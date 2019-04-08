@@ -10,9 +10,24 @@ import Foundation
 import FirebaseFirestore
 import Firebase
 
-struct PinPointUserCollectionKeys {
-    static let CollectionKey = "pinpointuser"
-    static let PinPointUserIdKey = "pinpointId"
+struct EventCollectionKeys {
+    static let CollectionKeys = "event"
+    static let PersonID = "personID"
+    static let PhotoURL = "PhotoURL"
+    static let DisplayNameKey = "displayName"
+    static let Lat = "lat"
+    static let Long = "long"
+    static let EmailKey = "email"
+    static let IsTrusted = "isTrusted"
+    static let isBlocked = "isBlocked"
+    static let CreatedAt = "createdAt"
+    static let EventDescription = "eventDescription"
+    static let EventType = "eventType"
+      static let DocumentIdKey = "documentId"
+}
+struct ProfileCollectionKeys {
+    static let CollectionKey = "Profile"
+    static let ProfileIdKey = "ProfileId"
     static let DisplayNameKey = "displayName"
     static let FirstNameKey = "firstName"
     static let LastNameKey = "lastName"
@@ -23,14 +38,6 @@ struct PinPointUserCollectionKeys {
     static let BioKey = "bio"
 }
 
-struct EventPostCollectionKeys {
-    static let CollectionKey = "eventPosts"
-    static let EventPostDescritionKey = "eventPostDescription"
-    static let PinPointUserIdKey = "pinpointId"
-    static let CreatedDateKey = "createdDate"
-    static let DocumentIdKey = "documentId"
-    static let ImageURLKey = "imageURL"
-}
 
 final class DBService {
     private init() {}
@@ -43,18 +50,18 @@ final class DBService {
     }()
     
     static public var generateDocumentId: String {
-        return firestoreDB.collection(PinPointUserCollectionKeys.CollectionKey).document().documentID
+        return firestoreDB.collection(ProfileCollectionKeys.CollectionKey).document().documentID
     }
     
-    static public func createBlogger(blogger: PinPointUser, completion: @escaping (Error?) -> Void) {
-        firestoreDB.collection(PinPointUserCollectionKeys.CollectionKey)
-            .document(blogger.bloggerId)
-            .setData([ EventPostCollectionKeys.PinPointUserIdKey : blogger.bloggerId,
-                       PinPointUserCollectionKeys.DisplayNameKey : blogger.displayName,
-                       PinPointUserCollectionKeys.EmailKey       : blogger.email,
-                       PinPointUserCollectionKeys.PhotoURLKey    : blogger.photoURL ?? "",
-                       PinPointUserCollectionKeys.JoinedDateKey  : blogger.joinedDate,
-                       PinPointUserCollectionKeys.BioKey         : blogger.bio ?? ""
+    static public func createBlogger(blogger: ProfileOfUser, completion: @escaping (Error?) -> Void) {
+        firestoreDB.collection(ProfileCollectionKeys.CollectionKey)
+            .document(blogger.ProfileId)
+            .setData([ ProfileCollectionKeys.CollectionKey : blogger.ProfileId,
+                       ProfileCollectionKeys.DisplayNameKey : blogger.displayName,
+                       ProfileCollectionKeys.EmailKey       : blogger.email,
+                       ProfileCollectionKeys.PhotoURLKey    : blogger.photoURL ?? "",
+                       ProfileCollectionKeys.JoinedDateKey  : blogger.joinedDate,
+                       ProfileCollectionKeys.BioKey         : blogger.bio ?? ""
             ]) { (error) in
                 if let error = error {
                     completion(error)
@@ -64,14 +71,14 @@ final class DBService {
         }
     }
     
-    static public func postBlog(blog: EventPost, completion: @escaping (Error?) -> Void) {
-        firestoreDB.collection(EventPostCollectionKeys.CollectionKey)
+    static public func postBlog(blog: EventCreatedByUser, completion: @escaping (Error?) -> Void) {
+        firestoreDB.collection(EventCollectionKeys.CollectionKeys)
             .document(blog.documentId).setData([
-                EventPostCollectionKeys.CreatedDateKey     : blog.createdDate,
-                EventPostCollectionKeys.PinPointUserIdKey       : blog.bloggerId,
-                EventPostCollectionKeys.EventPostDescritionKey  : blog.blogDescription,
-                EventPostCollectionKeys.ImageURLKey        : blog.imageURL,
-                EventPostCollectionKeys.DocumentIdKey      : blog.documentId
+                EventCollectionKeys.CreatedAt     : blog.createdAt,
+                EventCollectionKeys.PersonID       : blog.personID,
+                EventCollectionKeys.EventDescription  : blog.eventDescription,
+                EventCollectionKeys.PhotoURL        : blog.photoURL,
+                EventCollectionKeys.DocumentIdKey      : blog.documentId
                 ])
             { (error) in
                 if let error = error {
@@ -81,10 +88,10 @@ final class DBService {
                 }
         }
     }
-    static public func deleteBlog(blog: EventPost, completion: @escaping (Error?) -> Void) {
+    static public func deleteBlog(blog: EventCreatedByUser, completion: @escaping (Error?) -> Void) {
         DBService.firestoreDB
-            .collection(EventPostCollectionKeys.CollectionKey)
-            .document(blog.documentId)
+            .collection(EventCollectionKeys.CollectionKeys)
+            .document(blog.personID)
             .delete { (error) in
                 if let error = error {
                     completion(error)
@@ -93,28 +100,28 @@ final class DBService {
                 }
         }
     }
-    static public func fetchUser(userId: String, completion: @escaping (Error?, PinPointUser?) -> Void) {
+    static public func fetchUser(userId: String, completion: @escaping (Error?, ProfileOfUser?) -> Void) {
         DBService.firestoreDB
-            .collection(PinPointUserCollectionKeys.CollectionKey)
-            .whereField(PinPointUserCollectionKeys.PinPointUserIdKey, isEqualTo: userId)
+            .collection(ProfileCollectionKeys.CollectionKey)
+            .whereField(ProfileCollectionKeys.ProfileIdKey, isEqualTo: userId)
             .getDocuments { (snapshot, error) in
                 if let error = error {
                     completion(error, nil)
                 } else if let snapshot = snapshot?.documents.first {
-                    let blogCreator = PinPointUser(dict: snapshot.data())
+                    let blogCreator = ProfileOfUser(dict: snapshot.data())
                     completion(nil, blogCreator)
                 }
         }
     }
-    static public func fetchBlogCreator(userId: String, completion: @escaping (Error?, PinPointUser?) -> Void) {
+    static public func fetchBlogCreator(userId: String, completion: @escaping (Error?, ProfileOfUser?) -> Void) {
         DBService.firestoreDB
-            .collection(PinPointUserCollectionKeys.CollectionKey)
-            .whereField(PinPointUserCollectionKeys.PinPointUserIdKey, isEqualTo: userId)
+            .collection(ProfileCollectionKeys.CollectionKey)
+            .whereField(ProfileCollectionKeys.ProfileIdKey, isEqualTo: userId)
             .getDocuments { (snapshot, error) in
                 if let error = error {
                     completion(error, nil)
                 } else if let snapshot = snapshot?.documents.first {
-                    let blogCreator = PinPointUser(dict: snapshot.data())
+                    let blogCreator = ProfileOfUser(dict: snapshot.data())
                     completion(nil, blogCreator)
                 }
         }

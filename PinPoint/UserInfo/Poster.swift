@@ -8,8 +8,9 @@
 
 import Foundation
 
-struct PinPointUser {
-    let bloggerId: String
+struct ProfileOfUser {
+    
+    let ProfileId: String
     let displayName: String
     let email: String
     let photoURL: String?
@@ -32,7 +33,7 @@ struct PinPointUser {
          firstName: String?,
          lastName: String?,
          bio: String?) {
-        self.bloggerId = userId
+        self.ProfileId = userId
         self.displayName = displayName
         self.email = email
         self.photoURL = photoURL
@@ -44,14 +45,14 @@ struct PinPointUser {
     }
     
     init(dict: [String: Any]) {
-        self.bloggerId = dict[PinPointUserCollectionKeys.PinPointUserIdKey] as? String ?? ""
-        self.displayName = dict[PinPointUserCollectionKeys.DisplayNameKey] as? String ?? ""
-        self.email = dict[PinPointUserCollectionKeys.EmailKey] as? String ?? ""
-        self.photoURL = dict[PinPointUserCollectionKeys.PhotoURLKey] as? String ?? ""
-        self.coverImageURL = dict[PinPointUserCollectionKeys.CoverImageURLKey] as? String ?? ""
-        self.joinedDate = dict[PinPointUserCollectionKeys.JoinedDateKey] as? String ?? ""
-        self.firstName = dict[PinPointUserCollectionKeys.FirstNameKey] as? String ?? "FirstName"
-        self.lastName = dict[PinPointUserCollectionKeys.LastNameKey] as? String ?? "LastName"
-        self.bio = dict[PinPointUserCollectionKeys.BioKey] as? String ?? "fellow bloggers are looking forward to reading your bio"
+        self.ProfileId = dict[ProfileCollectionKeys.CollectionKey] as? String ?? ""
+        self.displayName = dict[ProfileCollectionKeys.DisplayNameKey] as? String ?? ""
+        self.email = dict[ProfileCollectionKeys.EmailKey] as? String ?? ""
+        self.photoURL = dict[ProfileCollectionKeys.PhotoURLKey] as? String ?? ""
+        self.coverImageURL = dict[ProfileCollectionKeys.CoverImageURLKey] as? String ?? ""
+        self.joinedDate = dict[ProfileCollectionKeys.JoinedDateKey] as? String ?? ""
+        self.firstName = dict[ProfileCollectionKeys.FirstNameKey] as? String ?? "FirstName"
+        self.lastName = dict[ProfileCollectionKeys.LastNameKey] as? String ?? "LastName"
+        self.bio = dict[ProfileCollectionKeys.BioKey] as? String ?? "fellow bloggers are looking forward to reading your bio"
     }
 }

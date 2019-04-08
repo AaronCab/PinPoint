@@ -18,18 +18,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         window = UIWindow(frame: UIScreen.main.bounds)
         if let user = AppDelegate.authservice.getCurrentUser() {
-            print("user id: \(user.uid)")
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let pinpointTabBarController = storyboard.instantiateViewController(withIdentifier: "PinPointTabController") as! UITabBarController
-            window?.rootViewController = pinpointTabBarController
+            print("\(user.uid)")
+          let containerView = ContainerController()
+            window?.rootViewController = containerView
         } else {
-            let storyboard = UIStoryboard(name: "LoginView", bundle: nil)
-            let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-            window?.rootViewController = UINavigationController(rootViewController: loginViewController)
+            let loginView = LoginViewController()
+            window?.rootViewController = UINavigationController(rootViewController: loginView)
         }
         window?.makeKeyAndVisible()
         return true
-        return true
+        //added comment
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
