@@ -9,22 +9,29 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-
+    
+    var loginView = LoginView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.addSubview(loginView)
+        whatToDoForButtons()
 
-        // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func whatToDoForButtons(){
+        loginView.createAccountHere.addTarget(self, action: #selector(createButton), for: .touchUpInside)
+        loginView.customEmailLogin.addTarget(self, action: #selector(loginWithExsistingAccount), for: .touchUpInside)
     }
-    */
-
+    
+    @objc func createButton(){
+        let createVC = CreateAccountViewController()
+        self.navigationController?.pushViewController(createVC, animated: true)
+    }
+    
+    @objc func loginWithExsistingAccount(){
+        let loginWEVC = LoginWithExistingViewController()
+        self.navigationController?.pushViewController(loginWEVC, animated: true)
+    }
+    
 }
