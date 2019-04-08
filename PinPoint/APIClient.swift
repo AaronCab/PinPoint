@@ -9,7 +9,7 @@
 import Foundation
 final class ApiClient {
     
-    static func getEvents(distance: String, location: String, completionHandler: @escaping (AppError?, [Event]?) -> Void) {
+    static func getEvents(distance: String, location: String, completionHandler: @escaping (AppError?, Event?) -> Void) {
         let secretToken = "HGCVIXQ3FJZNEZUHE4G2"
         let endpointURLString = "https://www.eventbriteapi.com/v3/events/search?location.within=\(distance)&expand=venue-H'Authorization:BearerPERSONAL_OAUTH_TOKEN'&location.address=\(location)&token=\(secretToken)"
         
@@ -18,7 +18,7 @@ final class ApiClient {
                 completionHandler(AppError.networkError(error), nil)
             } else if let data = data {
                 do {
-                    let events = try JSONDecoder().decode([Event].self, from: data)
+                    let events = try JSONDecoder().decode(Event.self, from: data)
                     completionHandler(nil, events)
                 } catch {
                     completionHandler(AppError.jsonDecodingError(error), nil)
