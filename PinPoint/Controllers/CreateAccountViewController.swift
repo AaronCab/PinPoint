@@ -9,22 +9,28 @@
 import UIKit
 
 class CreateAccountViewController: UIViewController {
-
+    
+    var createUserView = CreateUserView()
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        view.addSubview(createUserView)
+        let leftBarItem = UIBarButtonItem(customView: createUserView.cancel)
+        createUserView.cancel.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
+        self.navigationItem.leftBarButtonItem = leftBarItem
+        let rightBarItem = UIBarButtonItem(customView: createUserView.create)
+        createUserView.create.addTarget(self, action: #selector(createProfile), for: .touchUpInside)
+        self.navigationItem.rightBarButtonItem = rightBarItem
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc func dismissView(){
+        navigationController?.popViewController(animated: true)
     }
-    */
-
+    
+    @objc func createProfile(){
+        
+    }
+    
 }
