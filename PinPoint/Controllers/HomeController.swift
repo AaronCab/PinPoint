@@ -9,22 +9,29 @@
 import UIKit
 
 class HomeController: UIViewController {
-
+    
+    // MARK: - Properties
+    
+    var delegate: HomeControllerDelegate?
+    // MARK: - Init
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .white
+        configureNavigationBar()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // MARK: - Handlers
+    
+    @objc func handleMenuToggle() {
+        delegate?.handleMenuToggle(forMenuOption: nil)
     }
-    */
-
+    func configureNavigationBar() {
+        navigationController?.navigationBar.barTintColor = .red
+        navigationController?.navigationBar.barStyle = .black
+        
+        navigationItem.title = "Hamburguesa"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "hamburgerMenu").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMenuToggle))
+    }
+    
 }

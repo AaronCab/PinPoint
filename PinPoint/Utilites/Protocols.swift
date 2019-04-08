@@ -6,4 +6,6 @@
 //  Copyright © 2019 Pursuit. All rights reserved.
 //
 
-import Foundation
+protocol HomeControllerDelegate {
+    func handleMenuToggle(forMenuOption menuOption: MenuOption?)
+}
