@@ -9,22 +9,27 @@
 import UIKit
 
 class LoginWithExistingViewController: UIViewController {
-
+    
+    var accountExistingView = AccountExistingView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        view.addSubview(accountExistingView)
+        let leftBarItem = UIBarButtonItem(customView: accountExistingView.cancel)
+        accountExistingView.cancel.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
+        self.navigationItem.leftBarButtonItem = leftBarItem
+        let rightBarItem = UIBarButtonItem(customView: accountExistingView.login)
+        accountExistingView.login.addTarget(self, action: #selector(loginWithCreatedAccount), for: .touchUpInside)
+        self.navigationItem.rightBarButtonItem = rightBarItem
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc func dismissView(){
+        navigationController?.popViewController(animated: true)
     }
-    */
-
+    
+    @objc func loginWithCreatedAccount(){
+        //userlogin delegate goes here
+    }
+    
+    
 }
