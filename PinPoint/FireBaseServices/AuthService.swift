@@ -11,7 +11,7 @@ import FirebaseAuth
 
 protocol AuthServiceCreateNewAccountDelegate: AnyObject {
     func didRecieveErrorCreatingAccount(_ authservice: AuthService, error: Error)
-    func didCreateNewAccount(_ authservice: AuthService, blogger: PinPointUser)
+    func didCreateNewAccount(_ authservice: AuthService, blogger: ProfileOfUser)
 }
 
 protocol AuthServiceExistingAccountDelegate: AnyObject {
@@ -45,7 +45,7 @@ final class AuthService {
                 })
                 
                 // create user (blogger) on firestore database
-                let blogger = PinPointUser.init(userId: authDataResult.user.uid,
+                let blogger = ProfileOfUser.init(userId: authDataResult.user.uid,
                                            displayName: username,
                                            email: authDataResult.user.email!,
                                            photoURL: nil,

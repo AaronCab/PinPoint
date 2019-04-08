@@ -29,6 +29,10 @@
 		93088BC8225BB1330067F09D /* MenuOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BC7225BB1330067F09D /* MenuOptions.swift */; };
 		93088BCB225BB1570067F09D /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BCA225BB1570067F09D /* HomeController.swift */; };
 		93088BCD225BB1680067F09D /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BCC225BB1680067F09D /* MenuController.swift */; };
+		93088BCF225BD20A0067F09D /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BCE225BD20A0067F09D /* NetworkHandler.swift */; };
+		93088BD1225BD2200067F09D /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BD0225BD2200067F09D /* AppError.swift */; };
+		93088BD3225BD2360067F09D /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BD2225BD2360067F09D /* APIClient.swift */; };
+		93088BD5225BD2B70067F09D /* EventsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BD4225BD2B70067F09D /* EventsModel.swift */; };
 		9314F7792257B041009E0BB7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9314F7782257B041009E0BB7 /* AppDelegate.swift */; };
 		9314F77B2257B041009E0BB7 /* PinPointTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9314F77A2257B041009E0BB7 /* PinPointTabBarController.swift */; };
 		9314F7802257B043009E0BB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9314F77F2257B043009E0BB7 /* Assets.xcassets */; };
@@ -63,6 +67,10 @@
 		93088BC7225BB1330067F09D /* MenuOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOptions.swift; sourceTree = "<group>"; };
 		93088BCA225BB1570067F09D /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		93088BCC225BB1680067F09D /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
+		93088BCE225BD20A0067F09D /* NetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
+		93088BD0225BD2200067F09D /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		93088BD2225BD2360067F09D /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		93088BD4225BD2B70067F09D /* EventsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsModel.swift; sourceTree = "<group>"; };
 		9314F7752257B041009E0BB7 /* PinPoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PinPoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9314F7782257B041009E0BB7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9314F77A2257B041009E0BB7 /* PinPointTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinPointTabBarController.swift; sourceTree = "<group>"; };
@@ -178,6 +186,10 @@
 			isa = PBXGroup;
 			children = (
 				9314F7782257B041009E0BB7 /* AppDelegate.swift */,
+				93088BCE225BD20A0067F09D /* NetworkHandler.swift */,
+				93088BD0225BD2200067F09D /* AppError.swift */,
+				93088BD2225BD2360067F09D /* APIClient.swift */,
+				93088BD4225BD2B70067F09D /* EventsModel.swift */,
 				93088BC9225BB13A0067F09D /* Utilites */,
 				93088BBF225BAEAD0067F09D /* Controllers */,
 				93088BC0225BAECD0067F09D /* Views */,
@@ -344,12 +356,15 @@
 			files = (
 				93088BB6225BA6660067F09D /* CreateAccountViewController.swift in Sources */,
 				93088BC4225BB0D80067F09D /* MenuOptionsCell.swift in Sources */,
+				93088BD5225BD2B70067F09D /* EventsModel.swift in Sources */,
 				93088BA3225B96970067F09D /* UIViewController+Navigation.swift in Sources */,
 				93088BAB225B9AE10067F09D /* DBService.swift in Sources */,
+				93088BD1225BD2200067F09D /* AppError.swift in Sources */,
 				93088B9F225B95FE0067F09D /* String+Extensions.swift in Sources */,
 				93088BBC225BA70A0067F09D /* CreateUserView.swift in Sources */,
 				9314F77B2257B041009E0BB7 /* PinPointTabBarController.swift in Sources */,
 				9314F7792257B041009E0BB7 /* AppDelegate.swift in Sources */,
+				93088BCF225BD20A0067F09D /* NetworkHandler.swift in Sources */,
 				93088BBE225BA7200067F09D /* AccountExistingView.swift in Sources */,
 				93088BC8225BB1330067F09D /* MenuOptions.swift in Sources */,
 				93088BA1225B963C0067F09D /* UIViewController+Alerts.swift in Sources */,
@@ -366,6 +381,7 @@
 				93088BCB225BB1570067F09D /* HomeController.swift in Sources */,
 				93088BBA225BA6F90067F09D /* LoginView.swift in Sources */,
 				93088BA5225B972E0067F09D /* AuthService.swift in Sources */,
+				93088BD3225BD2360067F09D /* APIClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
