@@ -53,15 +53,15 @@ final class DBService {
         return firestoreDB.collection(ProfileCollectionKeys.CollectionKey).document().documentID
     }
     
-    static public func createBlogger(blogger: ProfileOfUser, completion: @escaping (Error?) -> Void) {
+    static public func createPinPointuser(user: ProfileOfUser, completion: @escaping (Error?) -> Void) {
         firestoreDB.collection(ProfileCollectionKeys.CollectionKey)
-            .document(blogger.ProfileId)
-            .setData([ ProfileCollectionKeys.CollectionKey : blogger.ProfileId,
-                       ProfileCollectionKeys.DisplayNameKey : blogger.displayName,
-                       ProfileCollectionKeys.EmailKey       : blogger.email,
-                       ProfileCollectionKeys.PhotoURLKey    : blogger.photoURL ?? "",
-                       ProfileCollectionKeys.JoinedDateKey  : blogger.joinedDate,
-                       ProfileCollectionKeys.BioKey         : blogger.bio ?? ""
+            .document(user.ProfileId)
+            .setData([ ProfileCollectionKeys.CollectionKey : user.ProfileId,
+                       ProfileCollectionKeys.DisplayNameKey : user.displayName,
+                       ProfileCollectionKeys.EmailKey       : user.email,
+                       ProfileCollectionKeys.PhotoURLKey    : user.photoURL ?? "",
+                       ProfileCollectionKeys.JoinedDateKey  : user.joinedDate,
+                       ProfileCollectionKeys.BioKey         : user.bio ?? ""
             ]) { (error) in
                 if let error = error {
                     completion(error)
@@ -71,7 +71,7 @@ final class DBService {
         }
     }
     
-    static public func postBlog(blog: EventCreatedByUser, completion: @escaping (Error?) -> Void) {
+    static public func postEvent(blog: EventCreatedByUser, completion: @escaping (Error?) -> Void) {
         firestoreDB.collection(EventCollectionKeys.CollectionKeys)
             .document(blog.documentId).setData([
                 EventCollectionKeys.CreatedAt     : blog.createdAt,
@@ -88,7 +88,7 @@ final class DBService {
                 }
         }
     }
-    static public func deleteBlog(blog: EventCreatedByUser, completion: @escaping (Error?) -> Void) {
+    static public func deleteEvent(blog: EventCreatedByUser, completion: @escaping (Error?) -> Void) {
         DBService.firestoreDB
             .collection(EventCollectionKeys.CollectionKeys)
             .document(blog.personID)
@@ -113,7 +113,7 @@ final class DBService {
                 }
         }
     }
-    static public func fetchBlogCreator(userId: String, completion: @escaping (Error?, ProfileOfUser?) -> Void) {
+    static public func fetchPinpointUser(userId: String, completion: @escaping (Error?, ProfileOfUser?) -> Void) {
         DBService.firestoreDB
             .collection(ProfileCollectionKeys.CollectionKey)
             .whereField(ProfileCollectionKeys.ProfileIdKey, isEqualTo: userId)

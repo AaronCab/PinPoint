@@ -67,7 +67,6 @@ class CreateUserView: UIView {
         textfield.backgroundColor = .white
         textfield.textColor = .red
         textfield.placeholder = "DisplayName"
-        textfield.isSecureTextEntry = true
         return textfield
     }()
     
