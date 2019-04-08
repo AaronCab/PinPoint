@@ -23,6 +23,12 @@
 		93088BBA225BA6F90067F09D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BB9225BA6F90067F09D /* LoginView.swift */; };
 		93088BBC225BA70A0067F09D /* CreateUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BBB225BA70A0067F09D /* CreateUserView.swift */; };
 		93088BBE225BA7200067F09D /* AccountExistingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BBD225BA7200067F09D /* AccountExistingView.swift */; };
+		93088BC2225BB0B80067F09D /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BC1225BB0B80067F09D /* Protocols.swift */; };
+		93088BC4225BB0D80067F09D /* MenuOptionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BC3225BB0D80067F09D /* MenuOptionsCell.swift */; };
+		93088BC6225BB10D0067F09D /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BC5225BB10D0067F09D /* ContainerViewController.swift */; };
+		93088BC8225BB1330067F09D /* MenuOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BC7225BB1330067F09D /* MenuOptions.swift */; };
+		93088BCB225BB1570067F09D /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BCA225BB1570067F09D /* HomeController.swift */; };
+		93088BCD225BB1680067F09D /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BCC225BB1680067F09D /* MenuController.swift */; };
 		9314F7792257B041009E0BB7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9314F7782257B041009E0BB7 /* AppDelegate.swift */; };
 		9314F77B2257B041009E0BB7 /* PinPointTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9314F77A2257B041009E0BB7 /* PinPointTabBarController.swift */; };
 		9314F7802257B043009E0BB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9314F77F2257B043009E0BB7 /* Assets.xcassets */; };
@@ -51,6 +57,12 @@
 		93088BB9225BA6F90067F09D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		93088BBB225BA70A0067F09D /* CreateUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserView.swift; sourceTree = "<group>"; };
 		93088BBD225BA7200067F09D /* AccountExistingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountExistingView.swift; sourceTree = "<group>"; };
+		93088BC1225BB0B80067F09D /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		93088BC3225BB0D80067F09D /* MenuOptionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOptionsCell.swift; sourceTree = "<group>"; };
+		93088BC5225BB10D0067F09D /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		93088BC7225BB1330067F09D /* MenuOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOptions.swift; sourceTree = "<group>"; };
+		93088BCA225BB1570067F09D /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		93088BCC225BB1680067F09D /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		9314F7752257B041009E0BB7 /* PinPoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PinPoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9314F7782257B041009E0BB7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9314F77A2257B041009E0BB7 /* PinPointTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinPointTabBarController.swift; sourceTree = "<group>"; };
@@ -111,6 +123,39 @@
 			path = UserInfo;
 			sourceTree = "<group>";
 		};
+		93088BBF225BAEAD0067F09D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				93088BB3225BA6580067F09D /* LoginViewController.swift */,
+				93088BB5225BA6660067F09D /* CreateAccountViewController.swift */,
+				93088BB7225BA6D70067F09D /* LoginWithExistingViewController.swift */,
+				93088BC5225BB10D0067F09D /* ContainerViewController.swift */,
+				93088BCA225BB1570067F09D /* HomeController.swift */,
+				93088BCC225BB1680067F09D /* MenuController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		93088BC0225BAECD0067F09D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				93088BB9225BA6F90067F09D /* LoginView.swift */,
+				93088BBB225BA70A0067F09D /* CreateUserView.swift */,
+				93088BBD225BA7200067F09D /* AccountExistingView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		93088BC9225BB13A0067F09D /* Utilites */ = {
+			isa = PBXGroup;
+			children = (
+				93088BC1225BB0B80067F09D /* Protocols.swift */,
+				93088BC3225BB0D80067F09D /* MenuOptionsCell.swift */,
+				93088BC7225BB1330067F09D /* MenuOptions.swift */,
+			);
+			path = Utilites;
+			sourceTree = "<group>";
+		};
 		9314F76C2257B041009E0BB7 = {
 			isa = PBXGroup;
 			children = (
@@ -133,12 +178,9 @@
 			isa = PBXGroup;
 			children = (
 				9314F7782257B041009E0BB7 /* AppDelegate.swift */,
-				93088BB3225BA6580067F09D /* LoginViewController.swift */,
-				93088BB5225BA6660067F09D /* CreateAccountViewController.swift */,
-				93088BB7225BA6D70067F09D /* LoginWithExistingViewController.swift */,
-				93088BB9225BA6F90067F09D /* LoginView.swift */,
-				93088BBB225BA70A0067F09D /* CreateUserView.swift */,
-				93088BBD225BA7200067F09D /* AccountExistingView.swift */,
+				93088BC9225BB13A0067F09D /* Utilites */,
+				93088BBF225BAEAD0067F09D /* Controllers */,
+				93088BC0225BAECD0067F09D /* Views */,
 				93088BB0225B9DDC0067F09D /* FireBaseServices */,
 				93088BB1225B9DF70067F09D /* Extensions */,
 				9314F77A2257B041009E0BB7 /* PinPointTabBarController.swift */,
@@ -301,6 +343,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				93088BB6225BA6660067F09D /* CreateAccountViewController.swift in Sources */,
+				93088BC4225BB0D80067F09D /* MenuOptionsCell.swift in Sources */,
 				93088BA3225B96970067F09D /* UIViewController+Navigation.swift in Sources */,
 				93088BAB225B9AE10067F09D /* DBService.swift in Sources */,
 				93088B9F225B95FE0067F09D /* String+Extensions.swift in Sources */,
@@ -308,14 +351,19 @@
 				9314F77B2257B041009E0BB7 /* PinPointTabBarController.swift in Sources */,
 				9314F7792257B041009E0BB7 /* AppDelegate.swift in Sources */,
 				93088BBE225BA7200067F09D /* AccountExistingView.swift in Sources */,
+				93088BC8225BB1330067F09D /* MenuOptions.swift in Sources */,
 				93088BA1225B963C0067F09D /* UIViewController+Alerts.swift in Sources */,
+				93088BC2225BB0B80067F09D /* Protocols.swift in Sources */,
 				93088B9D225B95E20067F09D /* Date+Extensions.swift in Sources */,
 				93088BB8225BA6D70067F09D /* LoginWithExistingViewController.swift in Sources */,
 				93088BA7225B97C10067F09D /* IBDesignable.swift in Sources */,
 				93088BAF225B9B370067F09D /* Poster.swift in Sources */,
+				93088BCD225BB1680067F09D /* MenuController.swift in Sources */,
 				93088BAD225B9B270067F09D /* EventPost.swift in Sources */,
+				93088BC6225BB10D0067F09D /* ContainerViewController.swift in Sources */,
 				93088BA9225B9A520067F09D /* StorageService.swift in Sources */,
 				93088BB4225BA6580067F09D /* LoginViewController.swift in Sources */,
+				93088BCB225BB1570067F09D /* HomeController.swift in Sources */,
 				93088BBA225BA6F90067F09D /* LoginView.swift in Sources */,
 				93088BA5225B972E0067F09D /* AuthService.swift in Sources */,
 			);
