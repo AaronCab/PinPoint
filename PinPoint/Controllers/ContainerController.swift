@@ -67,14 +67,11 @@ class ContainerController: UIViewController {
                 guard let menuOption = menuOption else { return }
                 self.didSelectMenuOption(menuOption: menuOption)
             }
-                
             }
         animateStatusBar()
     }
-    
     func didSelectMenuOption(menuOption: MenuOption) {
         switch menuOption {
-            
         case .Discover:
             print("show discover")
         case .Moments:
@@ -92,10 +89,8 @@ class ContainerController: UIViewController {
         }, completion: nil)
     }
 }
-
 extension ContainerController: HomeControllerDelegate {
     func handleMenuToggle(forMenuOption menuOption: MenuOption?) {
-        
         if !isExpanded {
             configureMenuController()
         }
