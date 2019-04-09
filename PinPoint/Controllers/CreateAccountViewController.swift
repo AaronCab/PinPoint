@@ -41,9 +41,9 @@ class CreateAccountViewController: UIViewController {
         guard let userName = createUserView.displayName.text,
             let email = createUserView.emailCreatedwith.text,
             let password = createUserView.passwordCreatedWith.text,
-            !userName.isEmpty,
-            !email.isEmpty,
-            !password.isEmpty else{
+            userName.isEmpty,
+            email.isEmpty,
+            password.isEmpty else{
                 showAlert(title: "Missing Fields", message: "Please fill out all information")
                 return
         }
