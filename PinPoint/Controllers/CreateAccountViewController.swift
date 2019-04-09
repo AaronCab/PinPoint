@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import Firebase
 
 class CreateAccountViewController: UIViewController {
     
     var createUserView = CreateUserView()
+    var authService = AppDelegate.authservice
+    
     
     
     
@@ -23,6 +26,11 @@ class CreateAccountViewController: UIViewController {
         let rightBarItem = UIBarButtonItem(customView: createUserView.create)
         createUserView.create.addTarget(self, action: #selector(createProfile), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = rightBarItem
+        authService.authserviceCreateNewAccountDelegate = self
+        createUserView.displayName.delegate = self
+        createUserView.emailCreatedwith.delegate = self
+        createUserView.passwordCreatedWith.delegate = self
+        
     }
     
     @objc func dismissView(){
@@ -30,7 +38,39 @@ class CreateAccountViewController: UIViewController {
     }
     
     @objc func createProfile(){
+        guard let userName = createUserView.displayName.text,
+            let email = createUserView.emailCreatedwith.text,
+            let password = createUserView.passwordCreatedWith.text,
+            !userName.isEmpty,
+            !email.isEmpty,
+            !password.isEmpty else{
+                showAlert(title: "Missing Fields", message: "Please fill out all information")
+                return
+        }
+        authService.createNewAccount(username: userName, email: email, password: password)
+
+        }
+
+    
+}
+
+extension CreateAccountViewController: AuthServiceCreateNewAccountDelegate{
+    func didRecieveErrorCreatingAccount(_ authservice: AuthService, error: Error) {
+        showAlert(title: "Error", message: error.localizedDescription)
+    }
+    
+    func didCreateNewAccount(_ authservice: AuthService, pinpointUser: ProfileOfUser) {
+        let containVC = ContainerController()
+        self.present(containVC, animated: true)
         
     }
     
+    
+}
+
+extension CreateAccountViewController: UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
