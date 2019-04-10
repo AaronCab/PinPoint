@@ -19,6 +19,7 @@ class ContainerController: UIViewController {
     
     var isExpanded = false
     
+    
    
     
     override func viewDidLoad() {
@@ -118,8 +119,3 @@ extension ContainerController: HomeControllerDelegate {
         }
     }
 }
-
-<<<<<<< HEAD
-
-=======
->>>>>>> e22767d8f51b6756fa16f6b1d624e2849de90af8
