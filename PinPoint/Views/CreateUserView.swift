@@ -89,7 +89,7 @@ class CreateUserView: UIView {
     
     
     
-    func commonInit(){
+   private func commonInit(){
         emailCreatedWithContrant()
         passwordCreatedWithConstant()
         displayNameConstrant()
@@ -108,7 +108,7 @@ class CreateUserView: UIView {
         logo.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     }
     
-    func emailCreatedWithContrant(){
+    private func emailCreatedWithContrant(){
         addSubview(emailCreatedwith)
         emailCreatedwith.translatesAutoresizingMaskIntoConstraints = false
         emailCreatedwith.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
@@ -117,7 +117,7 @@ class CreateUserView: UIView {
         emailCreatedwith.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     }
     
-    func passwordCreatedWithConstant(){
+    private func passwordCreatedWithConstant(){
         addSubview(passwordCreatedWith)
         passwordCreatedWith.translatesAutoresizingMaskIntoConstraints = false
         passwordCreatedWith.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
@@ -126,7 +126,7 @@ class CreateUserView: UIView {
         passwordCreatedWith.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     }
     
-    func displayNameConstrant(){
+    private func displayNameConstrant(){
         addSubview(displayName)
         displayName.translatesAutoresizingMaskIntoConstraints = false
         displayName.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
