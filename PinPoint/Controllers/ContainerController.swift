@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Toucan
 
 class ContainerController: UIViewController {
     // MARK: - Properties
@@ -18,7 +19,7 @@ class ContainerController: UIViewController {
     
     var isExpanded = false
     
-    // MARK: - Init
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,9 +78,9 @@ class ContainerController: UIViewController {
     func didSelectMenuOption(menuOption: MenuOption) {
         switch menuOption {
         case .Discover:
-            let introVC = IntroViewController()
+        let introVC = IntroViewController()
         case .Moments:
-            print("show moment")
+            let eventsVC = EventsViewController()
         case .Messages:
             print("show messages")
         case .Profile:
@@ -117,3 +118,5 @@ extension ContainerController: HomeControllerDelegate {
         }
     }
 }
+
+
