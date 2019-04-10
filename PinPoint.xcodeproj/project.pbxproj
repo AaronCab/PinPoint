@@ -36,6 +36,14 @@
 		93088BD7225E39AD0067F09D /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BD6225E39AD0067F09D /* EventsViewController.swift */; };
 		93088BD9225E39F80067F09D /* EventsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BD8225E39F80067F09D /* EventsCell.swift */; };
 		93088BDB225E3A0D0067F09D /* EventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BDA225E3A0D0067F09D /* EventsView.swift */; };
+		93088BDD225E3D490067F09D /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BDC225E3D490067F09D /* IntroViewController.swift */; };
+		93088BDF225E3D620067F09D /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BDE225E3D620067F09D /* IntroView.swift */; };
+		93088BE1225E3D7E0067F09D /* InterestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BE0225E3D7E0067F09D /* InterestViewController.swift */; };
+		93088BE3225E3DAA0067F09D /* InterestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BE2225E3DAA0067F09D /* InterestView.swift */; };
+		93088BE5225E3DD00067F09D /* InterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BE4225E3DD00067F09D /* InterestCell.swift */; };
+		93088BE9225E41BC0067F09D /* ItemsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BE8225E41BC0067F09D /* ItemsDataManager.swift */; };
+		93088BEB225E41D80067F09D /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BEA225E41D80067F09D /* UserModel.swift */; };
+		93088BED225E42150067F09D /* FileManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BEC225E42150067F09D /* FileManagerHelper.swift */; };
 		9314F7792257B041009E0BB7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9314F7782257B041009E0BB7 /* AppDelegate.swift */; };
 		9314F77B2257B041009E0BB7 /* PinPointTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9314F77A2257B041009E0BB7 /* PinPointTabBarController.swift */; };
 		9314F7802257B043009E0BB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9314F77F2257B043009E0BB7 /* Assets.xcassets */; };
@@ -73,10 +81,18 @@
 		93088BCE225BD20A0067F09D /* NetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
 		93088BD0225BD2200067F09D /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		93088BD2225BD2360067F09D /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
-		93088BD4225BD2B70067F09D /* EventsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsModel.swift; sourceTree = "<group>"; };
+		93088BD4225BD2B70067F09D /* EventsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EventsModel.swift; path = ../EventsModel.swift; sourceTree = "<group>"; };
 		93088BD6225E39AD0067F09D /* EventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		93088BD8225E39F80067F09D /* EventsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsCell.swift; sourceTree = "<group>"; };
 		93088BDA225E3A0D0067F09D /* EventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsView.swift; sourceTree = "<group>"; };
+		93088BDC225E3D490067F09D /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
+		93088BDE225E3D620067F09D /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
+		93088BE0225E3D7E0067F09D /* InterestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestViewController.swift; sourceTree = "<group>"; };
+		93088BE2225E3DAA0067F09D /* InterestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestView.swift; sourceTree = "<group>"; };
+		93088BE4225E3DD00067F09D /* InterestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestCell.swift; sourceTree = "<group>"; };
+		93088BE8225E41BC0067F09D /* ItemsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsDataManager.swift; sourceTree = "<group>"; };
+		93088BEA225E41D80067F09D /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		93088BEC225E42150067F09D /* FileManagerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerHelper.swift; sourceTree = "<group>"; };
 		9314F7752257B041009E0BB7 /* PinPoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PinPoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9314F7782257B041009E0BB7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9314F77A2257B041009E0BB7 /* PinPointTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinPointTabBarController.swift; sourceTree = "<group>"; };
@@ -147,6 +163,8 @@
 				93088BCA225BB1570067F09D /* HomeController.swift */,
 				93088BCC225BB1680067F09D /* MenuController.swift */,
 				93088BD6225E39AD0067F09D /* EventsViewController.swift */,
+				93088BDC225E3D490067F09D /* IntroViewController.swift */,
+				93088BE0225E3D7E0067F09D /* InterestViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -157,8 +175,9 @@
 				93088BB9225BA6F90067F09D /* LoginView.swift */,
 				93088BBB225BA70A0067F09D /* CreateUserView.swift */,
 				93088BBD225BA7200067F09D /* AccountExistingView.swift */,
-				93088BD8225E39F80067F09D /* EventsCell.swift */,
 				93088BDA225E3A0D0067F09D /* EventsView.swift */,
+				93088BDE225E3D620067F09D /* IntroView.swift */,
+				93088BE2225E3DAA0067F09D /* InterestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -171,6 +190,29 @@
 				93088BC7225BB1330067F09D /* MenuOptions.swift */,
 			);
 			path = Utilites;
+			sourceTree = "<group>";
+		};
+		93088BE6225E3DF20067F09D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				93088BD8225E39F80067F09D /* EventsCell.swift */,
+				93088BE4225E3DD00067F09D /* InterestCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		93088BE7225E3E4B0067F09D /* NetworkServices */ = {
+			isa = PBXGroup;
+			children = (
+				93088BCE225BD20A0067F09D /* NetworkHandler.swift */,
+				93088BE8225E41BC0067F09D /* ItemsDataManager.swift */,
+				93088BD0225BD2200067F09D /* AppError.swift */,
+				93088BD2225BD2360067F09D /* APIClient.swift */,
+				93088BD4225BD2B70067F09D /* EventsModel.swift */,
+				93088BEA225E41D80067F09D /* UserModel.swift */,
+				93088BEC225E42150067F09D /* FileManagerHelper.swift */,
+			);
+			path = NetworkServices;
 			sourceTree = "<group>";
 		};
 		9314F76C2257B041009E0BB7 = {
@@ -195,10 +237,8 @@
 			isa = PBXGroup;
 			children = (
 				9314F7782257B041009E0BB7 /* AppDelegate.swift */,
-				93088BCE225BD20A0067F09D /* NetworkHandler.swift */,
-				93088BD0225BD2200067F09D /* AppError.swift */,
-				93088BD2225BD2360067F09D /* APIClient.swift */,
-				93088BD4225BD2B70067F09D /* EventsModel.swift */,
+				93088BE7225E3E4B0067F09D /* NetworkServices */,
+				93088BE6225E3DF20067F09D /* Cells */,
 				93088BC9225BB13A0067F09D /* Utilites */,
 				93088BBF225BAEAD0067F09D /* Controllers */,
 				93088BC0225BAECD0067F09D /* Views */,
@@ -367,9 +407,11 @@
 				93088BC4225BB0D80067F09D /* MenuOptionsCell.swift in Sources */,
 				93088BD5225BD2B70067F09D /* EventsModel.swift in Sources */,
 				93088BD7225E39AD0067F09D /* EventsViewController.swift in Sources */,
+				93088BE1225E3D7E0067F09D /* InterestViewController.swift in Sources */,
 				93088BA3225B96970067F09D /* UIViewController+Navigation.swift in Sources */,
 				93088BAB225B9AE10067F09D /* DBService.swift in Sources */,
 				93088BD1225BD2200067F09D /* AppError.swift in Sources */,
+				93088BE9225E41BC0067F09D /* ItemsDataManager.swift in Sources */,
 				93088B9F225B95FE0067F09D /* String+Extensions.swift in Sources */,
 				93088BBC225BA70A0067F09D /* CreateUserView.swift in Sources */,
 				9314F77B2257B041009E0BB7 /* PinPointTabBarController.swift in Sources */,
@@ -383,6 +425,8 @@
 				93088BB8225BA6D70067F09D /* LoginWithExistingViewController.swift in Sources */,
 				93088BD9225E39F80067F09D /* EventsCell.swift in Sources */,
 				93088BA7225B97C10067F09D /* IBDesignable.swift in Sources */,
+				93088BDF225E3D620067F09D /* IntroView.swift in Sources */,
+				93088BED225E42150067F09D /* FileManagerHelper.swift in Sources */,
 				93088BAF225B9B370067F09D /* Poster.swift in Sources */,
 				93088BCD225BB1680067F09D /* MenuController.swift in Sources */,
 				93088BDB225E3A0D0067F09D /* EventsView.swift in Sources */,
@@ -390,10 +434,14 @@
 				93088BC6225BB10D0067F09D /* ContainerController.swift in Sources */,
 				93088BA9225B9A520067F09D /* StorageService.swift in Sources */,
 				93088BB4225BA6580067F09D /* LoginViewController.swift in Sources */,
+				93088BE3225E3DAA0067F09D /* InterestView.swift in Sources */,
 				93088BCB225BB1570067F09D /* HomeController.swift in Sources */,
+				93088BE5225E3DD00067F09D /* InterestCell.swift in Sources */,
 				93088BBA225BA6F90067F09D /* LoginView.swift in Sources */,
+				93088BEB225E41D80067F09D /* UserModel.swift in Sources */,
 				93088BA5225B972E0067F09D /* AuthService.swift in Sources */,
 				93088BD3225BD2360067F09D /* APIClient.swift in Sources */,
+				93088BDD225E3D490067F09D /* IntroViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
