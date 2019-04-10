@@ -17,19 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         window = UIWindow(frame: UIScreen.main.bounds)
-        if let user = AppDelegate.authservice.getCurrentUser() {
-            print("user id: \(user.uid)")
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let pinpointTabBarController = storyboard.instantiateViewController(withIdentifier: "PinPointTabController") as! UITabBarController
-            window?.rootViewController = pinpointTabBarController
-        } else {
-            let storyboard = UIStoryboard(name: "LoginView", bundle: nil)
-            let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-            window?.rootViewController = UINavigationController(rootViewController: loginViewController)
-        }
-        window?.makeKeyAndVisible()
-        return true
-        return true
+            let containerView = ContainerController()
+            window?.rootViewController = containerView
+            window?.makeKeyAndVisible()
+            return true
+        //added comment
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

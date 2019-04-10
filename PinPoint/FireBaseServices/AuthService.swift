@@ -11,7 +11,7 @@ import FirebaseAuth
 
 protocol AuthServiceCreateNewAccountDelegate: AnyObject {
     func didRecieveErrorCreatingAccount(_ authservice: AuthService, error: Error)
-    func didCreateNewAccount(_ authservice: AuthService, blogger: PinPointUser)
+    func didCreateNewAccount(_ authservice: AuthService, pinpointUser: ProfileOfUser)
 }
 
 protocol AuthServiceExistingAccountDelegate: AnyObject {
@@ -34,7 +34,6 @@ final class AuthService {
                 return
             } else if let authDataResult = authDataResult {
                 
-                // update displayName for auth user
                 let request = authDataResult.user.createProfileChangeRequest()
                 request.displayName = username
                 request.commitChanges(completion: { (error) in
@@ -44,8 +43,7 @@ final class AuthService {
                     }
                 })
                 
-                // create user (blogger) on firestore database
-                let blogger = PinPointUser.init(userId: authDataResult.user.uid,
+                let pinpointUser = ProfileOfUser.init(userId: authDataResult.user.uid,
                                            displayName: username,
                                            email: authDataResult.user.email!,
                                            photoURL: nil,
@@ -54,11 +52,11 @@ final class AuthService {
                                            firstName: nil,
                                            lastName: nil,
                                            bio: nil)
-                DBService.createBlogger(blogger: blogger, completion: { (error) in
+                DBService.createPinPointuser(user: pinpointUser, completion: { (error) in
                     if let error = error {
                         self.authserviceCreateNewAccountDelegate?.didRecieveErrorCreatingAccount(self, error: error)
                     } else {
-                        self.authserviceCreateNewAccountDelegate?.didCreateNewAccount(self, blogger: blogger)
+                        self.authserviceCreateNewAccountDelegate?.didCreateNewAccount(self, pinpointUser: pinpointUser)
                     }
                 })
             }
