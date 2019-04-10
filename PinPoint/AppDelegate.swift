@@ -17,16 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         window = UIWindow(frame: UIScreen.main.bounds)
-        if let user = AppDelegate.authservice.getCurrentUser() {
-            print("\(user.uid)")
-          let containerView = ContainerController()
+            let containerView = ContainerController()
             window?.rootViewController = containerView
-        } else {
-            let loginView = LoginViewController()
-            window?.rootViewController = UINavigationController(rootViewController: loginView)
-        }
-        window?.makeKeyAndVisible()
-        return true
+            window?.makeKeyAndVisible()
+            return true
         //added comment
     }
 

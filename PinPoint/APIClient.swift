@@ -18,8 +18,8 @@ final class ApiClient {
                 completionHandler(AppError.networkError(error), nil)
             } else if let data = data {
                 do {
-                    let events = try JSONDecoder().decode([Event].self, from: data)
-                    completionHandler(nil, events)
+                    let events = try JSONDecoder().decode(EventsInArea.self, from: data)
+                    completionHandler(nil, events.events)
                 } catch {
                     completionHandler(AppError.jsonDecodingError(error), nil)
                 }
