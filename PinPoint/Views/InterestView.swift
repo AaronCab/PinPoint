@@ -1,5 +1,5 @@
 //
-//  EventsView.swift
+//  InterestView.swift
 //  PinPoint
 //
 //  Created by Aaron Cabreja on 4/10/19.
@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import SnapKit
 
-class EventsView: UIView {
+class InterestView: UIView {
 
     /*
     // Only override draw() if you perform custom drawing.
