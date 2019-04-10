@@ -11,12 +11,18 @@ import UIKit
 class LoginViewController: UIViewController {
     
     var loginView = LoginView()
-    
+    var event = [Event](){
+        didSet {
+            DispatchQueue.main.async {
+                
+            }
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(loginView)
         whatToDoForButtons()
-
+      
     }
     
     func whatToDoForButtons(){
