@@ -32,6 +32,7 @@ class IntroViewController: UIViewController {
         ip.delegate = self
         return ip
     }()
+    
     var location = "Manhatten"
     
     private var selectedImageValue: UIImage?
@@ -83,6 +84,9 @@ class IntroViewController: UIViewController {
 
     }
 }
+
+
+
 extension IntroViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true)
