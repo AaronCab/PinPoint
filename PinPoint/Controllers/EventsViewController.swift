@@ -33,9 +33,6 @@ class EventsViewController: UIViewController {
             }
         }
     }
-    
-
-
 }
 extension EventsViewController: UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -50,5 +47,5 @@ extension EventsViewController: UICollectionViewDataSource, UICollectionViewDele
 
     }
     
-    
 }
+
