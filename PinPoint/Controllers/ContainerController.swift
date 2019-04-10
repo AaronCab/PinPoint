@@ -13,6 +13,9 @@ class ContainerController: UIViewController {
     
     var menuController: MenuController!
     var centerController: UIViewController!
+    var eventsView: EventsViewController!
+    var interestsView: InterestViewController!
+    
     var isExpanded = false
     
     // MARK: - Init
@@ -20,13 +23,7 @@ class ContainerController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureHomeController()
-        ApiClient.getEvents(distance: "2km", location: "Manhattan") { (error, data) in
-            if let error = error {
-                print(error.errorMessage())
-            } else if let data = data {
-                dump(data)
-            }
-        }
+       
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -47,7 +44,7 @@ class ContainerController: UIViewController {
         homeController.delegate = self
         centerController = UINavigationController(rootViewController: homeController)
         view.addSubview(centerController.view)
-        addChild(centerController)
+//        addChild(centerController)
         centerController.didMove(toParent: self)
     }
     func configureMenuController() {
@@ -80,7 +77,7 @@ class ContainerController: UIViewController {
     func didSelectMenuOption(menuOption: MenuOption) {
         switch menuOption {
         case .Discover:
-            print("show discover")
+            let introVC = IntroViewController()
         case .Moments:
             print("show moment")
         case .Messages:
@@ -90,18 +87,33 @@ class ContainerController: UIViewController {
         }
     }
     
-    func animateStatusBar() {
+    func animateStatusBar() { 
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
             self.setNeedsStatusBarAppearanceUpdate()
         }, completion: nil)
     }
 }
 extension ContainerController: HomeControllerDelegate {
-    func handleMenuToggle(forMenuOption menuOption: MenuOption?) {
+    func handleMenuToggle(forMenuOption menuOption: MenuOption?, menuCategories: MenuCategories?) {
         if !isExpanded {
             configureMenuController()
         }
                  isExpanded = !isExpanded
         animatePanel(shouldExpand: isExpanded, menuOption: menuOption)
+        
+        guard let discover = centerController.children.first as? HomeController,
+        let menuCategories = menuCategories else { return }
+        switch menuCategories {
+        case .intro:
+            discover.introPageOn()
+        case .moments:
+            discover.eventsPageOn()
+        case .profile:
+            discover.profilePageOn()
+        case .discover:
+            discover.favoritesPageOn()
+        //default:
+        //    print("No Other VC")
+        }
     }
 }
