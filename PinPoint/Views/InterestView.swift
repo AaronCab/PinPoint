@@ -28,7 +28,7 @@ class InterestView: UIView {
         super.init(coder: aDecoder)
         commonInit()
     }
-    func commonInit(){
+   private func commonInit(){
         backgroundColor = .white
         self.intrestCollectionView.register(InterestCell.self, forCellWithReuseIdentifier: "InterestCell")
         setup()
