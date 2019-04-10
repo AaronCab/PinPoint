@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import SnapKit
 
 class EventsView: UIView {
+
+  
+
     
     lazy var myCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()

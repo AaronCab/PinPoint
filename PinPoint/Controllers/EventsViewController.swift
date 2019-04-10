@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Kingfisher
 class EventsViewController: UIViewController {
     let eventsView = EventsView()
     var event = [Event](){
@@ -33,9 +33,6 @@ class EventsViewController: UIViewController {
             }
         }
     }
-    
-
-
 }
 extension EventsViewController: UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -45,10 +42,19 @@ extension EventsViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? EventsCell else { return UICollectionViewCell() }
         let currentEvent = event[indexPath.row]
-        
+        cell.eventDescription.text = currentEvent.description?.text
+        cell.eventStartTime.text = currentEvent.start?.local
+        cell.eventEndTime.text = currentEvent.end?.local
+        cell.eventName.text = currentEvent.name?.text
+        cell.eventImageView.kf.indicatorType = .activity
+        cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.logo?.original.url)!), placeholder: #imageLiteral(resourceName: "icons8-check_male"))
+        cell.moreInfoButton.addTarget(self, action: #selector(moreInfo), for: .touchUpInside)
         return cell
 
     }
-    
+    @objc func moreInfo(){
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    }
     
 }
+

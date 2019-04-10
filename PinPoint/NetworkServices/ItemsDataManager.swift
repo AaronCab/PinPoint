@@ -36,7 +36,7 @@ final class ItemsDataManager{
                     article = try PropertyListDecoder().decode([UserModel].self, from: data)
                     items = article
                 } catch {
-                    print("property list decoding error: \(error)")
+                   
                 }
             } else {
                 print("data is nil")

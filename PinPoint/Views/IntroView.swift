@@ -75,37 +75,39 @@ class IntroView: UIView {
     func nameCreatedWithContrant(){
         addSubview(nameInTextField)
         nameInTextField.translatesAutoresizingMaskIntoConstraints = false
+        nameInTextField.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor, constant: 30).isActive = true
         nameInTextField.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
-        nameInTextField.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor).isActive = true
         nameInTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
         nameInTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     }
-    
+
     func pictureContrant(){
         addSubview(pictureOfUser)
         pictureOfUser.translatesAutoresizingMaskIntoConstraints = false
+        pictureOfUser.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.3).isActive = true
+        pictureOfUser.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
         pictureOfUser.bottomAnchor.constraint(equalTo: pictureButton.topAnchor, constant: 20).isActive = true
         pictureOfUser.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true 
         pictureOfUser.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
         pictureOfUser.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     }
-    
+
     func pictureButtonConstrant(){
         addSubview(pictureButton)
         pictureButton.translatesAutoresizingMaskIntoConstraints = false
-        pictureButton.bottomAnchor.constraint(equalTo: nameInTextField.topAnchor, constant: 30).isActive = true
-        pictureButton.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor).isActive = true
+        pictureButton.topAnchor.constraint(equalTo: pictureOfUser.bottomAnchor, constant: 30).isActive = true
+        pictureButton.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
         pictureButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
         pictureButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     }
-    
+
     func locationButtonConstrant(){
         addSubview(locationButton)
         locationButton.translatesAutoresizingMaskIntoConstraints = false
-        locationButton.topAnchor.constraint(equalTo: nameInTextField.topAnchor, constant: 30).isActive = true
-        locationButton.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor).isActive = true
+        locationButton.topAnchor.constraint(equalTo: nameInTextField.bottomAnchor, constant: 30).isActive = true
+        locationButton.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
         locationButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
         locationButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     }
-    
+
 }

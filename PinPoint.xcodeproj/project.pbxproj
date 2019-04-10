@@ -51,6 +51,7 @@
 		93088BF5225E54C30067F09D /* CreatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BF4225E54C30067F09D /* CreatedView.swift */; };
 		93088BF7225E54F30067F09D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BF6225E54F30067F09D /* ProfileViewController.swift */; };
 		93088BF9225E55020067F09D /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BF8225E55020067F09D /* ProfileView.swift */; };
+		93088BFB225E715C0067F09D /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BFA225E715C0067F09D /* Location.swift */; };
 		9314F7792257B041009E0BB7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9314F7782257B041009E0BB7 /* AppDelegate.swift */; };
 		9314F77B2257B041009E0BB7 /* PinPointTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9314F77A2257B041009E0BB7 /* PinPointTabBarController.swift */; };
 		9314F7802257B043009E0BB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9314F77F2257B043009E0BB7 /* Assets.xcassets */; };
@@ -107,6 +108,7 @@
 		93088BF4225E54C30067F09D /* CreatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatedView.swift; sourceTree = "<group>"; };
 		93088BF6225E54F30067F09D /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		93088BF8225E55020067F09D /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		93088BFA225E715C0067F09D /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		9314F7752257B041009E0BB7 /* PinPoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PinPoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9314F7782257B041009E0BB7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9314F77A2257B041009E0BB7 /* PinPointTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinPointTabBarController.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				93088BD4225BD2B70067F09D /* EventsModel.swift */,
 				93088BEA225E41D80067F09D /* UserModel.swift */,
 				93088BEC225E42150067F09D /* FileManagerHelper.swift */,
+				93088BFA225E715C0067F09D /* Location.swift */,
 			);
 			path = NetworkServices;
 			sourceTree = "<group>";
@@ -438,6 +441,7 @@
 				93088B9F225B95FE0067F09D /* String+Extensions.swift in Sources */,
 				93088BBC225BA70A0067F09D /* CreateUserView.swift in Sources */,
 				9314F77B2257B041009E0BB7 /* PinPointTabBarController.swift in Sources */,
+				93088BFB225E715C0067F09D /* Location.swift in Sources */,
 				9314F7792257B041009E0BB7 /* AppDelegate.swift in Sources */,
 				93088BCF225BD20A0067F09D /* NetworkHandler.swift in Sources */,
 				93088BBE225BA7200067F09D /* AccountExistingView.swift in Sources */,
