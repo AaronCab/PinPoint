@@ -36,8 +36,8 @@ class LoginWithExistingViewController: UIViewController {
     @objc func loginWithCreatedAccount(){
             guard let email = accountExistingView.emailToLogin.text,
                 let password = accountExistingView.passwordToLogin.text,
-                !email.isEmpty,
-                !password.isEmpty
+                email.isEmpty,
+                password.isEmpty
                 else{
                     showAlert(title: "Error", message: "Incorrect password and/or username")
                     return
@@ -56,6 +56,7 @@ extension LoginWithExistingViewController: AuthServiceExistingAccountDelegate{
     
     func didSignInToExistingAccount(_ authservice: AuthService, user: User) {
         let containVC = ContainerController()
+        
         self.present(containVC, animated: true)
         
     }
