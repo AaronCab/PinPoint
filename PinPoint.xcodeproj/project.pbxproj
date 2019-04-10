@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05256F68225E739E0060B9B1 /* MenuCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05256F67225E739E0060B9B1 /* MenuCategories.swift */; };
 		93088B9D225B95E20067F09D /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088B9C225B95E20067F09D /* Date+Extensions.swift */; };
 		93088B9F225B95FE0067F09D /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088B9E225B95FE0067F09D /* String+Extensions.swift */; };
 		93088BA1225B963C0067F09D /* UIViewController+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BA0225B963C0067F09D /* UIViewController+Alerts.swift */; };
@@ -60,6 +61,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		05256F67225E739E0060B9B1 /* MenuCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCategories.swift; sourceTree = "<group>"; };
 		146FB7134DA418F51EC1E8D3 /* Pods-PinPoint.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PinPoint.debug.xcconfig"; path = "Target Support Files/Pods-PinPoint/Pods-PinPoint.debug.xcconfig"; sourceTree = "<group>"; };
 		246C9750CA3360B1EC660EC1 /* Pods-PinPoint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PinPoint.release.xcconfig"; path = "Target Support Files/Pods-PinPoint/Pods-PinPoint.release.xcconfig"; sourceTree = "<group>"; };
 		4E6346C23E7AB50CCD79EA1B /* Pods_PinPoint.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PinPoint.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -208,6 +210,7 @@
 				93088BC1225BB0B80067F09D /* Protocols.swift */,
 				93088BC3225BB0D80067F09D /* MenuOptionsCell.swift */,
 				93088BC7225BB1330067F09D /* MenuOptions.swift */,
+				05256F67225E739E0060B9B1 /* MenuCategories.swift */,
 			);
 			path = Utilites;
 			sourceTree = "<group>";
@@ -445,6 +448,7 @@
 				93088BC8225BB1330067F09D /* MenuOptions.swift in Sources */,
 				93088BA1225B963C0067F09D /* UIViewController+Alerts.swift in Sources */,
 				93088BC2225BB0B80067F09D /* Protocols.swift in Sources */,
+				05256F68225E739E0060B9B1 /* MenuCategories.swift in Sources */,
 				93088BEF225E542F0067F09D /* FavoritesViewController.swift in Sources */,
 				93088B9D225B95E20067F09D /* Date+Extensions.swift in Sources */,
 				93088BF5225E54C30067F09D /* CreatedView.swift in Sources */,

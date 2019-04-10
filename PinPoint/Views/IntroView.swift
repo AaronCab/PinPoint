@@ -86,6 +86,8 @@ class IntroView: UIView {
         pictureOfUser.translatesAutoresizingMaskIntoConstraints = false
         pictureOfUser.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.3).isActive = true
         pictureOfUser.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
+        pictureOfUser.bottomAnchor.constraint(equalTo: pictureButton.topAnchor, constant: 20).isActive = true
+        pictureOfUser.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true 
         pictureOfUser.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
         pictureOfUser.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     }

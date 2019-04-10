@@ -13,6 +13,9 @@ class ContainerController: UIViewController {
     
     var menuController: MenuController!
     var centerController: UIViewController!
+    var eventsView: EventsViewController!
+    var interestsView: InterestViewController!
+    
     var isExpanded = false
     
     // MARK: - Init
@@ -41,7 +44,7 @@ class ContainerController: UIViewController {
         homeController.delegate = self
         centerController = UINavigationController(rootViewController: homeController)
         view.addSubview(centerController.view)
-        addChild(centerController)
+//        addChild(centerController)
         centerController.didMove(toParent: self)
     }
     func configureMenuController() {
@@ -68,16 +71,13 @@ class ContainerController: UIViewController {
                 guard let menuOption = menuOption else { return }
                 self.didSelectMenuOption(menuOption: menuOption)
             }
-                
             }
         animateStatusBar()
     }
-    
     func didSelectMenuOption(menuOption: MenuOption) {
         switch menuOption {
-            
         case .Discover:
-            print("show discover")
+            let introVC = IntroViewController()
         case .Moments:
             print("show moment")
         case .Messages:
@@ -93,14 +93,27 @@ class ContainerController: UIViewController {
         }, completion: nil)
     }
 }
-
 extension ContainerController: HomeControllerDelegate {
-    func handleMenuToggle(forMenuOption menuOption: MenuOption?) {
-        
+    func handleMenuToggle(forMenuOption menuOption: MenuOption?, menuCategories: MenuCategories?) {
         if !isExpanded {
             configureMenuController()
         }
                  isExpanded = !isExpanded
         animatePanel(shouldExpand: isExpanded, menuOption: menuOption)
+        
+        guard let discover = centerController.children.first as? HomeController,
+        let menuCategories = menuCategories else { return }
+        switch menuCategories {
+        case .intro:
+            discover.introPageOn()
+        case .moments:
+            discover.eventsPageOn()
+        case .profile:
+            discover.profilePageOn()
+        case .discover:
+            discover.favoritesPageOn()
+        //default:
+        //    print("No Other VC")
+        }
     }
 }
