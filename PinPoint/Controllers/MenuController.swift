@@ -58,10 +58,10 @@ extension MenuController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let menuOption = MenuOption(rawValue: indexPath.row)
         if indexPath.row == 0 {
-            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .intro)
+            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .discover)
         }
         if indexPath.row == 1 {
-            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .discover)
+            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .intro)
         }
         if indexPath.row == 2 {
             delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .moments)
