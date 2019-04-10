@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Toucan
+import CoreLocation
 
 class HomeController: UIViewController {
     
@@ -32,8 +34,11 @@ class HomeController: UIViewController {
             }
         }
     }
+
+    var contentView = UIView.init(frame: UIScreen.main.bounds)
+    
+    
     var delegate: HomeControllerDelegate?
-    // MARK: - Init
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +49,19 @@ class HomeController: UIViewController {
         configureNavigationBar()
         getEvents()
     }
+    
+    
+        var location = "Manhatten"
+        var selectedImageValue: UIImage?
+        var locationManager = CLLocationManager()
+        var locationService = LocationService()
+        var long: Double!
+        var lat: Double!
+        private lazy var imagePickerController: UIImagePickerController = {
+            let ip = UIImagePickerController()
+            ip.delegate = self
+            return ip
+        }()
     
     // MARK: - Handlers
     
@@ -61,6 +79,8 @@ class HomeController: UIViewController {
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
         contentView.addSubview(introView)
+        contentView.addSubview(view)
+        
         view.addSubview(contentView)
     }
     func eventsPageOn() {
@@ -110,4 +130,53 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
     }
     
     
+}
+
+extension HomeController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true)
+    }
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
+            print("original image is nil")
+            return
+        }
+        let resizedImage = Toucan.init(image: originalImage).resize(CGSize(width: 500, height: 500))
+        selectedImageValue = resizedImage.image
+//        pictureOfUser.image = resizedImage.image
+        dismiss(animated: true)
+    }
+}
+
+extension HomeController: UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+extension HomeController: CLLocationManagerDelegate {
+    
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let locational = locations.last else {
+            print("no locations found")
+            return
+        }
+        currentLocation = locational
+        let geoCoder = CLGeocoder()
+        geoCoder.reverseGeocodeLocation(locational) { (placemarks, error) in
+            if let error = error{
+                self.showAlert(title: "Error", message: error.localizedDescription)
+            }
+            guard let placeMark = placemarks?.first else { return }
+            
+            if let city = placeMark.subAdministrativeArea {
+                self.location = city
+                
+            }
+            
+        }
+    }
 }
