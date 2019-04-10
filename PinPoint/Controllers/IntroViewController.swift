@@ -8,16 +8,31 @@
 
 import UIKit
 import Toucan
+import CoreLocation
 
 class IntroViewController: UIViewController {
     
     var introView = IntroView()
+    
+    var currentLocation: CLLocation? {
+        didSet{
+            introView.locationButton.setTitle(location, for: .normal)
+        }
+    }
+    var locationManager = CLLocationManager()
+    var locationService = LocationService()
+    var long: Double!
+    var lat: Double!
+    
+    
+
     
     private lazy var imagePickerController: UIImagePickerController = {
         let ip = UIImagePickerController()
         ip.delegate = self
         return ip
     }()
+    var location = "Manhatten"
     
     private var selectedImageValue: UIImage?
 
@@ -25,6 +40,12 @@ class IntroViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(introView)
         introView.pictureButton.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
+        introView.locationButton.addTarget(self, action: #selector(locationFinder), for: .touchUpInside)
+        self.locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        }
     }
     
     @objc func imagePicker(){
@@ -46,7 +67,20 @@ class IntroViewController: UIViewController {
 
 
     @objc func locationFinder(){
-    
+        locationManager.startUpdatingLocation()
+        currentLocation = locationManager.location
+        
+        locationManager.stopUpdatingLocation()
+        
+        locationService.getCoordinate(addressString: location) { (locationFound, error) in
+            if let error = error{
+                self.showAlert(title: "Error", message: error.localizedDescription)
+            }else {
+                self.lat = locationFound.latitude
+                self.long = locationFound.longitude
+            }
+        }
+
     }
 }
 extension IntroViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
@@ -70,5 +104,30 @@ extension IntroViewController: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+
+extension IntroViewController: CLLocationManagerDelegate {
+    
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let locational = locations.last else {
+            print("no locations found")
+            return
+        }
+        currentLocation = locational
+        let geoCoder = CLGeocoder()
+        geoCoder.reverseGeocodeLocation(locational) { (placemarks, error) in
+            if let error = error{
+                self.showAlert(title: "Error", message: error.localizedDescription)
+            }
+            guard let placeMark = placemarks?.first else { return }
+            
+            if let city = placeMark.subAdministrativeArea {
+                self.location = city
+                
+            }
+            
+        }
     }
 }
