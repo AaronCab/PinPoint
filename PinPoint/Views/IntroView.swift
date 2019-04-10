@@ -65,9 +65,9 @@ class IntroView: UIView {
     
     private func commonInit(){
         addGradient()
-        nameCreatedWithContrant()
         pictureContrant()
         pictureButtonConstrant()
+        nameCreatedWithContrant()
         locationButtonConstrant()
     }
     
@@ -84,10 +84,8 @@ class IntroView: UIView {
     private func pictureContrant(){
         addSubview(pictureOfUser)
         pictureOfUser.translatesAutoresizingMaskIntoConstraints = false
-        pictureOfUser.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.3).isActive = true
+        pictureOfUser.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.35).isActive = true
         pictureOfUser.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
-        pictureOfUser.bottomAnchor.constraint(equalTo: pictureButton.topAnchor, constant: 20).isActive = true
-        pictureOfUser.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true 
         pictureOfUser.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
         pictureOfUser.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     }
