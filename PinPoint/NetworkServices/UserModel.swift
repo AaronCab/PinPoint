@@ -12,4 +12,9 @@ struct UserModel: Codable {
     let lat: Double
     let long: Double
     let photo: String
+    let interst1: String
+    let interest2: String
+    let interest3: String
+    let interest4: String
+    let interest5: String
 }

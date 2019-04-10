@@ -20,13 +20,7 @@ class ContainerController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureHomeController()
-        ApiClient.getEvents(distance: "2km", location: "Manhattan") { (error, data) in
-            if let error = error {
-                print(error.errorMessage())
-            } else if let data = data {
-                dump(data)
-            }
-        }
+       
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -93,7 +87,7 @@ class ContainerController: UIViewController {
         }
     }
     
-    func animateStatusBar() {
+    func animateStatusBar() { 
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
             self.setNeedsStatusBarAppearanceUpdate()
         }, completion: nil)
