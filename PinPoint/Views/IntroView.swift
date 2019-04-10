@@ -31,7 +31,7 @@ class IntroView: UIView {
     
     var pictureOfUser: UIImageView = {
         var imageView = UIImageView()
-        imageView.image = UIImage(named: "icons8-account-25")
+        imageView.image = UIImage(named: "placeholder-image")
         return imageView
     }()
     
@@ -65,14 +65,14 @@ class IntroView: UIView {
     
     private func commonInit(){
         addGradient()
-        nameCreatedWithContrant()
         pictureContrant()
         pictureButtonConstrant()
+        nameCreatedWithContrant()
         locationButtonConstrant()
     }
     
     
-    func nameCreatedWithContrant(){
+    private func nameCreatedWithContrant(){
         addSubview(nameInTextField)
         nameInTextField.translatesAutoresizingMaskIntoConstraints = false
         nameInTextField.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor, constant: 30).isActive = true
@@ -81,18 +81,16 @@ class IntroView: UIView {
         nameInTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     }
 
-    func pictureContrant(){
+    private func pictureContrant(){
         addSubview(pictureOfUser)
         pictureOfUser.translatesAutoresizingMaskIntoConstraints = false
-        pictureOfUser.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.3).isActive = true
+        pictureOfUser.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.35).isActive = true
         pictureOfUser.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
-        pictureOfUser.bottomAnchor.constraint(equalTo: pictureButton.topAnchor, constant: 20).isActive = true
-        pictureOfUser.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true 
         pictureOfUser.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
         pictureOfUser.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     }
 
-    func pictureButtonConstrant(){
+   private func pictureButtonConstrant(){
         addSubview(pictureButton)
         pictureButton.translatesAutoresizingMaskIntoConstraints = false
         pictureButton.topAnchor.constraint(equalTo: pictureOfUser.bottomAnchor, constant: 30).isActive = true
@@ -101,7 +99,7 @@ class IntroView: UIView {
         pictureButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     }
 
-    func locationButtonConstrant(){
+   private func locationButtonConstrant(){
         addSubview(locationButton)
         locationButton.translatesAutoresizingMaskIntoConstraints = false
         locationButton.topAnchor.constraint(equalTo: nameInTextField.bottomAnchor, constant: 30).isActive = true

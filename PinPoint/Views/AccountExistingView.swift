@@ -82,7 +82,7 @@ class AccountExistingView: UIView {
     
     
     
-    func commonInit(){
+    private func commonInit(){
         emailLoginContrant()
         passwordLoginConstant()
         logoLabelConstrant()
@@ -100,7 +100,7 @@ class AccountExistingView: UIView {
         logo.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     }
     
-    func emailLoginContrant(){
+    private func emailLoginContrant(){
         addSubview(emailToLogin)
         emailToLogin.translatesAutoresizingMaskIntoConstraints = false
         emailToLogin.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
@@ -109,7 +109,7 @@ class AccountExistingView: UIView {
         emailToLogin.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     }
     
-    func passwordLoginConstant(){
+   private func passwordLoginConstant(){
         addSubview(passwordToLogin)
         passwordToLogin.translatesAutoresizingMaskIntoConstraints = false
         passwordToLogin.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
