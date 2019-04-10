@@ -1,4 +1,4 @@
-<img width="892" alt="Screen Shot 2019-04-10 at 10 44 37 AM" src="https://user-images.githubusercontent.com/43770785/55888991-5913fd80-5b7e-11e9-98b6-a93eae6456f9.png">
+<img width="882" alt="Screen Shot 2019-04-10 at 10 44 37 AM" src="https://user-images.githubusercontent.com/43770785/55889427-0d158880-5b7f-11e9-8b90-2c43fb959db7.png">
 
 # PinPoint
 
