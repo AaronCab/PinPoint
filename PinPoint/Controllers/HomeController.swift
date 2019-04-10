@@ -41,6 +41,7 @@ class HomeController: UIViewController {
             }
         }
     }
+
     var delegate: HomeControllerDelegate?
     
     override func viewDidLoad() {
@@ -82,9 +83,7 @@ class HomeController: UIViewController {
     func introPageOn() {
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
-        introView.pictureButton.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
-        introView.locationButton.addTarget(self, action: #selector(locationFinder), for: .touchUpInside)
-        contentView.addSubview(introView)
+
         view.addSubview(contentView)
     }
     func eventsPageOn() {
