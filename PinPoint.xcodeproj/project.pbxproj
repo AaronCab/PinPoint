@@ -625,7 +625,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+<<<<<<< HEAD
+				DEVELOPMENT_TEAM = D9PD329X4J;
+=======
 				DEVELOPMENT_TEAM = 9DV268QUJB;
+>>>>>>> 4f2960b325e951ffdbf274d7a029c651f435da56
 				INFOPLIST_FILE = PinPoint/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -644,7 +648,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+<<<<<<< HEAD
+				DEVELOPMENT_TEAM = D9PD329X4J;
+=======
 				DEVELOPMENT_TEAM = 9DV268QUJB;
+>>>>>>> 4f2960b325e951ffdbf274d7a029c651f435da56
 				INFOPLIST_FILE = PinPoint/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
