@@ -36,9 +36,9 @@ class CreateUserView: UIView {
         let label = UILabel()
         
         label.backgroundColor = .clear
-        label.text = "PinPoint"
+        label.text = "P I N P O I N T"
         label.textColor = .white
-        label.font = UIFont.italicSystemFont(ofSize: 30)
+        label.font = UIFont(name: "Futura", size: 36)
         label.textAlignment = .center
         
         return label
