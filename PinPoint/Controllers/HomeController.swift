@@ -44,9 +44,17 @@ class HomeController: UIViewController {
         }
     }
 
+
+
+ //   var contentView = UIView.init(frame: UIScreen.main.bounds)
+    
+    
+
+
     //var contentView = UIView.init(frame: UIScreen.main.bounds)
     
     
+
     var delegate: HomeControllerDelegate?
     
     override func viewDidLoad() {
