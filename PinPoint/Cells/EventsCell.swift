@@ -73,6 +73,7 @@ class EventsCell: UICollectionViewCell {
     
     func setupCell() {
         self.addSubview(eventCellContainerView)
+    
         eventCellContainerView.snp.makeConstraints { (make) in
             make.edges.equalTo(contentView)
             
