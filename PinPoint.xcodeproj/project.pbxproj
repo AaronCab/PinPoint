@@ -57,6 +57,9 @@
 		9314F7802257B043009E0BB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9314F77F2257B043009E0BB7 /* Assets.xcassets */; };
 		9314F7832257B043009E0BB7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9314F7812257B043009E0BB7 /* LaunchScreen.storyboard */; };
 		9314F78B2257B2F4009E0BB7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9314F78A2257B2F4009E0BB7 /* GoogleService-Info.plist */; };
+		93BFA6FD225F93DC0074FD34 /* FavoritesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BFA6FC225F93DC0074FD34 /* FavoritesCell.swift */; };
+		93BFA6FF225F98F10074FD34 /* FavoritesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BFA6FE225F98F10074FD34 /* FavoritesModel.swift */; };
+		93BFA701225F9A760074FD34 /* FavoritesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BFA700225F9A750074FD34 /* FavoritesDataManager.swift */; };
 		94F65BFC0759B9FC879F0B3A /* Pods_PinPoint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E6346C23E7AB50CCD79EA1B /* Pods_PinPoint.framework */; };
 /* End PBXBuildFile section */
 
@@ -116,6 +119,9 @@
 		9314F7822257B043009E0BB7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9314F7842257B043009E0BB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9314F78A2257B2F4009E0BB7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		93BFA6FC225F93DC0074FD34 /* FavoritesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCell.swift; sourceTree = "<group>"; };
+		93BFA6FE225F98F10074FD34 /* FavoritesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesModel.swift; sourceTree = "<group>"; };
+		93BFA700225F9A750074FD34 /* FavoritesDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				93088BD8225E39F80067F09D /* EventsCell.swift */,
+				93BFA6FC225F93DC0074FD34 /* FavoritesCell.swift */,
 				93088BE4225E3DD00067F09D /* InterestCell.swift */,
 			);
 			path = Cells;
@@ -229,12 +236,14 @@
 			children = (
 				93088BCE225BD20A0067F09D /* NetworkHandler.swift */,
 				93088BE8225E41BC0067F09D /* ItemsDataManager.swift */,
+				93BFA700225F9A750074FD34 /* FavoritesDataManager.swift */,
 				93088BD0225BD2200067F09D /* AppError.swift */,
 				93088BD2225BD2360067F09D /* APIClient.swift */,
 				93088BD4225BD2B70067F09D /* EventsModel.swift */,
 				93088BEA225E41D80067F09D /* UserModel.swift */,
 				93088BEC225E42150067F09D /* FileManagerHelper.swift */,
 				93088BFA225E715C0067F09D /* Location.swift */,
+				93BFA6FE225F98F10074FD34 /* FavoritesModel.swift */,
 			);
 			path = NetworkServices;
 			sourceTree = "<group>";
@@ -444,6 +453,7 @@
 				93088BFB225E715C0067F09D /* Location.swift in Sources */,
 				9314F7792257B041009E0BB7 /* AppDelegate.swift in Sources */,
 				93088BCF225BD20A0067F09D /* NetworkHandler.swift in Sources */,
+				93BFA6FD225F93DC0074FD34 /* FavoritesCell.swift in Sources */,
 				93088BBE225BA7200067F09D /* AccountExistingView.swift in Sources */,
 				93088BC8225BB1330067F09D /* MenuOptions.swift in Sources */,
 				93088BA1225B963C0067F09D /* UIViewController+Alerts.swift in Sources */,
@@ -467,9 +477,11 @@
 				93088BB4225BA6580067F09D /* LoginViewController.swift in Sources */,
 				93088BE3225E3DAA0067F09D /* InterestView.swift in Sources */,
 				93088BF9225E55020067F09D /* ProfileView.swift in Sources */,
+				93BFA6FF225F98F10074FD34 /* FavoritesModel.swift in Sources */,
 				93088BCB225BB1570067F09D /* HomeController.swift in Sources */,
 				93088BE5225E3DD00067F09D /* InterestCell.swift in Sources */,
 				93088BBA225BA6F90067F09D /* LoginView.swift in Sources */,
+				93BFA701225F9A760074FD34 /* FavoritesDataManager.swift in Sources */,
 				93088BEB225E41D80067F09D /* UserModel.swift in Sources */,
 				93088BA5225B972E0067F09D /* AuthService.swift in Sources */,
 				93088BD3225BD2360067F09D /* APIClient.swift in Sources */,
@@ -613,13 +625,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+<<<<<<< HEAD
 				DEVELOPMENT_TEAM = D9PD329X4J;
+=======
+				DEVELOPMENT_TEAM = 9DV268QUJB;
+>>>>>>> 4f2960b325e951ffdbf274d7a029c651f435da56
 				INFOPLIST_FILE = PinPoint/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.pursuit.PinPoint;
+				PRODUCT_BUNDLE_IDENTIFIER = .com.genceci.www.PinPoint;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -632,13 +648,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+<<<<<<< HEAD
 				DEVELOPMENT_TEAM = D9PD329X4J;
+=======
+				DEVELOPMENT_TEAM = 9DV268QUJB;
+>>>>>>> 4f2960b325e951ffdbf274d7a029c651f435da56
 				INFOPLIST_FILE = PinPoint/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.pursuit.PinPoint;
+				PRODUCT_BUNDLE_IDENTIFIER = .com.genceci.www.PinPoint;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

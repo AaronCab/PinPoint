@@ -32,7 +32,7 @@ class MenuController: UIViewController {
         tableView.register(MenuOptionsCell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.backgroundColor = .red
         tableView.separatorStyle = .none
-        tableView.rowHeight = 80
+        tableView.rowHeight = 72
         
         
         view.addSubview(tableView)
@@ -55,13 +55,17 @@ extension MenuController: UITableViewDataSource, UITableViewDelegate {
         cell.iconImageView.image = menuOption?.image
         return cell
     }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "PINPOINT"
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let menuOption = MenuOption(rawValue: indexPath.row)
         if indexPath.row == 0 {
-            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .intro)
+            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .discover)
         }
         if indexPath.row == 1 {
-            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .discover)
+            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .intro)
         }
         if indexPath.row == 2 {
             delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .moments)

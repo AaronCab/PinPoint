@@ -114,9 +114,13 @@ extension ContainerController: HomeControllerDelegate {
             discover.profilePageOn()
         case .discover:
             discover.favoritesPageOn()
-        //default:
-        //    print("No Other VC")
+        default:
+            print("No Other VC")
         }
     }
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4f2960b325e951ffdbf274d7a029c651f435da56

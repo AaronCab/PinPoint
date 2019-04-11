@@ -9,17 +9,18 @@
 import UIKit
 import Toucan
 import CoreLocation
+import FirebaseAuth
 
 class HomeController: UIViewController {
     var contentView = UIView.init(frame: UIScreen.main.bounds)
     
-    
-    // MARK: - Properties
- 
     let introView = IntroView()
     let eventsView = EventsView()
     let favoriteView = FavoritesView()
     let profileView = ProfileView()
+    var eventCell = EventsCell()
+    let loginView = LoginView()
+    let authService = AppDelegate.authservice
     var event = [Event](){
         didSet {
             DispatchQueue.main.async {
@@ -44,7 +45,13 @@ class HomeController: UIViewController {
     }
 
 
+
  //   var contentView = UIView.init(frame: UIScreen.main.bounds)
+    
+    
+
+
+    //var contentView = UIView.init(frame: UIScreen.main.bounds)
     
     
 
@@ -56,7 +63,7 @@ class HomeController: UIViewController {
         view.addSubview(contentView)
         eventsView.myCollectionView.dataSource = self
         eventsView.myCollectionView.delegate = self
- 
+        loginViewStuff()
         configureNavigationBar()
         getEvents()
     }
@@ -89,7 +96,7 @@ class HomeController: UIViewController {
     func introPageOn() {
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
-
+        contentView.addSubview(introView)
         view.addSubview(contentView)
     }
     func eventsPageOn() {
@@ -105,15 +112,23 @@ class HomeController: UIViewController {
         view.addSubview(contentView)
     }
     func profilePageOn() {
+        if authService.getCurrentUser() == nil{
+            contentView.removeFromSuperview()
+            contentView = UIView.init(frame: UIScreen.main.bounds)
+            contentView.addSubview(loginView)
+            view.addSubview(loginView)
+        }else{
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
         contentView.addSubview(profileView)
         view.addSubview(profileView)
+        }
     }
 }
 
 
 extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
          return event.count
     }
@@ -122,10 +137,11 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? EventsCell else { return UICollectionViewCell() }
         let currentEvent = event[indexPath.row]
         cell.eventDescription.text = currentEvent.description?.text
-        cell.eventStartTime.text = currentEvent.start?.local
-        cell.eventEndTime.text = currentEvent.end?.local
+        cell.eventStartTime.text = currentEvent.start?.local.formatISODateString(dateFormat: "EEEE, MMM d, yyyy")
+        cell.eventEndTime.text = currentEvent.end?.local.formatISODateString(dateFormat: "MMM d, h:mm a")
         cell.eventName.text = currentEvent.name?.text
         cell.eventImageView.kf.indicatorType = .activity
+        cell.moreInfoButton.tag = indexPath.row
         if currentEvent.logo?.original.url == nil{
             cell.eventImageView.image = UIImage(named: "placeholder-image")
         }else{
@@ -136,8 +152,21 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         return cell
     }
     
-    @objc func moreInfo(){
+    @objc func moreInfo(senderTag: UIButton){
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let favoriteActione = UIAlertAction(title: "Favorite", style: .default) { alert in
+            let thisEvent = self.event[senderTag.tag]
+        let favoriteEvent = FavoritesModel.init(name: (thisEvent.name?.text)!, description: (thisEvent.description?.text)!, url: thisEvent.url, start: thisEvent.start!.local, end: thisEvent.end!.local, capacity: thisEvent.capacity, status: thisEvent.status)
+            FavoritesDataManager.saveToDocumentsDirectory(favoriteArticle: favoriteEvent)
+            self.showAlert(title: "PinPoint", message: "Successfully Favorites Event")
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(favoriteActione)
+        present(alertController, animated: true)
+
+    
+        
     }
     
     
@@ -174,6 +203,7 @@ extension HomeController: CLLocationManagerDelegate {
             print("no locations found")
             return
         }
+      //  currentLocation = locational
 //        currentLocation = locational
         let geoCoder = CLGeocoder()
         geoCoder.reverseGeocodeLocation(locational) { (placemarks, error) in
@@ -212,7 +242,6 @@ extension HomeController{
     
     
     @objc func locationFinder(){
-//        locationManager.startUpdatingLocation()
         self.locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
             locationManager.startUpdatingLocation()
@@ -220,7 +249,6 @@ extension HomeController{
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         }
         currentLocation = locationManager.location!
-//        locationManager.stopUpdatingLocation()
         
         locationService.getCoordinate(addressString: location) { (locationFound, error) in
             if let error = error{
@@ -232,4 +260,26 @@ extension HomeController{
         }
         
     }
+}
+
+extension HomeController{
+    
+    func loginViewStuff(){
+        loginView.createAccountHere.addTarget(self, action: #selector(createButton), for: .touchUpInside)
+        loginView.customEmailLogin.addTarget(self, action: #selector(loginWithExsistingAccount), for: .touchUpInside)
+    }
+    
+    
+    @objc func createButton(){
+        let createVC = CreateAccountViewController()
+        self.navigationController?.pushViewController(createVC, animated: true)
+    }
+    
+    @objc func loginWithExsistingAccount(){
+        let loginWEVC = LoginWithExistingViewController()
+        self.navigationController?.pushViewController(loginWEVC, animated: true)
+    }
+
+    
+
 }
