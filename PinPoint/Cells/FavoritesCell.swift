@@ -23,6 +23,7 @@ class FavoritesCell: UICollectionViewCell {
         let en = UILabel()
         en.text = "Event Name"
         en.numberOfLines = 2
+        en.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         return en
     }()
     
@@ -38,6 +39,9 @@ class FavoritesCell: UICollectionViewCell {
     let eventDescription: UITextView = {
         let et = UITextView()
         et.isEditable = false
+        et.backgroundColor = .clear
+        et.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        et.textColor = .white
         return et
     }()
     
@@ -92,19 +96,22 @@ class FavoritesCell: UICollectionViewCell {
             
         }
         eventImageView.snp.makeConstraints { (make) in
+            
+            make.topMargin.equalTo(eventName.snp_bottom)
+            make.width.equalTo(contentView)
             make.top.equalTo(eventName.snp.bottom)
             make.width.equalTo(eventCellContainerView)
             make.height.equalTo(300)
             
         }
         eventDescription.snp.makeConstraints { (make) in
-            make.top.equalTo(eventImageView.snp_bottom)
+            make.top.equalTo(400)
             make.width.equalTo(eventCellContainerView)
-            make.height.equalTo(300)
+            make.height.equalTo(150)
             
         }
         eventStartTime.snp.makeConstraints { (make) in
-            make.top.equalTo(eventDescription.snp_bottom)
+            make.top.equalTo(650)
             make.width.equalTo(eventCellContainerView)
             
         }
@@ -118,4 +125,5 @@ class FavoritesCell: UICollectionViewCell {
             make.left.equalTo(11)
         }
     }
+    
 }

@@ -34,7 +34,7 @@ class FavoritesView: UIView {
     }
     func commonInit(){
         backgroundColor = .white
-        self.myCollectionView.register(EventsCell.self, forCellWithReuseIdentifier: "CollectionViewCell")
+        self.myCollectionView.register(FavoritesCell.self, forCellWithReuseIdentifier: "FavoritesCell")
         setup()
     }
     
