@@ -14,6 +14,11 @@ extension String {
     public func formatISODateString(dateFormat: String) -> String {
         var formatDate = self
         let isoDateFormatter = ISO8601DateFormatter()
+        isoDateFormatter.formatOptions = [
+            .withFullTime,
+            .withInternetDateTime,
+            .withDashSeparatorInDate
+        ]
         if let date = isoDateFormatter.date(from: self) {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = dateFormat
