@@ -143,8 +143,8 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? EventsCell else { return UICollectionViewCell() }
         let currentEvent = event[indexPath.row]
         cell.eventDescription.text = currentEvent.description?.text
-        cell.eventStartTime.text = currentEvent.start?.local.formatISODateString(dateFormat: "EEEE, MMM d, yyyy")
-        cell.eventEndTime.text = currentEvent.end?.local.formatISODateString(dateFormat: "MMM d, h:mm a")
+        cell.eventStartTime.text = "Start time: \(currentEvent.start?.local.formatISODateString(dateFormat: "EEEE, MMM d, yyyy"))"
+        cell.eventEndTime.text = "End Time: \(currentEvent.end?.local.formatISODateString(dateFormat: "MMM d, h:mm a"))"
         cell.eventName.text = currentEvent.name?.text
         cell.eventImageView.kf.indicatorType = .activity
         cell.moreInfoButton.tag = indexPath.row
