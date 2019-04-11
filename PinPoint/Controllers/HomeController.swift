@@ -9,6 +9,7 @@
 import UIKit
 import Toucan
 import CoreLocation
+import FirebaseAuth
 
 class HomeController: UIViewController {
     var contentView = UIView.init(frame: UIScreen.main.bounds)
@@ -20,6 +21,8 @@ class HomeController: UIViewController {
     let eventsView = EventsView()
     let favoriteView = FavoritesView()
     let profileView = ProfileView()
+    let loginView = LoginView()
+    let authService = AppDelegate.authservice
     var event = [Event](){
         didSet {
             DispatchQueue.main.async {
@@ -51,7 +54,7 @@ class HomeController: UIViewController {
         view.addSubview(contentView)
         eventsView.myCollectionView.dataSource = self
         eventsView.myCollectionView.delegate = self
- 
+        loginViewStuff()
         configureNavigationBar()
         getEvents()
     }
@@ -84,7 +87,7 @@ class HomeController: UIViewController {
     func introPageOn() {
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
-
+        contentView.addSubview(introView)
         view.addSubview(contentView)
     }
     func eventsPageOn() {
@@ -100,10 +103,17 @@ class HomeController: UIViewController {
         view.addSubview(contentView)
     }
     func profilePageOn() {
+        if authService.getCurrentUser() == nil{
+            contentView.removeFromSuperview()
+            contentView = UIView.init(frame: UIScreen.main.bounds)
+            contentView.addSubview(loginView)
+            view.addSubview(loginView)
+        }else{
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
         contentView.addSubview(profileView)
         view.addSubview(profileView)
+        }
     }
 }
 
@@ -207,7 +217,6 @@ extension HomeController{
     
     
     @objc func locationFinder(){
-//        locationManager.startUpdatingLocation()
         self.locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
             locationManager.startUpdatingLocation()
@@ -215,7 +224,6 @@ extension HomeController{
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         }
         currentLocation = locationManager.location!
-//        locationManager.stopUpdatingLocation()
         
         locationService.getCoordinate(addressString: location) { (locationFound, error) in
             if let error = error{
@@ -227,4 +235,26 @@ extension HomeController{
         }
         
     }
+}
+
+extension HomeController{
+    
+    func loginViewStuff(){
+        loginView.createAccountHere.addTarget(self, action: #selector(createButton), for: .touchUpInside)
+        loginView.customEmailLogin.addTarget(self, action: #selector(loginWithExsistingAccount), for: .touchUpInside)
+    }
+    
+    
+    @objc func createButton(){
+        let createVC = CreateAccountViewController()
+        self.navigationController?.pushViewController(createVC, animated: true)
+    }
+    
+    @objc func loginWithExsistingAccount(){
+        let loginWEVC = LoginWithExistingViewController()
+        self.navigationController?.pushViewController(loginWEVC, animated: true)
+    }
+
+    
+
 }
