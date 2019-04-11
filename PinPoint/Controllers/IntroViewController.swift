@@ -14,7 +14,7 @@ class IntroViewController: UIViewController {
     
     var introView = IntroView()
     
-    var currentLocation: CLLocation? {
+    var currentLocation: CLLocation! {
         didSet{
             introView.locationButton.setTitle(location, for: .normal)
         }

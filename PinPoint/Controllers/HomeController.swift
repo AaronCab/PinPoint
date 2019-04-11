@@ -11,9 +11,11 @@ import Toucan
 import CoreLocation
 
 class HomeController: UIViewController {
+    var contentView = UIView.init(frame: UIScreen.main.bounds)
+    
     
     // MARK: - Properties
-    var contentView = UIView.init(frame: UIScreen.main.bounds)
+ 
     let introView = IntroView()
     let eventsView = EventsView()
     let favoriteView = FavoritesView()
@@ -23,6 +25,12 @@ class HomeController: UIViewController {
             DispatchQueue.main.async {
                 self.eventsView.myCollectionView.reloadData()
             }
+        }
+    }
+    
+    var currentLocation = CLLocation(){
+        didSet{
+            introView.locationButton.setTitle(location, for: .normal)
         }
     }
     private func getEvents(){
@@ -43,6 +51,7 @@ class HomeController: UIViewController {
         view.addSubview(contentView)
         eventsView.myCollectionView.dataSource = self
         eventsView.myCollectionView.delegate = self
+ 
         configureNavigationBar()
         getEvents()
     }
@@ -75,9 +84,7 @@ class HomeController: UIViewController {
     func introPageOn() {
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
-        contentView.addSubview(introView)
-        contentView.addSubview(view)
-        
+
         view.addSubview(contentView)
     }
     func eventsPageOn() {
@@ -123,6 +130,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
 //        cell.frame.origin.x = cell.eventImageView.frame.width * self.view.bounds.size.width
         return cell
     }
+    
     @objc func moreInfo(){
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     }
@@ -142,7 +150,7 @@ extension HomeController: UIImagePickerControllerDelegate, UINavigationControlle
         }
         let resizedImage = Toucan.init(image: originalImage).resize(CGSize(width: 500, height: 500))
         selectedImageValue = resizedImage.image
-//        pictureOfUser.image = resizedImage.image
+        introView.pictureOfUser.image = resizedImage.image
         dismiss(animated: true)
     }
 }
@@ -155,7 +163,6 @@ extension HomeController: UITextFieldDelegate{
 }
 
 extension HomeController: CLLocationManagerDelegate {
-    
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locational = locations.last else {
@@ -176,5 +183,48 @@ extension HomeController: CLLocationManagerDelegate {
             }
             
         }
+    }
+}
+
+extension HomeController{
+    
+    @objc func imagePicker(){
+        let alertSheet = UIAlertController(title: "Picture from where?", message: nil, preferredStyle: .actionSheet)
+        alertSheet.addAction(UIAlertAction(title: "Library", style: .default, handler: { (action) in
+            self.imagePickerController.sourceType = .photoLibrary
+            self.present(self.imagePickerController, animated: true)
+        }))
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            alertSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action) in
+                self.imagePickerController.sourceType = .camera
+                self.present(self.imagePickerController, animated: true)
+            }))
+        }
+        alertSheet.addAction(UIAlertAction(title: "Nevermind", style: .cancel, handler: nil))
+        present(alertSheet, animated: true, completion: nil)
+    }
+    
+    
+    
+    @objc func locationFinder(){
+//        locationManager.startUpdatingLocation()
+        self.locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.startUpdatingLocation()
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        }
+        currentLocation = locationManager.location!
+//        locationManager.stopUpdatingLocation()
+        
+        locationService.getCoordinate(addressString: location) { (locationFound, error) in
+            if let error = error{
+                self.showAlert(title: "Error", message: error.localizedDescription)
+            }else {
+                self.lat = locationFound.latitude
+                self.long = locationFound.longitude
+            }
+        }
+        
     }
 }
