@@ -13,7 +13,9 @@ import FirebaseAuth
 
 class HomeController: UIViewController {
     var contentView = UIView.init(frame: UIScreen.main.bounds)
-    
+    func loadFavorites() {
+        self.favoriteEvents = FavoritesDataManager.fetchItemsFromDocumentsDirectory()
+    }
     let introView = IntroView()
     let eventsView = EventsView()
     let favoriteView = FavoritesView()
@@ -25,6 +27,16 @@ class HomeController: UIViewController {
         didSet {
             DispatchQueue.main.async {
                 self.eventsView.myCollectionView.reloadData()
+            }
+        }
+    }
+    var favoriteCell = FavoritesCell()
+    
+    
+    private var favoriteEvents = [FavoritesModel]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.favoriteView.myCollectionView.reloadData()
             }
         }
     }
@@ -56,22 +68,28 @@ class HomeController: UIViewController {
         ip.delegate = self
         return ip
     }()
-
-
-
-
+    
+    
+    
+    
     var delegate: HomeControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         viewdidLoadLayout()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+
     
     private func viewdidLoadLayout(){
         view.backgroundColor = .white
         view.addSubview(contentView)
         eventsView.myCollectionView.dataSource = self
         eventsView.myCollectionView.delegate = self
+        favoriteView.myCollectionView.delegate = self
+        favoriteView.myCollectionView.dataSource = self
         locationManager = CLLocationManager()
         loginViewStuff()
         introViewStuff()
@@ -87,7 +105,7 @@ class HomeController: UIViewController {
         
     }
     
-
+    
     
     @objc func handleMenuToggle() {
         delegate?.handleMenuToggle(forMenuOption: nil, menuCategories: nil)
@@ -114,6 +132,8 @@ class HomeController: UIViewController {
     func favoritesPageOn() {
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
+        loadFavorites()
+
         contentView.addSubview(favoriteView)
         view.addSubview(contentView)
     }
@@ -124,37 +144,61 @@ class HomeController: UIViewController {
             contentView.addSubview(loginView)
             view.addSubview(loginView)
         }else{
-        contentView.removeFromSuperview()
-        contentView = UIView.init(frame: UIScreen.main.bounds)
-        contentView.addSubview(profileView)
-        view.addSubview(profileView)
+            contentView.removeFromSuperview()
+            contentView = UIView.init(frame: UIScreen.main.bounds)
+            contentView.addSubview(profileView)
+            view.addSubview(profileView)
         }
     }
 }
 
 
 extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
+   
+    
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-         return event.count
+        if collectionView == favoriteView.myCollectionView{
+            return FavoritesDataManager.fetchItemsFromDocumentsDirectory().count
+        } else {
+            return event.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == eventsView.myCollectionView {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? EventsCell else { return UICollectionViewCell() }
         let currentEvent = event[indexPath.row]
         cell.eventDescription.text = currentEvent.description?.text
-        cell.eventStartTime.text = "Start time: \(currentEvent.start?.local.formatISODateString(dateFormat: "EEEE, MMM d, yyyy"))"
-        cell.eventEndTime.text = "End Time: \(currentEvent.end?.local.formatISODateString(dateFormat: "MMM d, h:mm a"))"
+        cell.eventStartTime.text = "Start time: \(currentEvent.start?.local.formatISODateString(dateFormat: "EEEE, MMM d, yyyy") ?? "no start time found")"
+        cell.eventEndTime.text = "End Time: \(currentEvent.end?.local.formatISODateString(dateFormat: "MMM d, h:mm a") ?? "no end time found")"
         cell.eventName.text = currentEvent.name?.text
         cell.eventImageView.kf.indicatorType = .activity
         cell.moreInfoButton.tag = indexPath.row
         if currentEvent.logo?.original.url == nil{
             cell.eventImageView.image = UIImage(named: "placeholder-image")
         }else{
-        cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.logo?.original.url)!), placeholder: UIImage(named: "placeholder-image"))
+            cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.logo?.original.url)!), placeholder: UIImage(named: "placeholder-image"))
         }
         cell.moreInfoButton.addTarget(self, action: #selector(moreInfo), for: .touchUpInside)
         return cell
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoritesCell", for: indexPath) as? FavoritesCell else { return UICollectionViewCell() }
+            let currentEvent = FavoritesDataManager.fetchItemsFromDocumentsDirectory()[indexPath.row]
+            cell.eventDescription.text = currentEvent.description
+            cell.eventStartTime.text = "Start time: \(currentEvent.start)"
+            cell.eventEndTime.text = "End Time: \(currentEvent.end)"
+            cell.eventName.text = currentEvent.name
+            cell.eventImageView.kf.indicatorType = .activity
+            cell.moreInfoButton.tag = indexPath.row
+            if currentEvent.url == nil{
+                cell.eventImageView.image = UIImage(named: "placeholder-image")
+            }else{
+                cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.url)!), placeholder: UIImage(named: "placeholder-image"))
+            }
+            cell.moreInfoButton.addTarget(self, action: #selector(moreInfo), for: .touchUpInside)
+            return cell
+        }
     }
     
     @objc func moreInfo(senderTag: UIButton){
@@ -162,15 +206,15 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         let favoriteActione = UIAlertAction(title: "Favorite", style: .default) { alert in
             let thisEvent = self.event[senderTag.tag]
-        let favoriteEvent = FavoritesModel.init(name: (thisEvent.name?.text)!, description: (thisEvent.description?.text)!, url: thisEvent.url, start: thisEvent.start!.local, end: thisEvent.end!.local, capacity: thisEvent.capacity, status: thisEvent.status)
+            let favoriteEvent = FavoritesModel.init(name: (thisEvent.name?.text)!, description: (thisEvent.description?.text)!, url: thisEvent.logo?.original.url, start: thisEvent.start!.local, end: thisEvent.end!.local, capacity: thisEvent.capacity, status: thisEvent.status)
             FavoritesDataManager.saveToDocumentsDirectory(favoriteArticle: favoriteEvent)
             self.showAlert(title: "PinPoint", message: "Successfully Favorites Event")
         }
         alertController.addAction(cancelAction)
         alertController.addAction(favoriteActione)
         present(alertController, animated: true)
-
-    
+        
+        
         
     }
     
@@ -209,7 +253,7 @@ extension HomeController: CLLocationManagerDelegate {
             return
         }
         currentLocation = locational
-
+        
         let geoCoder = CLGeocoder()
         geoCoder.reverseGeocodeLocation(locational) { (placemarks, error) in
             if let error = error{
@@ -252,14 +296,14 @@ extension HomeController{
     
     
     @objc func locationFinder(){
-
+        
         self.locationManager.delegate = self
-
+        
         locationService.getCoordinate(addressString: location) { (locationFound, error) in
             if let error = error{
                 self.showAlert(title: "Error", message: error.localizedDescription)
             }else {
-
+                
                 self.lat = locationFound.latitude
                 self.long = locationFound.longitude
             }
@@ -285,7 +329,8 @@ extension HomeController{
         let loginWEVC = LoginWithExistingViewController()
         self.navigationController?.pushViewController(loginWEVC, animated: true)
     }
-
     
-
+    
+    
 }
+
