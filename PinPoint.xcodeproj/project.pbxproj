@@ -60,6 +60,7 @@
 		93BFA6FD225F93DC0074FD34 /* FavoritesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BFA6FC225F93DC0074FD34 /* FavoritesCell.swift */; };
 		93BFA6FF225F98F10074FD34 /* FavoritesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BFA6FE225F98F10074FD34 /* FavoritesModel.swift */; };
 		93BFA701225F9A760074FD34 /* FavoritesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BFA700225F9A750074FD34 /* FavoritesDataManager.swift */; };
+		93BFA703225FC5E90074FD34 /* LoggedInUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BFA702225FC5E90074FD34 /* LoggedInUserModel.swift */; };
 		94F65BFC0759B9FC879F0B3A /* Pods_PinPoint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E6346C23E7AB50CCD79EA1B /* Pods_PinPoint.framework */; };
 /* End PBXBuildFile section */
 
@@ -122,6 +123,7 @@
 		93BFA6FC225F93DC0074FD34 /* FavoritesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCell.swift; sourceTree = "<group>"; };
 		93BFA6FE225F98F10074FD34 /* FavoritesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesModel.swift; sourceTree = "<group>"; };
 		93BFA700225F9A750074FD34 /* FavoritesDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesDataManager.swift; sourceTree = "<group>"; };
+		93BFA702225FC5E90074FD34 /* LoggedInUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInUserModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,6 +243,7 @@
 				93088BD2225BD2360067F09D /* APIClient.swift */,
 				93088BD4225BD2B70067F09D /* EventsModel.swift */,
 				93088BEA225E41D80067F09D /* UserModel.swift */,
+				93BFA702225FC5E90074FD34 /* LoggedInUserModel.swift */,
 				93088BEC225E42150067F09D /* FileManagerHelper.swift */,
 				93088BFA225E715C0067F09D /* Location.swift */,
 				93BFA6FE225F98F10074FD34 /* FavoritesModel.swift */,
@@ -436,6 +439,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93BFA703225FC5E90074FD34 /* LoggedInUserModel.swift in Sources */,
 				93088BB6225BA6660067F09D /* CreateAccountViewController.swift in Sources */,
 				93088BC4225BB0D80067F09D /* MenuOptionsCell.swift in Sources */,
 				93088BD5225BD2B70067F09D /* EventsModel.swift in Sources */,
