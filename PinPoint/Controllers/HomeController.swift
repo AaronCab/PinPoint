@@ -46,6 +46,7 @@ class HomeController: UIViewController {
             introView.locationButton.setTitle(location, for: .normal)
         }
     }
+    
     private func getEvents(){
         ApiClient.getEvents(distance: "2km", location: "Manhattan") { (error, data) in
             if let error = error {
@@ -95,6 +96,9 @@ class HomeController: UIViewController {
         introViewStuff()
         configureNavigationBar()
         getEvents()
+        locationManager = CLLocationManager()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
         self.locationManager.requestAlwaysAuthorization()
         self.locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
