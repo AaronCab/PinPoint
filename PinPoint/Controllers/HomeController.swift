@@ -208,7 +208,6 @@ extension HomeController: CLLocationManagerDelegate {
             print("no locations found")
             return
         }
-        
         currentLocation = locational
 
         let geoCoder = CLGeocoder()
