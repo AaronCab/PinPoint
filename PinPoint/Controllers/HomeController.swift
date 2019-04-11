@@ -14,6 +14,7 @@ class HomeController: UIViewController {
     var contentView = UIView.init(frame: UIScreen.main.bounds)
     
     
+    // MARK: - Properties
  
     let introView = IntroView()
     let eventsView = EventsView()
@@ -126,6 +127,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.logo?.original.url)!), placeholder: UIImage(named: "placeholder-image"))
         }
         cell.moreInfoButton.addTarget(self, action: #selector(moreInfo), for: .touchUpInside)
+//        cell.frame.origin.x = cell.eventImageView.frame.width * self.view.bounds.size.width
         return cell
     }
     
@@ -167,7 +169,7 @@ extension HomeController: CLLocationManagerDelegate {
             print("no locations found")
             return
         }
-        currentLocation = locational
+//        currentLocation = locational
         let geoCoder = CLGeocoder()
         geoCoder.reverseGeocodeLocation(locational) { (placemarks, error) in
             if let error = error{

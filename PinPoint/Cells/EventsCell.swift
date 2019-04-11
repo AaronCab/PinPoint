@@ -13,6 +13,7 @@ class EventsCell: UICollectionViewCell {
     
     let eventCellContainerView: UIView = {
         let ev = UIView()
+        ev.backgroundColor = .clear
         ev.layer.cornerRadius = 20
         ev.layer.masksToBounds = true
     
@@ -22,6 +23,7 @@ class EventsCell: UICollectionViewCell {
     let eventName: UILabel = {
         let en = UILabel()
         en.text = "Event Name"
+        en.numberOfLines = 2
         return en
     }()
     
@@ -54,7 +56,7 @@ class EventsCell: UICollectionViewCell {
     
     let moreInfoButton: UIButton = {
         let button = UIButton()
-        button.titleLabel?.text = "more info"
+        button.setTitle("more info", for: .normal)
         return button
     }()
    
@@ -71,6 +73,7 @@ class EventsCell: UICollectionViewCell {
     
     func setupCell() {
         self.addSubview(eventCellContainerView)
+    
         eventCellContainerView.snp.makeConstraints { (make) in
             make.edges.equalTo(contentView)
             
@@ -83,34 +86,36 @@ class EventsCell: UICollectionViewCell {
         eventCellContainerView.addSubview(moreInfoButton)
         
         eventName.snp.makeConstraints { (make) in
-            make.top.right.equalTo(11)
-            make.top.left.equalTo(-11)
+            make.top.equalTo(eventCellContainerView.snp.top)
+            
+            make.left.equalTo(11)
+            
             
         }
         eventImageView.snp.makeConstraints { (make) in
-            make.topMargin.equalTo(eventName.snp_bottom)
-            make.width.equalTo(11)
-            make.height.equalTo(30)
+            make.top.equalTo(eventName.snp.bottom)
+            make.width.equalTo(eventCellContainerView)
+            make.height.equalTo(300)
             
         }
         eventDescription.snp.makeConstraints { (make) in
             make.top.equalTo(eventImageView.snp_bottom)
-            make.width.equalTo(11)
-            make.height.equalTo(30)
+            make.width.equalTo(eventCellContainerView)
+            make.height.equalTo(300)
             
         }
         eventStartTime.snp.makeConstraints { (make) in
             make.top.equalTo(eventDescription.snp_bottom)
-            make.width.equalTo(11)
+            make.width.equalTo(eventCellContainerView)
             
         }
         eventEndTime.snp.makeConstraints { (make) in
             make.top.equalTo(eventStartTime.snp_bottom)
-            make.width.equalTo(11)
+            make.width.equalTo(eventCellContainerView)
 
         }
         moreInfoButton.snp.makeConstraints { (make) in
-            make.top.equalTo(eventEndTime.snp_bottom)
+            make.bottom.equalTo(eventCellContainerView.snp.bottom)
             make.left.equalTo(11)
         }
     }
