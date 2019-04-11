@@ -72,19 +72,22 @@ class HomeController: UIViewController {
         view.addSubview(contentView)
         eventsView.myCollectionView.dataSource = self
         eventsView.myCollectionView.delegate = self
+        locationManager = CLLocationManager()
         loginViewStuff()
         introViewStuff()
         configureNavigationBar()
         getEvents()
-        
-        locationManager = CLLocationManager()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.startUpdatingLocation()
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
         
     }
     
 
-    // MARK: - Handlers
     
     @objc func handleMenuToggle() {
         delegate?.handleMenuToggle(forMenuOption: nil, menuCategories: nil)
@@ -205,7 +208,6 @@ extension HomeController: CLLocationManagerDelegate {
             print("no locations found")
             return
         }
-        
         currentLocation = locational
 
         let geoCoder = CLGeocoder()
