@@ -7,12 +7,11 @@
 //
 
 import Foundation
-struct Blogger {
+struct UserLogedInModel {
     let bloggerId: String
     let displayName: String
     let email: String
     let photoURL: String?
-    let coverImageURL: String?
     let joinedDate: String
     let firstName: String?
     let lastName: String?
@@ -35,7 +34,6 @@ struct Blogger {
         self.displayName = displayName
         self.email = email
         self.photoURL = photoURL
-        self.coverImageURL = coverImageURL
         self.joinedDate = joinedDate
         self.firstName = firstName
         self.lastName = lastName
@@ -47,7 +45,6 @@ struct Blogger {
         self.displayName = dict[ProfileCollectionKeys.DisplayNameKey] as? String ?? ""
         self.email = dict[ProfileCollectionKeys.EmailKey] as? String ?? ""
         self.photoURL = dict[ProfileCollectionKeys.PhotoURLKey] as? String ?? ""
-        self.coverImageURL = dict[ProfileCollectionKeys.CoverImageURLKey] as? String ?? ""
         self.joinedDate = dict[ProfileCollectionKeys.JoinedDateKey] as? String ?? ""
         self.firstName = dict[ProfileCollectionKeys.FirstNameKey] as? String ?? "FirstName"
         self.lastName = dict[ProfileCollectionKeys.LastNameKey] as? String ?? "LastName"

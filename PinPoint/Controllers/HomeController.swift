@@ -44,6 +44,8 @@ class HomeController: UIViewController {
     var currentLocation = CLLocation(){
         didSet{
             introView.locationButton.setTitle(location, for: .normal)
+            locationManager.stopUpdatingLocation()
+
         }
     }
     
@@ -104,7 +106,6 @@ class HomeController: UIViewController {
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
         }
         
     }
@@ -301,8 +302,8 @@ extension HomeController{
     
     
     @objc func locationFinder(){
-        
-        self.locationManager.delegate = self
+
+        locationManager.startUpdatingLocation()
         
         locationService.getCoordinate(addressString: location) { (locationFound, error) in
             if let error = error{
@@ -311,6 +312,8 @@ extension HomeController{
                 
                 self.lat = locationFound.latitude
                 self.long = locationFound.longitude
+                self.locationManager.stopUpdatingLocation()
+
             }
         }
         
