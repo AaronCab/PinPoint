@@ -56,9 +56,14 @@ extension MenuController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "PINPOINT"
+        return "P I N P O I N T"
     }
-    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.font = UIFont(name: "Futura", size: 40)
+        header.textLabel?.textColor = UIColor.black
+        header.textLabel?.highlightedTextColor = .none
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let menuOption = MenuOption(rawValue: indexPath.row)
         if indexPath.row == 0 {
