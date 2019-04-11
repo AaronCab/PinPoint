@@ -82,7 +82,6 @@ class HomeController: UIViewController {
     }
     
 
-    // MARK: - Handlers
     
     @objc func handleMenuToggle() {
         delegate?.handleMenuToggle(forMenuOption: nil, menuCategories: nil)
@@ -149,7 +148,6 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.logo?.original.url)!), placeholder: UIImage(named: "placeholder-image"))
         }
         cell.moreInfoButton.addTarget(self, action: #selector(moreInfo), for: .touchUpInside)
-//        cell.frame.origin.x = cell.eventImageView.frame.width * self.view.bounds.size.width
         return cell
     }
     
