@@ -44,6 +44,9 @@ class HomeController: UIViewController {
         }
     }
 
+    //var contentView = UIView.init(frame: UIScreen.main.bounds)
+    
+    
     var delegate: HomeControllerDelegate?
     
     override func viewDidLoad() {
@@ -192,6 +195,7 @@ extension HomeController: CLLocationManagerDelegate {
             print("no locations found")
             return
         }
+      //  currentLocation = locational
 //        currentLocation = locational
         let geoCoder = CLGeocoder()
         geoCoder.reverseGeocodeLocation(locational) { (placemarks, error) in

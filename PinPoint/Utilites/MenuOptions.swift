@@ -28,7 +28,7 @@ enum MenuOption: Int, CustomStringConvertible {
         switch self {
         case .Discover: return UIImage(named: "icons8-ask-question-25") ?? UIImage()
         case .Moments: return UIImage(named: "icons8-account-25") ?? UIImage()
-        case .Messages: return UIImage(named: "icons8-ask-question-25") ?? UIImage()
+        case .Messages: return UIImage(named: "icons8-chat-51") ?? UIImage()
         case .Profile: return UIImage(named: "icons8-account-25") ?? UIImage()
             
         }
