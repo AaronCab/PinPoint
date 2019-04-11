@@ -56,8 +56,10 @@ class HomeController: UIViewController {
         ip.delegate = self
         return ip
     }()
-    
-    
+
+
+
+
     var delegate: HomeControllerDelegate?
     
     override func viewDidLoad() {
@@ -90,7 +92,7 @@ class HomeController: UIViewController {
         navigationController?.navigationBar.barTintColor = .red
         navigationController?.navigationBar.barStyle = .black
         
-        navigationItem.title = "Menu"
+        navigationItem.title = "P I N P O I N T"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "hamburgerMenu").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMenuToggle))
     }
     func introPageOn() {

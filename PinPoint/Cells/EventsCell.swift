@@ -94,10 +94,14 @@ class EventsCell: UICollectionViewCell {
             
         }
         eventImageView.snp.makeConstraints { (make) in
+
+            make.topMargin.equalTo(eventName.snp_bottom)
+            make.width.equalTo(contentView)
+            make.height.equalTo(30)
             make.top.equalTo(eventName.snp.bottom)
             make.width.equalTo(eventCellContainerView)
             make.height.equalTo(300)
-            
+
         }
         eventDescription.snp.makeConstraints { (make) in
             make.top.equalTo(eventImageView.snp_bottom)
