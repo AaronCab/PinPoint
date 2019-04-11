@@ -172,6 +172,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         cell.eventDescription.text = currentEvent.description?.text
         cell.eventStartTime.text = "Start time: \(currentEvent.start?.local.formatISODateString(dateFormat: "EEEE, MMM d, yyyy") ?? "no start time found")"
         cell.eventEndTime.text = "End Time: \(currentEvent.end?.local.formatISODateString(dateFormat: "MMM d, h:mm a") ?? "no end time found")"
+            
         cell.eventName.text = currentEvent.name?.text
         cell.eventImageView.kf.indicatorType = .activity
         cell.moreInfoButton.tag = indexPath.row
