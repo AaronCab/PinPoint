@@ -45,9 +45,9 @@ class CreateAccountViewController: UIViewController {
                 showAlert(title: "Error", message: "Create account error")
                 return
         }
-        if !userName.isEmpty,
-        !email.isEmpty,
-            !password.isEmpty{
+        if userName.isEmpty &&
+        email.isEmpty &&
+        password.isEmpty{
             showAlert(title: "Missing Fields", message: "Please fill out all info")
 
         }else{
