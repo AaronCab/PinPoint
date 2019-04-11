@@ -23,39 +23,37 @@ class LoginView: UIView {
     
     private var logo: UILabel = {
         let label = UILabel()
-        
         label.backgroundColor = .clear
-        label.text = "PinPoint"
+        label.text = "P I N P O I N T"
         label.textColor = .white
-        label.font = UIFont.italicSystemFont(ofSize: 30)
+        label.font = UIFont(name: "Futura", size: 36)
         label.textAlignment = .center
-        
         return label
     }()
-    
-    var gmailLoginButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .white
-        button.setTitleColor(.black, for: .normal)
-        button.setTitle("Gmail Login", for: .normal)
-        button.isEnabled = true
-        return button
-    }()
-    
     var facebookLogIn: UIButton = {
         let button = UIButton()
         button.backgroundColor = .white
+        button.layer.cornerRadius = 10
         button.setTitleColor(.black, for: .normal)
-        button.setTitle("Facebook Login", for: .normal)
+        button.setTitle("FACEBOOK LOGIN", for: .normal)
         button.isEnabled = true
         return button
     }()
-    
+    var gmailLoginButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 10
+        button.setTitleColor(.black, for: .normal)
+        button.setTitle("GMAIL LOGIN", for: .normal)
+        button.isEnabled = true
+        return button
+    }()
     var customEmailLogin: UIButton = {
         let button = UIButton()
         button.backgroundColor = .white
+        button.layer.cornerRadius = 10
         button.setTitleColor(.black, for: .normal)
-        button.setTitle("Login with created account here", for: .normal)
+        button.setTitle("EXISTING ACCOUNT LOGIN", for: .normal)
         button.isEnabled = true
         return button
     }()
@@ -63,8 +61,9 @@ class LoginView: UIView {
     var createAccountHere: UIButton = {
         let button = UIButton()
         button.backgroundColor = .white
+        button.layer.cornerRadius = 10
         button.setTitleColor(.black, for: .normal)
-        button.setTitle("Create user account", for: .normal)
+        button.setTitle("CREATE NEW ACCOUNT", for: .normal)
         button.isEnabled = true
         return button
     }()
@@ -86,6 +85,14 @@ class LoginView: UIView {
         customEmailLoginConstrant()
         logoLabelConstrant()
         createAccountConstrant()
+    }
+    private func logoLabelConstrant(){
+        addSubview(logo)
+        logo.translatesAutoresizingMaskIntoConstraints = false
+        logo.centerXAnchor.constraint(equalTo: gmailLoginButton.centerXAnchor, constant: 0).isActive = true
+        logo.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.7).isActive = true
+        logo.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
+        logo.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     }
     
     private func facebookLoginConstrant(){
@@ -115,14 +122,6 @@ class LoginView: UIView {
         customEmailLogin.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     }
     
-    private func logoLabelConstrant(){
-        addSubview(logo)
-        logo.translatesAutoresizingMaskIntoConstraints = false
-        logo.centerXAnchor.constraint(equalTo: gmailLoginButton.centerXAnchor, constant: 0).isActive = true
-        logo.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.4).isActive = true
-        logo.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        logo.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
-    }
     
     private func createAccountConstrant(){
         addSubview(createAccountHere)

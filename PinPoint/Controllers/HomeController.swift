@@ -73,6 +73,7 @@ class HomeController: UIViewController {
         view.addSubview(contentView)
         eventsView.myCollectionView.dataSource = self
         eventsView.myCollectionView.delegate = self
+        locationManager = CLLocationManager()
         loginViewStuff()
         introViewStuff()
         configureNavigationBar()
@@ -80,6 +81,13 @@ class HomeController: UIViewController {
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
         
     }
     
@@ -139,8 +147,8 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? EventsCell else { return UICollectionViewCell() }
         let currentEvent = event[indexPath.row]
         cell.eventDescription.text = currentEvent.description?.text
-        cell.eventStartTime.text = currentEvent.start?.local.formatISODateString(dateFormat: "EEEE, MMM d, yyyy")
-        cell.eventEndTime.text = currentEvent.end?.local.formatISODateString(dateFormat: "MMM d, h:mm a")
+        cell.eventStartTime.text = "Start time: \(currentEvent.start?.local.formatISODateString(dateFormat: "EEEE, MMM d, yyyy"))"
+        cell.eventEndTime.text = "End Time: \(currentEvent.end?.local.formatISODateString(dateFormat: "MMM d, h:mm a"))"
         cell.eventName.text = currentEvent.name?.text
         cell.eventImageView.kf.indicatorType = .activity
         cell.moreInfoButton.tag = indexPath.row
@@ -204,7 +212,6 @@ extension HomeController: CLLocationManagerDelegate {
             print("no locations found")
             return
         }
-        
         currentLocation = locational
 
         let geoCoder = CLGeocoder()

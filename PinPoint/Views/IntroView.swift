@@ -26,6 +26,9 @@ class IntroView: UIView {
         textField.backgroundColor = .white
         textField.textColor = .red
         textField.placeholder = "Please enter your name"
+        textField.layer.cornerRadius = 10.0
+        textField.layer.borderWidth = 2.0
+        textField.layer.borderColor = UIColor.black.cgColor
         return textField
         }()
     
