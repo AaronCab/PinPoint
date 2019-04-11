@@ -1,23 +1,21 @@
 //
-//  EventsCell.swift
+//  FavoritesCell.swift
 //  PinPoint
 //
-//  Created by Aaron Cabreja on 4/10/19.
+//  Created by Aaron Cabreja on 4/11/19.
 //  Copyright © 2019 Pursuit. All rights reserved.
 //
 
 import UIKit
-import SnapKit
 
-class EventsCell: UICollectionViewCell {
-
-
+class FavoritesCell: UICollectionViewCell {
+    
     let eventCellContainerView: UIView = {
         let ev = UIView()
         ev.backgroundColor = .clear
         ev.layer.cornerRadius = 20
         ev.layer.masksToBounds = true
-    
+        
         return ev
     }()
     
@@ -60,11 +58,11 @@ class EventsCell: UICollectionViewCell {
         button.setTitle("more info", for: .normal)
         return button
     }()
-   
-
+    
+    
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
-       
+        
         setupCell()
     }
     
@@ -74,7 +72,7 @@ class EventsCell: UICollectionViewCell {
     
     func setupCell() {
         self.addSubview(eventCellContainerView)
-    
+        
         eventCellContainerView.snp.makeConstraints { (make) in
             make.edges.equalTo(contentView)
             
@@ -113,7 +111,7 @@ class EventsCell: UICollectionViewCell {
         eventEndTime.snp.makeConstraints { (make) in
             make.top.equalTo(eventStartTime.snp_bottom)
             make.width.equalTo(eventCellContainerView)
-
+            
         }
         moreInfoButton.snp.makeConstraints { (make) in
             make.bottom.equalTo(eventCellContainerView.snp.bottom)

@@ -13,13 +13,11 @@ import CoreLocation
 class HomeController: UIViewController {
     var contentView = UIView.init(frame: UIScreen.main.bounds)
     
-    
-    // MARK: - Properties
- 
     let introView = IntroView()
     let eventsView = EventsView()
     let favoriteView = FavoritesView()
     let profileView = ProfileView()
+    var eventCell = EventsCell()
     var event = [Event](){
         didSet {
             DispatchQueue.main.async {
@@ -51,7 +49,6 @@ class HomeController: UIViewController {
         view.addSubview(contentView)
         eventsView.myCollectionView.dataSource = self
         eventsView.myCollectionView.delegate = self
- 
         configureNavigationBar()
         getEvents()
     }
@@ -109,6 +106,7 @@ class HomeController: UIViewController {
 
 
 extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
          return event.count
     }
@@ -117,10 +115,11 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? EventsCell else { return UICollectionViewCell() }
         let currentEvent = event[indexPath.row]
         cell.eventDescription.text = currentEvent.description?.text
-        cell.eventStartTime.text = currentEvent.start?.local
-        cell.eventEndTime.text = currentEvent.end?.local
+        cell.eventStartTime.text = currentEvent.start?.local.formatISODateString(dateFormat: "EEEE, MMM d, yyyy")
+        cell.eventEndTime.text = currentEvent.end?.local.formatISODateString(dateFormat: "MMM d, h:mm a")
         cell.eventName.text = currentEvent.name?.text
         cell.eventImageView.kf.indicatorType = .activity
+        cell.moreInfoButton.tag = indexPath.row
         if currentEvent.logo?.original.url == nil{
             cell.eventImageView.image = UIImage(named: "placeholder-image")
         }else{
@@ -131,8 +130,21 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         return cell
     }
     
-    @objc func moreInfo(){
+    @objc func moreInfo(senderTag: UIButton){
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let favoriteActione = UIAlertAction(title: "Favorite", style: .default) { alert in
+            let thisEvent = self.event[senderTag.tag]
+        let favoriteEvent = FavoritesModel.init(name: (thisEvent.name?.text)!, description: (thisEvent.description?.text)!, url: thisEvent.url, start: thisEvent.start!.local, end: thisEvent.end!.local, capacity: thisEvent.capacity, status: thisEvent.status)
+            FavoritesDataManager.saveToDocumentsDirectory(favoriteArticle: favoriteEvent)
+            self.showAlert(title: "PinPoint", message: "Successfully Favorites Event")
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(favoriteActione)
+        present(alertController, animated: true)
+
+    
+        
     }
     
     
