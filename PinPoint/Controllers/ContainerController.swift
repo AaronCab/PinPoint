@@ -81,7 +81,7 @@ class ContainerController: UIViewController {
         case .Discover:
         let introVC = IntroViewController()
         case .Favorites:
-            let eventsVC = EventsViewController()
+        let eventsVC = EventsViewController()
         case .Messages:
             print("show messages")
         case .Profile:
@@ -120,7 +120,3 @@ extension ContainerController: HomeControllerDelegate {
     }
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 4f2960b325e951ffdbf274d7a029c651f435da56
