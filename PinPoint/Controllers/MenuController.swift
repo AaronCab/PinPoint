@@ -56,19 +56,25 @@ extension MenuController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "PINPOINT"
+        return "   P I N P O I N T"
     }
-    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.font = UIFont(name: "Futura", size: 36)
+        header.textLabel?.backgroundColor = UIColor.clear
+        header.textLabel?.textColor = UIColor.white
+        header.contentView.backgroundColor = .clear
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let menuOption = MenuOption(rawValue: indexPath.row)
         if indexPath.row == 0 {
             delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .discover)
         }
         if indexPath.row == 1 {
-            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .intro)
+            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .messaging)
         }
         if indexPath.row == 2 {
-            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .moments)
+            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .favorites)
         }
         if indexPath.row == 3 {
             delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .profile)

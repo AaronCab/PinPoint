@@ -9,5 +9,5 @@
 import Foundation
 
 enum MenuCategories {
-    case discover, moments, intro, profile 
+    case discover, favorites, messaging, profile
 }

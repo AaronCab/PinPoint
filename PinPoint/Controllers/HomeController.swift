@@ -56,8 +56,10 @@ class HomeController: UIViewController {
         ip.delegate = self
         return ip
     }()
-    
-    
+
+
+
+
     var delegate: HomeControllerDelegate?
     
     override func viewDidLoad() {
@@ -91,7 +93,7 @@ class HomeController: UIViewController {
         navigationController?.navigationBar.barTintColor = .red
         navigationController?.navigationBar.barStyle = .black
         
-        navigationItem.title = "Menu"
+        navigationItem.title = "P I N P O I N T"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "hamburgerMenu").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMenuToggle))
     }
     func introPageOn() {
@@ -149,7 +151,6 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.logo?.original.url)!), placeholder: UIImage(named: "placeholder-image"))
         }
         cell.moreInfoButton.addTarget(self, action: #selector(moreInfo), for: .touchUpInside)
-//        cell.frame.origin.x = cell.eventImageView.frame.width * self.view.bounds.size.width
         return cell
     }
     
