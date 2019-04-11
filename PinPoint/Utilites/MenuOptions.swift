@@ -10,14 +10,14 @@ import UIKit
 
 enum MenuOption: Int, CustomStringConvertible {
     case Discover
-    case Moments
+    case Favorites
     case Messages
     case Profile
     
     var description: String {
         switch self {
         case .Discover: return "Discover"
-        case .Moments: return "Moments"
+        case .Favorites: return "Favorites"
         case .Messages: return "Messages"
         case .Profile: return "Profile"
             
@@ -26,10 +26,10 @@ enum MenuOption: Int, CustomStringConvertible {
     
     var image: UIImage  {
         switch self {
-        case .Discover: return UIImage(named: "icons8-ask-question-25") ?? UIImage()
-        case .Moments: return UIImage(named: "icons8-account-25") ?? UIImage()
+        case .Discover: return UIImage(named: "icons8-today-240.png") ?? UIImage()
+        case .Favorites: return UIImage(named: "icons8-star-80.png") ?? UIImage()
         case .Messages: return UIImage(named: "icons8-chat-51") ?? UIImage()
-        case .Profile: return UIImage(named: "icons8-account-25") ?? UIImage()
+        case .Profile: return UIImage(named: "icons8-customer-240.png") ?? UIImage()
             
         }
     }
