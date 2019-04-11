@@ -40,14 +40,19 @@ class CreateAccountViewController: UIViewController {
     @objc func createProfile(){
         guard let userName = createUserView.displayName.text,
             let email = createUserView.emailCreatedwith.text,
-            let password = createUserView.passwordCreatedWith.text,
-            userName.isEmpty,
-            email.isEmpty,
-            password.isEmpty else{
-                showAlert(title: "Missing Fields", message: "Please fill out all information")
+            let password = createUserView.passwordCreatedWith.text
+            else{
+                showAlert(title: "Error", message: "Create account error")
                 return
         }
+        if !userName.isEmpty,
+        !email.isEmpty,
+            !password.isEmpty{
+            showAlert(title: "Missing Fields", message: "Please fill out all info")
+
+        }else{
         authService.createNewAccount(username: userName, email: email, password: password)
+        }
 
         }
 
