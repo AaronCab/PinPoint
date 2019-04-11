@@ -80,7 +80,7 @@ class ContainerController: UIViewController {
         switch menuOption {
         case .Discover:
         let introVC = IntroViewController()
-        case .Moments:
+        case .Favorites:
             let eventsVC = EventsViewController()
         case .Messages:
             print("show messages")
@@ -106,13 +106,13 @@ extension ContainerController: HomeControllerDelegate {
         guard let discover = centerController.children.first as? HomeController,
         let menuCategories = menuCategories else { return }
         switch menuCategories {
-        case .intro:
+        case .discover:
             discover.introPageOn()
-        case .moments:
+        case .favorites:
             discover.eventsPageOn()
         case .profile:
             discover.profilePageOn()
-        case .discover:
+        case .messaging:
             discover.favoritesPageOn()
         default:
             print("No Other VC")
@@ -120,4 +120,7 @@ extension ContainerController: HomeControllerDelegate {
     }
 }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 4f2960b325e951ffdbf274d7a029c651f435da56
