@@ -43,44 +43,47 @@ class HomeController: UIViewController {
             }
         }
     }
-
-
-
- //   var contentView = UIView.init(frame: UIScreen.main.bounds)
     
     
+    var location = "Manhatten"
+    var selectedImageValue: UIImage?
+    var locationManager: CLLocationManager!
+    var locationService = LocationService()
+    var long: Double!
+    var lat: Double!
+    private lazy var imagePickerController: UIImagePickerController = {
+        let ip = UIImagePickerController()
+        ip.delegate = self
+        return ip
+    }()
 
 
-    //var contentView = UIView.init(frame: UIScreen.main.bounds)
-    
-    
+
 
     var delegate: HomeControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewdidLoadLayout()
+    }
+    
+    private func viewdidLoadLayout(){
         view.backgroundColor = .white
         view.addSubview(contentView)
         eventsView.myCollectionView.dataSource = self
         eventsView.myCollectionView.delegate = self
         loginViewStuff()
+        introViewStuff()
         configureNavigationBar()
         getEvents()
+        
+        locationManager = CLLocationManager()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
+        
     }
     
-    
-        var location = "Manhatten"
-        var selectedImageValue: UIImage?
-        var locationManager = CLLocationManager()
-        var locationService = LocationService()
-        var long: Double!
-        var lat: Double!
-        private lazy var imagePickerController: UIImagePickerController = {
-            let ip = UIImagePickerController()
-            ip.delegate = self
-            return ip
-        }()
-    
+
     // MARK: - Handlers
     
     @objc func handleMenuToggle() {
@@ -148,7 +151,6 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.logo?.original.url)!), placeholder: UIImage(named: "placeholder-image"))
         }
         cell.moreInfoButton.addTarget(self, action: #selector(moreInfo), for: .touchUpInside)
-//        cell.frame.origin.x = cell.eventImageView.frame.width * self.view.bounds.size.width
         return cell
     }
     
@@ -203,8 +205,9 @@ extension HomeController: CLLocationManagerDelegate {
             print("no locations found")
             return
         }
-      //  currentLocation = locational
-//        currentLocation = locational
+        
+        currentLocation = locational
+
         let geoCoder = CLGeocoder()
         geoCoder.reverseGeocodeLocation(locational) { (placemarks, error) in
             if let error = error{
@@ -222,6 +225,11 @@ extension HomeController: CLLocationManagerDelegate {
 }
 
 extension HomeController{
+    
+    func introViewStuff(){
+        introView.pictureButton.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
+        introView.locationButton.addTarget(self, action: #selector(locationFinder), for: .touchUpInside)
+    }
     
     @objc func imagePicker(){
         let alertSheet = UIAlertController(title: "Picture from where?", message: nil, preferredStyle: .actionSheet)
@@ -242,18 +250,14 @@ extension HomeController{
     
     
     @objc func locationFinder(){
-        self.locationManager.requestWhenInUseAuthorization()
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.startUpdatingLocation()
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        }
-        currentLocation = locationManager.location!
-        
+
+        self.locationManager.delegate = self
+
         locationService.getCoordinate(addressString: location) { (locationFound, error) in
             if let error = error{
                 self.showAlert(title: "Error", message: error.localizedDescription)
             }else {
+
                 self.lat = locationFound.latitude
                 self.long = locationFound.longitude
             }
