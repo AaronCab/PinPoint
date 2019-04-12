@@ -36,6 +36,7 @@ struct ProfileCollectionKeys {
     static let CoverImageURLKey = "coverImageURL"
     static let JoinedDateKey = "joinedDate"
     static let BioKey = "bio"
+    static let FriendsKey = "friendsKey"
 }
 
 
