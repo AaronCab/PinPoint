@@ -33,12 +33,12 @@ struct DescriptionOfEvent: Codable {
 }
 struct StartTimeOfEvent: Codable {
     let timezone: String
-    let local: String
+    let utc: String
     
 }
 struct EndTimeOfEvent: Codable {
     let timezone: String
-    let local: String
+    let utc: String
 }
 struct LogoOfTheEvent: Codable {
     let original: PictureOfTheEvent
