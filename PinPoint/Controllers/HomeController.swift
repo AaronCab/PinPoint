@@ -231,7 +231,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { alert in
             self.confirmDeletionActionSheet(handler: { (deleteAction) in
                 self.deleteFavorite(senderTag: senderTag)
-                self.eventsView.myCollectionView.reloadData()
+                self.favoriteView.myCollectionView.reloadData()
             })
             
         }
