@@ -635,11 +635,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = org.pursuit.PinPoint;
-=======
-				PRODUCT_BUNDLE_IDENTIFIER = .org.pursuit.PinPoint;
->>>>>>> a8fe75e1ea8ec1818e7cacafb84d5ec3689473d4
+
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -658,11 +655,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-<<<<<<< HEAD
-				PRODUCT_BUNDLE_IDENTIFIER = org.pursuit.PinPoint;
-=======
-				PRODUCT_BUNDLE_IDENTIFIER = .org.pursuit.PinPoint;
->>>>>>> a8fe75e1ea8ec1818e7cacafb84d5ec3689473d4
+
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
