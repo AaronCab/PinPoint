@@ -33,7 +33,7 @@ class IntroViewController: UIViewController {
         return ip
     }()
     
-    var location = "Manhatten"
+    var location = "Manhattan"
     
     private var selectedImageValue: UIImage?
 

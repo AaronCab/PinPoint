@@ -10,6 +10,7 @@ import UIKit
 import Toucan
 import CoreLocation
 import FirebaseAuth
+import SafariServices
 
 class HomeController: UIViewController {
     var contentView = UIView.init(frame: UIScreen.main.bounds)
@@ -60,7 +61,7 @@ class HomeController: UIViewController {
     }
     
     
-    var location = "Manhatten"
+    var location = "Manhattan"
     var selectedImageValue: UIImage?
     var locationManager: CLLocationManager!
     var locationService = LocationService()
@@ -83,6 +84,7 @@ class HomeController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
     }
 
     
@@ -151,6 +153,7 @@ class HomeController: UIViewController {
         }else{
             contentView.removeFromSuperview()
             contentView = UIView.init(frame: UIScreen.main.bounds)
+            profileView.profilePicture.image = UIImage(named: "placeholder-image")
             contentView.addSubview(profileView)
             view.addSubview(profileView)
         }
@@ -197,10 +200,10 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             cell.eventName.text = currentEvent.name
             cell.eventImageView.kf.indicatorType = .activity
             cell.moreInfoButton.tag = indexPath.row
-            if currentEvent.url == nil{
+            if currentEvent.imageUrl == nil{
                 cell.eventImageView.image = UIImage(named: "placeholder-image")
             }else{
-                cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.url)!), placeholder: UIImage(named: "placeholder-image"))
+                cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.imageUrl)!), placeholder: UIImage(named: "placeholder-image"))
             }
             cell.moreInfoButton.addTarget(self, action: #selector(moreInfoFav), for: .touchUpInside)
             return cell
@@ -213,7 +216,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         let favoriteActione = UIAlertAction(title: "Favorite", style: .default) { alert in
             let thisEvent = self.event[senderTag.tag]
-            let favoriteEvent = FavoritesModel.init(name: (thisEvent.name?.text)!, description: (thisEvent.description?.text)!, url: thisEvent.logo?.original.url, start: thisEvent.start!.utc, end: thisEvent.end!.utc, capacity: thisEvent.capacity, status: thisEvent.status)
+            let favoriteEvent = FavoritesModel.init(name: (thisEvent.name?.text)!, description: (thisEvent.description?.text)!, imageUrl: thisEvent.logo?.original.url, start: thisEvent.start!.utc, end: thisEvent.end!.utc, capacity: thisEvent.capacity, status: thisEvent.status, url: thisEvent.url)
             FavoritesDataManager.saveToDocumentsDirectory(favoriteArticle: favoriteEvent)
             self.showAlert(title: "PinPoint", message: "Successfully Favorites Event")
         }
@@ -231,10 +234,23 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { alert in
             self.confirmDeletionActionSheet(handler: { (deleteAction) in
                 self.deleteFavorite(senderTag: senderTag)
-                self.eventsView.myCollectionView.reloadData()
+                self.favoriteView.myCollectionView.reloadData()
             })
             
         }
+        let safariAction = UIAlertAction(title: "Safari", style: .default) { alert in
+            let favorite = FavoritesDataManager.fetchItemsFromDocumentsDirectory()[senderTag.tag]
+            guard let favURL = favorite.url else {
+                return
+            }
+            guard let url = URL(string: "http://www.google.com") else {
+                return
+            }
+            
+            let safariVC = SFSafariViewController(url: url)
+           self.present(safariVC, animated: true, completion: nil)
+        }
+        alertController.addAction(safariAction)
         alertController.addAction(deleteAction)
         alertController.addAction(cancelAction)
         present(alertController, animated: true)
@@ -367,3 +383,8 @@ extension HomeController{
     
 }
 
+
+extension HomeController{
+    
+    
+}

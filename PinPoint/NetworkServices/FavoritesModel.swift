@@ -10,9 +10,10 @@ import Foundation
 struct FavoritesModel: Codable {
     let name: String
     let description: String
-    let url: String?
+    let imageUrl: String?
     let start: String
     let end: String
     let capacity: String?
     let status: String?
+    let url: String?
 }
