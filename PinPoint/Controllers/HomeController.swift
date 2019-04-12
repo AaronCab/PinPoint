@@ -175,8 +175,8 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? EventsCell else { return UICollectionViewCell() }
         let currentEvent = event[indexPath.row]
         cell.eventDescription.text = currentEvent.description?.text
-        cell.eventStartTime.text = "Start time: \(currentEvent.start?.local.formatISODateString(dateFormat: "EEEE, MMM d, yyyy") ?? "no start time found")"
-        cell.eventEndTime.text = "End Time: \(currentEvent.end?.local.formatISODateString(dateFormat: "MMM d, h:mm a") ?? "no end time found")"
+        cell.eventStartTime.text = "Start time: \(currentEvent.start?.utc.formatISODateString(dateFormat: "MMM d, h:mm a") ?? "no start time found")"
+        cell.eventEndTime.text = "End Time: \(currentEvent.end?.utc.formatISODateString(dateFormat: "MMM d, h:mm a") ?? "no end time found")"
             
         cell.eventName.text = currentEvent.name?.text
         cell.eventImageView.kf.indicatorType = .activity
@@ -192,8 +192,8 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoritesCell", for: indexPath) as? FavoritesCell else { return UICollectionViewCell() }
             let currentEvent = FavoritesDataManager.fetchItemsFromDocumentsDirectory()[indexPath.row]
             cell.eventDescription.text = currentEvent.description
-            cell.eventStartTime.text = "Start time: \(currentEvent.start)"
-            cell.eventEndTime.text = "End Time: \(currentEvent.end)"
+            cell.eventStartTime.text = "Start time: \(currentEvent.start.formatISODateString(dateFormat: "MMM d, h:mm a"))"
+            cell.eventEndTime.text = "End Time: \(currentEvent.end.formatISODateString(dateFormat: "MMM d, h:mm a"))"
             cell.eventName.text = currentEvent.name
             cell.eventImageView.kf.indicatorType = .activity
             cell.moreInfoButton.tag = indexPath.row
@@ -212,7 +212,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         let favoriteActione = UIAlertAction(title: "Favorite", style: .default) { alert in
             let thisEvent = self.event[senderTag.tag]
-            let favoriteEvent = FavoritesModel.init(name: (thisEvent.name?.text)!, description: (thisEvent.description?.text)!, url: thisEvent.logo?.original.url, start: thisEvent.start!.local, end: thisEvent.end!.local, capacity: thisEvent.capacity, status: thisEvent.status)
+            let favoriteEvent = FavoritesModel.init(name: (thisEvent.name?.text)!, description: (thisEvent.description?.text)!, url: thisEvent.logo?.original.url, start: thisEvent.start!.utc, end: thisEvent.end!.utc, capacity: thisEvent.capacity, status: thisEvent.status)
             FavoritesDataManager.saveToDocumentsDirectory(favoriteArticle: favoriteEvent)
             self.showAlert(title: "PinPoint", message: "Successfully Favorites Event")
         }
