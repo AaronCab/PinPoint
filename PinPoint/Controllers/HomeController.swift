@@ -227,8 +227,8 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         
         
     }
+    
     @objc func moreInfoFav(senderTag: UIButton){
-        
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { alert in
@@ -240,19 +240,18 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         }
         let safariAction = UIAlertAction(title: "Safari", style: .default) { alert in
             let favorite = FavoritesDataManager.fetchItemsFromDocumentsDirectory()[senderTag.tag]
-            guard let favURL = favorite.url else {
-                return
-            }
-            guard let url = URL(string: "http://www.google.com") else {
+            guard let favURL = favorite.url,
+                let url = URL(string: "https://www.google.com") else {
                 return
             }
             
-            let safariVC = SFSafariViewController(url: url)
-           self.present(safariVC, animated: true, completion: nil)
+        let safariVC = SFSafariViewController(url: url)
+          self.present(safariVC, animated: true, completion: nil)
         }
         alertController.addAction(safariAction)
         alertController.addAction(deleteAction)
         alertController.addAction(cancelAction)
+        
         present(alertController, animated: true)
         
     }
