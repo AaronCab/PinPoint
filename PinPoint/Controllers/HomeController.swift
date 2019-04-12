@@ -60,7 +60,7 @@ class HomeController: UIViewController {
     }
     
     
-    var location = "Manhatten"
+    var location = "Manhattan"
     var selectedImageValue: UIImage?
     var locationManager: CLLocationManager!
     var locationService = LocationService()

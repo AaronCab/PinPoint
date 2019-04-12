@@ -25,16 +25,16 @@ class IntroView: UIView {
         let textField = UITextField()
         textField.backgroundColor = .white
         textField.textColor = .red
+            textField.font = UIFont.init(name: "futura", size: 18)
         textField.placeholder = "Please enter your name"
-        textField.layer.cornerRadius = 10.0
-        textField.layer.borderWidth = 2.0
-        textField.layer.borderColor = UIColor.black.cgColor
+        textField.layer.cornerRadius = 5
         return textField
         }()
     
     var pictureOfUser: UIImageView = {
         var imageView = UIImageView()
         imageView.image = UIImage(named: "placeholder-image")
+        imageView.layer.cornerRadius = 10
         return imageView
     }()
     
@@ -42,7 +42,7 @@ class IntroView: UIView {
         let button = UIButton()
         button.backgroundColor = .white
         button.setTitleColor(.black, for: .normal)
-        button.setTitle("ChangePicture", for: .normal)
+        button.setTitle("Change Picture", for: .normal)
         button.isEnabled = true
         return button
     }()
@@ -51,7 +51,7 @@ class IntroView: UIView {
         let button = UIButton()
         button.backgroundColor = .white
         button.setTitleColor(.black, for: .normal)
-        button.setTitle("FindLocation", for: .normal)
+        button.setTitle("Find Location", for: .normal)
         button.isEnabled = true
         return button
     }()
