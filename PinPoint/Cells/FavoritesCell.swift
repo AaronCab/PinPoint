@@ -67,6 +67,20 @@ class FavoritesCell: UICollectionViewCell {
         return button
     }()
     
+    let bottonView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .blue
+        view.layer.cornerRadius = 20
+        return view
+    }()
+    
+    let switchView: UISwitch = {
+        let sv = UISwitch()
+        sv.thumbTintColor = .black
+        sv.onTintColor = .white
+        return sv
+    }()
+    
     
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
@@ -90,6 +104,7 @@ class FavoritesCell: UICollectionViewCell {
         eventCellContainerView.addSubview(eventStartTime)
         eventCellContainerView.addSubview(eventEndTime)
         eventCellContainerView.addSubview(moreInfoButton)
+        eventCellContainerView.addSubview(switchView)
         
         eventName.snp.makeConstraints { (make) in
             make.top.equalTo(eventCellContainerView.snp.top)
@@ -120,11 +135,18 @@ class FavoritesCell: UICollectionViewCell {
             make.top.equalTo(eventStartTime.snp_bottom).offset(5)
            make.left.equalTo(20)
         }
+        
         moreInfoButton.snp.makeConstraints { (make) in
             make.top.equalTo(eventEndTime.snp_bottom).offset(20)
             make.height.equalTo(50)
             make.left.equalTo(20)
             make.width.equalTo(50)
+        }
+        
+        switchView.snp.makeConstraints { (make) in
+            make.top.equalTo(eventEndTime.snp_bottom).offset(20)
+            make.height.equalTo(50)
+            make.left.equalTo(moreInfoButton.snp.right).offset(50)
         }
     }
     
