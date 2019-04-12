@@ -227,8 +227,8 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         
         
     }
+    
     @objc func moreInfoFav(senderTag: UIButton){
-        
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { alert in
@@ -244,15 +244,13 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             let url = URL(string: favURL) else {
                 return
             }
-            
             let safariVC = SFSafariViewController(url: url)
-            DispatchQueue.global().async {
             self.present(safariVC, animated: true, completion: nil)
-            }
         }
         alertController.addAction(safariAction)
         alertController.addAction(deleteAction)
         alertController.addAction(cancelAction)
+        
         present(alertController, animated: true)
         
     }

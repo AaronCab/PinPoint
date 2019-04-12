@@ -65,9 +65,8 @@ extension CreateAccountViewController: AuthServiceCreateNewAccountDelegate{
     }
     
     func didCreateNewAccount(_ authservice: AuthService, pinpointUser: ProfileOfUser) {
-        let containVC = ContainerController()
+        let containVC = HomeController()
         self.present(containVC, animated: true)
-        
     }
     
     
