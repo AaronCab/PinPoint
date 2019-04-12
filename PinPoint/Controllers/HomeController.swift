@@ -237,7 +237,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
                 self.deleteFavorite(senderTag: senderTag)
                 self.favoriteView.myCollectionView.reloadData()
             })
-            
+
         }
         let safariAction = UIAlertAction(title: "Safari", style: .default) { alert in
             let favorite = FavoritesDataManager.fetchItemsFromDocumentsDirectory()[senderTag.tag]
@@ -245,8 +245,9 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             let url = URL(string: favURL) else {
                 return
             }
-            let safariVC = SFSafariViewController(url: url)
-            self.present(safariVC, animated: true, completion: nil)
+
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+   
         }
         alertController.addAction(safariAction)
         alertController.addAction(deleteAction)
@@ -260,11 +261,6 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         FavoritesDataManager.deleteItem(atIndex: senderTag.tag, item: favoriteArticle)
     }
 
-    
-    
-   
-    
-    
 }
 
 extension HomeController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
