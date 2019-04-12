@@ -23,6 +23,7 @@ class HomeController: UIViewController {
     let profileView = ProfileView()
     var eventCell = EventsCell()
     let loginView = LoginView()
+    let interestsView = InterestView()
     let authService = AppDelegate.authservice
     var event = [Event](){
         didSet {
@@ -45,13 +46,13 @@ class HomeController: UIViewController {
     var currentLocation = CLLocation(){
         didSet{
             introView.locationButton.setTitle(location, for: .normal)
+            getEvents()
             locationManager.stopUpdatingLocation()
 
         }
     }
-    
     private func getEvents(){
-        ApiClient.getEvents(distance: "2km", location: "Manhattan") { (error, data) in
+        ApiClient.getEvents(distance: "2km", location: location) { (error, data) in
             if let error = error {
                 print(error.errorMessage())
             } else if let data = data {
@@ -62,6 +63,7 @@ class HomeController: UIViewController {
     
     
     var location = "Manhattan"
+
     var selectedImageValue: UIImage?
     var locationManager: CLLocationManager!
     var locationService = LocationService()
@@ -124,10 +126,10 @@ class HomeController: UIViewController {
         navigationItem.title = "P I N P O I N T"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "hamburgerMenu").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMenuToggle))
     }
-    func introPageOn() {
+    func messagingPageOn() {
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
-        contentView.addSubview(introView)
+        contentView.addSubview(interestsView)
         view.addSubview(contentView)
     }
     func eventsPageOn() {
@@ -136,6 +138,14 @@ class HomeController: UIViewController {
         contentView.addSubview(eventsView)
         view.addSubview(contentView)
     }
+    
+    func preferencesPageOn() {
+        contentView.removeFromSuperview()
+        contentView = UIView.init(frame: UIScreen.main.bounds)
+        contentView.addSubview(introView)
+        view.addSubview(contentView)
+    }
+    
     func favoritesPageOn() {
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
@@ -227,8 +237,8 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         
         
     }
+    
     @objc func moreInfoFav(senderTag: UIButton){
-        
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { alert in
@@ -236,7 +246,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
                 self.deleteFavorite(senderTag: senderTag)
                 self.favoriteView.myCollectionView.reloadData()
             })
-            
+
         }
         let safariAction = UIAlertAction(title: "Safari", style: .default) { alert in
             let favorite = FavoritesDataManager.fetchItemsFromDocumentsDirectory()[senderTag.tag]
@@ -244,15 +254,14 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             let url = URL(string: favURL) else {
                 return
             }
-            
-            let safariVC = SFSafariViewController(url: url)
-            DispatchQueue.global().async {
-            self.present(safariVC, animated: true, completion: nil)
-            }
+
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+   
         }
         alertController.addAction(safariAction)
         alertController.addAction(deleteAction)
         alertController.addAction(cancelAction)
+        
         present(alertController, animated: true)
         
     }
@@ -261,11 +270,6 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         FavoritesDataManager.deleteItem(atIndex: senderTag.tag, item: favoriteArticle)
     }
 
-    
-    
-   
-    
-    
 }
 
 extension HomeController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{

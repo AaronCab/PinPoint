@@ -44,7 +44,6 @@ class DetailView: UIView {
         setUp()
     }
     private func setUp(){
-        
         imageConstraints()
         labelConstraint()
         textViewConstraint()
