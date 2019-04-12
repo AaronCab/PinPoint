@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import SnapKit
 
 class CreateUserView: UIView {
     
-
+    
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         commonInit()
@@ -49,6 +50,7 @@ class CreateUserView: UIView {
         let textfield = UITextField()
         textfield.backgroundColor = .white
         textfield.textColor = .red
+        textfield.layer.cornerRadius = 10
         textfield.placeholder = "Email"
         return textfield
     }()
@@ -57,6 +59,7 @@ class CreateUserView: UIView {
         let textfield = UITextField()
         textfield.backgroundColor = .white
         textfield.textColor = .red
+        textfield.layer.cornerRadius = 10
         textfield.placeholder = "Password"
         textfield.isSecureTextEntry = true
         return textfield
@@ -65,8 +68,9 @@ class CreateUserView: UIView {
     var displayName: UITextField = {
         let textfield = UITextField()
         textfield.backgroundColor = .white
+        textfield.layer.cornerRadius = 10
         textfield.textColor = .red
-        textfield.placeholder = "DisplayName"
+        textfield.placeholder = "Display Name"
         return textfield
     }()
     
@@ -80,7 +84,7 @@ class CreateUserView: UIView {
     
     lazy var create: UIButton = {
         var button = UIButton()
-        button.setTitle("Create acoount", for: .normal)
+        button.setTitle("Create Account", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.isEnabled = true
         return button
@@ -89,25 +93,24 @@ class CreateUserView: UIView {
     
     
     
-   private func commonInit(){
+    private func commonInit(){
         emailCreatedWithContrant()
         passwordCreatedWithConstant()
         displayNameConstrant()
-        logoLabelConstrant()
         addGradient()
         addSubview(cancel)
         addSubview(create)
+        setUpView()
     }
-    
-    private func logoLabelConstrant(){
-        addSubview(logo)
-        logo.translatesAutoresizingMaskIntoConstraints = false
-        logo.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
-        logo.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.4).isActive = true
-        logo.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        logo.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
+    private func setUpView() {
+        self.addSubview(logo)
+        logo.snp.makeConstraints { (make) in
+            make.centerX.equalTo(self.snp.centerX)
+            make.height.equalTo(self.snp.height).multipliedBy(0.7)
+        }
+        self.addSubview(emailCreatedwith)
     }
-    
+
     private func emailCreatedWithContrant(){
         addSubview(emailCreatedwith)
         emailCreatedwith.translatesAutoresizingMaskIntoConstraints = false
