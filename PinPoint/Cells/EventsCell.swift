@@ -10,14 +10,13 @@ import UIKit
 import SnapKit
 
 class EventsCell: UICollectionViewCell {
-
-
+    
+    
     let eventCellContainerView: UIView = {
         let ev = UIView()
         ev.backgroundColor = .clear
         ev.layer.cornerRadius = 20
         ev.layer.masksToBounds = true
-    
         return ev
     }()
     
@@ -42,7 +41,7 @@ class EventsCell: UICollectionViewCell {
     let eventDescription: UITextView = {
         let et = UITextView()
         et.isEditable = false
-         et.backgroundColor = .clear
+        et.backgroundColor = .clear
         et.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         et.font = UIFont.init(name: "futura", size: 18)
         et.textColor = .white
@@ -65,16 +64,13 @@ class EventsCell: UICollectionViewCell {
     
     let moreInfoButton: UIButton = {
         let button = UIButton()
-//        button.imageView?.image = UIImage.init(named: "icons8-ask-question-25")
-       //button.setTitle("more info", for: .normal)
         button.setImage(#imageLiteral(resourceName: "icons8-star-80"), for: .normal)
         return button
     }()
-   
-
+    
+    
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
-       
         setupCell()
     }
     
@@ -84,7 +80,7 @@ class EventsCell: UICollectionViewCell {
     
     func setupCell() {
         self.addSubview(eventCellContainerView)
-    
+        
         eventCellContainerView.snp.makeConstraints { (make) in
             make.edges.equalTo(contentView)
             
@@ -104,13 +100,11 @@ class EventsCell: UICollectionViewCell {
             
         }
         eventImageView.snp.makeConstraints { (make) in
-
-           // make.topMargin.equalTo(eventName.snp.bottom.)
+            
             make.top.equalTo(eventName.snp.bottom).offset(15)
             make.left.equalTo(20)
             make.right.equalTo(-20)
             make.height.equalTo(300)
-
         }
         eventDescription.snp.makeConstraints { (make) in
             make.top.equalTo(eventImageView.snp.bottom).offset(15)

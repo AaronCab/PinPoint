@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class FavoritesCell: UICollectionViewCell {
     
@@ -15,7 +16,6 @@ class FavoritesCell: UICollectionViewCell {
         ev.backgroundColor = .clear
         ev.layer.cornerRadius = 20
         ev.layer.masksToBounds = true
-        
         return ev
     }()
     
@@ -24,6 +24,7 @@ class FavoritesCell: UICollectionViewCell {
         en.text = "Event Name"
         en.numberOfLines = 2
         en.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        en.font = UIFont.init(name: "futura", size: 16)
         return en
     }()
     
@@ -40,7 +41,8 @@ class FavoritesCell: UICollectionViewCell {
         let et = UITextView()
         et.isEditable = false
         et.backgroundColor = .clear
-        et.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        et.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        et.font = UIFont.init(name: "futura", size: 18)
         et.textColor = .white
         return et
     }()
@@ -48,25 +50,26 @@ class FavoritesCell: UICollectionViewCell {
     let eventStartTime: UILabel = {
         let es = UILabel()
         es.text = "Start Time"
+        es.font = UIFont.init(name: "futura", size: 18)
         return es
     }()
     
     let eventEndTime: UILabel = {
         let ee = UILabel()
+        ee.font = UIFont.init(name: "futura", size: 18)
         ee.text = "End Time"
         return ee
     }()
     
     let moreInfoButton: UIButton = {
         let button = UIButton()
-        button.setTitle("more info", for: .normal)
+        button.setImage(#imageLiteral(resourceName: "icons8-about-80"), for: .normal)
         return button
     }()
     
     
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
-        
         setupCell()
     }
     
@@ -91,38 +94,37 @@ class FavoritesCell: UICollectionViewCell {
         eventName.snp.makeConstraints { (make) in
             make.top.equalTo(eventCellContainerView.snp.top)
             
-            make.left.equalTo(11)
+            make.centerX.equalTo(eventCellContainerView.snp.centerX)
             
             
         }
         eventImageView.snp.makeConstraints { (make) in
-            
-            make.topMargin.equalTo(eventName.snp_bottom)
-            make.width.equalTo(contentView)
-            make.top.equalTo(eventName.snp.bottom)
-            make.width.equalTo(eventCellContainerView)
+            make.top.equalTo(eventName.snp.bottom).offset(15)
+            make.left.equalTo(20)
+            make.right.equalTo(-20)
             make.height.equalTo(300)
-            
         }
         eventDescription.snp.makeConstraints { (make) in
-            make.top.equalTo(400)
-            make.width.equalTo(eventCellContainerView)
-            make.height.equalTo(150)
+            make.top.equalTo(eventImageView.snp.bottom).offset(15)
+            make.left.equalTo(20)
+            make.right.equalTo(-20)
+            make.height.equalTo(200)
             
         }
         eventStartTime.snp.makeConstraints { (make) in
-            make.top.equalTo(650)
-            make.width.equalTo(eventCellContainerView)
+            make.top.equalTo(eventDescription.snp.bottom).offset(15)
+            make.left.equalTo(20)
             
         }
         eventEndTime.snp.makeConstraints { (make) in
-            make.top.equalTo(eventStartTime.snp_bottom)
-            make.width.equalTo(eventCellContainerView)
-            
+            make.top.equalTo(eventStartTime.snp_bottom).offset(5)
+           make.left.equalTo(20)
         }
         moreInfoButton.snp.makeConstraints { (make) in
-            make.bottom.equalTo(eventCellContainerView.snp.bottom)
-            make.left.equalTo(11)
+            make.top.equalTo(eventEndTime.snp_bottom).offset(20)
+            make.height.equalTo(50)
+            make.left.equalTo(20)
+            make.width.equalTo(50)
         }
     }
     
