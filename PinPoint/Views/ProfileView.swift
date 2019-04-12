@@ -31,9 +31,10 @@ class ProfileView: UIView {
         gradient.colors = [firstColor.cgColor, secondColor.cgColor]
         self.layer.insertSublayer(gradient, at: 0)
     }
+    
     var profilePicture: UIImageView = {
         let imageView = UIImageView()
-        imageView.layer.cornerRadius = 15
+
         return imageView
     }()
     

@@ -32,7 +32,7 @@ class MenuController: UIViewController {
         tableView.register(MenuOptionsCell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.backgroundColor = .red
         tableView.separatorStyle = .none
-        tableView.rowHeight = 72
+        tableView.rowHeight = 64
         
         
         view.addSubview(tableView)
@@ -45,7 +45,7 @@ class MenuController: UIViewController {
 }
 extension MenuController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 5
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier , for: indexPath) as! MenuOptionsCell
@@ -74,9 +74,12 @@ extension MenuController: UITableViewDataSource, UITableViewDelegate {
             delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .favorites)
         }
         if indexPath.row == 2 {
-            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .messaging)
+            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .preferences)
         }
         if indexPath.row == 3 {
+            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .messaging)
+        }
+        if indexPath.row == 4 {
             delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .profile)
         }
     }

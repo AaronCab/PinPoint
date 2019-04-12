@@ -31,10 +31,9 @@ class IntroView: UIView {
         return textField
         }()
     
-    var pictureOfUser: CircularImageView = {
-        var imageView = CircularImageView()
-        imageView.image = UIImage(named: "placeholder-image")
-        imageView.layer.cornerRadius = 300
+    var pictureOfUser: UIImageView = {
+        var imageView = UIImageView()
+        imageView.image = UIImage(named: "pinpointred")
         return imageView
     }()
     
