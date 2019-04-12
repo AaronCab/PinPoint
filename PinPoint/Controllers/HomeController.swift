@@ -83,6 +83,7 @@ class HomeController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
     }
 
     
@@ -151,6 +152,7 @@ class HomeController: UIViewController {
         }else{
             contentView.removeFromSuperview()
             contentView = UIView.init(frame: UIScreen.main.bounds)
+            profileView.profilePicture.image = UIImage(named: "placeholder-image")
             contentView.addSubview(profileView)
             view.addSubview(profileView)
         }
@@ -367,3 +369,8 @@ extension HomeController{
     
 }
 
+
+extension HomeController{
+    
+    
+}

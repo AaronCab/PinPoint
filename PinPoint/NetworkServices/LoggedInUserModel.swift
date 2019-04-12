@@ -16,6 +16,7 @@ struct UserLogedInModel {
     let firstName: String?
     let lastName: String?
     let bio: String?
+    let friends: [String]?
     
     public var fullName: String {
         return ((firstName ?? "") + " " + (lastName ?? "")).trimmingCharacters(in: .whitespacesAndNewlines)
@@ -29,7 +30,9 @@ struct UserLogedInModel {
          joinedDate: String,
          firstName: String?,
          lastName: String?,
-         bio: String?) {
+         bio: String?,
+        friend: [String]?
+        ) {
         self.bloggerId = userId
         self.displayName = displayName
         self.email = email
@@ -38,6 +41,7 @@ struct UserLogedInModel {
         self.firstName = firstName
         self.lastName = lastName
         self.bio = bio
+        self.friends = friend
     }
     
     init(dict: [String: Any]) {
@@ -49,5 +53,6 @@ struct UserLogedInModel {
         self.firstName = dict[ProfileCollectionKeys.FirstNameKey] as? String ?? "FirstName"
         self.lastName = dict[ProfileCollectionKeys.LastNameKey] as? String ?? "LastName"
         self.bio = dict[ProfileCollectionKeys.BioKey] as? String ?? "fellow bloggers are looking forward to reading your bio"
+        self.friends = dict[ProfileCollectionKeys.FriendsKey] as? [String] ?? [""]
     }
 }
