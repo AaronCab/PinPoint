@@ -228,6 +228,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         
         
     }
+    
     @objc func moreInfoFav(senderTag: UIButton){
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
@@ -246,6 +247,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             }
 
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
+   
         }
         alertController.addAction(safariAction)
         alertController.addAction(deleteAction)
