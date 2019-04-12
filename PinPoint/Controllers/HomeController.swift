@@ -204,12 +204,13 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             }else{
                 cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.url)!), placeholder: UIImage(named: "placeholder-image"))
             }
-            cell.moreInfoButton.addTarget(self, action: #selector(moreInfo), for: .touchUpInside)
+            cell.moreInfoButton.addTarget(self, action: #selector(moreInfoFav), for: .touchUpInside)
             return cell
         }
+       
     }
-    
     @objc func moreInfo(senderTag: UIButton){
+        
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         let favoriteActione = UIAlertAction(title: "Favorite", style: .default) { alert in
@@ -225,6 +226,30 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         
         
     }
+    @objc func moreInfoFav(senderTag: UIButton){
+        
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { alert in
+            self.confirmDeletionActionSheet(handler: { (deleteAction) in
+                self.deleteFavorite(senderTag: senderTag)
+                self.favoriteView.myCollectionView.reloadData()
+            })
+            
+        }
+        alertController.addAction(deleteAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true)
+        
+    }
+    private func deleteFavorite(senderTag: UIButton) {
+        let favoriteArticle = favoriteEvents[senderTag.tag]
+        FavoritesDataManager.deleteItem(atIndex: senderTag.tag, item: favoriteArticle)
+    }
+
+    
+    
+   
     
     
 }

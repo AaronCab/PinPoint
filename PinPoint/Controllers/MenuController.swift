@@ -71,10 +71,10 @@ extension MenuController: UITableViewDataSource, UITableViewDelegate {
             delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .discover)
         }
         if indexPath.row == 1 {
-            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .messaging)
+            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .favorites)
         }
         if indexPath.row == 2 {
-            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .favorites)
+            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .messaging)
         }
         if indexPath.row == 3 {
             delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .profile)

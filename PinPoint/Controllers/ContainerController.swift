@@ -16,16 +16,10 @@ class ContainerController: UIViewController {
     var centerController: UIViewController!
     var eventsView: EventsViewController!
     var interestsView: InterestViewController!
-    
     var isExpanded = false
-    
-    
-   
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureHomeController()
-       
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -45,18 +39,16 @@ class ContainerController: UIViewController {
         let homeController = HomeController()
         homeController.delegate = self
         centerController = UINavigationController(rootViewController: homeController)
-        view.addSubview(centerController.view)
-//        addChild(centerController)
+    view.addSubview(centerController.view)
         centerController.didMove(toParent: self)
     }
     func configureMenuController() {
         if menuController == nil {
             menuController = MenuController()
             menuController.delegate = self
-            view.insertSubview(menuController.view, at: 0)
+    view.insertSubview(menuController.view, at: 0)
             addChild(menuController)
             menuController.didMove(toParent: self)
-            
         }
     }
     func animatePanel(shouldExpand: Bool, menuOption: MenuOption?) {
@@ -107,13 +99,13 @@ extension ContainerController: HomeControllerDelegate {
         let menuCategories = menuCategories else { return }
         switch menuCategories {
         case .discover:
-            discover.introPageOn()
-        case .favorites:
             discover.eventsPageOn()
+        case .favorites:
+            discover.favoritesPageOn()
         case .profile:
             discover.profilePageOn()
         case .messaging:
-            discover.favoritesPageOn()
+            discover.introPageOn()
         default:
             print("No Other VC")
         }
