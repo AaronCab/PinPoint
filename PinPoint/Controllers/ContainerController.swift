@@ -71,11 +71,15 @@ class ContainerController: UIViewController {
     func didSelectMenuOption(menuOption: MenuOption) {
         switch menuOption {
         case .Discover:
-        let introVC = IntroViewController()
+            print("show discover")
+       // let introVC = IntroViewController()
         case .Favorites:
-        let eventsVC = EventsViewController()
+            print("show favorites")
+      //  let eventsVC = EventsViewController()
         case .Messages:
             print("show messages")
+        case .Preferences:
+            print("show preferences")
         case .Profile:
             print("show profile")
         }
@@ -102,10 +106,12 @@ extension ContainerController: HomeControllerDelegate {
             discover.eventsPageOn()
         case .favorites:
             discover.favoritesPageOn()
+        case .preferences:
+            discover.preferencesPageOn()
+        case .messaging:
+            discover.messagingPageOn()
         case .profile:
             discover.profilePageOn()
-        case .messaging:
-            discover.introPageOn()
         default:
             print("No Other VC")
         }

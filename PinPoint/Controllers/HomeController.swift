@@ -23,6 +23,7 @@ class HomeController: UIViewController {
     let profileView = ProfileView()
     var eventCell = EventsCell()
     let loginView = LoginView()
+    let interestsView = InterestView()
     let authService = AppDelegate.authservice
     var event = [Event](){
         didSet {
@@ -125,10 +126,10 @@ class HomeController: UIViewController {
         navigationItem.title = "P I N P O I N T"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "hamburgerMenu").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMenuToggle))
     }
-    func introPageOn() {
+    func messagingPageOn() {
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
-        contentView.addSubview(introView)
+        contentView.addSubview(interestsView)
         view.addSubview(contentView)
     }
     func eventsPageOn() {
@@ -137,6 +138,14 @@ class HomeController: UIViewController {
         contentView.addSubview(eventsView)
         view.addSubview(contentView)
     }
+    
+    func preferencesPageOn() {
+        contentView.removeFromSuperview()
+        contentView = UIView.init(frame: UIScreen.main.bounds)
+        contentView.addSubview(introView)
+        view.addSubview(contentView)
+    }
+    
     func favoritesPageOn() {
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
