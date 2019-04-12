@@ -45,13 +45,13 @@ class HomeController: UIViewController {
     var currentLocation = CLLocation(){
         didSet{
             introView.locationButton.setTitle(location, for: .normal)
+            getEvents()
             locationManager.stopUpdatingLocation()
 
         }
     }
-    
     private func getEvents(){
-        ApiClient.getEvents(distance: "2km", location: "Manhattan") { (error, data) in
+        ApiClient.getEvents(distance: "2km", location: location) { (error, data) in
             if let error = error {
                 print(error.errorMessage())
             } else if let data = data {
@@ -62,6 +62,7 @@ class HomeController: UIViewController {
     
     
     var location = "Manhattan"
+
     var selectedImageValue: UIImage?
     var locationManager: CLLocationManager!
     var locationService = LocationService()
