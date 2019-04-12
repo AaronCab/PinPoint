@@ -240,15 +240,15 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         }
         let safariAction = UIAlertAction(title: "Safari", style: .default) { alert in
             let favorite = FavoritesDataManager.fetchItemsFromDocumentsDirectory()[senderTag.tag]
-            guard let favURL = favorite.url else {
-                return
-            }
-            guard let url = URL(string: "http://www.google.com") else {
+            guard let favURL = favorite.url,
+            let url = URL(string: favURL) else {
                 return
             }
             
             let safariVC = SFSafariViewController(url: url)
-           self.present(safariVC, animated: true, completion: nil)
+            DispatchQueue.global().async {
+            self.present(safariVC, animated: true, completion: nil)
+            }
         }
         alertController.addAction(safariAction)
         alertController.addAction(deleteAction)
