@@ -1,5 +1,5 @@
 //
-//  DiscoverViewController.swift
+//  BioViewController.swift
 //  PinPoint
 //
 //  Created by Aaron Cabreja on 4/15/19.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-class DiscoverViewController: UIViewController {
+class BioViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-
+    
 }
