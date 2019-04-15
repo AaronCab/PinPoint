@@ -22,7 +22,7 @@ class ProfileView: UIView {
     
     
     private var gradient: CAGradientLayer!
-    
+
     private func addGradient(){
         let firstColor = UIColor.init(red: 255/255, green: 0/255, blue: 0/255, alpha: 1)
         let secondColor = UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
@@ -39,7 +39,7 @@ class ProfileView: UIView {
     
     var displayName: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .white
+        label.backgroundColor = .clear
         label.layer.cornerRadius = 15
         label.font = UIFont.init(name: "futura", size: 14)
         label.text = " U S E R N A M E"
@@ -49,7 +49,7 @@ class ProfileView: UIView {
     
     var email: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .white
+        label.backgroundColor = .clear
         label.layer.cornerRadius = 15
         label.font = UIFont.init(name: "futura", size: 14)
         label.text = " E M A I L"
@@ -60,7 +60,7 @@ class ProfileView: UIView {
     
     var name: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .white
+        label.backgroundColor = .clear
         label.layer.cornerRadius = 15
         label.font = UIFont.init(name: "futura", size: 14)
         label.font = UIFont.systemFont(ofSize: 14, weight: .light)
@@ -71,8 +71,9 @@ class ProfileView: UIView {
     
     var bioLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .clear
+        label.backgroundColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
         label.textAlignment = .center
+        label.textColor = #colorLiteral(red: 0.2380180061, green: 0.2380180061, blue: 0.2380180061, alpha: 1)
         label.layer.cornerRadius = 15
         label.font = UIFont.init(name: "futura", size: 20)
         label.text = "B I O"
@@ -81,7 +82,7 @@ class ProfileView: UIView {
     
     var bio: UITextView = {
         let textView = UITextView()
-        textView.backgroundColor = .white
+        textView.backgroundColor = .clear
         textView.layer.cornerRadius = 10
         textView.isEditable = false
         return textView
