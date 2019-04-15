@@ -33,8 +33,7 @@ class IntroView: UIView {
     
     var pictureOfUser: UIImageView = {
         var imageView = UIImageView()
-        imageView.image = UIImage(named: "placeholder-image")
-        imageView.layer.cornerRadius = 10
+        imageView.image = UIImage(named: "pinpointred")
         return imageView
     }()
     

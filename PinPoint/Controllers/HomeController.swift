@@ -23,6 +23,7 @@ class HomeController: UIViewController {
     let profileView = ProfileView()
     var eventCell = EventsCell()
     let loginView = LoginView()
+    let messagesView = MessageView()
     let authService = AppDelegate.authservice
     var event = [Event](){
         didSet {
@@ -45,13 +46,13 @@ class HomeController: UIViewController {
     var currentLocation = CLLocation(){
         didSet{
             introView.locationButton.setTitle(location, for: .normal)
+            getEvents()
             locationManager.stopUpdatingLocation()
 
         }
     }
-    
     private func getEvents(){
-        ApiClient.getEvents(distance: "2km", location: "Manhattan") { (error, data) in
+        ApiClient.getEvents(distance: "2km", location: location) { (error, data) in
             if let error = error {
                 print(error.errorMessage())
             } else if let data = data {
@@ -59,7 +60,6 @@ class HomeController: UIViewController {
             }
         }
     }
-    
     
     var location = "Manhattan"
     var selectedImageValue: UIImage?
@@ -72,9 +72,6 @@ class HomeController: UIViewController {
         ip.delegate = self
         return ip
     }()
-    
-    
-    
     
     var delegate: HomeControllerDelegate?
     
@@ -112,8 +109,6 @@ class HomeController: UIViewController {
         
     }
     
-    
-    
     @objc func handleMenuToggle() {
         delegate?.handleMenuToggle(forMenuOption: nil, menuCategories: nil)
     }
@@ -124,10 +119,10 @@ class HomeController: UIViewController {
         navigationItem.title = "P I N P O I N T"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "hamburgerMenu").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMenuToggle))
     }
-    func introPageOn() {
+    func messagingPageOn() {
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
-        contentView.addSubview(introView)
+        contentView.addSubview(messagesView)
         view.addSubview(contentView)
     }
     func eventsPageOn() {
@@ -136,6 +131,14 @@ class HomeController: UIViewController {
         contentView.addSubview(eventsView)
         view.addSubview(contentView)
     }
+    
+    func preferencesPageOn() {
+        contentView.removeFromSuperview()
+        contentView = UIView.init(frame: UIScreen.main.bounds)
+        contentView.addSubview(introView)
+        view.addSubview(contentView)
+    }
+    
     func favoritesPageOn() {
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
@@ -163,8 +166,6 @@ class HomeController: UIViewController {
 
 extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
    
-    
-
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == favoriteView.myCollectionView{
             return FavoritesDataManager.fetchItemsFromDocumentsDirectory().count
@@ -201,9 +202,9 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             cell.eventImageView.kf.indicatorType = .activity
             cell.moreInfoButton.tag = indexPath.row
             if currentEvent.imageUrl == nil{
-                cell.eventImageView.image = UIImage(named: "placeholder-image")
+                cell.eventImageView.image = UIImage(named: "pinpointred")
             }else{
-                cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.imageUrl)!), placeholder: UIImage(named: "placeholder-image"))
+                cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.imageUrl)!), placeholder: UIImage(named: "pinpointred"))
             }
             cell.moreInfoButton.addTarget(self, action: #selector(moreInfoFav), for: .touchUpInside)
             return cell
@@ -224,8 +225,6 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         alertController.addAction(favoriteActione)
         present(alertController, animated: true)
         
-        
-        
     }
     
     @objc func moreInfoFav(senderTag: UIButton){
@@ -236,17 +235,17 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
                 self.deleteFavorite(senderTag: senderTag)
                 self.favoriteView.myCollectionView.reloadData()
             })
-            
+
         }
         let safariAction = UIAlertAction(title: "Safari", style: .default) { alert in
             let favorite = FavoritesDataManager.fetchItemsFromDocumentsDirectory()[senderTag.tag]
             guard let favURL = favorite.url,
-                let url = URL(string: "https://www.google.com") else {
+            let url = URL(string: favURL) else {
                 return
             }
-            
-        let safariVC = SFSafariViewController(url: url)
-          self.present(safariVC, animated: true, completion: nil)
+
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+   
         }
         alertController.addAction(safariAction)
         alertController.addAction(deleteAction)
@@ -260,11 +259,6 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         FavoritesDataManager.deleteItem(atIndex: senderTag.tag, item: favoriteArticle)
     }
 
-    
-    
-   
-    
-    
 }
 
 extension HomeController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{

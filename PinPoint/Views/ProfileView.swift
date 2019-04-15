@@ -32,19 +32,29 @@ class ProfileView: UIView {
         self.layer.insertSublayer(gradient, at: 0)
     }
     
+    var profilePicture: UIImageView = {
+        let imageView = UIImageView()
+
+        return imageView
+    }()
+    
     var displayName: UILabel = {
         let label = UILabel()
         label.backgroundColor = .white
-        label.layer.cornerRadius = 10
-        label.text = "Username"
+        label.layer.cornerRadius = 15
+        label.font = UIFont.init(name: "futura", size: 14)
+        label.text = " U S E R N A M E"
+        label.font = UIFont.systemFont(ofSize: 14, weight: .light)
         return label
     }()
     
     var email: UILabel = {
         let label = UILabel()
         label.backgroundColor = .white
-        label.layer.cornerRadius = 10
-        label.text = "Email"
+        label.layer.cornerRadius = 15
+        label.font = UIFont.init(name: "futura", size: 14)
+        label.text = " E M A I L"
+        label.font = UIFont.systemFont(ofSize: 14, weight: .light)
 
         return label
     }()
@@ -52,8 +62,10 @@ class ProfileView: UIView {
     var name: UILabel = {
         let label = UILabel()
         label.backgroundColor = .white
-        label.layer.cornerRadius = 10
-        label.text = "Name"
+        label.layer.cornerRadius = 15
+        label.font = UIFont.init(name: "futura", size: 14)
+        label.font = UIFont.systemFont(ofSize: 14, weight: .light)
+        label.text = " N A M E"
 
         return label
     }()
@@ -62,8 +74,9 @@ class ProfileView: UIView {
         let label = UILabel()
         label.backgroundColor = .clear
         label.textAlignment = .center
-        label.layer.cornerRadius = 10
-        label.text = "Bio"
+        label.layer.cornerRadius = 15
+        label.font = UIFont.init(name: "futura", size: 20)
+        label.text = "B I O"
         return label
     }()
     
@@ -75,15 +88,9 @@ class ProfileView: UIView {
         return textView
     }()
     
-    var profilePicture: UIImageView = {
-        let imageView = UIImageView()
-
-        return imageView
-    }()
-    
     var signOut: UIButton = {
         let button = UIButton()
-        button.setTitle("Signout", for: .normal)
+        button.setTitle("SIGN OUT", for: .normal)
         button.setTitleColor(.red, for: .normal)
         button.backgroundColor = .white
         return button
@@ -138,20 +145,21 @@ extension ProfileView{
     private func profilePictureConstrant(){
         addSubview(profilePicture)
         profilePicture.translatesAutoresizingMaskIntoConstraints = false
-        profilePicture.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
+        profilePicture.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 11).isActive = true
         profilePicture.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.3 ).isActive = true
         profilePicture.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
-        profilePicture.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        profilePicture.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
+        profilePicture.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 35).isActive = true
+        profilePicture.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -35).isActive = true
     }
     
     private func displayNameConstrant(){
         addSubview(displayName)
         displayName.translatesAutoresizingMaskIntoConstraints = false
-        displayName.topAnchor.constraint(equalTo: profilePicture.bottomAnchor, constant: 15).isActive = true
-        displayName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        displayName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
+        displayName.topAnchor.constraint(equalTo: profilePicture.bottomAnchor, constant: 20).isActive = true
+        displayName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 35).isActive = true
+        displayName.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        displayName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -35).isActive = true
     }
     
 
@@ -160,16 +168,20 @@ extension ProfileView{
         addSubview(name)
         name.translatesAutoresizingMaskIntoConstraints = false
         name.topAnchor.constraint(equalTo: displayName.bottomAnchor, constant: 15).isActive = true
-        name.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        name.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
+        name.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 35).isActive = true
+        
+        name.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        name.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -35).isActive = true
     }
     
     private func emailConstrant(){
         addSubview(email)
         email.translatesAutoresizingMaskIntoConstraints = false
         email.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 15).isActive = true
-        email.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        email.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
+        email.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 35).isActive = true
+        
+        email.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        email.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -35).isActive = true
     }
     
     private func bioLabelConstrant(){
@@ -210,16 +222,10 @@ extension ProfileView{
         addSubview(bio)
         bio.translatesAutoresizingMaskIntoConstraints = false
         bio.bottomAnchor.constraint(equalTo: events.topAnchor, constant: -10).isActive = true
-        bio.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
-        bio.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
-        bio.topAnchor.constraint(equalTo: bioLabel.bottomAnchor, constant: 10).isActive = true
+        bio.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 35).isActive = true
+        bio.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -35).isActive = true
+        bio.topAnchor.constraint(equalTo: bioLabel.bottomAnchor, constant: 25).isActive = true
         
     }
-    
-    
-    
-
-    
-
     
 }
