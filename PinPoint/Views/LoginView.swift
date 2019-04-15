@@ -33,7 +33,7 @@ class LoginView: UIView {
     var facebookLogIn: UIButton = {
         let button = UIButton()
         button.backgroundColor = .white
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = 20
         button.setTitleColor(.black, for: .normal)
         button.setTitle("FACEBOOK LOGIN", for: .normal)
         button.isEnabled = true
