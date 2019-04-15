@@ -138,6 +138,7 @@ class HomeController: UIViewController {
         contentView.addSubview(discoverView)
         view.addSubview(contentView)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "MyEvent!", style: .plain, target: nil, action: nil)
+        self.navigationItem.rightBarButtonItem?.tintColor = .black
 
     }
     
@@ -172,6 +173,7 @@ class HomeController: UIViewController {
             view.addSubview(profileView)
         }
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: nil, action: nil)
+        self.navigationItem.rightBarButtonItem?.tintColor = .black
         // add right naviEgation item
     }
 }

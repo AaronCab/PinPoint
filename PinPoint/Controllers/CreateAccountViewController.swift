@@ -14,9 +14,6 @@ class CreateAccountViewController: UIViewController {
     var createUserView = CreateUserView()
     var authService = AppDelegate.authservice
     
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(createUserView)
