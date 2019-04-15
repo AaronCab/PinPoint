@@ -77,9 +77,13 @@ class HomeController: UIViewController {
         super.viewDidLoad()
         viewdidLoadLayout()
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         
+        if authService.getCurrentUser() != nil{
+            loginView.removeFromSuperview()
+        }
     }
     
     private func viewdidLoadLayout(){
@@ -94,7 +98,7 @@ class HomeController: UIViewController {
         introViewStuff()
         configureNavigationBar()
         getEvents()
-        profileViewControllerStuff()
+        authService.authserviceSignOutDelegate = self
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
@@ -171,7 +175,9 @@ class HomeController: UIViewController {
             contentView.addSubview(profileView)
             view.addSubview(profileView)
         }
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: nil, action: nil)
+        let rightBarItem = UIBarButtonItem(customView: profileView.settingsButton)
+        profileView.settingsButton.addTarget(self, action: #selector(allCommands), for: .touchUpInside)
+        self.navigationItem.rightBarButtonItem = rightBarItem
         // add right naviEgation item
     }
 }
@@ -384,15 +390,35 @@ extension HomeController{
     
 }
 
-extension HomeController{
-    
-    func profileViewControllerStuff(){
-        profileView.settingsButton.addTarget(self, action: #selector(editProfile), for: .touchUpInside)
+extension HomeController: AuthServiceSignOutDelegate{
+    func didSignOutWithError(_ authservice: AuthService, error: Error) {
+        showAlert(title: "Error signing out", message: error.localizedDescription)
     }
     
-    @objc func editProfile(){
-        let editVC = EditProfileViewController()
-        self.navigationController?.pushViewController(editVC, animated: true)
+    func didSignOut(_ authservice: AuthService) {
+        if loginView.isDescendant(of: view){
+            loginView.removeFromSuperview()
+        }else{
+            view.addSubview(loginView)
+        }
+    }
+
+    @objc func allCommands(){
+        let alert = UIAlertController(title: "How can I help you", message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Edit Profile", style: .default, handler: { (edit) in
+            let editVC = EditProfileViewController()
+            self.navigationController?.pushViewController(editVC, animated: true)
+        }))
+        alert.addAction(UIAlertAction(title: "Sign out", style: .default, handler: { (signOut) in
+            self.authService.signOutAccount()
+        }))
+        alert.addAction(UIAlertAction(title: "User create events", style: .default, handler: { (events) in
+            self.showAlert(title: "Nothing Yet", message: "more to come here stay tune")
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(alert, animated: true)
+
     }
     
 }
+
