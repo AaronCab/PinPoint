@@ -48,6 +48,8 @@ class LoginWithExistingViewController: UIViewController {
             showAlert(title: "Error", message: " Incorrect username or password")
         }else{
             authService.signInExistingAccount(email: email, password: password)
+            let containVC = HomeController()
+            self.present(containVC, animated: true)
         }
             
     }
