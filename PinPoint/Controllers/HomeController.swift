@@ -385,7 +385,7 @@ extension HomeController{
 extension HomeController{
     
     func profileViewControllerStuff(){
-        profileView.edit.addTarget(self, action: #selector(editProfile), for: .touchUpInside)
+        profileView.settingsButton.addTarget(self, action: #selector(editProfile), for: .touchUpInside)
     }
     
     

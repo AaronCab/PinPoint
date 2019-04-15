@@ -103,12 +103,9 @@ extension ContainerController: HomeControllerDelegate {
         let menuCategories = menuCategories else { return }
         switch menuCategories {
         case .discover:
+            homeController.discoverPageOn()
+        case.nearby:
             homeController.eventsPageOn()
-        case.nearby:
-            homeController.nearbyPageOn()
-            discover.discoverPageOn()
-        case.nearby:
-            discover.eventsPageOn()
         case .favorites:
             homeController.favoritesPageOn()
         case .preferences:
