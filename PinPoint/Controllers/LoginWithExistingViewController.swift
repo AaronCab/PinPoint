@@ -22,6 +22,11 @@ class LoginWithExistingViewController: UIViewController {
     
     func viewDidLoadLayout(){
         view.addSubview(accountExistingView)
+        
+        accountExistingView.emailToLogin.text = "jason@jason.com"
+        accountExistingView.passwordToLogin.text = "123456"
+        
+        
         let leftBarItem = UIBarButtonItem(customView: accountExistingView.cancel)
         accountExistingView.cancel.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
         self.navigationItem.leftBarButtonItem = leftBarItem
@@ -30,6 +35,7 @@ class LoginWithExistingViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = rightBarItem
         accountExistingView.emailToLogin.delegate = self
         accountExistingView.passwordToLogin.delegate = self
+        authService.authserviceExistingAccountDelegate = self
         
     }
     
@@ -48,8 +54,6 @@ class LoginWithExistingViewController: UIViewController {
             showAlert(title: "Error", message: " Incorrect username or password")
         }else{
             authService.signInExistingAccount(email: email, password: password)
-            let containVC = HomeController()
-            self.present(containVC, animated: true)
         }
             
     }
@@ -63,9 +67,8 @@ extension LoginWithExistingViewController: AuthServiceExistingAccountDelegate{
     }
     
     func didSignInToExistingAccount(_ authservice: AuthService, user: User) {
-        let containVC = HomeController()
         
-        self.present(containVC, animated: true)
+        self.navigationController?.popViewController(animated: true)
         
     }
     
