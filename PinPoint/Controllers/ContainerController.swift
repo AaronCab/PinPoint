@@ -99,21 +99,24 @@ extension ContainerController: HomeControllerDelegate {
                  isExpanded = !isExpanded
         animatePanel(shouldExpand: isExpanded, menuOption: menuOption)
         
-        guard let discover = centerController.children.first as? HomeController,
+        guard let homeController = centerController.children.first as? HomeController,
         let menuCategories = menuCategories else { return }
         switch menuCategories {
         case .discover:
+            homeController.eventsPageOn()
+        case.nearby:
+            homeController.nearbyPageOn()
             discover.discoverPageOn()
         case.nearby:
             discover.eventsPageOn()
         case .favorites:
-            discover.favoritesPageOn()
+            homeController.favoritesPageOn()
         case .preferences:
-            discover.preferencesPageOn()
+            homeController.preferencesPageOn()
         case .messaging:
-            discover.messagingPageOn()
+            homeController.messagingPageOn()
         case .profile:
-            discover.profilePageOn()
+            homeController.profilePageOn()
         default:
             print("nothing is happening")
         }
