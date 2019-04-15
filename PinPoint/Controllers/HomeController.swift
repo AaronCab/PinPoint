@@ -33,8 +33,6 @@ class HomeController: UIViewController {
         }
     }
     var favoriteCell = FavoritesCell()
-    
-    
     private var favoriteEvents = [FavoritesModel]() {
         didSet {
             DispatchQueue.main.async {
@@ -42,7 +40,6 @@ class HomeController: UIViewController {
             }
         }
     }
-    
     var currentLocation = CLLocation(){
         didSet{
             introView.locationButton.setTitle(location, for: .normal)
@@ -372,12 +369,8 @@ extension HomeController{
         self.navigationController?.pushViewController(loginWEVC, animated: true)
     }
     
-    
-    
 }
 
-
 extension HomeController{
-    
     
 }
