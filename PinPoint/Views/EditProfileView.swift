@@ -94,6 +94,7 @@ class EditProfileView: UIView {
     var bio: UIButton = {
         let button = UIButton()
         button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 10
         return button
     }()

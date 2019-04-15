@@ -28,11 +28,20 @@ class EditProfileViewController: UIViewController {
         view.addSubview(editProfile)
         introViewStuff()
     }
-    
+
     
     
     func introViewStuff(){
         editProfile.picImage.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
+        editProfile.bio.addTarget(self, action: #selector(bioController), for: .touchUpInside)
+        editProfile.saveEdit.addTarget(self, action: #selector(updateProifle), for: .touchUpInside)
+    }
+    
+    
+    @objc func bioController(){
+        let bio = BioViewController()
+        bio.delegate = self
+        self.navigationController?.pushViewController(bio, animated: true)
     }
     
     @objc func imagePicker(){
@@ -113,11 +122,6 @@ class EditProfileViewController: UIViewController {
         }
     }
     
-    //    @IBAction func unwindFromEditBlog(seque: UIStoryboardSegue){
-    //        let editVC = seque.source as! EditBioProfileViewController
-    //        bio.setTitle(editVC.bio.text, for: .normal)
-    //    }
-    
 }
 extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -143,4 +147,12 @@ extension EditProfileViewController: UITextFieldDelegate{
         textField.resignFirstResponder()
         return true
     }
+}
+
+extension EditProfileViewController: BioDelegate{
+    func bioprotocol(bioText: String) {
+         editProfile.bio.setTitle(bioText, for: .normal)
+    }
+    
+    
 }
