@@ -119,6 +119,18 @@ class ProfileView: UIView {
 
     }
     
+    
+    var loggedInUserModel: UserLogedInModel!{
+        didSet{
+            bio.text = loggedInUserModel.bio ?? ""
+            if let picture = loggedInUserModel.photoURL{
+                profilePicture.kf.setImage(with: URL(string: picture), placeholder: #imageLiteral(resourceName: "placeholder-image.png"))
+            }
+            name.text = "\(loggedInUserModel.firstName ?? "") \(loggedInUserModel.lastName ?? "")"
+            displayName.text = loggedInUserModel.displayName
+        }
+    }
+    
 }
 
 extension ProfileView{
