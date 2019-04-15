@@ -22,7 +22,7 @@ class ProfileView: UIView {
     
     
     private var gradient: CAGradientLayer!
-    
+
     private func addGradient(){
         let firstColor = UIColor.init(red: 255/255, green: 0/255, blue: 0/255, alpha: 1)
         let secondColor = UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
@@ -39,7 +39,7 @@ class ProfileView: UIView {
     
     var displayName: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .white
+        label.backgroundColor = .clear
         label.layer.cornerRadius = 15
         label.font = UIFont.init(name: "futura", size: 14)
         label.text = " U S E R N A M E"
@@ -49,7 +49,7 @@ class ProfileView: UIView {
     
     var email: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .white
+        label.backgroundColor = .clear
         label.layer.cornerRadius = 15
         label.font = UIFont.init(name: "futura", size: 14)
         label.text = " E M A I L"
@@ -60,7 +60,7 @@ class ProfileView: UIView {
     
     var name: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .white
+        label.backgroundColor = .clear
         label.layer.cornerRadius = 15
         label.font = UIFont.init(name: "futura", size: 14)
         label.font = UIFont.systemFont(ofSize: 14, weight: .light)
@@ -71,8 +71,9 @@ class ProfileView: UIView {
     
     var bioLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .clear
+        label.backgroundColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
         label.textAlignment = .center
+        label.textColor = #colorLiteral(red: 0.2380180061, green: 0.2380180061, blue: 0.2380180061, alpha: 1)
         label.layer.cornerRadius = 15
         label.font = UIFont.init(name: "futura", size: 20)
         label.text = "B I O"
@@ -81,37 +82,11 @@ class ProfileView: UIView {
     
     var bio: UITextView = {
         let textView = UITextView()
-        textView.backgroundColor = .white
+        textView.backgroundColor = .clear
         textView.layer.cornerRadius = 10
         textView.isEditable = false
         return textView
     }()
-    
-    var signOut: UIButton = {
-        let button = UIButton()
-      //  button.setTitle("Sign Out", for: .normal)
-        button.setImage(#imageLiteral(resourceName: "icons8-exit-100"), for: .normal)
-        button.setTitleColor(.red, for: .normal)
-        button.backgroundColor = .clear
-        return button
-    }()
-    
-    var edit: UIButton = {
-        let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "icons8-compose-100"), for: .normal)
-        button.setTitleColor(.red, for: .normal)
-        button.backgroundColor = .clear
-        return button
-    }()
-    
-    var events: UIButton = {
-        let button = UIButton()
-        button.setTitle("User Events", for: .normal)
-        button.setTitleColor(.red, for: .normal)
-        button.backgroundColor = .clear
-        return button
-    }()
-    
     var settingsButton: UIButton = {
        let button = UIButton()
         button.setImage(#imageLiteral(resourceName: "icons8-more-100-2"), for: .normal)
@@ -124,10 +99,7 @@ class ProfileView: UIView {
         profilePictureConstraint()
         displayNameConstraint()
         nameConstraint()
-        eventsConstraint()
         emailConstraint()
-        editConstraint()
-        signOutConstraint()
         bioLabelConstraint()
         bioConstraint()
         settingsButtonConstraint()
@@ -151,16 +123,8 @@ extension ProfileView{
     
     private func settingsButtonConstraint() {
         addSubview(settingsButton)
-//
-//        settingsButton.snp.makeConstraints { (make) in
-//            make.top.equalTo(self.snp.top).offset(5)
-//            make.left.equalTo(self.snp.left)
-//            make.right.equalTo(5)
-//            make.height.equalTo(10)
-//            make.width.equalTo(10)
-//        }
         settingsButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([settingsButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10), settingsButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -250), settingsButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 150),settingsButton.heightAnchor.constraint(equalToConstant: 15), settingsButton.widthAnchor.constraint(equalToConstant: 15)])
+        NSLayoutConstraint.activate([settingsButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10), settingsButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10),settingsButton.heightAnchor.constraint(equalToConstant: 40), settingsButton.widthAnchor.constraint(equalToConstant: 45)])
     }
     
     private func profilePictureConstraint(){
@@ -211,39 +175,10 @@ extension ProfileView{
         bioLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     }
     
-    private func eventsConstraint(){
-        addSubview(events)
-        events.translatesAutoresizingMaskIntoConstraints = false
-        events.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
-        events.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
-        events.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.3).isActive = true
-    }
-    
-    
-    private func editConstraint(){
-        addSubview(edit)
-        edit.translatesAutoresizingMaskIntoConstraints = false
-        edit.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 5).isActive = true
-        edit.leadingAnchor.constraint(equalTo: events.trailingAnchor, constant: 10).isActive = true
-        edit.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.08).isActive = true
-        edit.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.08).isActive = true
-    }
-    
-    private func signOutConstraint(){
-        addSubview(signOut)
-        signOut.translatesAutoresizingMaskIntoConstraints = false
-        signOut.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 5).isActive = true
-        signOut.leadingAnchor.constraint(equalTo: edit.trailingAnchor, constant: 15).isActive = true
-        signOut.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 10)
-        signOut.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.08).isActive = true
-        signOut.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.08).isActive = true
-        
-    }
-    
     private func bioConstraint(){
         addSubview(bio)
         bio.translatesAutoresizingMaskIntoConstraints = false
-        bio.bottomAnchor.constraint(equalTo: events.topAnchor, constant: -25).isActive = true
+        bio.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -25).isActive = true
         bio.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 35).isActive = true
         bio.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -35).isActive = true
         bio.topAnchor.constraint(equalTo: bioLabel.bottomAnchor, constant: 10).isActive = true
