@@ -19,6 +19,7 @@ class HomeController: UIViewController {
     }
     let introView = IntroView()
     let eventsView = EventsView()
+    let nearbyView = DiscoverView()
     let favoriteView = FavoritesView()
     let profileView = ProfileView()
     var eventCell = EventsCell()
@@ -125,6 +126,13 @@ class HomeController: UIViewController {
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
         contentView.addSubview(eventsView)
+        view.addSubview(contentView)
+    }
+    
+    func nearbyPageOn() {
+        contentView.removeFromSuperview()
+        contentView = UIView.init(frame: UIScreen.main.bounds)
+        contentView.addSubview(nearbyView)
         view.addSubview(contentView)
     }
     

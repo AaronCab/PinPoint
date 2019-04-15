@@ -45,7 +45,7 @@ class MenuController: UIViewController {
 }
 extension MenuController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 6
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier , for: indexPath) as! MenuOptionsCell
@@ -71,15 +71,18 @@ extension MenuController: UITableViewDataSource, UITableViewDelegate {
             delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .discover)
         }
         if indexPath.row == 1 {
-            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .favorites)
+            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .nearby)
         }
         if indexPath.row == 2 {
-            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .preferences)
+            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .favorites)
         }
         if indexPath.row == 3 {
-            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .messaging)
+            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .preferences)
         }
         if indexPath.row == 4 {
+            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .messaging)
+        }
+        if indexPath.row == 5 {
             delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .profile)
         }
     }

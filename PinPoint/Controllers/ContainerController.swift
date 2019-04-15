@@ -72,10 +72,10 @@ class ContainerController: UIViewController {
         switch menuOption {
         case .Discover:
             print("show discover")
-       // let introVC = IntroViewController()
+        case .Nearby:
+            print("show nearby events")
         case .Favorites:
             print("show favorites")
-      //  let eventsVC = EventsViewController()
         case .Messages:
             print("show messages")
         case .Preferences:
@@ -104,6 +104,8 @@ extension ContainerController: HomeControllerDelegate {
         switch menuCategories {
         case .discover:
             discover.eventsPageOn()
+        case.nearby:
+            discover.nearbyPageOn()
         case .favorites:
             discover.favoritesPageOn()
         case .preferences:
