@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class ProfileView: UIView {
     override init(frame: CGRect) {
@@ -111,6 +112,13 @@ class ProfileView: UIView {
         return button
     }()
     
+    var settingsButton: UIButton = {
+       let button = UIButton()
+        button.setImage(#imageLiteral(resourceName: "icons8-more-100-2"), for: .normal)
+        button.backgroundColor = .clear
+        return button 
+    }()
+    
     private func commonInit(){
         addGradient()
         profilePictureConstraint()
@@ -122,17 +130,31 @@ class ProfileView: UIView {
         signOutConstraint()
         bioLabelConstraint()
         bioConstraint()
-        
+        settingsButtonConstraint()
     }
     
 }
 
 extension ProfileView{
-    //
+    
+    private func settingsButtonConstraint() {
+        addSubview(settingsButton)
+//
+//        settingsButton.snp.makeConstraints { (make) in
+//            make.top.equalTo(self.snp.top).offset(5)
+//            make.left.equalTo(self.snp.left)
+//            make.right.equalTo(5)
+//            make.height.equalTo(10)
+//            make.width.equalTo(10)
+//        }
+        settingsButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([settingsButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10), settingsButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -250), settingsButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 150),settingsButton.heightAnchor.constraint(equalToConstant: 15), settingsButton.widthAnchor.constraint(equalToConstant: 15)])
+    }
+    
     private func profilePictureConstraint(){
         addSubview(profilePicture)
         profilePicture.translatesAutoresizingMaskIntoConstraints = false
-        profilePicture.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 11).isActive = true
+        profilePicture.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 21).isActive = true
         profilePicture.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.3 ).isActive = true
         profilePicture.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
@@ -191,18 +213,18 @@ extension ProfileView{
         edit.translatesAutoresizingMaskIntoConstraints = false
         edit.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 5).isActive = true
         edit.leadingAnchor.constraint(equalTo: events.trailingAnchor, constant: 10).isActive = true
-        edit.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.10).isActive = true
-        edit.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.10).isActive = true
+        edit.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.08).isActive = true
+        edit.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.08).isActive = true
     }
     
     private func signOutConstraint(){
         addSubview(signOut)
         signOut.translatesAutoresizingMaskIntoConstraints = false
         signOut.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 5).isActive = true
-        signOut.leadingAnchor.constraint(equalTo: edit.trailingAnchor, constant: 10).isActive = true
+        signOut.leadingAnchor.constraint(equalTo: edit.trailingAnchor, constant: 15).isActive = true
         signOut.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 10)
-        signOut.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.10).isActive = true
-        signOut.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.10).isActive = true
+        signOut.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.08).isActive = true
+        signOut.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.08).isActive = true
         
     }
     
