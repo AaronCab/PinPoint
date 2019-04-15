@@ -23,7 +23,7 @@ class HomeController: UIViewController {
     let profileView = ProfileView()
     var eventCell = EventsCell()
     let loginView = LoginView()
-    let interestsView = InterestView()
+    let messagesView = MessageView()
     let authService = AppDelegate.authservice
     var event = [Event](){
         didSet {
@@ -61,9 +61,7 @@ class HomeController: UIViewController {
         }
     }
     
-    
     var location = "Manhattan"
-
     var selectedImageValue: UIImage?
     var locationManager: CLLocationManager!
     var locationService = LocationService()
@@ -74,9 +72,6 @@ class HomeController: UIViewController {
         ip.delegate = self
         return ip
     }()
-    
-    
-    
     
     var delegate: HomeControllerDelegate?
     
@@ -114,8 +109,6 @@ class HomeController: UIViewController {
         
     }
     
-    
-    
     @objc func handleMenuToggle() {
         delegate?.handleMenuToggle(forMenuOption: nil, menuCategories: nil)
     }
@@ -129,7 +122,7 @@ class HomeController: UIViewController {
     func messagingPageOn() {
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
-        contentView.addSubview(interestsView)
+        contentView.addSubview(messagesView)
         view.addSubview(contentView)
     }
     func eventsPageOn() {
@@ -173,8 +166,6 @@ class HomeController: UIViewController {
 
 extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
    
-    
-
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == favoriteView.myCollectionView{
             return FavoritesDataManager.fetchItemsFromDocumentsDirectory().count
@@ -211,9 +202,9 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             cell.eventImageView.kf.indicatorType = .activity
             cell.moreInfoButton.tag = indexPath.row
             if currentEvent.imageUrl == nil{
-                cell.eventImageView.image = UIImage(named: "placeholder-image")
+                cell.eventImageView.image = UIImage(named: "pinpointred")
             }else{
-                cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.imageUrl)!), placeholder: UIImage(named: "placeholder-image"))
+                cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.imageUrl)!), placeholder: UIImage(named: "pinpointred"))
             }
             cell.moreInfoButton.addTarget(self, action: #selector(moreInfoFav), for: .touchUpInside)
             return cell
@@ -233,8 +224,6 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         alertController.addAction(cancelAction)
         alertController.addAction(favoriteActione)
         present(alertController, animated: true)
-        
-        
         
     }
     
