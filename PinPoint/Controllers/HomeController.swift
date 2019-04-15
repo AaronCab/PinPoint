@@ -80,7 +80,6 @@ class HomeController: UIViewController {
         super.viewWillAppear(animated)
         
     }
-
     
     private func viewdidLoadLayout(){
         view.backgroundColor = .white
@@ -160,7 +159,6 @@ class HomeController: UIViewController {
     }
 }
 
-
 extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -183,9 +181,9 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         cell.eventImageView.kf.indicatorType = .activity
         cell.moreInfoButton.tag = indexPath.row
         if currentEvent.logo?.original.url == nil{
-            cell.eventImageView.image = UIImage(named: "placeholder-image")
+            cell.eventImageView.image = UIImage(named: "pinpointred")
         }else{
-            cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.logo?.original.url)!), placeholder: UIImage(named: "placeholder-image"))
+            cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.logo?.original.url)!), placeholder: UIImage(named: "pinpointred"))
         }
         cell.moreInfoButton.addTarget(self, action: #selector(moreInfo), for: .touchUpInside)
         return cell
@@ -240,9 +238,8 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             let url = URL(string: favURL) else {
                 return
             }
-
+            
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
-   
         }
         alertController.addAction(safariAction)
         alertController.addAction(deleteAction)

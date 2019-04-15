@@ -34,6 +34,9 @@ class IntroView: UIView {
     var pictureOfUser: UIImageView = {
         var imageView = UIImageView()
         imageView.image = UIImage(named: "pinpointred")
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 20
+        imageView.layer.masksToBounds = true
         return imageView
     }()
     

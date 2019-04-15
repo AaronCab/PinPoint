@@ -13,6 +13,7 @@ class DetailView: UIView {
     
     lazy var image: UIImageView = {
         let image = UIImageView()
+        image.image = UIImage(named: "placeholder-image")
         return image
     }()
     lazy var label: UILabel = {
