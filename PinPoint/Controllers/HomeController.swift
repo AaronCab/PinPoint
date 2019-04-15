@@ -178,6 +178,7 @@ class HomeController: UIViewController {
         let rightBarItem = UIBarButtonItem(customView: profileView.settingsButton)
         profileView.settingsButton.addTarget(self, action: #selector(allCommands), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = rightBarItem
+
         // add right naviEgation item
     }
 }
@@ -417,8 +418,5 @@ extension HomeController: AuthServiceSignOutDelegate{
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(alert, animated: true)
-
     }
-    
 }
-
