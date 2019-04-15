@@ -94,6 +94,7 @@ class HomeController: UIViewController {
         introViewStuff()
         configureNavigationBar()
         getEvents()
+        profileViewControllerStuff()
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
@@ -372,5 +373,15 @@ extension HomeController{
 }
 
 extension HomeController{
+    
+    func profileViewControllerStuff(){
+        profileView.edit.addTarget(self, action: #selector(editProfile), for: .touchUpInside)
+    }
+    
+    
+    @objc func editProfile(){
+        let editVC = EditProfileViewController()
+        self.navigationController?.pushViewController(editVC, animated: true)
+    }
     
 }
