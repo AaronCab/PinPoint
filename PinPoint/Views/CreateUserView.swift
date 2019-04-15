@@ -50,7 +50,6 @@ class CreateUserView: UIView {
         let textfield = UITextField()
         textfield.backgroundColor = .white
         textfield.textColor = .red
-        textfield.layer.cornerRadius = 10
         textfield.placeholder = "Email"
         return textfield
     }()
@@ -59,7 +58,6 @@ class CreateUserView: UIView {
         let textfield = UITextField()
         textfield.backgroundColor = .white
         textfield.textColor = .red
-        textfield.layer.cornerRadius = 10
         textfield.placeholder = "Password"
         textfield.isSecureTextEntry = true
         return textfield
@@ -68,7 +66,6 @@ class CreateUserView: UIView {
     var displayName: UITextField = {
         let textfield = UITextField()
         textfield.backgroundColor = .white
-        textfield.layer.cornerRadius = 10
         textfield.textColor = .red
         textfield.placeholder = "Display Name"
         return textfield
@@ -90,52 +87,50 @@ class CreateUserView: UIView {
         return button
     }()
     
+    lazy var stackViewContainer: UIView = {
+        let vc = UIView()
+        vc.layer.cornerRadius = 10
+        vc.layer.masksToBounds = true
+        vc.backgroundColor = .clear
+        return vc
+    }()
     
-    
+    lazy var fieldContainerView:  UIStackView = {
+        let fv = UIStackView(arrangedSubviews: [displayName,
+                                                emailCreatedwith,
+                                                passwordCreatedWith ])
+        fv.axis = .vertical
+        fv.distribution = .fillEqually
+        fv.spacing = 2
+        fv.layer.masksToBounds = true
+        fv.layer.cornerRadius = 10
+        return fv
+    }()
     
     private func commonInit(){
-        emailCreatedWithContrant()
-        passwordCreatedWithConstant()
-        displayNameConstrant()
         addGradient()
         addSubview(cancel)
         addSubview(create)
         setUpView()
     }
+    
     private func setUpView() {
         self.addSubview(logo)
+        self.addSubview(stackViewContainer)
+        stackViewContainer.addSubview(fieldContainerView)
         logo.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.snp.centerX)
-            make.height.equalTo(self.snp.height).multipliedBy(0.7)
+            make.centerY.equalTo(self.snp.centerY).offset(-176)
         }
-        self.addSubview(emailCreatedwith)
-    }
-
-    private func emailCreatedWithContrant(){
-        addSubview(emailCreatedwith)
-        emailCreatedwith.translatesAutoresizingMaskIntoConstraints = false
-        emailCreatedwith.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
-        emailCreatedwith.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor, constant: 0).isActive = true
-        emailCreatedwith.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        emailCreatedwith.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
-    }
-    
-    private func passwordCreatedWithConstant(){
-        addSubview(passwordCreatedWith)
-        passwordCreatedWith.translatesAutoresizingMaskIntoConstraints = false
-        passwordCreatedWith.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
-        passwordCreatedWith.topAnchor.constraint(equalTo: emailCreatedwith.bottomAnchor, constant: 30).isActive = true
-        passwordCreatedWith.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        passwordCreatedWith.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
-    }
-    
-    private func displayNameConstrant(){
-        addSubview(displayName)
-        displayName.translatesAutoresizingMaskIntoConstraints = false
-        displayName.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
-        displayName.bottomAnchor.constraint(equalTo: emailCreatedwith.topAnchor, constant: -30).isActive = true
-        displayName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        displayName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
+        stackViewContainer.snp.makeConstraints { (make) in
+            make.left.equalTo(20)
+            make.right.equalTo(-20)
+            make.top.equalTo(logo.snp.bottom).offset(50)
+            make.height.equalTo(150)
+        }
+        fieldContainerView.snp.makeConstraints { (make) in
+            make.edges.equalTo(stackViewContainer)
+        }
     }
     
 }
