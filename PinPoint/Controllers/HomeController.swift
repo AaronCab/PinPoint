@@ -118,12 +118,14 @@ class HomeController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "hamburgerMenu").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMenuToggle))
     }
     func messagingPageOn() {
+        self.navigationItem.rightBarButtonItem = nil
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
         contentView.addSubview(messagesView)
         view.addSubview(contentView)
     }
     func eventsPageOn() {
+        self.navigationItem.rightBarButtonItem = nil
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
         contentView.addSubview(eventsView)
@@ -131,15 +133,16 @@ class HomeController: UIViewController {
     }
     
     func discoverPageOn() {
-        // Add right navigation item to add event
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
         contentView.addSubview(discoverView)
         view.addSubview(contentView)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "MyEvent!", style: .plain, target: nil, action: nil)
+
     }
     
     func preferencesPageOn() {
-        // remove it
+        self.navigationItem.rightBarButtonItem = nil
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
         contentView.addSubview(introView)
@@ -168,7 +171,7 @@ class HomeController: UIViewController {
             contentView.addSubview(profileView)
             view.addSubview(profileView)
         }
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "hello", style: .plain, target: nil, action: nil)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: nil, action: nil)
         // add right naviEgation item
     }
 }
@@ -369,7 +372,6 @@ extension HomeController{
         loginView.customEmailLogin.addTarget(self, action: #selector(loginWithExsistingAccount), for: .touchUpInside)
     }
     
-    
     @objc func createButton(){
         let createVC = CreateAccountViewController()
         self.navigationController?.pushViewController(createVC, animated: true)
@@ -387,7 +389,6 @@ extension HomeController{
     func profileViewControllerStuff(){
         profileView.settingsButton.addTarget(self, action: #selector(editProfile), for: .touchUpInside)
     }
-    
     
     @objc func editProfile(){
         let editVC = EditProfileViewController()
