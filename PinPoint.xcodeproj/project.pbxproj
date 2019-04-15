@@ -53,6 +53,8 @@
 		93088BF9225E55020067F09D /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BF8225E55020067F09D /* ProfileView.swift */; };
 		93088BFB225E715C0067F09D /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BFA225E715C0067F09D /* Location.swift */; };
 		9311D705226122D000AF2BC6 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9311D704226122D000AF2BC6 /* DetailView.swift */; };
+		9311D7072264D2F100AF2BC6 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9311D7062264D2F100AF2BC6 /* EditProfileViewController.swift */; };
+		9311D7092264D31D00AF2BC6 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9311D7082264D31D00AF2BC6 /* EditProfileView.swift */; };
 		9314F7792257B041009E0BB7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9314F7782257B041009E0BB7 /* AppDelegate.swift */; };
 		9314F77B2257B041009E0BB7 /* PinPointTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9314F77A2257B041009E0BB7 /* PinPointTabBarController.swift */; };
 		9314F7802257B043009E0BB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9314F77F2257B043009E0BB7 /* Assets.xcassets */; };
@@ -115,6 +117,8 @@
 		93088BF8225E55020067F09D /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		93088BFA225E715C0067F09D /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		9311D704226122D000AF2BC6 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		9311D7062264D2F100AF2BC6 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		9311D7082264D31D00AF2BC6 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		9314F7752257B041009E0BB7 /* PinPoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PinPoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9314F7782257B041009E0BB7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9314F77A2257B041009E0BB7 /* PinPointTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinPointTabBarController.swift; sourceTree = "<group>"; };
@@ -194,6 +198,7 @@
 				93088BEE225E542F0067F09D /* FavoritesViewController.swift */,
 				93088BF2225E54AF0067F09D /* CreatedViewController.swift */,
 				93088BF6225E54F30067F09D /* ProfileViewController.swift */,
+				9311D7062264D2F100AF2BC6 /* EditProfileViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -211,6 +216,7 @@
 				93088BF4225E54C30067F09D /* CreatedView.swift */,
 				93088BF8225E55020067F09D /* ProfileView.swift */,
 				9311D704226122D000AF2BC6 /* DetailView.swift */,
+				9311D7082264D31D00AF2BC6 /* EditProfileView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -475,8 +481,10 @@
 				93088BA7225B97C10067F09D /* IBDesignable.swift in Sources */,
 				93088BDF225E3D620067F09D /* IntroView.swift in Sources */,
 				93088BED225E42150067F09D /* FileManagerHelper.swift in Sources */,
+				9311D7072264D2F100AF2BC6 /* EditProfileViewController.swift in Sources */,
 				9311D705226122D000AF2BC6 /* DetailView.swift in Sources */,
 				93088BAF225B9B370067F09D /* Poster.swift in Sources */,
+				9311D7092264D31D00AF2BC6 /* EditProfileView.swift in Sources */,
 				93088BCD225BB1680067F09D /* MenuController.swift in Sources */,
 				93088BDB225E3A0D0067F09D /* EventsView.swift in Sources */,
 				93088BAD225B9B270067F09D /* EventPost.swift in Sources */,
