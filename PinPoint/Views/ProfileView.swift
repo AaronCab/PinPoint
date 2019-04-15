@@ -34,7 +34,6 @@ class ProfileView: UIView {
     
     var profilePicture: UIImageView = {
         let imageView = UIImageView()
-
         return imageView
     }()
     
