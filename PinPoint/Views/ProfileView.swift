@@ -19,7 +19,7 @@ class ProfileView: UIView {
         super.init(coder: aDecoder)
         commonInit()
     }
-
+    
     
     private var gradient: CAGradientLayer!
     
@@ -32,9 +32,8 @@ class ProfileView: UIView {
         self.layer.insertSublayer(gradient, at: 0)
     }
     
-    var profilePicture: UIImageView = {
-        let imageView = UIImageView()
-
+    var profilePicture: CircularImageView = {
+        let imageView = CircularImageView()
         return imageView
     }()
     
@@ -55,7 +54,7 @@ class ProfileView: UIView {
         label.font = UIFont.init(name: "futura", size: 14)
         label.text = " E M A I L"
         label.font = UIFont.systemFont(ofSize: 14, weight: .light)
-
+        
         return label
     }()
     
@@ -66,7 +65,7 @@ class ProfileView: UIView {
         label.font = UIFont.init(name: "futura", size: 14)
         label.font = UIFont.systemFont(ofSize: 14, weight: .light)
         label.text = " N A M E"
-
+        
         return label
     }()
     
@@ -90,17 +89,18 @@ class ProfileView: UIView {
     
     var signOut: UIButton = {
         let button = UIButton()
-        button.setTitle("SIGN OUT", for: .normal)
+      //  button.setTitle("Sign Out", for: .normal)
+        button.setImage(#imageLiteral(resourceName: "icons8-exit-100"), for: .normal)
         button.setTitleColor(.red, for: .normal)
-        button.backgroundColor = .white
+        button.backgroundColor = .clear
         return button
     }()
     
     var edit: UIButton = {
         let button = UIButton()
-        button.setTitle("Edit", for: .normal)
+        button.setImage(#imageLiteral(resourceName: "icons8-compose-100"), for: .normal)
         button.setTitleColor(.red, for: .normal)
-        button.backgroundColor = .white
+        button.backgroundColor = .clear
         return button
     }()
     
@@ -108,40 +108,40 @@ class ProfileView: UIView {
         let button = UIButton()
         button.setTitle("User Events", for: .normal)
         button.setTitleColor(.red, for: .normal)
-        button.backgroundColor = .white
+        button.backgroundColor = .clear
         return button
     }()
     
     private func commonInit(){
         addGradient()
-        profilePictureConstrant()
-        displayNameConstrant()
-        nameConstrant()
-        eventsConstrant()
-        emailConstrant()
-        editConstrant()
-        signOutConstrant()
-        bioLabelConstrant()
-        bioConstrant()
-
+        profilePictureConstraint()
+        displayNameConstraint()
+        nameConstraint()
+        eventsConstraint()
+        emailConstraint()
+        editConstraint()
+        signOutConstraint()
+        bioLabelConstraint()
+        bioConstraint()
+        
     }
     
 }
 
 extension ProfileView{
-//
-    private func profilePictureConstrant(){
+    //
+    private func profilePictureConstraint(){
         addSubview(profilePicture)
         profilePicture.translatesAutoresizingMaskIntoConstraints = false
         profilePicture.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 11).isActive = true
         profilePicture.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.3 ).isActive = true
         profilePicture.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
-        profilePicture.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 35).isActive = true
-        profilePicture.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -35).isActive = true
+        profilePicture.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 92).isActive = true
+        profilePicture.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -92).isActive = true
     }
     
-    private func displayNameConstrant(){
+    private func displayNameConstraint(){
         addSubview(displayName)
         displayName.translatesAutoresizingMaskIntoConstraints = false
         displayName.topAnchor.constraint(equalTo: profilePicture.bottomAnchor, constant: 20).isActive = true
@@ -150,9 +150,7 @@ extension ProfileView{
         displayName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -35).isActive = true
     }
     
-
-    
-    private func nameConstrant(){
+    private func nameConstraint(){
         addSubview(name)
         name.translatesAutoresizingMaskIntoConstraints = false
         name.topAnchor.constraint(equalTo: displayName.bottomAnchor, constant: 15).isActive = true
@@ -162,7 +160,7 @@ extension ProfileView{
         name.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -35).isActive = true
     }
     
-    private func emailConstrant(){
+    private func emailConstraint(){
         addSubview(email)
         email.translatesAutoresizingMaskIntoConstraints = false
         email.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 15).isActive = true
@@ -172,15 +170,15 @@ extension ProfileView{
         email.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -35).isActive = true
     }
     
-    private func bioLabelConstrant(){
+    private func bioLabelConstraint(){
         addSubview(bioLabel)
         bioLabel.translatesAutoresizingMaskIntoConstraints = false
-        bioLabel.topAnchor.constraint(equalTo: email.bottomAnchor, constant: 15).isActive = true
+        bioLabel.topAnchor.constraint(equalTo: email.bottomAnchor, constant: 10).isActive = true
         bioLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
         bioLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     }
     
-    private func eventsConstrant(){
+    private func eventsConstraint(){
         addSubview(events)
         events.translatesAutoresizingMaskIntoConstraints = false
         events.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
@@ -189,30 +187,33 @@ extension ProfileView{
     }
     
     
-    private func editConstrant(){
+    private func editConstraint(){
         addSubview(edit)
         edit.translatesAutoresizingMaskIntoConstraints = false
-        edit.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+        edit.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 5).isActive = true
         edit.leadingAnchor.constraint(equalTo: events.trailingAnchor, constant: 10).isActive = true
-        edit.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.3).isActive = true
+        edit.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.10).isActive = true
+        edit.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.10).isActive = true
     }
     
-    private func signOutConstrant(){
+    private func signOutConstraint(){
         addSubview(signOut)
         signOut.translatesAutoresizingMaskIntoConstraints = false
-        signOut.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+        signOut.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 5).isActive = true
         signOut.leadingAnchor.constraint(equalTo: edit.trailingAnchor, constant: 10).isActive = true
-        signOut.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.3).isActive = true
+        signOut.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 10)
+        signOut.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.10).isActive = true
+        signOut.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.10).isActive = true
         
     }
     
-    private func bioConstrant(){
+    private func bioConstraint(){
         addSubview(bio)
         bio.translatesAutoresizingMaskIntoConstraints = false
-        bio.bottomAnchor.constraint(equalTo: events.topAnchor, constant: -10).isActive = true
+        bio.bottomAnchor.constraint(equalTo: events.topAnchor, constant: -25).isActive = true
         bio.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 35).isActive = true
         bio.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -35).isActive = true
-        bio.topAnchor.constraint(equalTo: bioLabel.bottomAnchor, constant: 25).isActive = true
+        bio.topAnchor.constraint(equalTo: bioLabel.bottomAnchor, constant: 10).isActive = true
         
     }
     
