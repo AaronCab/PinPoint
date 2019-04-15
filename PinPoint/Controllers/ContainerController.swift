@@ -115,7 +115,7 @@ extension ContainerController: HomeControllerDelegate {
         case .profile:
             discover.profilePageOn()
         default:
-            print("No Other VC")
+            print("nothing is happening")
         }
     }
 }
