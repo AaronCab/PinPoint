@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+ class AppDelegate: UIResponder, UIApplicationDelegate {
     static var authservice = AuthService()
     var window: UIWindow?
 

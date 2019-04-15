@@ -37,6 +37,7 @@ struct ProfileCollectionKeys {
     static let JoinedDateKey = "joinedDate"
     static let BioKey = "bio"
     static let FriendsKey = "friendsKey"
+    static let PhotoBucket = "photoBucket"
 }
 
 
