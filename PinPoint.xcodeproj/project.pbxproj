@@ -66,6 +66,8 @@
 		93BFA6FF225F98F10074FD34 /* FavoritesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BFA6FE225F98F10074FD34 /* FavoritesModel.swift */; };
 		93BFA701225F9A760074FD34 /* FavoritesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BFA700225F9A750074FD34 /* FavoritesDataManager.swift */; };
 		93BFA703225FC5E90074FD34 /* LoggedInUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BFA702225FC5E90074FD34 /* LoggedInUserModel.swift */; };
+		93FF2FB42264FF2500A350E2 /* BioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FF2FB32264FF2500A350E2 /* BioView.swift */; };
+		93FF2FB62264FF3800A350E2 /* BioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FF2FB52264FF3800A350E2 /* BioViewController.swift */; };
 		94F65BFC0759B9FC879F0B3A /* Pods_PinPoint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E6346C23E7AB50CCD79EA1B /* Pods_PinPoint.framework */; };
 /* End PBXBuildFile section */
 
@@ -134,6 +136,8 @@
 		93BFA6FE225F98F10074FD34 /* FavoritesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesModel.swift; sourceTree = "<group>"; };
 		93BFA700225F9A750074FD34 /* FavoritesDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesDataManager.swift; sourceTree = "<group>"; };
 		93BFA702225FC5E90074FD34 /* LoggedInUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInUserModel.swift; sourceTree = "<group>"; };
+		93FF2FB32264FF2500A350E2 /* BioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioView.swift; sourceTree = "<group>"; };
+		93FF2FB52264FF3800A350E2 /* BioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +208,7 @@
 				93088BF6225E54F30067F09D /* ProfileViewController.swift */,
 				9311D7062264D2F100AF2BC6 /* EditProfileViewController.swift */,
 				9311D70C2264DF8100AF2BC6 /* DiscoverViewController.swift */,
+				93FF2FB52264FF3800A350E2 /* BioViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -223,6 +228,7 @@
 				9311D704226122D000AF2BC6 /* DetailView.swift */,
 				9311D7082264D31D00AF2BC6 /* EditProfileView.swift */,
 				9311D70A2264DF6C00AF2BC6 /* DiscoverView.swift */,
+				93FF2FB32264FF2500A350E2 /* BioView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -461,6 +467,7 @@
 				93088BD5225BD2B70067F09D /* EventsModel.swift in Sources */,
 				93088BD7225E39AD0067F09D /* EventsViewController.swift in Sources */,
 				93088BF1225E54430067F09D /* FavoritesView.swift in Sources */,
+				93FF2FB62264FF3800A350E2 /* BioViewController.swift in Sources */,
 				93088BE1225E3D7E0067F09D /* InterestViewController.swift in Sources */,
 				93088BF7225E54F30067F09D /* ProfileViewController.swift in Sources */,
 				93088BA3225B96970067F09D /* UIViewController+Navigation.swift in Sources */,
@@ -496,6 +503,7 @@
 				93088BCD225BB1680067F09D /* MenuController.swift in Sources */,
 				93088BDB225E3A0D0067F09D /* EventsView.swift in Sources */,
 				93088BAD225B9B270067F09D /* EventPost.swift in Sources */,
+				93FF2FB42264FF2500A350E2 /* BioView.swift in Sources */,
 				93088BC6225BB10D0067F09D /* ContainerController.swift in Sources */,
 				93088BA9225B9A520067F09D /* StorageService.swift in Sources */,
 				93088BB4225BA6580067F09D /* LoginViewController.swift in Sources */,

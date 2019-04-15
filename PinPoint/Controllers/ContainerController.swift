@@ -106,6 +106,9 @@ extension ContainerController: HomeControllerDelegate {
             homeController.eventsPageOn()
         case.nearby:
             homeController.nearbyPageOn()
+            discover.discoverPageOn()
+        case.nearby:
+            discover.eventsPageOn()
         case .favorites:
             homeController.favoritesPageOn()
         case .preferences:
@@ -115,7 +118,7 @@ extension ContainerController: HomeControllerDelegate {
         case .profile:
             homeController.profilePageOn()
         default:
-            print("No Other VC")
+            print("nothing is happening")
         }
     }
 }

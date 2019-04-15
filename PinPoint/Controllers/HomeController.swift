@@ -19,7 +19,7 @@ class HomeController: UIViewController {
     }
     let introView = IntroView()
     let eventsView = EventsView()
-    let nearbyView = DiscoverView()
+    let discoverView = DiscoverView()
     let favoriteView = FavoritesView()
     let profileView = ProfileView()
     var eventCell = EventsCell()
@@ -46,7 +46,7 @@ class HomeController: UIViewController {
             introView.locationButton.setTitle(location, for: .normal)
             getEvents()
             locationManager.stopUpdatingLocation()
-
+            
         }
     }
     private func getEvents(){
@@ -94,6 +94,7 @@ class HomeController: UIViewController {
         introViewStuff()
         configureNavigationBar()
         getEvents()
+        profileViewControllerStuff()
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
@@ -129,10 +130,10 @@ class HomeController: UIViewController {
         view.addSubview(contentView)
     }
     
-    func nearbyPageOn() {
+    func discoverPageOn() {
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
-        contentView.addSubview(nearbyView)
+        contentView.addSubview(discoverView)
         view.addSubview(contentView)
     }
     
@@ -147,7 +148,7 @@ class HomeController: UIViewController {
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
         loadFavorites()
-
+        
         contentView.addSubview(favoriteView)
         view.addSubview(contentView)
     }
@@ -168,7 +169,7 @@ class HomeController: UIViewController {
 }
 
 extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
-   
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == favoriteView.myCollectionView{
             return FavoritesDataManager.fetchItemsFromDocumentsDirectory().count
@@ -179,22 +180,22 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == eventsView.myCollectionView {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? EventsCell else { return UICollectionViewCell() }
-        let currentEvent = event[indexPath.row]
-        cell.eventDescription.text = currentEvent.description?.text
-        cell.eventStartTime.text = "Start time: \(currentEvent.start?.utc.formatISODateString(dateFormat: "MMM d, h:mm a") ?? "no start time found")"
-        cell.eventEndTime.text = "End Time: \(currentEvent.end?.utc.formatISODateString(dateFormat: "MMM d, h:mm a") ?? "no end time found")"
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? EventsCell else { return UICollectionViewCell() }
+            let currentEvent = event[indexPath.row]
+            cell.eventDescription.text = currentEvent.description?.text
+            cell.eventStartTime.text = "Start time: \(currentEvent.start?.utc.formatISODateString(dateFormat: "MMM d, h:mm a") ?? "no start time found")"
+            cell.eventEndTime.text = "End Time: \(currentEvent.end?.utc.formatISODateString(dateFormat: "MMM d, h:mm a") ?? "no end time found")"
             
-        cell.eventName.text = currentEvent.name?.text
-        cell.eventImageView.kf.indicatorType = .activity
-        cell.moreInfoButton.tag = indexPath.row
-        if currentEvent.logo?.original.url == nil{
-            cell.eventImageView.image = UIImage(named: "pinpointred")
-        }else{
-            cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.logo?.original.url)!), placeholder: UIImage(named: "pinpointred"))
-        }
-        cell.moreInfoButton.addTarget(self, action: #selector(moreInfo), for: .touchUpInside)
-        return cell
+            cell.eventName.text = currentEvent.name?.text
+            cell.eventImageView.kf.indicatorType = .activity
+            cell.moreInfoButton.tag = indexPath.row
+            if currentEvent.logo?.original.url == nil{
+                cell.eventImageView.image = UIImage(named: "pinpointred")
+            }else{
+                cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.logo?.original.url)!), placeholder: UIImage(named: "pinpointred"))
+            }
+            cell.moreInfoButton.addTarget(self, action: #selector(moreInfo), for: .touchUpInside)
+            return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoritesCell", for: indexPath) as? FavoritesCell else { return UICollectionViewCell() }
             let currentEvent = FavoritesDataManager.fetchItemsFromDocumentsDirectory()[indexPath.row]
@@ -212,7 +213,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             cell.moreInfoButton.addTarget(self, action: #selector(moreInfoFav), for: .touchUpInside)
             return cell
         }
-       
+        
     }
     @objc func moreInfo(senderTag: UIButton){
         
@@ -238,13 +239,13 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
                 self.deleteFavorite(senderTag: senderTag)
                 self.favoriteView.myCollectionView.reloadData()
             })
-
+            
         }
         let safariAction = UIAlertAction(title: "Safari", style: .default) { alert in
             let favorite = FavoritesDataManager.fetchItemsFromDocumentsDirectory()[senderTag.tag]
             guard let favURL = favorite.url,
-            let url = URL(string: favURL) else {
-                return
+                let url = URL(string: favURL) else {
+                    return
             }
             
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -260,7 +261,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         let favoriteArticle = favoriteEvents[senderTag.tag]
         FavoritesDataManager.deleteItem(atIndex: senderTag.tag, item: favoriteArticle)
     }
-
+    
 }
 
 extension HomeController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
@@ -338,7 +339,7 @@ extension HomeController{
     
     
     @objc func locationFinder(){
-
+        
         locationManager.startUpdatingLocation()
         
         locationService.getCoordinate(addressString: location) { (locationFound, error) in
@@ -349,7 +350,7 @@ extension HomeController{
                 self.lat = locationFound.latitude
                 self.long = locationFound.longitude
                 self.locationManager.stopUpdatingLocation()
-
+                
             }
         }
         
@@ -377,5 +378,15 @@ extension HomeController{
 }
 
 extension HomeController{
+    
+    func profileViewControllerStuff(){
+        profileView.edit.addTarget(self, action: #selector(editProfile), for: .touchUpInside)
+    }
+    
+    
+    @objc func editProfile(){
+        let editVC = EditProfileViewController()
+        self.navigationController?.pushViewController(editVC, animated: true)
+    }
     
 }
