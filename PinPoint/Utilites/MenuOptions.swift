@@ -10,6 +10,7 @@ import UIKit
 
 enum MenuOption: Int, CustomStringConvertible {
     case Discover
+    case Nearby
     case Favorites
     case Preferences
     case Messages
@@ -18,6 +19,7 @@ enum MenuOption: Int, CustomStringConvertible {
     var description: String {
         switch self {
         case .Discover: return "Discover"
+        case .Nearby: return "Nearby"
         case .Favorites: return "Favorites"
         case .Preferences: return "Preferences"
         case .Messages: return "Messages"
@@ -29,6 +31,7 @@ enum MenuOption: Int, CustomStringConvertible {
     var image: UIImage  {
         switch self {
         case .Discover: return UIImage(named: "icons8-today-240.png") ?? UIImage()
+        case .Nearby: return UIImage(named: "icons8-map-80") ?? UIImage()
         case .Favorites: return UIImage(named: "icons8-star-80.png") ?? UIImage()
         case .Preferences: return UIImage(named: "icons8-map-pinpoint-80.png") ?? UIImage()
         case .Messages: return UIImage(named: "icons8-chat-51") ?? UIImage()
