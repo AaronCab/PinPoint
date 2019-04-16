@@ -241,6 +241,14 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             return cell
         }
         
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let eventDVC = DetailViewController()
+        eventDVC.event = event[indexPath.row]
+        self.navigationController?.pushViewController(eventDVC, animated: true)
+
     }
     @objc func moreInfo(senderTag: UIButton){
         
