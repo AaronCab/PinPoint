@@ -40,7 +40,7 @@ class PreferencesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(preferencesView)
-        preferencesView.pictureButton.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
+        //preferencesView.pictureButton.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
         preferencesView.locationButton.addTarget(self, action: #selector(locationFinder), for: .touchUpInside)
         self.locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
@@ -99,7 +99,7 @@ extension PreferencesViewController: UIImagePickerControllerDelegate, UINavigati
         }
         let resizedImage = Toucan.init(image: originalImage).resize(CGSize(width: 500, height: 500))
         selectedImageValue = resizedImage.image
-        preferencesView.pictureOfUser.image = resizedImage.image
+        //preferencesView.pictureOfUser.image = resizedImage.image
         dismiss(animated: true)
     }
 }
