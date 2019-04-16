@@ -37,8 +37,8 @@
 		93088BD7225E39AD0067F09D /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BD6225E39AD0067F09D /* EventsViewController.swift */; };
 		93088BD9225E39F80067F09D /* EventsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BD8225E39F80067F09D /* EventsCell.swift */; };
 		93088BDB225E3A0D0067F09D /* EventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BDA225E3A0D0067F09D /* EventsView.swift */; };
-		93088BDD225E3D490067F09D /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BDC225E3D490067F09D /* IntroViewController.swift */; };
-		93088BDF225E3D620067F09D /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BDE225E3D620067F09D /* IntroView.swift */; };
+		93088BDD225E3D490067F09D /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BDC225E3D490067F09D /* PreferencesViewController.swift */; };
+		93088BDF225E3D620067F09D /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BDE225E3D620067F09D /* PreferencesView.swift */; };
 		93088BE1225E3D7E0067F09D /* InterestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BE0225E3D7E0067F09D /* InterestViewController.swift */; };
 		93088BE3225E3DAA0067F09D /* InterestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BE2225E3DAA0067F09D /* InterestView.swift */; };
 		93088BE5225E3DD00067F09D /* InterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BE4225E3DD00067F09D /* InterestCell.swift */; };
@@ -107,8 +107,8 @@
 		93088BD6225E39AD0067F09D /* EventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		93088BD8225E39F80067F09D /* EventsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsCell.swift; sourceTree = "<group>"; };
 		93088BDA225E3A0D0067F09D /* EventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsView.swift; sourceTree = "<group>"; };
-		93088BDC225E3D490067F09D /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
-		93088BDE225E3D620067F09D /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
+		93088BDC225E3D490067F09D /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		93088BDE225E3D620067F09D /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		93088BE0225E3D7E0067F09D /* InterestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestViewController.swift; sourceTree = "<group>"; };
 		93088BE2225E3DAA0067F09D /* InterestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestView.swift; sourceTree = "<group>"; };
 		93088BE4225E3DD00067F09D /* InterestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestCell.swift; sourceTree = "<group>"; };
@@ -205,7 +205,7 @@
 				93088BCA225BB1570067F09D /* HomeController.swift */,
 				93088BCC225BB1680067F09D /* MenuController.swift */,
 				93088BD6225E39AD0067F09D /* EventsViewController.swift */,
-				93088BDC225E3D490067F09D /* IntroViewController.swift */,
+				93088BDC225E3D490067F09D /* PreferencesViewController.swift */,
 				93088BE0225E3D7E0067F09D /* InterestViewController.swift */,
 				93088BEE225E542F0067F09D /* FavoritesViewController.swift */,
 				93088BF2225E54AF0067F09D /* CreatedViewController.swift */,
@@ -225,7 +225,7 @@
 				93088BBB225BA70A0067F09D /* CreateUserView.swift */,
 				93088BBD225BA7200067F09D /* AccountExistingView.swift */,
 				93088BDA225E3A0D0067F09D /* EventsView.swift */,
-				93088BDE225E3D620067F09D /* IntroView.swift */,
+				93088BDE225E3D620067F09D /* PreferencesView.swift */,
 				93088BE2225E3DAA0067F09D /* InterestView.swift */,
 				93088BF0225E54430067F09D /* FavoritesView.swift */,
 				93088BF4225E54C30067F09D /* CreatedView.swift */,
@@ -499,7 +499,7 @@
 				93088BD9225E39F80067F09D /* EventsCell.swift in Sources */,
 				93088BF3225E54AF0067F09D /* CreatedViewController.swift in Sources */,
 				93088BA7225B97C10067F09D /* IBDesignable.swift in Sources */,
-				93088BDF225E3D620067F09D /* IntroView.swift in Sources */,
+				93088BDF225E3D620067F09D /* PreferencesView.swift in Sources */,
 				93FF2FB82266298400A350E2 /* DetailViewController.swift in Sources */,
 				93088BED225E42150067F09D /* FileManagerHelper.swift in Sources */,
 				9311D7072264D2F100AF2BC6 /* EditProfileViewController.swift in Sources */,
@@ -524,6 +524,7 @@
 				93088BEB225E41D80067F09D /* UserModel.swift in Sources */,
 				93088BA5225B972E0067F09D /* AuthService.swift in Sources */,
 				93088BD3225BD2360067F09D /* APIClient.swift in Sources */,
+				93088BDD225E3D490067F09D /* PreferencesViewController.swift in Sources */,
 				93088BDD225E3D490067F09D /* IntroViewController.swift in Sources */,
 				93FF2FBA2266346500A350E2 /* CategoryCell.swift in Sources */,
 			);

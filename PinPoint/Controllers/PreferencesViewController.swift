@@ -10,13 +10,13 @@ import UIKit
 import Toucan
 import CoreLocation
 
-class IntroViewController: UIViewController {
+class PreferencesViewController: UIViewController {
     
-    var introView = IntroView()
+    var preferencesView = PreferencesView()
     
     var currentLocation: CLLocation! {
         didSet{
-            introView.locationButton.setTitle(location, for: .normal)
+            preferencesView.locationButton.setTitle(location, for: .normal)
         }
     }
     var locationManager = CLLocationManager()
@@ -39,9 +39,9 @@ class IntroViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(introView)
-        introView.pictureButton.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
-        introView.locationButton.addTarget(self, action: #selector(locationFinder), for: .touchUpInside)
+        view.addSubview(preferencesView)
+        preferencesView.pictureButton.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
+        preferencesView.locationButton.addTarget(self, action: #selector(locationFinder), for: .touchUpInside)
         self.locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
@@ -87,7 +87,7 @@ class IntroViewController: UIViewController {
 
 
 
-extension IntroViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+extension PreferencesViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true)
     }
@@ -99,19 +99,19 @@ extension IntroViewController: UIImagePickerControllerDelegate, UINavigationCont
         }
         let resizedImage = Toucan.init(image: originalImage).resize(CGSize(width: 500, height: 500))
         selectedImageValue = resizedImage.image
-        introView.pictureOfUser.image = resizedImage.image
+        preferencesView.pictureOfUser.image = resizedImage.image
         dismiss(animated: true)
     }
 }
 
-extension IntroViewController: UITextFieldDelegate{
+extension PreferencesViewController: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
 }
 
-extension IntroViewController: CLLocationManagerDelegate {
+extension PreferencesViewController: CLLocationManagerDelegate {
     
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

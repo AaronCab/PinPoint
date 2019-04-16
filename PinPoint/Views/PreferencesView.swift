@@ -8,7 +8,7 @@
 
 import UIKit
 
-class IntroView: UIView {
+class PreferencesView: UIView {
 
     private var gradient: CAGradientLayer!
     
