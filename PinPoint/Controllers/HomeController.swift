@@ -147,8 +147,9 @@ class HomeController: UIViewController {
         contentView.addSubview(discoverView)
         view.addSubview(contentView)
         self.navigationItem.title = "D I S C O V E R"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "MyEvent!", style: .plain, target: nil, action: nil)
-        self.navigationItem.rightBarButtonItem?.tintColor = .black
+        let rightBarItem = UIBarButtonItem(customView: discoverView.addEventButton)
+        discoverView.addEventButton.addTarget(self, action: #selector(addEventCommand), for: .touchUpInside)
+        self.navigationItem.rightBarButtonItem = rightBarItem
 
     }
     
@@ -438,6 +439,10 @@ extension HomeController: AuthServiceSignOutDelegate{
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(alert, animated: true)
+    }
+    @objc func addEventCommand(){
+        let createVC = CreatedViewController()
+        self.navigationController?.pushViewController(createVC, animated: true)
     }
 }
 

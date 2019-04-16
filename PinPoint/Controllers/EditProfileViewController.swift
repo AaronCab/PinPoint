@@ -66,30 +66,22 @@ class EditProfileViewController: UIViewController {
     return
     }
     
-    guard var displayName = editProfile.displayName.text,
-        var firstName = editProfile.firstName.text,
-        var lastName = editProfile.lastName.text,
-        var bio = editProfile.bio.title(for: .normal) else{
-            self.showAlert(title: "error", message: nil)
+    guard let displayName = editProfile.displayName.text,
+        !displayName.isEmpty,
+        let firstName = editProfile.firstName.text,
+        !firstName.isEmpty,
+        let lastName = editProfile.lastName.text,
+         !lastName.isEmpty,
+        let bio = editProfile.bio.titleLabel?.text,
+        !bio.isEmpty else {
+            showAlert(title: "Empty Fields", message: nil)
             return
         }
-    if displayName.isEmpty || displayName == ""{
-    displayName = self.user.displayName
-    }
-    if firstName.isEmpty || firstName == ""{
-        firstName = self.user.firstName ?? "FirstName"
-    }
-        if lastName.isEmpty || lastName == ""{
-            lastName = self.user.lastName ?? "LastName"
-        }
-        
-    if bio.isEmpty || bio == ""{
-    bio = self.user.bio ?? "Bio"
-    }
+
     
     if let user = authService.getCurrentUser(){
     
-    StorageService.postImage(imageData: imageDataforProfile, imageName: ProfileCollectionKeys.PhotoBucket) { (error, url) in
+    StorageService.postImage(imageData: imageDataforProfile, imageName: ProfileCollectionKeys.PhotoURLKey) { (error, url) in
     if let error = error{
         self.showAlert(title: "error", message: error.localizedDescription)
         

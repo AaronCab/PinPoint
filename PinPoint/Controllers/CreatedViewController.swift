@@ -9,22 +9,25 @@
 import UIKit
 
 class CreatedViewController: UIViewController {
-
+    var createdEvent = CreatedView()
+    var authService = AppDelegate.authservice
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        view.addSubview(createdEvent)
+        let leftBarItem = UIBarButtonItem(customView: createdEvent.cancel)
+        createdEvent.cancel.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
+        self.navigationItem.leftBarButtonItem = leftBarItem
+        let rightBarItem = UIBarButtonItem(customView: createdEvent.create)
+//        createdEvent.create.addTarget(self, action: #selector(createProfile), for: .touchUpInside)
+        self.navigationItem.rightBarButtonItem = rightBarItem
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc func dismissView(){
+        navigationController?.popViewController(animated: true)
     }
-    */
+   
+
 
 }
