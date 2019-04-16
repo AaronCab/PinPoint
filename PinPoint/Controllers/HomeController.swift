@@ -98,7 +98,7 @@ class HomeController: UIViewController {
         favoriteView.myCollectionView.dataSource = self
         locationManager = CLLocationManager()
         loginViewStuff()
-        preferencesView()
+        preferencesViewStuff()
         configureNavigationBar()
         getEvents()
         authService.authserviceSignOutDelegate = self
@@ -350,7 +350,7 @@ extension HomeController: CLLocationManagerDelegate {
 
 extension HomeController{
     
-    func preferencesView(){
+    func preferencesViewStuff(){
         preferencesView.pictureButton.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
         preferencesView.locationButton.addTarget(self, action: #selector(locationFinder), for: .touchUpInside)
     }
