@@ -29,10 +29,17 @@ class DiscoverView: UIView {
         super.init(coder: aDecoder)
         commonInit()
     }
+    var addEventButton: UIButton = {
+        let button = UIButton()
+        button.setImage(#imageLiteral(resourceName: "icons8-create-25"), for: .normal)
+        button.backgroundColor = .clear
+        return button
+    }()
     private func commonInit(){
         backgroundColor = .white
         self.discoverCollectionView.register(InterestCell.self, forCellWithReuseIdentifier: "InterestCell")
         setup()
+        addEventButtonConstraint()
     }
     
     private func setup() {
@@ -44,4 +51,14 @@ class DiscoverView: UIView {
         discoverCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         discoverCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
     }
+    
 }
+extension DiscoverView{
+    
+    private func addEventButtonConstraint() {
+        addSubview(addEventButton)
+        addEventButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([addEventButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10), addEventButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10),addEventButton.heightAnchor.constraint(equalToConstant: 40), addEventButton.widthAnchor.constraint(equalToConstant: 45)])
+    }
+}
+
