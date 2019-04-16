@@ -33,9 +33,9 @@ class CreatedView: UIView {
         button.isEnabled = true
         return button
     }()
-    var createdPicture: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "placeholder-image")
+    var createdPicture: UIButton = {
+        let imageView = UIButton()
+        imageView.setImage(UIImage(named: "placeholder-image"), for: .normal)
         return imageView
     }()
 
