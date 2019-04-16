@@ -128,6 +128,7 @@ class HomeController: UIViewController {
         self.navigationItem.rightBarButtonItem = nil
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
+        self.navigationItem.title = "M E S S A G E S"
         contentView.addSubview(messagesView)
         view.addSubview(contentView)
     }
@@ -135,6 +136,7 @@ class HomeController: UIViewController {
         self.navigationItem.rightBarButtonItem = nil
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
+        self.navigationItem.title = "N E A R B Y  E V E N T S"
         contentView.addSubview(eventsView)
         view.addSubview(contentView)
     }
@@ -144,6 +146,7 @@ class HomeController: UIViewController {
         contentView = UIView.init(frame: UIScreen.main.bounds)
         contentView.addSubview(discoverView)
         view.addSubview(contentView)
+        self.navigationItem.title = "D I S C O V E R"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "MyEvent!", style: .plain, target: nil, action: nil)
         self.navigationItem.rightBarButtonItem?.tintColor = .black
 
@@ -153,6 +156,7 @@ class HomeController: UIViewController {
         self.navigationItem.rightBarButtonItem = nil
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
+        self.navigationItem.title = "P R E F E R E N C E S"
         contentView.addSubview(introView)
         view.addSubview(contentView)
     }
@@ -162,6 +166,7 @@ class HomeController: UIViewController {
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
         loadFavorites()
+        self.navigationItem.title = "F A V O R I T E S"
         
         contentView.addSubview(favoriteView)
         view.addSubview(contentView)
@@ -170,12 +175,14 @@ class HomeController: UIViewController {
         if authService.getCurrentUser() == nil{
             contentView.removeFromSuperview()
             contentView = UIView.init(frame: UIScreen.main.bounds)
+            self.navigationItem.title = "P R O F I L E"
             contentView.addSubview(loginView)
             view.addSubview(loginView)
         }else{
             contentView.removeFromSuperview()
             contentView = UIView.init(frame: UIScreen.main.bounds)
             profileView.profilePicture.image = UIImage(named: "placeholder-image")
+            self.navigationItem.title = "P R O F I L E"
             contentView.addSubview(profileView)
             updateUser()
             view.addSubview(profileView)
