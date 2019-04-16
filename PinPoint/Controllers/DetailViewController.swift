@@ -9,22 +9,25 @@
 import UIKit
 
 class DetailViewController: UIViewController {
+    
+    var detailView = DetailView()
+    
+    var event: Event!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        view.addSubview(detailView)
+        updateDetailView()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    func updateDetailView(){
+        detailView.image.kf.indicatorType = .activity
+        if event.logo?.original.url == nil{
+            detailView.image.image = UIImage(named: "pinpointred")
+        }else{
+            detailView.image.kf.setImage(with: URL(string: (event.logo?.original.url)!), placeholder: UIImage(named: "pinpointred"))
+        }
+        detailView.label.text = event.name?.text    }
 
 }

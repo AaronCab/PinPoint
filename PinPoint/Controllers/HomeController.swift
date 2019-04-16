@@ -9,6 +9,7 @@
 import UIKit
 import Toucan
 import CoreLocation
+import Firebase
 import FirebaseAuth
 import SafariServices
 
@@ -26,6 +27,7 @@ class HomeController: UIViewController {
     let loginView = LoginView()
     let messagesView = MessageView()
     let authService = AppDelegate.authservice
+    private var listener: ListenerRegistration!
     var event = [Event](){
         didSet {
             DispatchQueue.main.async {
@@ -41,6 +43,7 @@ class HomeController: UIViewController {
             }
         }
     }
+    private var userModel: UserLogedInModel!
     var currentLocation = CLLocation(){
         didSet{
             introView.locationButton.setTitle(location, for: .normal)
@@ -181,6 +184,7 @@ class HomeController: UIViewController {
             profileView.profilePicture.image = UIImage(named: "placeholder-image")
             self.navigationItem.title = "P R O F I L E"
             contentView.addSubview(profileView)
+            updateUser()
             view.addSubview(profileView)
         }
 
@@ -237,6 +241,14 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             return cell
         }
         
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let eventDVC = DetailViewController()
+        eventDVC.event = event[indexPath.row]
+        self.navigationController?.pushViewController(eventDVC, animated: true)
+
     }
     @objc func moreInfo(senderTag: UIButton){
         
@@ -427,4 +439,21 @@ extension HomeController: AuthServiceSignOutDelegate{
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(alert, animated: true)
     }
+}
+
+extension HomeController{
+    func updateUser(){
+        if let user = authService.getCurrentUser(){
+          self.listener = DBService.firestoreDB
+                .collection(ProfileCollectionKeys.CollectionKey)
+                .addSnapshotListener({ (data, error) in
+                    if let data = data{
+                        self.profileView.loggedInUserModel = data.documents.map { UserLogedInModel(dict: $0.data()) }
+                            .filter(){$0.email == user.email}.first
+                        
+                    }
+                })
+        }
+    }
+
 }
