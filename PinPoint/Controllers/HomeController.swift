@@ -9,6 +9,7 @@
 import UIKit
 import Toucan
 import CoreLocation
+import Firebase
 import FirebaseAuth
 import SafariServices
 
@@ -26,6 +27,7 @@ class HomeController: UIViewController {
     let loginView = LoginView()
     let messagesView = MessageView()
     let authService = AppDelegate.authservice
+    private var listener: ListenerRegistration!
     var event = [Event](){
         didSet {
             DispatchQueue.main.async {
@@ -41,6 +43,7 @@ class HomeController: UIViewController {
             }
         }
     }
+    private var userModel: UserLogedInModel!
     var currentLocation = CLLocation(){
         didSet{
             introView.locationButton.setTitle(location, for: .normal)
@@ -173,6 +176,7 @@ class HomeController: UIViewController {
             contentView = UIView.init(frame: UIScreen.main.bounds)
             profileView.profilePicture.image = UIImage(named: "placeholder-image")
             contentView.addSubview(profileView)
+            updateUser()
             view.addSubview(profileView)
         }
         let rightBarItem = UIBarButtonItem(customView: profileView.settingsButton)
@@ -419,4 +423,21 @@ extension HomeController: AuthServiceSignOutDelegate{
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(alert, animated: true)
     }
+}
+
+extension HomeController{
+    func updateUser(){
+        if let user = authService.getCurrentUser(){
+          self.listener = DBService.firestoreDB
+                .collection(ProfileCollectionKeys.CollectionKey)
+                .addSnapshotListener({ (data, error) in
+                    if let data = data{
+                        self.profileView.loggedInUserModel = data.documents.map { UserLogedInModel(dict: $0.data()) }
+                            .filter(){$0.email == user.email}.first
+                        
+                    }
+                })
+        }
+    }
+
 }

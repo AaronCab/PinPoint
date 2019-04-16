@@ -20,6 +20,7 @@ struct ProfileOfUser {
     let lastName: String?
     let bio: String?
     
+    
     public var fullName: String {
         return ((firstName ?? "") + " " + (lastName ?? "")).trimmingCharacters(in: .whitespacesAndNewlines)
     }
