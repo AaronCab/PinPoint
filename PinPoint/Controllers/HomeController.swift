@@ -145,6 +145,7 @@ class HomeController: UIViewController {
         contentView.addSubview(discoverView)
         view.addSubview(contentView)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "MyEvent!", style: .plain, target: nil, action: nil)
+        self.navigationItem.rightBarButtonItem?.tintColor = .black
 
     }
     
@@ -179,10 +180,10 @@ class HomeController: UIViewController {
             updateUser()
             view.addSubview(profileView)
         }
+
         let rightBarItem = UIBarButtonItem(customView: profileView.settingsButton)
         profileView.settingsButton.addTarget(self, action: #selector(allCommands), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = rightBarItem
-
         // add right naviEgation item
     }
 }
