@@ -312,7 +312,7 @@ extension HomeController: UIImagePickerControllerDelegate, UINavigationControlle
         }
         let resizedImage = Toucan.init(image: originalImage).resize(CGSize(width: 500, height: 500))
         selectedImageValue = resizedImage.image
-        preferencesView.pictureOfUser.image = resizedImage.image
+       // preferencesView.pictureOfUser.image = resizedImage.image
         dismiss(animated: true)
     }
 }
@@ -352,7 +352,7 @@ extension HomeController: CLLocationManagerDelegate {
 extension HomeController{
     
     func preferencesViewStuff(){
-        preferencesView.pictureButton.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
+        //preferencesView.pictureButton.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
         preferencesView.locationButton.addTarget(self, action: #selector(locationFinder), for: .touchUpInside)
     }
     

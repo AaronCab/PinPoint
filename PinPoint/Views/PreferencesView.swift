@@ -7,47 +7,35 @@
 //
 
 import UIKit
+import SnapKit
 
 class PreferencesView: UIView {
 
     private var gradient: CAGradientLayer!
     
     private func addGradient(){
-        let firstColor = UIColor.init(red: 255/255, green: 0/255, blue: 0/255, alpha: 1)
-        let secondColor = UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
+        let firstColor = UIColor.init(cgColor: #colorLiteral(red: 0.690956533, green: 0.0340622142, blue: 0.1003342643, alpha: 1))
+        let secondColor = UIColor.init(cgColor: #colorLiteral(red: 0.9200486541, green: 0.03262991831, blue: 0.1368149519, alpha: 1))
         gradient = CAGradientLayer()
         gradient.frame = self.bounds
         gradient.colors = [firstColor.cgColor, secondColor.cgColor]
         self.layer.insertSublayer(gradient, at: 0)
     }
-    
-        var nameInTextField: UITextField = {
-        let textField = UITextField()
-        textField.backgroundColor = .white
-        textField.textColor = .red
-            textField.font = UIFont.init(name: "futura", size: 18)
-        textField.placeholder = "Please enter your name"
-        textField.layer.cornerRadius = 5
-        return textField
-        }()
-    
-    var pictureOfUser: UIImageView = {
-        var imageView = UIImageView()
-        imageView.image = UIImage(named: "pinpointred")
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 20
-        imageView.layer.masksToBounds = true
-        return imageView
+
+    var searchBar: UISearchBar = {
+      let search = UISearchBar()
+        search.layer.cornerRadius = 10.0
+        search.backgroundColor = .clear
+        search.barTintColor = #colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1)
+        search.placeholder = "Change Your Location"
+        return search
     }()
     
-    var pictureButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .white
-        button.setTitleColor(.black, for: .normal)
-        button.setTitle("Change Picture", for: .normal)
-        button.isEnabled = true
-        return button
-    }()
+//    var categoryCollectionView: UICollectionView =  {
+//        let category = UICollectionView()
+//        category.collectionViewLayout.collectionView?.allowsMultipleSelection = true
+//        return category
+//    }()
     
     var locationButton: UIButton = {
         let button = UIButton()
@@ -70,47 +58,28 @@ class PreferencesView: UIView {
     
     private func commonInit(){
         addGradient()
-        pictureContrant()
-        pictureButtonConstrant()
-        nameCreatedWithContrant()
-        locationButtonConstrant()
+        setUpView()
     }
     
+
+
+   private func setUpView(){
+    self.addSubview(searchBar)
+    self.addSubview(locationButton)
     
-    private func nameCreatedWithContrant(){
-        addSubview(nameInTextField)
-        nameInTextField.translatesAutoresizingMaskIntoConstraints = false
-        nameInTextField.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor, constant: 30).isActive = true
-        nameInTextField.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
-        nameInTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        nameInTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
+    searchBar.snp.makeConstraints { (make) in
+        make.top.equalTo(self.snp.topMargin)
+       // make.left.equalTo(10)
+       // make.right.equalTo(10)
+        make.width.equalToSuperview()
     }
-
-    private func pictureContrant(){
-        addSubview(pictureOfUser)
-        pictureOfUser.translatesAutoresizingMaskIntoConstraints = false
-        pictureOfUser.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.35).isActive = true
-        pictureOfUser.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
-        pictureOfUser.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        pictureOfUser.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
+    
+    locationButton.snp.makeConstraints { (make) in
+        make.top.equalTo(searchBar.snp.bottom).offset(10)
+        make.left.equalTo(20)
+        make.right.equalTo(-20)
+        make.height.equalTo(100)
     }
-
-   private func pictureButtonConstrant(){
-        addSubview(pictureButton)
-        pictureButton.translatesAutoresizingMaskIntoConstraints = false
-        pictureButton.topAnchor.constraint(equalTo: pictureOfUser.bottomAnchor, constant: 30).isActive = true
-        pictureButton.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
-        pictureButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        pictureButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
-    }
-
-   private func locationButtonConstrant(){
-        addSubview(locationButton)
-        locationButton.translatesAutoresizingMaskIntoConstraints = false
-        locationButton.topAnchor.constraint(equalTo: nameInTextField.bottomAnchor, constant: 30).isActive = true
-        locationButton.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
-        locationButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        locationButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     }
 
 }
