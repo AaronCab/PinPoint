@@ -69,6 +69,7 @@
 		93FF2FB42264FF2500A350E2 /* BioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FF2FB32264FF2500A350E2 /* BioView.swift */; };
 		93FF2FB62264FF3800A350E2 /* BioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FF2FB52264FF3800A350E2 /* BioViewController.swift */; };
 		93FF2FB82266298400A350E2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FF2FB72266298400A350E2 /* DetailViewController.swift */; };
+		93FF2FBA2266346500A350E2 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FF2FB92266346500A350E2 /* CategoryCell.swift */; };
 		94F65BFC0759B9FC879F0B3A /* Pods_PinPoint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E6346C23E7AB50CCD79EA1B /* Pods_PinPoint.framework */; };
 /* End PBXBuildFile section */
 
@@ -140,6 +141,7 @@
 		93FF2FB32264FF2500A350E2 /* BioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioView.swift; sourceTree = "<group>"; };
 		93FF2FB52264FF3800A350E2 /* BioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioViewController.swift; sourceTree = "<group>"; };
 		93FF2FB72266298400A350E2 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		93FF2FB92266346500A350E2 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +255,7 @@
 				93088BD8225E39F80067F09D /* EventsCell.swift */,
 				93BFA6FC225F93DC0074FD34 /* FavoritesCell.swift */,
 				93088BE4225E3DD00067F09D /* InterestCell.swift */,
+				93FF2FB92266346500A350E2 /* CategoryCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -522,6 +525,7 @@
 				93088BA5225B972E0067F09D /* AuthService.swift in Sources */,
 				93088BD3225BD2360067F09D /* APIClient.swift in Sources */,
 				93088BDD225E3D490067F09D /* IntroViewController.swift in Sources */,
+				93FF2FBA2266346500A350E2 /* CategoryCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,7 +665,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9DV268QUJB;
+				DEVELOPMENT_TEAM = 9P5SSDN939;
 				INFOPLIST_FILE = PinPoint/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -680,7 +684,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9DV268QUJB;
+				DEVELOPMENT_TEAM = 9P5SSDN939;
 				INFOPLIST_FILE = PinPoint/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
