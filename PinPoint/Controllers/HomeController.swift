@@ -352,7 +352,6 @@ extension HomeController: CLLocationManagerDelegate {
 extension HomeController{
     
     func preferencesViewStuff(){
-        //preferencesView.pictureButton.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
         preferencesView.locationButton.addTarget(self, action: #selector(locationFinder), for: .touchUpInside)
     }
     
