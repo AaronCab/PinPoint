@@ -18,7 +18,7 @@ class HomeController: UIViewController {
     func loadFavorites() {
         self.favoriteEvents = FavoritesDataManager.fetchItemsFromDocumentsDirectory()
     }
-    let introView = IntroView()
+    let preferencesView = PreferencesView()
     let eventsView = EventsView()
     let discoverView = DiscoverView()
     let favoriteView = FavoritesView()
@@ -46,7 +46,7 @@ class HomeController: UIViewController {
     private var userModel: UserLogedInModel!
     var currentLocation = CLLocation(){
         didSet{
-            introView.locationButton.setTitle(location, for: .normal)
+            preferencesView.locationButton.setTitle(location, for: .normal)
             getEvents()
             locationManager.stopUpdatingLocation()
             
@@ -98,7 +98,7 @@ class HomeController: UIViewController {
         favoriteView.myCollectionView.dataSource = self
         locationManager = CLLocationManager()
         loginViewStuff()
-        introViewStuff()
+        preferencesView()
         configureNavigationBar()
         getEvents()
         authService.authserviceSignOutDelegate = self
@@ -157,7 +157,7 @@ class HomeController: UIViewController {
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
         self.navigationItem.title = "P R E F E R E N C E S"
-        contentView.addSubview(introView)
+        contentView.addSubview(preferencesView)
         view.addSubview(contentView)
     }
     
@@ -311,7 +311,7 @@ extension HomeController: UIImagePickerControllerDelegate, UINavigationControlle
         }
         let resizedImage = Toucan.init(image: originalImage).resize(CGSize(width: 500, height: 500))
         selectedImageValue = resizedImage.image
-        introView.pictureOfUser.image = resizedImage.image
+        preferencesView.pictureOfUser.image = resizedImage.image
         dismiss(animated: true)
     }
 }
@@ -350,9 +350,9 @@ extension HomeController: CLLocationManagerDelegate {
 
 extension HomeController{
     
-    func introViewStuff(){
-        introView.pictureButton.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
-        introView.locationButton.addTarget(self, action: #selector(locationFinder), for: .touchUpInside)
+    func preferencesView(){
+        preferencesView.pictureButton.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
+        preferencesView.locationButton.addTarget(self, action: #selector(locationFinder), for: .touchUpInside)
     }
     
     @objc func imagePicker(){
