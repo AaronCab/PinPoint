@@ -68,6 +68,7 @@
 		93BFA703225FC5E90074FD34 /* LoggedInUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BFA702225FC5E90074FD34 /* LoggedInUserModel.swift */; };
 		93FF2FB42264FF2500A350E2 /* BioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FF2FB32264FF2500A350E2 /* BioView.swift */; };
 		93FF2FB62264FF3800A350E2 /* BioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FF2FB52264FF3800A350E2 /* BioViewController.swift */; };
+		93FF2FB82266298400A350E2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FF2FB72266298400A350E2 /* DetailViewController.swift */; };
 		94F65BFC0759B9FC879F0B3A /* Pods_PinPoint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E6346C23E7AB50CCD79EA1B /* Pods_PinPoint.framework */; };
 /* End PBXBuildFile section */
 
@@ -138,6 +139,7 @@
 		93BFA702225FC5E90074FD34 /* LoggedInUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInUserModel.swift; sourceTree = "<group>"; };
 		93FF2FB32264FF2500A350E2 /* BioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioView.swift; sourceTree = "<group>"; };
 		93FF2FB52264FF3800A350E2 /* BioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioViewController.swift; sourceTree = "<group>"; };
+		93FF2FB72266298400A350E2 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +211,7 @@
 				9311D7062264D2F100AF2BC6 /* EditProfileViewController.swift */,
 				9311D70C2264DF8100AF2BC6 /* DiscoverViewController.swift */,
 				93FF2FB52264FF3800A350E2 /* BioViewController.swift */,
+				93FF2FB72266298400A350E2 /* DetailViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -494,6 +497,7 @@
 				93088BF3225E54AF0067F09D /* CreatedViewController.swift in Sources */,
 				93088BA7225B97C10067F09D /* IBDesignable.swift in Sources */,
 				93088BDF225E3D620067F09D /* IntroView.swift in Sources */,
+				93FF2FB82266298400A350E2 /* DetailViewController.swift in Sources */,
 				93088BED225E42150067F09D /* FileManagerHelper.swift in Sources */,
 				9311D7072264D2F100AF2BC6 /* EditProfileViewController.swift in Sources */,
 				9311D705226122D000AF2BC6 /* DetailView.swift in Sources */,

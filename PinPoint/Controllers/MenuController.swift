@@ -53,6 +53,7 @@ extension MenuController: UITableViewDataSource, UITableViewDelegate {
         let menuOption = MenuOption(rawValue: indexPath.row)
         cell.descriptionLabel.text = menuOption?.description
         cell.iconImageView.image = menuOption?.image
+        cell.selectionStyle = .blue
         return cell
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -63,7 +64,7 @@ extension MenuController: UITableViewDataSource, UITableViewDelegate {
         header.textLabel?.font = UIFont(name: "Futura", size: 36)
         header.textLabel?.backgroundColor = UIColor.clear
         header.textLabel?.textColor = UIColor.white
-        header.contentView.backgroundColor = .clear
+        header.contentView.backgroundColor = .red
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let menuOption = MenuOption(rawValue: indexPath.row)
