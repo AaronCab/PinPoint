@@ -19,6 +19,7 @@ public var catagories = [
 "health": "107",
 "sportsAndFitness": "108"]
 }
+
 extension Dictionary where Value : Equatable {
     func allKeysForValue(val : Value) -> [Key]? {
         return self.filter { $1 == val }.map { $0.0 }
