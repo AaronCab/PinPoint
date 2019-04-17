@@ -98,16 +98,14 @@ class EditProfileView: UIView {
     
     var saveEdit: UIButton = {
         let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: <#T##String#>), for: .normal)
-        button.setTitleColor(.red, for: .normal)
+        button.setImage(#imageLiteral(resourceName: "icons8-compose-100"), for: .normal)
         button.backgroundColor = .white
         return button
     }()
     
     var picImage: UIButton = {
         let button = UIButton()
-        button.setTitle("Photo", for: .normal)
-        button.setTitleColor(.red, for: .normal)
+         button.setImage(#imageLiteral(resourceName: "icons8-customer-240"), for: .normal)
         button.backgroundColor = .white
         return button
     }()
@@ -212,6 +210,7 @@ extension EditProfileView{
         picImage.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
         picImage.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
         picImage.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.3).isActive = true
+        picImage.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor,multiplier: 0.3).isActive = true
     }
 
     
@@ -221,6 +220,7 @@ extension EditProfileView{
         saveEdit.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
         saveEdit.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
         saveEdit.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.3).isActive = true
+        saveEdit.heightAnchor.constraint(equalTo:safeAreaLayoutGuide.heightAnchor, multiplier: 0.3).isActive = true 
         
     }
     
