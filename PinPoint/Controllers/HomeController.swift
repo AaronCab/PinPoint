@@ -47,19 +47,21 @@ class HomeController: UIViewController {
     var currentLocation = CLLocation(){
         didSet{
             preferencesView.locationButton.setTitle(location, for: .normal)
-            getEvents()
+            getCategory()
             locationManager.stopUpdatingLocation()
             
         }
     }
-    private func getEvents(){
-        ApiClient.getEvents(distance: "2km", location: location) { (error, data) in
+
+    private func getCategory(){
+        ApiClient.getCategoryEvents(distance: "5km", location: location, categoryID: "") { (error, data) in
             if let error = error {
                 print(error.errorMessage())
             } else if let data = data {
                 self.event = data
             }
-        }
+        
+    }
     }
     
     var location = "Manhattan"
@@ -80,7 +82,7 @@ class HomeController: UIViewController {
         super.viewDidLoad()
         viewdidLoadLayout()
     }
-
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
@@ -100,7 +102,7 @@ class HomeController: UIViewController {
         loginViewStuff()
         preferencesViewStuff()
         configureNavigationBar()
-        getEvents()
+        getCategory()
         authService.authserviceSignOutDelegate = self
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -150,7 +152,7 @@ class HomeController: UIViewController {
         let rightBarItem = UIBarButtonItem(customView: discoverView.addEventButton)
         discoverView.addEventButton.addTarget(self, action: #selector(addEventCommand), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = rightBarItem
-
+        
     }
     
     func preferencesPageOn() {
@@ -188,11 +190,10 @@ class HomeController: UIViewController {
             updateUser()
             view.addSubview(profileView)
         }
-
+        
         let rightBarItem = UIBarButtonItem(customView: profileView.settingsButton)
         profileView.settingsButton.addTarget(self, action: #selector(allCommands), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = rightBarItem
-        // add right naviEgation item
     }
 }
 
@@ -249,7 +250,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         let eventDVC = DetailViewController()
         eventDVC.event = event[indexPath.row]
         self.navigationController?.pushViewController(eventDVC, animated: true)
-
+        
     }
     @objc func moreInfo(senderTag: UIButton){
         
@@ -312,7 +313,6 @@ extension HomeController: UIImagePickerControllerDelegate, UINavigationControlle
         }
         let resizedImage = Toucan.init(image: originalImage).resize(CGSize(width: 500, height: 500))
         selectedImageValue = resizedImage.image
-       // preferencesView.pictureOfUser.image = resizedImage.image
         dismiss(animated: true)
     }
 }
@@ -423,7 +423,7 @@ extension HomeController: AuthServiceSignOutDelegate{
             view.addSubview(loginView)
         }
     }
-
+    
     @objc func allCommands(){
         let alert = UIAlertController(title: "How can I help you", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Edit Profile", style: .default, handler: { (edit) in
@@ -448,7 +448,7 @@ extension HomeController: AuthServiceSignOutDelegate{
 extension HomeController{
     func updateUser(){
         if let user = authService.getCurrentUser(){
-          self.listener = DBService.firestoreDB
+            self.listener = DBService.firestoreDB
                 .collection(ProfileCollectionKeys.CollectionKey)
                 .addSnapshotListener({ (data, error) in
                     if let data = data{
@@ -459,5 +459,5 @@ extension HomeController{
                 })
         }
     }
-
+    
 }
