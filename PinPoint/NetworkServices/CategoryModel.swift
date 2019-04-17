@@ -8,17 +8,20 @@
 
 import Foundation
 
-struct AvailableCategories: Codable {
-    let categories: [CategoryOption]
+class Catagory{
+public var catagories = [
+"business": "101",
+"scienceAndTech": "102",
+"music": "103",
+"filmAndMedia": "104",
+"arts": "105",
+"fashion": "106",
+"health": "107",
+"sportsAndFitness": "108"]
 }
-struct CategoryOption: Codable {
-    let business: String
-    let scienceAndTech: String
-    let music: String
-    let filmAndMedia: String
-    let arts: String
-    let fashion: String
-    let health: String
-    let sportsAndFitness: String
-    
+
+extension Dictionary where Value : Equatable {
+    func allKeysForValue(val : Value) -> [Key]? {
+        return self.filter { $1 == val }.map { $0.0 }
+    }
 }
