@@ -72,6 +72,7 @@
 		93FF2FB62264FF3800A350E2 /* BioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FF2FB52264FF3800A350E2 /* BioViewController.swift */; };
 		93FF2FB82266298400A350E2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FF2FB72266298400A350E2 /* DetailViewController.swift */; };
 		93FF2FBA2266346500A350E2 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FF2FB92266346500A350E2 /* CategoryCell.swift */; };
+		93FF2FBC2267C8E600A350E2 /* DiscoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FF2FBB2267C8E600A350E2 /* DiscoverCell.swift */; };
 		94F65BFC0759B9FC879F0B3A /* Pods_PinPoint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E6346C23E7AB50CCD79EA1B /* Pods_PinPoint.framework */; };
 		961AF28A2267821700C8E07F /* ExtensionHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961AF2892267821700C8E07F /* ExtensionHomeController.swift */; };
 		961AF28C226785D000C8E07F /* LocationResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961AF28B226785D000C8E07F /* LocationResultController.swift */; };
@@ -150,6 +151,7 @@
 		93FF2FB52264FF3800A350E2 /* BioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioViewController.swift; sourceTree = "<group>"; };
 		93FF2FB72266298400A350E2 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		93FF2FB92266346500A350E2 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		93FF2FBB2267C8E600A350E2 /* DiscoverCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCell.swift; sourceTree = "<group>"; };
 		961AF2892267821700C8E07F /* ExtensionHomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionHomeController.swift; sourceTree = "<group>"; };
 		961AF28B226785D000C8E07F /* LocationResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationResultController.swift; sourceTree = "<group>"; };
 		961AF28D2267874A00C8E07F /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 				93088BE4225E3DD00067F09D /* InterestCell.swift */,
 				93FF2FB92266346500A350E2 /* CategoryCell.swift */,
 				961AF28F226788B600C8E07F /* LocationTableViewCell.swift */,
+				93FF2FBB2267C8E600A350E2 /* DiscoverCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -502,6 +505,7 @@
 				93088BD1225BD2200067F09D /* AppError.swift in Sources */,
 				93088BE9225E41BC0067F09D /* ItemsDataManager.swift in Sources */,
 				93088B9F225B95FE0067F09D /* String+Extensions.swift in Sources */,
+				93FF2FBC2267C8E600A350E2 /* DiscoverCell.swift in Sources */,
 				93088BBC225BA70A0067F09D /* CreateUserView.swift in Sources */,
 				9314F77B2257B041009E0BB7 /* PinPointTabBarController.swift in Sources */,
 				93088BFB225E715C0067F09D /* Location.swift in Sources */,

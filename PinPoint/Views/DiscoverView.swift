@@ -17,6 +17,7 @@ class DiscoverView: UIView {
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize.init(width: 400, height: 750)
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        
         cv.backgroundColor = .red
         return cv
     } ()
@@ -38,7 +39,7 @@ class DiscoverView: UIView {
     }()
     private func commonInit(){
         backgroundColor = .white
-        self.discoverCollectionView.register(EventsCell.self, forCellWithReuseIdentifier: "CollectionViewCell")
+        self.discoverCollectionView.register(DiscoverCell.self, forCellWithReuseIdentifier: "DiscoverCell")
         setup()
         addEventButtonConstraint()
     }

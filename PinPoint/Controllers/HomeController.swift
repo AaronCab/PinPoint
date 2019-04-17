@@ -64,7 +64,7 @@ class HomeController: UIViewController {
     lazy var refreshControl: UIRefreshControl = {
         let rc = UIRefreshControl()
             discoverView.discoverCollectionView.refreshControl = rc
-        rc.addTarget(self, action: #selector(fetchBlogs), for: .valueChanged)
+        rc.addTarget(self, action: #selector(fetchEvents), for: .valueChanged)
         return rc
     }()
 
@@ -116,6 +116,9 @@ class HomeController: UIViewController {
         favoriteView.myCollectionView.dataSource = self
         preferencesView.categoryCollectionView.dataSource = self
         preferencesView.categoryCollectionView.delegate = self 
+
+        discoverView.discoverCollectionView.delegate = self
+        discoverView.discoverCollectionView.dataSource = self
         locationManager = CLLocationManager()
         loginViewStuff()
         preferencesViewStuff()
@@ -131,7 +134,7 @@ class HomeController: UIViewController {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         }
-        fetchBlogs()
+        fetchEvents()
         
     }
     
@@ -236,8 +239,15 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == preferencesView.categoryCollectionView {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
+        if collectionView == discoverView.discoverCollectionView {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DiscoverCell", for: indexPath) as? DiscoverCell else { return UICollectionViewCell() }
+            let currentEvent = createdEvent[indexPath.row]
+            cell.eventDescription.text = currentEvent.eventDescription
+            cell.eventName.text = currentEvent.displayName
+            cell.eventImageView.kf.indicatorType = .activity
+            cell.moreInfoButton.tag = indexPath.row
+            cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.photoURL)), placeholder: UIImage(named: "pinpointred"))
+            cell.moreInfoButton.addTarget(self, action: #selector(moreInfoFav), for: .touchUpInside)
             return cell
         } else if collectionView == eventsView.myCollectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? EventsCell else { return UICollectionViewCell() }
@@ -273,15 +283,9 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             cell.moreInfoButton.addTarget(self, action: #selector(moreInfoFav), for: .touchUpInside)
             return cell
         } else {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? EventsCell else { return UICollectionViewCell() }
-            let currentEvent = createdEvent[indexPath.row]
-            cell.eventDescription.text = currentEvent.eventDescription
-            cell.eventName.text = currentEvent.displayName
-            cell.eventImageView.kf.indicatorType = .activity
-            cell.moreInfoButton.tag = indexPath.row
-            cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.photoURL)), placeholder: UIImage(named: "pinpointred"))
-            cell.moreInfoButton.addTarget(self, action: #selector(moreInfoFav), for: .touchUpInside)
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
             return cell
+          
 
         }
         
@@ -308,12 +312,12 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         present(alertController, animated: true)
         
     }
-    @objc private func fetchBlogs(){
+    @objc private func fetchEvents(){
         refreshControl.beginRefreshing()
         listener = DBService.firestoreDB
             .collection(EventCollectionKeys.CollectionKeys).addSnapshotListener { [weak self] (snapshot, error) in
                 if let error = error {
-                    print("failed to fetch Blogs with error: \(error.localizedDescription)")
+                    print("failed to fetch Events with error: \(error.localizedDescription)")
                 } else if let snapshot = snapshot {
                     self?.createdEvent = snapshot.documents.map { EventCreatedByUser(dict: $0.data()) }
                         .sorted { $0.createdAt.date() > $1.createdAt.date() }
