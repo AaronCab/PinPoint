@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import MapKit
 
 class PreferencesView: UIView {
 
@@ -42,6 +43,8 @@ class PreferencesView: UIView {
         search.placeholder = "Change Your Location"
         return search
     }()
+    
+    
 
     var locationButton: UIButton = {
         let button = UIButton()
@@ -53,6 +56,25 @@ class PreferencesView: UIView {
         button.isEnabled = true
         return button
     }()
+    
+    private var locationResultsController: LocationResultController = {
+        var locationController = LocationResultController()
+        return locationController
+        
+    }()
+    
+    private lazy var searchController: UISearchController = {
+        let sc = UISearchController(searchResultsController: locationResultsController)
+        sc.searchResultsUpdater = locationResultsController
+        sc.hidesNavigationBarDuringPresentation = false
+        sc.searchBar.placeholder = "search for your own location"
+        sc.dimsBackgroundDuringPresentation = false
+        sc.obscuresBackgroundDuringPresentation = false
+//        definesPresentationContext = true
+        sc.searchBar.autocapitalizationType = .none
+        return sc
+    }()
+    
     
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
@@ -68,6 +90,7 @@ class PreferencesView: UIView {
         setUpView()
     }
    private func setUpView(){
+    searchBar = searchController.searchBar
     self.addSubview(searchBar)
     self.addSubview(locationButton)
     
