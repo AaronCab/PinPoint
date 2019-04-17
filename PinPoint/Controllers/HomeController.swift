@@ -29,6 +29,13 @@ class HomeController: UIViewController {
     let messagesView = MessageView()
     let authService = AppDelegate.authservice
     private var listener: ListenerRegistration!
+    var createdEvent = [EventCreatedByUser](){
+        didSet{
+            DispatchQueue.main.async {
+                self.discoverView.discoverCollectionView.reloadData()
+            }
+        }
+    }
     var event = [Event](){
         didSet {
             DispatchQueue.main.async {
@@ -53,6 +60,13 @@ class HomeController: UIViewController {
             
         }
     }
+    lazy var refreshControl: UIRefreshControl = {
+        let rc = UIRefreshControl()
+            discoverView.discoverCollectionView.refreshControl = rc
+        rc.addTarget(self, action: #selector(fetchBlogs), for: .valueChanged)
+        return rc
+    }()
+
 
     private func getCategory(){
         ApiClient.getCategoryEvents(distance: "5km", location: location, categoryID: "") { (error, data) in
@@ -113,6 +127,7 @@ class HomeController: UIViewController {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         }
+        fetchBlogs()
         
     }
     
@@ -237,7 +252,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             }
             cell.moreInfoButton.addTarget(self, action: #selector(moreInfo), for: .touchUpInside)
             return cell
-        } else {
+        } else if collectionView == favoriteView.myCollectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoritesCell", for: indexPath) as? FavoritesCell else { return UICollectionViewCell() }
             let currentEvent = FavoritesDataManager.fetchItemsFromDocumentsDirectory()[indexPath.row]
             cell.eventDescription.text = currentEvent.description
@@ -253,8 +268,18 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             }
             cell.moreInfoButton.addTarget(self, action: #selector(moreInfoFav), for: .touchUpInside)
             return cell
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? EventsCell else { return UICollectionViewCell() }
+            let currentEvent = createdEvent[indexPath.row]
+            cell.eventDescription.text = currentEvent.eventDescription
+            cell.eventName.text = currentEvent.displayName
+            cell.eventImageView.kf.indicatorType = .activity
+            cell.moreInfoButton.tag = indexPath.row
+            cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.photoURL)), placeholder: UIImage(named: "pinpointred"))
+            cell.moreInfoButton.addTarget(self, action: #selector(moreInfoFav), for: .touchUpInside)
+            return cell
+
         }
-        
         
     }
     
@@ -278,6 +303,21 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         alertController.addAction(favoriteActione)
         present(alertController, animated: true)
         
+    }
+    @objc private func fetchBlogs(){
+        refreshControl.beginRefreshing()
+        listener = DBService.firestoreDB
+            .collection(EventCollectionKeys.CollectionKeys).addSnapshotListener { [weak self] (snapshot, error) in
+                if let error = error {
+                    print("failed to fetch Blogs with error: \(error.localizedDescription)")
+                } else if let snapshot = snapshot {
+                    self?.createdEvent = snapshot.documents.map { EventCreatedByUser(dict: $0.data()) }
+                        .sorted { $0.createdAt.date() > $1.createdAt.date() }
+                }
+                DispatchQueue.main.async {
+                    self?.refreshControl.endRefreshing()
+                }
+        }
     }
     
     @objc func moreInfoFav(senderTag: UIButton){
