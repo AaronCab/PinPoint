@@ -23,6 +23,7 @@ class HomeController: UIViewController {
     let discoverView = DiscoverView()
     let favoriteView = FavoritesView()
     let profileView = ProfileView()
+    var categoryCell = CategoryCell()
     var eventCell = EventsCell()
     let loginView = LoginView()
     let messagesView = MessageView()
@@ -200,14 +201,19 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == favoriteView.myCollectionView{
-            return FavoritesDataManager.fetchItemsFromDocumentsDirectory().count
+            return FavoritesDataManager.fetchItemsFromDocumentsDirectory().count }
+       else if collectionView == preferencesView.categoryCollectionView {
+            return 21
         } else {
             return event.count
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == eventsView.myCollectionView {
+        if collectionView == preferencesView.categoryCollectionView {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
+            return cell
+        } else if collectionView == eventsView.myCollectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? EventsCell else { return UICollectionViewCell() }
             let currentEvent = event[indexPath.row]
             cell.eventDescription.text = currentEvent.description?.text
