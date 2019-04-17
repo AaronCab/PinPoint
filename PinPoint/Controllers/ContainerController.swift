@@ -115,7 +115,7 @@ extension ContainerController: HomeControllerDelegate {
         case .profile:
             homeController.profilePageOn()
         default:
-            print("nothing is happening")
+            print("rule")
         }
     }
 }
