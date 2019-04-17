@@ -72,6 +72,7 @@
 		93FF2FB82266298400A350E2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FF2FB72266298400A350E2 /* DetailViewController.swift */; };
 		93FF2FBA2266346500A350E2 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FF2FB92266346500A350E2 /* CategoryCell.swift */; };
 		94F65BFC0759B9FC879F0B3A /* Pods_PinPoint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E6346C23E7AB50CCD79EA1B /* Pods_PinPoint.framework */; };
+		961AF28A2267821700C8E07F /* ExtensionHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961AF2892267821700C8E07F /* ExtensionHomeController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -144,6 +145,7 @@
 		93FF2FB52264FF3800A350E2 /* BioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioViewController.swift; sourceTree = "<group>"; };
 		93FF2FB72266298400A350E2 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		93FF2FB92266346500A350E2 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		961AF2892267821700C8E07F /* ExtensionHomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionHomeController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +207,7 @@
 				93088BB7225BA6D70067F09D /* LoginWithExistingViewController.swift */,
 				93088BC5225BB10D0067F09D /* ContainerController.swift */,
 				93088BCA225BB1570067F09D /* HomeController.swift */,
+				961AF2892267821700C8E07F /* ExtensionHomeController.swift */,
 				93088BCC225BB1680067F09D /* MenuController.swift */,
 				93088BD6225E39AD0067F09D /* EventsViewController.swift */,
 				93088BDC225E3D490067F09D /* PreferencesViewController.swift */,
@@ -476,6 +479,7 @@
 				93088BD5225BD2B70067F09D /* EventsModel.swift in Sources */,
 				93088BD7225E39AD0067F09D /* EventsViewController.swift in Sources */,
 				93088BF1225E54430067F09D /* FavoritesView.swift in Sources */,
+				961AF28A2267821700C8E07F /* ExtensionHomeController.swift in Sources */,
 				93FF2FB62264FF3800A350E2 /* BioViewController.swift in Sources */,
 				93088BE1225E3D7E0067F09D /* InterestViewController.swift in Sources */,
 				93088BF7225E54F30067F09D /* ProfileViewController.swift in Sources */,
