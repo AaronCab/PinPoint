@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		05256F68225E739E0060B9B1 /* MenuCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05256F67225E739E0060B9B1 /* MenuCategories.swift */; };
 		05C7284C22666A2C000F353E /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C7284B22666A2C000F353E /* CategoryModel.swift */; };
+		0D636EAE22678459008E5128 /* HomeSplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D636EAD22678459008E5128 /* HomeSplashView.swift */; };
 		93088B9D225B95E20067F09D /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088B9C225B95E20067F09D /* Date+Extensions.swift */; };
 		93088B9F225B95FE0067F09D /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088B9E225B95FE0067F09D /* String+Extensions.swift */; };
 		93088BA1225B963C0067F09D /* UIViewController+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088BA0225B963C0067F09D /* UIViewController+Alerts.swift */; };
@@ -78,6 +79,7 @@
 /* Begin PBXFileReference section */
 		05256F67225E739E0060B9B1 /* MenuCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCategories.swift; sourceTree = "<group>"; };
 		05C7284B22666A2C000F353E /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
+		0D636EAD22678459008E5128 /* HomeSplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSplashView.swift; sourceTree = "<group>"; };
 		146FB7134DA418F51EC1E8D3 /* Pods-PinPoint.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PinPoint.debug.xcconfig"; path = "Target Support Files/Pods-PinPoint/Pods-PinPoint.debug.xcconfig"; sourceTree = "<group>"; };
 		246C9750CA3360B1EC660EC1 /* Pods-PinPoint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PinPoint.release.xcconfig"; path = "Target Support Files/Pods-PinPoint/Pods-PinPoint.release.xcconfig"; sourceTree = "<group>"; };
 		4E6346C23E7AB50CCD79EA1B /* Pods_PinPoint.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PinPoint.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -226,6 +228,7 @@
 		93088BC0225BAECD0067F09D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0D636EAD22678459008E5128 /* HomeSplashView.swift */,
 				93088BB9225BA6F90067F09D /* LoginView.swift */,
 				93088BBB225BA70A0067F09D /* CreateUserView.swift */,
 				93088BBD225BA7200067F09D /* AccountExistingView.swift */,
@@ -536,6 +539,7 @@
 				93088BD3225BD2360067F09D /* APIClient.swift in Sources */,
 				93088BDD225E3D490067F09D /* PreferencesViewController.swift in Sources */,
 				93088BDD225E3D490067F09D /* PreferencesViewController.swift in Sources */,
+				0D636EAE22678459008E5128 /* HomeSplashView.swift in Sources */,
 				93FF2FBA2266346500A350E2 /* CategoryCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

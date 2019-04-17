@@ -18,6 +18,7 @@ class HomeController: UIViewController {
     func loadFavorites() {
         self.favoriteEvents = FavoritesDataManager.fetchItemsFromDocumentsDirectory()
     }
+    let homeSplashImage = HomeSplashView()
     let preferencesView = PreferencesView()
     let eventsView = EventsView()
     let discoverView = DiscoverView()
@@ -94,6 +95,7 @@ class HomeController: UIViewController {
     
     private func viewdidLoadLayout(){
         view.backgroundColor = .white
+        view.addSubview(homeSplashImage)
         view.addSubview(contentView)
         eventsView.myCollectionView.dataSource = self
         eventsView.myCollectionView.delegate = self
