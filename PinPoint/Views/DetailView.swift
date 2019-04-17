@@ -11,68 +11,62 @@ import SnapKit
 
 class DetailView: UIView {
 
-    
-    lazy var image: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: "placeholder-image")
-        return image
-    }()
-    lazy var label: UILabel = {
+    lazy var detailLabel: UILabel = {
         let label = UILabel()
-        label.textAlignment = .center
-        label.font = UIFont(name: "futura", size: 30.0)
+        label.text = "Event Name"
+        label.numberOfLines = 2
+        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        label.font = UIFont.init(name: "futura", size: 30)
         return label
     }()
-    lazy var textView: UITextView = {
+    
+    lazy var detailImageView: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "icons8-ask-question-25")
+        image.contentMode = .scaleAspectFill
+        image.layer.cornerRadius = 20
+        image.layer.masksToBounds = true
+        return image
+    }()
+    lazy var detailTextView: UITextView = {
         let textView = UITextView()
-        textView.backgroundColor = #colorLiteral(red: 0.9397123456, green: 0.7953640819, blue: 0.7539283037, alpha: 1)
-        textView.font = UIFont(name:"futura" , size:18);
+        textView.isEditable = false
+        textView.backgroundColor = .yellow
+        textView.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        textView.font = UIFont.init(name: "futura", size: 18)
+        textView.textColor = .white
         return textView
     }()
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
-        
         commonInit()
     }
-    
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
-        
     }
     private func commonInit(){
         self.backgroundColor = #colorLiteral(red: 0.910360992, green: 0.1213598326, blue: 0.1217759624, alpha: 1)
-        setUp()
+        setUpView()
     }
-    private func setUp(){
-        imageConstraints()
-        labelConstraint()
-        textViewConstraint()
-    }
-    private func imageConstraints(){
-        addSubview(image)
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.topAnchor.constraint(equalTo: topAnchor, constant: 100).isActive = true
-        image.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.5).isActive = true
-        image.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.5).isActive = true
-        image.centerXAnchor.constraint(equalTo:safeAreaLayoutGuide.centerXAnchor).isActive = true
-    }
-    private func labelConstraint(){
-        addSubview(label)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 8).isActive = true
-        label.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, constant: 30).isActive = true
-        
-    }
-    
-    private func textViewConstraint(){
-        addSubview(textView)
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 10).isActive = true
-        textView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.3).isActive = true
-        textView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 1).isActive = true
-        textView.centerXAnchor.constraint(equalTo:safeAreaLayoutGuide.centerXAnchor).isActive = true
+    private func setUpView(){
+        self.addSubview(detailLabel)
+        self.addSubview(detailImageView)
+        self.addSubview(detailTextView)
+        detailLabel.snp.makeConstraints { (make) in
+            make.width.equalTo(350)
+        }
+        detailImageView.snp.makeConstraints { (make) in
+            make.top.equalTo(self.snp.topMargin)
+            make.width.equalTo(350)
+            make.height.equalTo(350)
+            make.centerX.equalTo(self.snp.centerX)
+        }
+        detailTextView.snp.makeConstraints { (make) in
+            make.top.equalTo(detailImageView.snp.bottom).offset(15)
+            make.left.equalTo(20)
+        }
         
     }
 }

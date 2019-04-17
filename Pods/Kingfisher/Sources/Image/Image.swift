@@ -235,27 +235,27 @@ extension KingfisherWrapper where Base: Image {
         return image
         #else
         
-        var image: Image?
+        var detailImage: Image?
         if options.preloadAll || options.onlyFirstFrame {
             // Use `images` image if you want to preload all animated data
             guard let animatedImage = GIFAnimatedImage(from: imageSource, for: info, options: options) else {
                 return nil
             }
             if options.onlyFirstFrame {
-                image = animatedImage.images.first
+                detailImage = animatedImage.images.first
             } else {
                 let duration = options.duration <= 0.0 ? animatedImage.duration : options.duration
-                image = .animatedImage(with: animatedImage.images, duration: duration)
+                detailImage = .animatedImage(with: animatedImage.images, duration: duration)
             }
-            image?.kf.animatedImageData = data
+            detailImage?.kf.animatedImageData = data
         } else {
-            image = Image(data: data, scale: options.scale)
-            var kf = image?.kf
+            detailImage = Image(data: data, scale: options.scale)
+            var kf = detailImage?.kf
             kf?.imageSource = imageSource
             kf?.animatedImageData = data
         }
         
-        return image
+        return detailImage
         #endif
     }
 

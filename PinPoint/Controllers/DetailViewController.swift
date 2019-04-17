@@ -22,12 +22,12 @@ class DetailViewController: UIViewController {
     }
     
     func updateDetailView(){
-        detailView.image.kf.indicatorType = .activity
+        detailView.detailImageView.kf.indicatorType = .activity
         if event.logo?.original.url == nil{
-            detailView.image.image = UIImage(named: "pinpointred")
+            detailView.detailImageView.image = UIImage(named: "pinpointred")
         }else{
-            detailView.image.kf.setImage(with: URL(string: (event.logo?.original.url)!), placeholder: UIImage(named: "pinpointred"))
+            detailView.detailImageView.kf.setImage(with: URL(string: (event.logo?.original.url)!), placeholder: UIImage(named: "pinpointred"))
         }
-        detailView.label.text = event.name?.text    }
+        detailView.detailLabel.text = event.name?.text    }
 
 }
