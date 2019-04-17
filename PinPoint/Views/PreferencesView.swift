@@ -29,15 +29,12 @@ class PreferencesView: UIView {
         pCV.layer.masksToBounds = true
         return pCV
     }()
-    
-    
         var categoryCollectionView: UICollectionView =  {
             let layout = UICollectionViewFlowLayout()
             layout.minimumLineSpacing = 16
-            layout.scrollDirection = .horizontal
+            layout.scrollDirection = .vertical 
             layout.itemSize = CGSize.init(width: 100, height: 100)
             let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-            
             cv.backgroundColor = .red
             return cv
         }()
@@ -51,9 +48,6 @@ class PreferencesView: UIView {
         search.placeholder = "Change Your Location"
         return search
     }()
-    
-    
-
     var locationButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = #colorLiteral(red: 0.8669512868, green: 0.8864203095, blue: 0.8792492747, alpha: 0.8279109589)
@@ -104,24 +98,30 @@ class PreferencesView: UIView {
     preferenceContainerView.snp.makeConstraints { (make) in
         make.edges.equalTo(self)
     }
-    
     preferenceContainerView.addSubview(searchBar)
     preferenceContainerView.addSubview(locationButton)
+    preferenceContainerView.addSubview(categoryCollectionView)
     
     searchBar.snp.makeConstraints { (make) in
         make.top.equalTo(safeAreaLayoutGuide.snp.topMargin).offset(10)
         make.left.equalTo(10)
         make.right.equalTo(-10)
         make.centerX.equalTo(self.safeAreaLayoutGuide.snp.centerX)
-        make.bottom.equalTo(locationButton.snp.top).offset(15)
     }
     
     locationButton.snp.makeConstraints { (make) in
-        make.top.equalTo(searchBar.snp.bottom)
+        make.top.equalTo(searchBar.snp.bottom).offset(15)
         make.left.equalTo(20)
         make.right.equalTo(-20)
         make.height.equalTo(50)
     }
+    categoryCollectionView.snp.makeConstraints { (make) in
+        make.top.equalTo(locationButton.snp.bottom).offset(15)
+        make.left.equalTo(20)
+        make.right.equalTo(-20)
+        make.height.equalTo(600)
+    }
+    
     }
 
 }

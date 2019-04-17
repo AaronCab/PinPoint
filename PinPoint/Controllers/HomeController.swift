@@ -114,6 +114,8 @@ class HomeController: UIViewController {
         eventsView.myCollectionView.delegate = self
         favoriteView.myCollectionView.delegate = self
         favoriteView.myCollectionView.dataSource = self
+        preferencesView.categoryCollectionView.dataSource = self
+        preferencesView.categoryCollectionView.delegate = self 
         locationManager = CLLocationManager()
         loginViewStuff()
         preferencesViewStuff()
