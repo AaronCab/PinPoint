@@ -14,9 +14,10 @@ class DiscoverView: UIView {
     lazy var discoverCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 16
-        layout.scrollDirection = .vertical
+        layout.scrollDirection = .horizontal
+        layout.itemSize = CGSize.init(width: 400, height: 750)
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = .white
+        cv.backgroundColor = .red
         return cv
     } ()
     override init(frame: CGRect) {
@@ -37,7 +38,7 @@ class DiscoverView: UIView {
     }()
     private func commonInit(){
         backgroundColor = .white
-        self.discoverCollectionView.register(InterestCell.self, forCellWithReuseIdentifier: "InterestCell")
+        self.discoverCollectionView.register(EventsCell.self, forCellWithReuseIdentifier: "CollectionViewCell")
         setup()
         addEventButtonConstraint()
     }

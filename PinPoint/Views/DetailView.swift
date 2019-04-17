@@ -9,9 +9,7 @@
 import UIKit
 import SnapKit
 
-class DetailView: UIView {
-
-    
+class DetailView: UIView {   
     lazy var detailLabel: UILabel = {
         let label = UILabel()
         label.text = "Event Name"
@@ -91,11 +89,11 @@ class DetailView: UIView {
             make.width.equalTo(350)
             make.left.equalTo(10)
             make.right.equalTo(-10)
-        }
+         }                         
         detailImageView.snp.makeConstraints { (make) in
-            make.top.equalTo(detailLabel.snp.bottom).offset(20)
-            make.width.equalTo(275)
-            make.height.equalTo(275)
+            make.top.equalTo(self.snp.topMargin)
+            make.width.equalTo(350)
+            make.height.equalTo(350)
             make.centerX.equalTo(self.snp.centerX)
         }
         detailTextView.snp.makeConstraints { (make) in
