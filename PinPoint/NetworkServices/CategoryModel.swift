@@ -10,15 +10,17 @@ import Foundation
 
 class Catagory{
 public var catagories = [
-"business": "101",
-"scienceAndTech": "102",
-"music": "103",
-"filmAndMedia": "104",
-"arts": "105",
-"fashion": "106",
-"health": "107",
-"sportsAndFitness": "108"]
+"Business": "101",
+"ScienceAndTech": "102",
+"Music": "103",
+"FilmAndMedia": "104",
+"Arts": "105",
+"Fashion": "106",
+"Health": "107",
+"SportsAndFitness": "108",
+    "All": ""]
 }
+
 extension Dictionary where Value : Equatable {
     func allKeysForValue(val : Value) -> [Key]? {
         return self.filter { $1 == val }.map { $0.0 }

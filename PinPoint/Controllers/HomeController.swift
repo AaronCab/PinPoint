@@ -196,6 +196,13 @@ class HomeController: UIViewController {
         profileView.settingsButton.addTarget(self, action: #selector(allCommands), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = rightBarItem
     }
+    
+    func defaultView(){
+        contentView.removeFromSuperview()
+        contentView = UIView.init(frame: UIScreen.main.bounds)
+        contentView.addSubview(loginView)
+
+    }
 }
 
 extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
@@ -465,5 +472,9 @@ extension HomeController{
                 })
         }
     }
+    
+}
+
+extension HomeController{
     
 }
