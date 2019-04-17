@@ -80,8 +80,8 @@ public struct RenderingModeImageModifier: ImageModifier {
     }
 
     /// Modify an input `Image`. See `ImageModifier` protocol for more.
-    public func modify(_ image: Image) -> Image {
-        return image.withRenderingMode(renderingMode)
+    public func modify(_ detailImage: Image) -> Image {
+        return detailImage.withRenderingMode(renderingMode)
     }
 }
 
@@ -92,8 +92,8 @@ public struct FlipsForRightToLeftLayoutDirectionImageModifier: ImageModifier {
     public init() {}
 
     /// Modify an input `Image`. See `ImageModifier` protocol for more.
-    public func modify(_ image: Image) -> Image {
-        return image.imageFlippedForRightToLeftLayoutDirection()
+    public func modify(_ detailImage: Image) -> Image {
+        return detailImage.imageFlippedForRightToLeftLayoutDirection()
     }
 }
 
@@ -109,8 +109,8 @@ public struct AlignmentRectInsetsImageModifier: ImageModifier {
     }
 
     /// Modify an input `Image`. See `ImageModifier` protocol for more.
-    public func modify(_ image: Image) -> Image {
-        return image.withAlignmentRectInsets(alignmentInsets)
+    public func modify(_ detailImage: Image) -> Image {
+        return detailImage.withAlignmentRectInsets(alignmentInsets)
     }
 }
 #endif
