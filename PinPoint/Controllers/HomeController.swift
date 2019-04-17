@@ -13,11 +13,18 @@ import Firebase
 import FirebaseAuth
 import SafariServices
 
+enum detailViewSeque{
+    case favorite
+    case event
+    case custom
+}
+
 class HomeController: UIViewController {
     var contentView = UIView.init(frame: UIScreen.main.bounds)
     func loadFavorites() {
-        self.favoriteEvents = FavoritesDataManager.fetchItemsFromDocumentsDirectory()
+        self.favorite = FavoritesDataManager.fetchItemsFromDocumentsDirectory()
     }
+    var whatToSeque = detailViewSeque.event
     let homeSplashImage = HomeSplashView()
     let preferencesView = PreferencesView()
     let eventsView = EventsView()
@@ -28,6 +35,13 @@ class HomeController: UIViewController {
     var eventCell = EventsCell()
     let loginView = LoginView()
     let messagesView = MessageView()
+    var favorite = FavoritesDataManager.fetchItemsFromDocumentsDirectory(){
+        didSet {
+            DispatchQueue.main.async {
+                self.favoriteView.myCollectionView.reloadData()
+                }
+            }
+        }
     let authService = AppDelegate.authservice
     private var listener: ListenerRegistration!
     var createdEvent = [EventCreatedByUser](){
@@ -45,13 +59,13 @@ class HomeController: UIViewController {
         }
     }
     var favoriteCell = FavoritesCell()
-    private var favoriteEvents = [FavoritesModel]() {
-        didSet {
-            DispatchQueue.main.async {
-                self.favoriteView.myCollectionView.reloadData()
-            }
-        }
-    }
+//    private var favoriteEvents = [FavoritesModel]() {
+//        didSet {
+//            DispatchQueue.main.async {
+//                self.favoriteView.myCollectionView.reloadData()
+//            }
+//        }
+//    }
     private var userModel: UserLogedInModel!
     var currentLocation = CLLocation(){
         didSet{
@@ -110,10 +124,7 @@ class HomeController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(homeSplashImage)
         view.addSubview(contentView)
-        eventsView.myCollectionView.dataSource = self
-        eventsView.myCollectionView.delegate = self
-        favoriteView.myCollectionView.delegate = self
-        favoriteView.myCollectionView.dataSource = self
+ 
         locationManager = CLLocationManager()
         loginViewStuff()
         preferencesViewStuff()
@@ -155,6 +166,8 @@ class HomeController: UIViewController {
         self.navigationItem.rightBarButtonItem = nil
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
+        eventsView.myCollectionView.dataSource = self
+        eventsView.myCollectionView.delegate = self
         self.navigationItem.title = "N E A R B Y  E V E N T S"
         contentView.addSubview(eventsView)
         view.addSubview(contentView)
@@ -187,7 +200,8 @@ class HomeController: UIViewController {
         contentView = UIView.init(frame: UIScreen.main.bounds)
         loadFavorites()
         self.navigationItem.title = "F A V O R I T E S"
-        
+        favoriteView.myCollectionView.delegate = self
+        favoriteView.myCollectionView.dataSource = self
         contentView.addSubview(favoriteView)
         view.addSubview(contentView)
     }
@@ -237,13 +251,14 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         if collectionView == preferencesView.categoryCollectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
             return cell
-        } else if collectionView == eventsView.myCollectionView {
+        }
+        if collectionView == eventsView.myCollectionView {
+            whatToSeque = .event
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? EventsCell else { return UICollectionViewCell() }
             let currentEvent = event[indexPath.row]
             cell.eventDescription.text = currentEvent.description?.text
             cell.eventStartTime.text = "Start time: \(currentEvent.start?.utc.formatISODateString(dateFormat: "MMM d, h:mm a") ?? "no start time found")"
             cell.eventEndTime.text = "End Time: \(currentEvent.end?.utc.formatISODateString(dateFormat: "MMM d, h:mm a") ?? "no end time found")"
-            
             cell.eventName.text = currentEvent.name?.text
             cell.eventImageView.kf.indicatorType = .activity
             cell.moreInfoButton.tag = indexPath.row
@@ -254,9 +269,11 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             }
             cell.moreInfoButton.addTarget(self, action: #selector(moreInfo), for: .touchUpInside)
             return cell
-        } else if collectionView == favoriteView.myCollectionView {
+        }
+        if collectionView == favoriteView.myCollectionView {
+            whatToSeque = .favorite
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoritesCell", for: indexPath) as? FavoritesCell else { return UICollectionViewCell() }
-            let currentEvent = FavoritesDataManager.fetchItemsFromDocumentsDirectory()[indexPath.row]
+            let currentEvent = favorite[indexPath.row]
             cell.eventDescription.text = currentEvent.description
             cell.eventStartTime.text = "Start time: \(currentEvent.start.formatISODateString(dateFormat: "MMM d, h:mm a"))"
             cell.eventEndTime.text = "End Time: \(currentEvent.end.formatISODateString(dateFormat: "MMM d, h:mm a"))"
@@ -271,6 +288,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             cell.moreInfoButton.addTarget(self, action: #selector(moreInfoFav), for: .touchUpInside)
             return cell
         } else {
+            whatToSeque = .custom
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? EventsCell else { return UICollectionViewCell() }
             let currentEvent = createdEvent[indexPath.row]
             cell.eventDescription.text = currentEvent.eventDescription
@@ -286,9 +304,21 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let eventDVC = DetailViewController()
-        eventDVC.event = event[indexPath.row]
-        self.navigationController?.pushViewController(eventDVC, animated: true)
+        switch whatToSeque {
+        case .event:
+            let eventDVC = DetailViewController()
+            eventDVC.event = event[indexPath.row]
+            self.navigationController?.pushViewController(eventDVC, animated: true)
+        case .favorite:
+            let favoriteDVC = DetailViewController()
+            favoriteDVC.favorite = favorite[indexPath.row]
+            self.navigationController?.pushViewController(favoriteDVC, animated: true)
+        case .custom:
+            let customDVC = DetailViewController()
+//            favoriteDVC.favorite = favorite[indexPath.row]
+            self.navigationController?.pushViewController(customDVC, animated: true)
+        }
+
         
     }
     @objc func moreInfo(senderTag: UIButton){
@@ -349,7 +379,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         
     }
     private func deleteFavorite(senderTag: UIButton) {
-        let favoriteArticle = favoriteEvents[senderTag.tag]
+        let favoriteArticle = favorite[senderTag.tag]
         FavoritesDataManager.deleteItem(atIndex: senderTag.tag, item: favoriteArticle)
     }
     
