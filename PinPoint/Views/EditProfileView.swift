@@ -55,7 +55,6 @@ class EditProfileView: UIView {
         textField.font = UIFont.init(name: "futura", size: 14)
         textField.placeholder = " E M A I L"
         textField.font = UIFont.systemFont(ofSize: 14, weight: .light)
-        
         return textField
     }()
     
@@ -66,7 +65,6 @@ class EditProfileView: UIView {
         textField.font = UIFont.init(name: "futura", size: 14)
         textField.font = UIFont.systemFont(ofSize: 14, weight: .light)
         textField.placeholder = "First Name"
-        
         return textField
     }()
     
@@ -77,7 +75,6 @@ class EditProfileView: UIView {
         textField.font = UIFont.init(name: "futura", size: 14)
         textField.font = UIFont.systemFont(ofSize: 14, weight: .light)
         textField.placeholder = "Last Name"
-        
         return textField
     }()
     
@@ -101,7 +98,7 @@ class EditProfileView: UIView {
     
     var saveEdit: UIButton = {
         let button = UIButton()
-        button.setTitle("Save Edit", for: .normal)
+        button.setImage(#imageLiteral(resourceName: <#T##String#>), for: .normal)
         button.setTitleColor(.red, for: .normal)
         button.backgroundColor = .white
         return button
