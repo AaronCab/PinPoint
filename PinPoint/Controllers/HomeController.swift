@@ -262,8 +262,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.photoURL)), placeholder: UIImage(named: "pinpointred"))
             cell.moreInfoButton.addTarget(self, action: #selector(moreInfoFav), for: .touchUpInside)
             return cell
-        }
-        if collectionView == eventsView.myCollectionView {
+        } else if collectionView == eventsView.myCollectionView {
             whatToSeque = .event
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? EventsCell else { return UICollectionViewCell() }
             let currentEvent = event[indexPath.row]
@@ -280,8 +279,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             }
             cell.moreInfoButton.addTarget(self, action: #selector(moreInfo), for: .touchUpInside)
             return cell
-        }
-        if collectionView == favoriteView.myCollectionView {
+        } else if collectionView == favoriteView.myCollectionView {
             whatToSeque = .favorite
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoritesCell", for: indexPath) as? FavoritesCell else { return UICollectionViewCell() }
             let currentEvent = favorite[indexPath.row]
@@ -298,7 +296,11 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             }
             cell.moreInfoButton.addTarget(self, action: #selector(moreInfoFav), for: .touchUpInside)
             return cell
-        } else {
+        }else if
+            collectionView == preferencesView.categoryCollectionView {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
+            return cell
+    }else {
             whatToSeque = .custom
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? EventsCell else { return UICollectionViewCell() }
             let currentEvent = createdEvent[indexPath.row]
