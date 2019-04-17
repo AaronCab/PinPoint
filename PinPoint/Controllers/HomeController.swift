@@ -68,7 +68,6 @@ class HomeController: UIViewController {
     var location = "Manhattan"
     var selectedImageValue: UIImage?
     var locationManager: CLLocationManager!
-    var locationService = LocationService()
     var long: Double!
     var lat: Double!
     private lazy var imagePickerController: UIImagePickerController = {
@@ -76,7 +75,7 @@ class HomeController: UIViewController {
         ip.delegate = self
         return ip
     }()
-    
+
     var delegate: HomeControllerDelegate?
     
     override func viewDidLoad() {
@@ -195,6 +194,13 @@ class HomeController: UIViewController {
         let rightBarItem = UIBarButtonItem(customView: profileView.settingsButton)
         profileView.settingsButton.addTarget(self, action: #selector(allCommands), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = rightBarItem
+    }
+    
+    func defaultView(){
+        contentView.removeFromSuperview()
+        contentView = UIView.init(frame: UIScreen.main.bounds)
+        contentView.addSubview(loginView)
+
     }
 }
 
@@ -382,8 +388,7 @@ extension HomeController{
     @objc func locationFinder(){
         
         locationManager.startUpdatingLocation()
-        
-        locationService.getCoordinate(addressString: location) { (locationFound, error) in
+        LocationService.getCoordinate(addressString: location) { (locationFound, error) in
             if let error = error{
                 self.showAlert(title: "Error", message: error.localizedDescription)
             }else {

@@ -68,20 +68,7 @@ class PreferencesViewController: UIViewController {
 
 
     @objc func locationFinder(){
-        locationManager.startUpdatingLocation()
-        currentLocation = locationManager.location
         
-        locationManager.stopUpdatingLocation()
-        
-        locationService.getCoordinate(addressString: location) { (locationFound, error) in
-            if let error = error{
-                self.showAlert(title: "Error", message: error.localizedDescription)
-            }else {
-                self.lat = locationFound.latitude
-                self.long = locationFound.longitude
-            }
-        }
-
     }
 }
 

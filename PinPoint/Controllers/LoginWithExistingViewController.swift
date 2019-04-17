@@ -23,10 +23,6 @@ class LoginWithExistingViewController: UIViewController {
     func viewDidLoadLayout(){
         view.addSubview(accountExistingView)
         
-        accountExistingView.emailToLogin.text = "jason@jason.com"
-        accountExistingView.passwordToLogin.text = "123456"
-        
-        
         let leftBarItem = UIBarButtonItem(customView: accountExistingView.cancel)
         accountExistingView.cancel.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
         self.navigationItem.leftBarButtonItem = leftBarItem
