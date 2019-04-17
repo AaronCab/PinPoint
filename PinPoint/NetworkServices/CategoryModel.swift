@@ -21,5 +21,4 @@ struct CategoryOption: Codable {
     let health: String
     let sportsAndFitness: String
     
-    
 }
