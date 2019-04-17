@@ -23,6 +23,14 @@ class PreferencesView: UIView {
         self.layer.insertSublayer(gradient, at: 0)
     }
     
+    let preferenceContainerView: UIView = {
+        let pCV = UIView()
+        pCV.backgroundColor = .clear
+        pCV.layer.masksToBounds = true
+        return pCV
+    }()
+    
+    
         var categoryCollectionView: UICollectionView =  {
             let layout = UICollectionViewFlowLayout()
             layout.minimumLineSpacing = 16
@@ -79,6 +87,7 @@ class PreferencesView: UIView {
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         commonInit()
+        setUpView()
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -91,16 +100,24 @@ class PreferencesView: UIView {
     }
    private func setUpView(){
     searchBar = searchController.searchBar
-    self.addSubview(searchBar)
-    self.addSubview(locationButton)
+    self.addSubview(preferenceContainerView)
+    preferenceContainerView.snp.makeConstraints { (make) in
+        make.edges.equalTo(self)
+    }
+    
+    preferenceContainerView.addSubview(searchBar)
+    preferenceContainerView.addSubview(locationButton)
     
     searchBar.snp.makeConstraints { (make) in
-        make.top.equalTo(self.snp.topMargin)
-        make.width.equalToSuperview()
+        make.top.equalTo(safeAreaLayoutGuide.snp.topMargin).offset(10)
+        make.left.equalTo(10)
+        make.right.equalTo(-10)
+        make.centerX.equalTo(self.safeAreaLayoutGuide.snp.centerX)
+        make.bottom.equalTo(locationButton.snp.top).offset(15)
     }
     
     locationButton.snp.makeConstraints { (make) in
-        make.top.equalTo(searchBar.snp.bottom).offset(10)
+        make.top.equalTo(searchBar.snp.bottom)
         make.left.equalTo(20)
         make.right.equalTo(-20)
         make.height.equalTo(50)

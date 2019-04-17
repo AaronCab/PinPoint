@@ -9,14 +9,14 @@
 import UIKit
 import SnapKit
 
-class DetailView: UIView {
-
+class DetailView: UIView {   
     lazy var detailLabel: UILabel = {
         let label = UILabel()
         label.text = "Event Name"
         label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        label.font = UIFont.init(name: "futura", size: 30)
+        label.font = UIFont.init(name: "futura", size: 16)
+        label.textAlignment = .center
         return label
     }()
     
@@ -34,9 +34,35 @@ class DetailView: UIView {
         textView.backgroundColor = .yellow
         textView.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         textView.font = UIFont.init(name: "futura", size: 18)
-        textView.textColor = .white
+        textView.text = "Key"
+        textView.textColor = .black
         return textView
     }()
+
+    lazy var displayUserPic: UIImageView = {
+        let userPic = UIImageView()
+        userPic.image = UIImage(named: "placeholder-image")
+        userPic.contentMode = .scaleAspectFill
+        userPic.layer.masksToBounds = true
+        return userPic
+    }()
+    
+    lazy var displayUserLabel: UILabel = {
+        let displayLabel = UILabel()
+        displayLabel.text = "User Name"
+        displayLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        displayLabel.font = UIFont.init(name: "futura", size: 14)
+        displayLabel.textColor = .black
+        return displayLabel
+    }()
+    
+    lazy var messageButton: UIButton = {
+       let button = UIButton()
+       button.setImage(#imageLiteral(resourceName: "icons8-chat-51"), for: .normal)
+        button.isEnabled = true
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         commonInit()
@@ -54,9 +80,16 @@ class DetailView: UIView {
         self.addSubview(detailLabel)
         self.addSubview(detailImageView)
         self.addSubview(detailTextView)
+        self.addSubview(displayUserPic)
+        self.addSubview(displayUserLabel)
+        self.addSubview(messageButton)
+
         detailLabel.snp.makeConstraints { (make) in
+            make.topMargin.equalTo(self.snp_topMargin).offset(15)
             make.width.equalTo(350)
-        }
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
+         }                         
         detailImageView.snp.makeConstraints { (make) in
             make.top.equalTo(self.snp.topMargin)
             make.width.equalTo(350)
@@ -65,7 +98,25 @@ class DetailView: UIView {
         }
         detailTextView.snp.makeConstraints { (make) in
             make.top.equalTo(detailImageView.snp.bottom).offset(15)
-            make.left.equalTo(20)
+            make.left.equalTo(35)
+            make.right.equalTo(-35)
+            make.height.equalTo(200)
+        }
+        displayUserPic.snp.makeConstraints { (make) in
+            make.topMargin.equalTo(detailTextView.snp.bottom).offset(25)
+            make.width.equalTo(75)
+            make.height.equalTo(75)
+            make.left.equalTo(50)
+        }
+        displayUserLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(displayUserPic.snp.right).offset(10)
+            make.height.equalTo(100)
+            make.top.equalTo(detailTextView.snp.bottom)
+        }
+        messageButton.snp.makeConstraints { (make) in
+            make.top.equalTo(detailTextView.snp.bottom)
+            make.height.equalTo(100)
+            make.left.equalTo(displayUserLabel.snp.right).offset(50)
         }
         
     }
