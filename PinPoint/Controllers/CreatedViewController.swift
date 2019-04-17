@@ -29,6 +29,7 @@ class CreatedViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = leftBarItem
         let rightBarItem = UIBarButtonItem(customView: createdEvent.create)
         createdEvent.create.addTarget(self, action: #selector(updateCreatedEvent), for: .touchUpInside)
+        createdEvent.create.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = rightBarItem
         configureInputAccessoryView()
     }
