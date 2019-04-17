@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class DetailView: UIView {
 
@@ -19,13 +20,13 @@ class DetailView: UIView {
     lazy var label: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = UIFont(name: "Helvetica", size: 30.0)
+        label.font = UIFont(name: "futura", size: 30.0)
         return label
     }()
     lazy var textView: UITextView = {
         let textView = UITextView()
         textView.backgroundColor = #colorLiteral(red: 0.9397123456, green: 0.7953640819, blue: 0.7539283037, alpha: 1)
-        textView.font = UIFont(name:"Helvetica" , size:20.0);
+        textView.font = UIFont(name:"futura" , size:18);
         return textView
     }()
     override init(frame: CGRect) {
@@ -41,7 +42,7 @@ class DetailView: UIView {
         
     }
     private func commonInit(){
-        self.backgroundColor = #colorLiteral(red: 0.9397123456, green: 0.7953640819, blue: 0.7539283037, alpha: 1)
+        self.backgroundColor = #colorLiteral(red: 0.910360992, green: 0.1213598326, blue: 0.1217759624, alpha: 1)
         setUp()
     }
     private func setUp(){
