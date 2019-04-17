@@ -128,6 +128,7 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - Protobuf (3.7.0)
+  - SCLAlertView (0.8)
   - SnapKit (4.2.0)
   - Toucan (1.1.0)
 
@@ -139,6 +140,7 @@ DEPENDENCIES:
   - Firebase/Messaging
   - Firebase/Storage
   - Kingfisher
+  - SCLAlertView
   - SnapKit
   - Toucan
 
@@ -165,6 +167,7 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - Protobuf
+    - SCLAlertView
     - SnapKit
     - Toucan
 
@@ -190,9 +193,10 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
+  SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   Toucan: 8f228fabb21521b9658692df9325fe76e71d74b2
 
-PODFILE CHECKSUM: 30b5d22e00b4c8c0ad04088f3e52f6bf73950816
+PODFILE CHECKSUM: e84a5271b7cf93c098b07e4f694c2548a80a8ce8
 
-COCOAPODS: 1.6.0
+COCOAPODS: 1.6.1
