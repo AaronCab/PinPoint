@@ -182,6 +182,7 @@ class HomeController: UIViewController {
         eventsView.myCollectionView.dataSource = self
         eventsView.myCollectionView.delegate = self
         self.navigationItem.title = "N E A R B Y  E V E N T S"
+        whatToSeque = .event
         contentView.addSubview(eventsView)
         view.addSubview(contentView)
     }
@@ -193,6 +194,7 @@ class HomeController: UIViewController {
         view.addSubview(contentView)
         self.navigationItem.title = "D I S C O V E R"
         let rightBarItem = UIBarButtonItem(customView: discoverView.addEventButton)
+        whatToSeque = .custom
         discoverView.addEventButton.addTarget(self, action: #selector(addEventCommand), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = rightBarItem
         
@@ -203,6 +205,7 @@ class HomeController: UIViewController {
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
         self.navigationItem.title = "P R E F E R E N C E S"
+        whatToSeque = .catagories
         contentView.addSubview(preferencesView)
         view.addSubview(contentView)
     }
@@ -215,6 +218,7 @@ class HomeController: UIViewController {
         self.navigationItem.title = "F A V O R I T E S"
         favoriteView.myCollectionView.delegate = self
         favoriteView.myCollectionView.dataSource = self
+        whatToSeque = .favorite
         contentView.addSubview(favoriteView)
         view.addSubview(contentView)
     }
@@ -230,14 +234,15 @@ class HomeController: UIViewController {
             contentView = UIView.init(frame: UIScreen.main.bounds)
             profileView.profilePicture.image = UIImage(named: "placeholder-image")
             self.navigationItem.title = "P R O F I L E"
+            let rightBarItem = UIBarButtonItem(customView: profileView.settingsButton)
+            profileView.settingsButton.addTarget(self, action: #selector(allCommands), for: .touchUpInside)
+            self.navigationItem.rightBarButtonItem = rightBarItem
             contentView.addSubview(profileView)
             updateUser()
             view.addSubview(profileView)
         }
         
-        let rightBarItem = UIBarButtonItem(customView: profileView.settingsButton)
-        profileView.settingsButton.addTarget(self, action: #selector(allCommands), for: .touchUpInside)
-        self.navigationItem.rightBarButtonItem = rightBarItem
+
     }
     
     func defaultView(){
@@ -251,13 +256,18 @@ class HomeController: UIViewController {
 extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == favoriteView.myCollectionView{
-            return FavoritesDataManager.fetchItemsFromDocumentsDirectory().count }
-       else if collectionView == preferencesView.categoryCollectionView {
-            return catagoriesInAnArray.count
-        } else {
+        switch whatToSeque {
+        case .event:
             return event.count
+        case .favorite:
+            return favorite.count
+        case .custom:
+            return createdEvent.count
+        case .catagories:
+            return catagoriesInAnArray.count
+            
         }
+
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -273,7 +283,6 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             return cell
         }
         if collectionView == eventsView.myCollectionView {
-            whatToSeque = .event
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? EventsCell else { return UICollectionViewCell() }
             let currentEvent = event[indexPath.row]
             cell.eventDescription.text = currentEvent.description?.text
@@ -291,7 +300,6 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             return cell
         }
         if collectionView == favoriteView.myCollectionView {
-            whatToSeque = .favorite
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoritesCell", for: indexPath) as? FavoritesCell else { return UICollectionViewCell() }
             let currentEvent = favorite[indexPath.row]
             cell.eventDescription.text = currentEvent.description
@@ -309,13 +317,11 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             return cell
         }
         if collectionView == preferencesView.categoryCollectionView {
-            whatToSeque = .catagories
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
             cell.categoryName.text = catagoriesInAnArray[indexPath.row]
             return cell
     }
         else {
-            whatToSeque = .custom
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? EventsCell else { return UICollectionViewCell() }
             let currentEvent = createdEvent[indexPath.row]
             cell.eventDescription.text = currentEvent.eventDescription
