@@ -40,11 +40,12 @@ class PreferencesView: UIView {
     }()
     var locationButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .clear
+        button.backgroundColor = .white
         button.setTitleColor(#colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1), for: .normal)
         button.setTitle("Find Location", for: .normal)
         button.titleLabel?.font = UIFont(name:
             "futura", size: 18)
+        button.layer.cornerRadius = 15
         button.isEnabled = true
         return button
     }()
