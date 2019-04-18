@@ -50,7 +50,6 @@ class AccountExistingView: UIView {
         let textfield = UITextField()
         textfield.backgroundColor = .white
         textfield.textColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
-        //  textfield.layer.cornerRadius = 10
         textfield.placeholder = "Email"
         return textfield
     }()
@@ -60,16 +59,15 @@ class AccountExistingView: UIView {
         textfield.backgroundColor = .white
         textfield.textColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
         textfield.placeholder = "Password"
-        // textfield.layer.cornerRadius = 10
         textfield.isSecureTextEntry = true
         return textfield
     }()
     
     lazy var textFieldContainerVew: UIView = {
         let tfv = UIView()
-        tfv.layer.cornerRadius = 20
+        tfv.layer.cornerRadius = 10
         tfv.layer.masksToBounds = true
-        tfv.backgroundColor = .blue
+        tfv.backgroundColor = .clear
         return tfv
     }()
     
@@ -109,18 +107,20 @@ class AccountExistingView: UIView {
           textFieldContainerVew.addSubview(passwordToLogin)
         textFieldContainerVew.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
-            make.width.equalToSuperview()
+            make.width.equalTo(375)
             make.height.equalTo(100)
             
         }
         emailToLogin.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
             make.width.equalToSuperview()
+            make.height.equalTo(50)
             
         }
         passwordToLogin.snp.makeConstraints { (make) in
             make.width.equalToSuperview()
             make.top.equalTo(emailToLogin.snp_bottom).offset(2)
+            make.bottom.equalTo(textFieldContainerVew.snp.bottom)
         }
         
     }
@@ -134,22 +134,22 @@ class AccountExistingView: UIView {
         logo.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     }
     
-    private func emailLoginContrant(){
-        addSubview(emailToLogin)
-        emailToLogin.translatesAutoresizingMaskIntoConstraints = false
-        emailToLogin.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
-        emailToLogin.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor, constant: 0).isActive = true
-        emailToLogin.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        emailToLogin.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
-    }
-    
-    private func passwordLoginConstant(){
-        addSubview(passwordToLogin)
-        passwordToLogin.translatesAutoresizingMaskIntoConstraints = false
-        passwordToLogin.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
-        passwordToLogin.topAnchor.constraint(equalTo: emailToLogin.bottomAnchor, constant: 30).isActive = true
-        passwordToLogin.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        passwordToLogin.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
-    }
+//    private func emailLoginContrant(){
+//        addSubview(emailToLogin)
+//        emailToLogin.translatesAutoresizingMaskIntoConstraints = false
+//        emailToLogin.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
+//        emailToLogin.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor, constant: 0).isActive = true
+//        emailToLogin.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
+//        emailToLogin.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
+//    }
+//    
+//    private func passwordLoginConstant(){
+//        addSubview(passwordToLogin)
+//        passwordToLogin.translatesAutoresizingMaskIntoConstraints = false
+//        passwordToLogin.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
+//        passwordToLogin.topAnchor.constraint(equalTo: emailToLogin.bottomAnchor, constant: 30).isActive = true
+//        passwordToLogin.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
+//        passwordToLogin.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
+//    }
     
 }
