@@ -25,8 +25,8 @@ class CreateUserView: UIView {
     private var gradient: CAGradientLayer!
     
     private func addGradient(){
-        let firstColor = UIColor.init(red: 247/255, green: 0/255, blue: 0/255, alpha: 1)
-        let secondColor = UIColor.init(red: 247/255, green: 0/255, blue: 0/255, alpha: 1)
+        let firstColor = UIColor.init(red: 255/255, green: 0/255, blue: 0/255, alpha: 1)
+        let secondColor = UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
         gradient = CAGradientLayer()
         gradient.frame = self.bounds
         gradient.colors = [firstColor.cgColor, secondColor.cgColor]
@@ -108,13 +108,13 @@ class CreateUserView: UIView {
     }()
     
     private func commonInit(){
-        addGradient()
         addSubview(cancel)
         addSubview(create)
         setUpView()
     }
     
     private func setUpView() {
+        addGradient()
         self.addSubview(logo)
         self.addSubview(stackViewContainer)
         stackViewContainer.addSubview(fieldContainerView)
