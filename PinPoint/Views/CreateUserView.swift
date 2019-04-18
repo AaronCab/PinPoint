@@ -49,7 +49,7 @@ class CreateUserView: UIView {
     var emailCreatedwith: UITextField = {
         let textfield = UITextField()
         textfield.backgroundColor = .white
-        textfield.textColor = .red
+        textfield.textColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
         textfield.placeholder = "Email"
         return textfield
     }()
@@ -57,7 +57,7 @@ class CreateUserView: UIView {
     var passwordCreatedWith: UITextField = {
         let textfield = UITextField()
         textfield.backgroundColor = .white
-        textfield.textColor = .red
+        textfield.textColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
         textfield.placeholder = "Password"
         textfield.isSecureTextEntry = true
         return textfield
@@ -66,7 +66,7 @@ class CreateUserView: UIView {
     var displayName: UITextField = {
         let textfield = UITextField()
         textfield.backgroundColor = .white
-        textfield.textColor = .red
+        textfield.textColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
         textfield.placeholder = "Display Name"
         return textfield
     }()

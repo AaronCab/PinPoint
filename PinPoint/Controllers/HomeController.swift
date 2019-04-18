@@ -161,7 +161,7 @@ class HomeController: UIViewController {
         delegate?.handleMenuToggle(forMenuOption: nil, menuCategories: nil)
     }
     func configureNavigationBar() {
-        navigationController?.navigationBar.barTintColor = .red
+        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
         navigationController?.navigationBar.barStyle = .black
         
         navigationItem.title = "P I N P O I N T"
