@@ -107,7 +107,7 @@ class ProfileView: UIView {
     }
     
     
-    var loggedInUserModel: UserLogedInModel?{
+    var loggedInUserModel: ProfileOfUser?{
         didSet{
             bio.text = loggedInUserModel?.bio ?? ""
             if let picture = loggedInUserModel?.photoURL{

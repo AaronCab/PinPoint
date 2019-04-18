@@ -102,7 +102,7 @@ class EditProfileView: UIView {
         button.backgroundColor = .white
         return button
     }()
-    
+     
     var picImage: UIButton = {
         let button = UIButton()
          button.setImage(#imageLiteral(resourceName: "icons8-customer-240"), for: .normal)
@@ -124,7 +124,7 @@ class EditProfileView: UIView {
     }
     
     
-    var loggedInUserModel: UserLogedInModel!{
+    var loggedInUserModel: ProfileOfUser!{
         didSet{
             bio.setTitle(loggedInUserModel.bio ?? "", for: .normal)
             if let picture = loggedInUserModel.photoURL{
