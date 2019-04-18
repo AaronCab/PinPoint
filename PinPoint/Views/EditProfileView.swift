@@ -227,7 +227,7 @@ extension EditProfileView{
     private func bioConstrant(){
         addSubview(bio)
         bio.translatesAutoresizingMaskIntoConstraints = false
-        bio.bottomAnchor.constraint(equalTo: picImage.topAnchor, constant: -10).isActive = true
+//        bio.bottomAnchor.constraint(equalTo: picImage.topAnchor, constant: -10).isActive = true
         bio.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 35).isActive = true
         bio.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -35).isActive = true
         bio.topAnchor.constraint(equalTo: bioLabel.bottomAnchor, constant: 25).isActive = true

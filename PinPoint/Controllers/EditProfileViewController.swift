@@ -75,6 +75,7 @@ class EditProfileViewController: UIViewController {
         let bio = editProfile.bio.titleLabel?.text,
         !bio.isEmpty else {
             showAlert(title: "Empty Fields", message: nil)
+            editProfile.saveEdit.isEnabled = true
             return
         }
 
