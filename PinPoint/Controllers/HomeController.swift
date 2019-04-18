@@ -350,8 +350,19 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             self.navigationController?.pushViewController(favoriteDVC, animated: true)
         case .custom:
             let customDVC = DetailViewController()
-//            favoriteDVC.favorite = favorite[indexPath.row]
-            self.navigationController?.pushViewController(customDVC, animated: true)
+            DBService.firestoreDB
+                    .collection(ProfileCollectionKeys.CollectionKey)
+                    .addSnapshotListener({ (data, error) in
+                        if let data = data{
+                           let user = data.documents.map { ProfileOfUser(dict: $0.data()) }
+                                .filter(){$0.ProfileId == self.createdEvent[indexPath.row].personID}.first
+                            customDVC.profileOfUser = user
+                            customDVC.custom = self.createdEvent[indexPath.row]
+                            self.navigationController?.pushViewController(customDVC, animated: true)
+                        }else if let error = error{
+                            print(error)
+                        }
+                    })
         case .catagories:
         let catgoriesDVC = DetailViewController()
             
@@ -573,8 +584,8 @@ extension HomeController{
                 .collection(ProfileCollectionKeys.CollectionKey)
                 .addSnapshotListener({ (data, error) in
                     if let data = data{
-                        self.profileView.loggedInUserModel = data.documents.map { UserLogedInModel(dict: $0.data()) }
-                            .filter(){$0.email == user.email}.first
+                        self.profileView.loggedInUserModel = data.documents.map { ProfileOfUser(dict: $0.data()) }
+                            .filter(){$0.ProfileId == user.uid}.first
                         
                     }
                 })

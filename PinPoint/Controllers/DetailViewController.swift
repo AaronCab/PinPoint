@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class DetailViewController: UIViewController {
     
@@ -14,13 +15,19 @@ class DetailViewController: UIViewController {
     
     var event: Event!
     var favorite: FavoritesModel!
+    var custom: EventCreatedByUser!
+    var profileOfUser: ProfileOfUser!
+    var authService = AppDelegate.authservice
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.addSubview(detailView)
         updateDetailView()
+
+        
     }
+    
     
     func updateDetailView(){
         if favorite != nil{
@@ -33,7 +40,8 @@ class DetailViewController: UIViewController {
             detailView.detailLabel.text = favorite.name
             detailView.detailTextView.text = favorite.description
             
-        }else if event != nil{
+        }
+        if event != nil{
         detailView.detailImageView.kf.indicatorType = .activity
         if event.logo?.original.url == nil{
             detailView.detailImageView.image = UIImage(named: "pinpointred")
@@ -48,6 +56,19 @@ class DetailViewController: UIViewController {
             detailView.messageButton.isHidden = true
             
         }
+        if custom != nil{
+            detailView.detailImageView.kf.indicatorType = .activity
+                detailView.detailImageView.kf.setImage(with: URL(string: (custom.photoURL)), placeholder: UIImage(named: "pinpointred"))
+            detailView.detailLabel.text = custom.displayName
+            detailView.detailTextView.text = custom.eventDescription
+                if profileOfUser.coverImageURL == nil{
+                    detailView.displayUserPic.kf.setImage(with: URL(string: (profileOfUser.coverImageURL!)), placeholder: UIImage(named: "pinpointred"))
+            }
+                else{
+                    detailView.detailImageView.image = UIImage(named: "pinpointred")
+                }
+                detailView.displayUserLabel.text = profileOfUser.displayName
+            
     }
-
+    }
 }
