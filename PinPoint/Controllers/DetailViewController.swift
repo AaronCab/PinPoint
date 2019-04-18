@@ -58,14 +58,14 @@ class DetailViewController: UIViewController {
         }
         if custom != nil{
             detailView.detailImageView.kf.indicatorType = .activity
-                detailView.detailImageView.kf.setImage(with: URL(string: (custom.photoURL)), placeholder: UIImage(named: "pinpointred"))
+                detailView.detailImageView.kf.setImage(with: URL(string: (custom.photoURL.description)), placeholder: UIImage(named: "pinpointred"))
             detailView.detailLabel.text = custom.displayName
             detailView.detailTextView.text = custom.eventDescription
                 if profileOfUser.coverImageURL == nil{
-                    detailView.displayUserPic.kf.setImage(with: URL(string: (profileOfUser.coverImageURL!)), placeholder: UIImage(named: "pinpointred"))
+                    detailView.displayUserPic.kf.setImage(with: URL(string: (profileOfUser.photoURL!)), placeholder: UIImage(named: "pinpointred"))
             }
                 else{
-                    detailView.detailImageView.image = UIImage(named: "pinpointred")
+                    detailView.displayUserPic.image = UIImage(named: "pinpointred")
                 }
                 detailView.displayUserLabel.text = profileOfUser.displayName
             

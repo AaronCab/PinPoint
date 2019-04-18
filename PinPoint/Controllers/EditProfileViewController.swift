@@ -67,13 +67,13 @@ class EditProfileViewController: UIViewController {
     }
     
     guard let displayName = editProfile.displayName.text,
-        displayName.isEmpty,
+        !displayName.isEmpty,
         let firstName = editProfile.firstName.text,
-        firstName.isEmpty,
+        !firstName.isEmpty,
         let lastName = editProfile.lastName.text,
-         lastName.isEmpty,
+         !lastName.isEmpty,
         let bio = editProfile.bio.titleLabel?.text,
-        bio.isEmpty else {
+        !bio.isEmpty else {
             showAlert(title: "Empty Fields", message: nil)
             return
         }
