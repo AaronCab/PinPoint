@@ -17,6 +17,7 @@ enum detailViewSeque{
     case favorite
     case event
     case custom
+    case catagories
 }
 
 class HomeController: UIViewController {
@@ -35,6 +36,19 @@ class HomeController: UIViewController {
     var eventCell = EventsCell()
     let loginView = LoginView()
     let messagesView = MessageView()
+    
+    var catagories = [
+        "Business": "101",
+        "ScienceAndTech": "102",
+        "Music": "103",
+        "FilmAndMedia": "104",
+        "Arts": "105",
+        "Fashion": "106",
+        "Health": "107",
+        "SportsAndFitness": "108",
+        "All": ""]
+    var catagoriesInAnArray = ["Business", "ScienceAndTech", "Music","FilmAndMedia","Arts","Fashion", "Health","SportsAndFitness", "All"]
+    
     var favorite = FavoritesDataManager.fetchItemsFromDocumentsDirectory(){
         didSet {
             DispatchQueue.main.async {
@@ -59,13 +73,8 @@ class HomeController: UIViewController {
         }
     }
     var favoriteCell = FavoritesCell()
-//    private var favoriteEvents = [FavoritesModel]() {
-//        didSet {
-//            DispatchQueue.main.async {
-//                self.favoriteView.myCollectionView.reloadData()
-//            }
-//        }
-//    }
+
+
     private var userModel: UserLogedInModel!
     var currentLocation = CLLocation(){
         didSet{
@@ -245,7 +254,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         if collectionView == favoriteView.myCollectionView{
             return FavoritesDataManager.fetchItemsFromDocumentsDirectory().count }
        else if collectionView == preferencesView.categoryCollectionView {
-            return 21
+            return catagoriesInAnArray.count
         } else {
             return event.count
         }
@@ -262,7 +271,8 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.photoURL)), placeholder: UIImage(named: "pinpointred"))
             cell.moreInfoButton.addTarget(self, action: #selector(moreInfoFav), for: .touchUpInside)
             return cell
-        } else if collectionView == eventsView.myCollectionView {
+        }
+        if collectionView == eventsView.myCollectionView {
             whatToSeque = .event
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? EventsCell else { return UICollectionViewCell() }
             let currentEvent = event[indexPath.row]
@@ -279,7 +289,8 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             }
             cell.moreInfoButton.addTarget(self, action: #selector(moreInfo), for: .touchUpInside)
             return cell
-        } else if collectionView == favoriteView.myCollectionView {
+        }
+        if collectionView == favoriteView.myCollectionView {
             whatToSeque = .favorite
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoritesCell", for: indexPath) as? FavoritesCell else { return UICollectionViewCell() }
             let currentEvent = favorite[indexPath.row]
@@ -296,11 +307,14 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             }
             cell.moreInfoButton.addTarget(self, action: #selector(moreInfoFav), for: .touchUpInside)
             return cell
-        }else if
-            collectionView == preferencesView.categoryCollectionView {
+        }
+        if collectionView == preferencesView.categoryCollectionView {
+            whatToSeque = .catagories
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
+            cell.categoryName.text = catagoriesInAnArray[indexPath.row]
             return cell
-    }else {
+    }
+        else {
             whatToSeque = .custom
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? EventsCell else { return UICollectionViewCell() }
             let currentEvent = createdEvent[indexPath.row]
@@ -332,6 +346,9 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             let customDVC = DetailViewController()
 //            favoriteDVC.favorite = favorite[indexPath.row]
             self.navigationController?.pushViewController(customDVC, animated: true)
+        case .catagories:
+        let catgoriesDVC = DetailViewController()
+            
         }
 
         

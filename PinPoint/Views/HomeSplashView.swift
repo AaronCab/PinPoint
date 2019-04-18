@@ -15,6 +15,7 @@ class HomeSplashView: UIView {
         let vw = UIView(frame: CGRect(x: 100, y: 100, width: 128, height: 128))
         vw.backgroundColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
         
+
         vw.layer.shadowOffset = .zero
         vw.layer.shadowColor = UIColor.yellow.cgColor
         vw.layer.shadowRadius = 20
