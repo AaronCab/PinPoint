@@ -27,6 +27,7 @@ class CreateAccountViewController: UIViewController {
         createUserView.displayName.delegate = self
         createUserView.emailCreatedwith.delegate = self
         createUserView.passwordCreatedWith.delegate = self
+        hideKeyboardWhenTappedAround()
         
     }
     
