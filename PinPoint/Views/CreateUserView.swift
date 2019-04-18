@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import SnapKit
 
 class CreateUserView: UIView {
     
-
+    
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         commonInit()
@@ -24,8 +25,8 @@ class CreateUserView: UIView {
     private var gradient: CAGradientLayer!
     
     private func addGradient(){
-        let firstColor = UIColor.init(red: 255/255, green: 0/255, blue: 0/255, alpha: 1)
-        let secondColor = UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
+        let firstColor = UIColor.init(red: 247/255, green: 0/255, blue: 0/255, alpha: 1)
+        let secondColor = UIColor.init(red: 247/255, green: 0/255, blue: 0/255, alpha: 1)
         gradient = CAGradientLayer()
         gradient.frame = self.bounds
         gradient.colors = [firstColor.cgColor, secondColor.cgColor]
@@ -36,9 +37,9 @@ class CreateUserView: UIView {
         let label = UILabel()
         
         label.backgroundColor = .clear
-        label.text = "PinPoint"
+        label.text = "P I N P O I N T"
         label.textColor = .white
-        label.font = UIFont.italicSystemFont(ofSize: 30)
+        label.font = UIFont(name: "Futura", size: 36)
         label.textAlignment = .center
         
         return label
@@ -66,7 +67,7 @@ class CreateUserView: UIView {
         let textfield = UITextField()
         textfield.backgroundColor = .white
         textfield.textColor = .red
-        textfield.placeholder = "DisplayName"
+        textfield.placeholder = "Display Name"
         return textfield
     }()
     
@@ -80,59 +81,56 @@ class CreateUserView: UIView {
     
     lazy var create: UIButton = {
         var button = UIButton()
-        button.setTitle("Create acoount", for: .normal)
+        button.setTitle("Create Account", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.isEnabled = true
         return button
     }()
     
+    lazy var stackViewContainer: UIView = {
+        let vc = UIView()
+        vc.layer.cornerRadius = 10
+        vc.layer.masksToBounds = true
+        vc.backgroundColor = .clear
+        return vc
+    }()
     
+    lazy var fieldContainerView:  UIStackView = {
+        let fv = UIStackView(arrangedSubviews: [displayName,
+                                                emailCreatedwith,
+                                                passwordCreatedWith ])
+        fv.axis = .vertical
+        fv.distribution = .fillEqually
+        fv.spacing = 2
+        fv.layer.masksToBounds = true
+        fv.layer.cornerRadius = 10
+        return fv
+    }()
     
-    
-    func commonInit(){
-        emailCreatedWithContrant()
-        passwordCreatedWithConstant()
-        displayNameConstrant()
-        logoLabelConstrant()
+    private func commonInit(){
         addGradient()
         addSubview(cancel)
         addSubview(create)
+        setUpView()
     }
     
-    private func logoLabelConstrant(){
-        addSubview(logo)
-        logo.translatesAutoresizingMaskIntoConstraints = false
-        logo.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
-        logo.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.4).isActive = true
-        logo.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        logo.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
-    }
-    
-    func emailCreatedWithContrant(){
-        addSubview(emailCreatedwith)
-        emailCreatedwith.translatesAutoresizingMaskIntoConstraints = false
-        emailCreatedwith.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
-        emailCreatedwith.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor, constant: 0).isActive = true
-        emailCreatedwith.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        emailCreatedwith.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
-    }
-    
-    func passwordCreatedWithConstant(){
-        addSubview(passwordCreatedWith)
-        passwordCreatedWith.translatesAutoresizingMaskIntoConstraints = false
-        passwordCreatedWith.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
-        passwordCreatedWith.topAnchor.constraint(equalTo: emailCreatedwith.bottomAnchor, constant: 30).isActive = true
-        passwordCreatedWith.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        passwordCreatedWith.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
-    }
-    
-    func displayNameConstrant(){
-        addSubview(displayName)
-        displayName.translatesAutoresizingMaskIntoConstraints = false
-        displayName.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
-        displayName.bottomAnchor.constraint(equalTo: emailCreatedwith.topAnchor, constant: -30).isActive = true
-        displayName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        displayName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
+    private func setUpView() {
+        self.addSubview(logo)
+        self.addSubview(stackViewContainer)
+        stackViewContainer.addSubview(fieldContainerView)
+        logo.snp.makeConstraints { (make) in
+            make.centerX.equalTo(self.snp.centerX)
+            make.centerY.equalTo(self.snp.centerY).offset(-176)
+        }
+        stackViewContainer.snp.makeConstraints { (make) in
+            make.left.equalTo(20)
+            make.right.equalTo(-20)
+            make.top.equalTo(logo.snp.bottom).offset(50)
+            make.height.equalTo(150)
+        }
+        fieldContainerView.snp.makeConstraints { (make) in
+            make.edges.equalTo(stackViewContainer)
+        }
     }
     
 }

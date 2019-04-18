@@ -9,14 +9,7 @@
 import UIKit
 extension UIViewController {
     public func showLoginView() {
-        if let _ = storyboard?.instantiateViewController(withIdentifier: "PinPointTabController") as? PinPointTabBarController {
-            let loginViewStoryboard = UIStoryboard(name: "LoginView", bundle: nil)
-            if let loginViewController = loginViewStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
-                (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController = UINavigationController(rootViewController: loginViewController)
-            }
-        } else {
-            dismiss(animated: true)
-        }
+        
     }
     public func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer =     UITapGestureRecognizer(target: self, action:    #selector(UIViewController.dismissKeyboard))

@@ -14,9 +14,6 @@ class CreateAccountViewController: UIViewController {
     var createUserView = CreateUserView()
     var authService = AppDelegate.authservice
     
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(createUserView)
@@ -40,14 +37,19 @@ class CreateAccountViewController: UIViewController {
     @objc func createProfile(){
         guard let userName = createUserView.displayName.text,
             let email = createUserView.emailCreatedwith.text,
-            let password = createUserView.passwordCreatedWith.text,
-            userName.isEmpty,
-            email.isEmpty,
-            password.isEmpty else{
-                showAlert(title: "Missing Fields", message: "Please fill out all information")
+            let password = createUserView.passwordCreatedWith.text
+            else{
+                showAlert(title: "Error", message: "Create account error")
                 return
         }
+        if userName.isEmpty &&
+        email.isEmpty &&
+        password.isEmpty{
+            showAlert(title: "Missing Fields", message: "Please fill out all info")
+
+        }else{
         authService.createNewAccount(username: userName, email: email, password: password)
+        }
 
         }
 
@@ -60,8 +62,7 @@ extension CreateAccountViewController: AuthServiceCreateNewAccountDelegate{
     }
     
     func didCreateNewAccount(_ authservice: AuthService, pinpointUser: ProfileOfUser) {
-        let containVC = ContainerController()
-        self.present(containVC, animated: true)
+        self.navigationController?.popViewController(animated: true)
         
     }
     

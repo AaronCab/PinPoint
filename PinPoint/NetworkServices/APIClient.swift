@@ -9,9 +9,9 @@
 import Foundation
 final class ApiClient {
     
-    static func getEvents(distance: String, location: String, completionHandler: @escaping (AppError?, [Event]?) -> Void) {
+    static func getCategoryEvents(distance: String, location: String, categoryID: String, completionHandler: @escaping (AppError?, [Event]?) -> Void) {
         let secretToken = "HGCVIXQ3FJZNEZUHE4G2"
-        let endpointURLString = "https://www.eventbriteapi.com/v3/events/search?location.within=\(distance)&expand=venue-H'Authorization:BearerPERSONAL_OAUTH_TOKEN'&location.address=\(location)&token=\(secretToken)"
+        let endpointURLString = "https://www.eventbriteapi.com/v3/events/search?location.within=\(distance)&expand=category-H'103'&location.address=\(location)&token=\(secretToken)&categories=\(categoryID)"
         
         NetworkHelper.shared.performDataTask(endpointURLString: endpointURLString) { (error, data) in
             if let error = error {
@@ -26,5 +26,5 @@ final class ApiClient {
             }
         }
         
-}
+    }
 }

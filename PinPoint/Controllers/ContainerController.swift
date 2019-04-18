@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Toucan
 
 class ContainerController: UIViewController {
     // MARK: - Properties
@@ -15,15 +16,10 @@ class ContainerController: UIViewController {
     var centerController: UIViewController!
     var eventsView: EventsViewController!
     var interestsView: InterestViewController!
-    
     var isExpanded = false
-    
-    // MARK: - Init
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureHomeController()
-       
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -43,18 +39,16 @@ class ContainerController: UIViewController {
         let homeController = HomeController()
         homeController.delegate = self
         centerController = UINavigationController(rootViewController: homeController)
-        view.addSubview(centerController.view)
-//        addChild(centerController)
+    view.addSubview(centerController.view)
         centerController.didMove(toParent: self)
     }
     func configureMenuController() {
         if menuController == nil {
             menuController = MenuController()
             menuController.delegate = self
-            view.insertSubview(menuController.view, at: 0)
+    view.insertSubview(menuController.view, at: 0)
             addChild(menuController)
             menuController.didMove(toParent: self)
-            
         }
     }
     func animatePanel(shouldExpand: Bool, menuOption: MenuOption?) {
@@ -77,11 +71,15 @@ class ContainerController: UIViewController {
     func didSelectMenuOption(menuOption: MenuOption) {
         switch menuOption {
         case .Discover:
-            let introVC = IntroViewController()
-        case .Moments:
-            print("show moment")
+            print("show discover")
+        case .Nearby:
+            print("show nearby events")
+        case .Favorites:
+            print("show favorites")
         case .Messages:
             print("show messages")
+        case .Preferences:
+            print("show preferences")
         case .Profile:
             print("show profile")
         }
@@ -101,19 +99,27 @@ extension ContainerController: HomeControllerDelegate {
                  isExpanded = !isExpanded
         animatePanel(shouldExpand: isExpanded, menuOption: menuOption)
         
-        guard let discover = centerController.children.first as? HomeController,
+        guard let homeController = centerController.children.first as? HomeController,
         let menuCategories = menuCategories else { return }
         switch menuCategories {
-        case .intro:
-            discover.introPageOn()
-        case .moments:
-            discover.eventsPageOn()
-        case .profile:
-            discover.profilePageOn()
         case .discover:
-            discover.favoritesPageOn()
-        //default:
-        //    print("No Other VC")
+            homeController.discoverPageOn()
+        case.nearby:
+            homeController.eventsPageOn()
+        case .favorites:
+            homeController.favoritesPageOn()
+        case .preferences:
+            homeController.preferencesPageOn()
+        case .messaging:
+            homeController.messagingPageOn()
+        case .profile:
+            homeController.profilePageOn()
+        default:
+            print("rule")
         }
     }
 }
+
+
+
+

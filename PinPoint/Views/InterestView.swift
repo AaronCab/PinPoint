@@ -8,14 +8,14 @@
 
 import UIKit
 
-class InterestView: UIView {
+class MessageView: UIView {
     
-    lazy var intrestCollectionView: UICollectionView = {
+    lazy var messageCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 16
         layout.scrollDirection = .vertical
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = .green
+        cv.backgroundColor = .white
         return cv
     } ()
     override init(frame: CGRect) {
@@ -28,20 +28,20 @@ class InterestView: UIView {
         super.init(coder: aDecoder)
         commonInit()
     }
-    func commonInit(){
+   private func commonInit(){
         backgroundColor = .white
-        self.intrestCollectionView.register(InterestCell.self, forCellWithReuseIdentifier: "InterestCell")
+        self.messageCollectionView.register(InterestCell.self, forCellWithReuseIdentifier: "InterestCell")
         setup()
     }
     
     private func setup() {
-        addSubview(intrestCollectionView)
-        intrestCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        intrestCollectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
-        intrestCollectionView.bottomAnchor.constraint(equalTo:  safeAreaLayoutGuide.bottomAnchor).isActive = true
-        intrestCollectionView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        intrestCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        intrestCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        addSubview(messageCollectionView)
+        messageCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        messageCollectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
+        messageCollectionView.bottomAnchor.constraint(equalTo:  safeAreaLayoutGuide.bottomAnchor).isActive = true
+        messageCollectionView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        messageCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        messageCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
     }
     
 }

@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import SnapKit
 
 class AccountExistingView: UIView {
-
+    
     
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
@@ -36,9 +37,9 @@ class AccountExistingView: UIView {
         let label = UILabel()
         
         label.backgroundColor = .clear
-        label.text = "PinPoint"
+        label.text = "P I N P O I N T"
         label.textColor = .white
-        label.font = UIFont.italicSystemFont(ofSize: 30)
+        label.font = UIFont(name: "Futura", size: 36)
         label.textAlignment = .center
         
         return label
@@ -49,6 +50,7 @@ class AccountExistingView: UIView {
         let textfield = UITextField()
         textfield.backgroundColor = .white
         textfield.textColor = .red
+        //  textfield.layer.cornerRadius = 10
         textfield.placeholder = "Email"
         return textfield
     }()
@@ -58,10 +60,18 @@ class AccountExistingView: UIView {
         textfield.backgroundColor = .white
         textfield.textColor = .red
         textfield.placeholder = "Password"
+        // textfield.layer.cornerRadius = 10
         textfield.isSecureTextEntry = true
         return textfield
     }()
     
+    lazy var textFieldContainerVew: UIView = {
+        let tfv = UIView()
+        tfv.layer.cornerRadius = 20
+        tfv.layer.masksToBounds = true
+        tfv.backgroundColor = .blue
+        return tfv
+    }()
     
     lazy var cancel: UIButton = {
         var button = UIButton()
@@ -82,25 +92,49 @@ class AccountExistingView: UIView {
     
     
     
-    func commonInit(){
-        emailLoginContrant()
-        passwordLoginConstant()
+    private func commonInit(){
+        //   emailLoginContrant()
+        //  passwordLoginConstant()
         logoLabelConstrant()
         addGradient()
+        setUpViews()
         addSubview(cancel)
         addSubview(login)
+    }
+    
+    private func setUpViews() {
+        self.addSubview(textFieldContainerVew)
+
+         textFieldContainerVew.addSubview(emailToLogin)
+          textFieldContainerVew.addSubview(passwordToLogin)
+        textFieldContainerVew.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+            make.width.equalToSuperview()
+            make.height.equalTo(100)
+            
+        }
+        emailToLogin.snp.makeConstraints { (make) in
+            make.top.equalToSuperview()
+            make.width.equalToSuperview()
+            
+        }
+        passwordToLogin.snp.makeConstraints { (make) in
+            make.width.equalToSuperview()
+            make.top.equalTo(emailToLogin.snp_bottom).offset(2)
+        }
+        
     }
     
     private func logoLabelConstrant(){
         addSubview(logo)
         logo.translatesAutoresizingMaskIntoConstraints = false
         logo.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
-        logo.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.4).isActive = true
+        logo.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.7).isActive = true
         logo.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
         logo.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     }
     
-    func emailLoginContrant(){
+    private func emailLoginContrant(){
         addSubview(emailToLogin)
         emailToLogin.translatesAutoresizingMaskIntoConstraints = false
         emailToLogin.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
@@ -109,7 +143,7 @@ class AccountExistingView: UIView {
         emailToLogin.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     }
     
-    func passwordLoginConstant(){
+    private func passwordLoginConstant(){
         addSubview(passwordToLogin)
         passwordToLogin.translatesAutoresizingMaskIntoConstraints = false
         passwordToLogin.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true

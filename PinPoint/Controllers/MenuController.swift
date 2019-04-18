@@ -32,7 +32,7 @@ class MenuController: UIViewController {
         tableView.register(MenuOptionsCell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.backgroundColor = .red
         tableView.separatorStyle = .none
-        tableView.rowHeight = 80
+        tableView.rowHeight = 64
         
         
         view.addSubview(tableView)
@@ -45,7 +45,7 @@ class MenuController: UIViewController {
 }
 extension MenuController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 6
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier , for: indexPath) as! MenuOptionsCell
@@ -53,20 +53,37 @@ extension MenuController: UITableViewDataSource, UITableViewDelegate {
         let menuOption = MenuOption(rawValue: indexPath.row)
         cell.descriptionLabel.text = menuOption?.description
         cell.iconImageView.image = menuOption?.image
+        cell.selectionStyle = .blue
         return cell
+    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "   P I N P O I N T"
+    }
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.font = UIFont(name: "Futura", size: 36)
+        header.textLabel?.backgroundColor = UIColor.clear
+        header.textLabel?.textColor = UIColor.white
+        header.contentView.backgroundColor = .red
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let menuOption = MenuOption(rawValue: indexPath.row)
         if indexPath.row == 0 {
-            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .intro)
-        }
-        if indexPath.row == 1 {
             delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .discover)
         }
+        if indexPath.row == 1 {
+            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .nearby)
+        }
         if indexPath.row == 2 {
-            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .moments)
+            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .favorites)
         }
         if indexPath.row == 3 {
+            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .preferences)
+        }
+        if indexPath.row == 4 {
+            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .messaging)
+        }
+        if indexPath.row == 5 {
             delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .profile)
         }
     }

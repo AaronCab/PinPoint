@@ -22,12 +22,18 @@ class LoginWithExistingViewController: UIViewController {
     
     func viewDidLoadLayout(){
         view.addSubview(accountExistingView)
+        
         let leftBarItem = UIBarButtonItem(customView: accountExistingView.cancel)
         accountExistingView.cancel.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
         self.navigationItem.leftBarButtonItem = leftBarItem
         let rightBarItem = UIBarButtonItem(customView: accountExistingView.login)
         accountExistingView.login.addTarget(self, action: #selector(loginWithCreatedAccount), for: .touchUpInside)
-        self.navigationItem.rightBarButtonItem = rightBarItem    }
+        self.navigationItem.rightBarButtonItem = rightBarItem
+        accountExistingView.emailToLogin.delegate = self
+        accountExistingView.passwordToLogin.delegate = self
+        authService.authserviceExistingAccountDelegate = self
+        
+    }
     
     @objc func dismissView(){
         navigationController?.popViewController(animated: true)
@@ -35,14 +41,16 @@ class LoginWithExistingViewController: UIViewController {
     
     @objc func loginWithCreatedAccount(){
             guard let email = accountExistingView.emailToLogin.text,
-                let password = accountExistingView.passwordToLogin.text,
-                email.isEmpty,
-                password.isEmpty
+                let password = accountExistingView.passwordToLogin.text
                 else{
-                    showAlert(title: "Error", message: "Incorrect password and/or username")
+                    showAlert(title: "Error", message: "Error logging in")
                     return
             }
+        if email.isEmpty && password.isEmpty{
+            showAlert(title: "Error", message: " Incorrect username or password")
+        }else{
             authService.signInExistingAccount(email: email, password: password)
+        }
             
     }
     
@@ -55,9 +63,8 @@ extension LoginWithExistingViewController: AuthServiceExistingAccountDelegate{
     }
     
     func didSignInToExistingAccount(_ authservice: AuthService, user: User) {
-        let containVC = ContainerController()
         
-        self.present(containVC, animated: true)
+        self.navigationController?.popViewController(animated: true)
         
     }
     

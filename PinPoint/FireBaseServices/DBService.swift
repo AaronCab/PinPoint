@@ -36,6 +36,8 @@ struct ProfileCollectionKeys {
     static let CoverImageURLKey = "coverImageURL"
     static let JoinedDateKey = "joinedDate"
     static let BioKey = "bio"
+    static let FriendsKey = "friendsKey"
+    static let PhotoBucket = "photoBucket"
 }
 
 
@@ -71,20 +73,20 @@ final class DBService {
         }
     }
     
-    static public func postEvent(blog: EventCreatedByUser, completion: @escaping (Error?) -> Void) {
+    static public func postEvent(event: EventCreatedByUser, completion: @escaping (Error?) -> Void) {
         firestoreDB.collection(EventCollectionKeys.CollectionKeys)
-            .document(blog.documentId).setData([
-                EventCollectionKeys.CreatedAt     : blog.createdAt,
-                EventCollectionKeys.PersonID       : blog.personID,
-                EventCollectionKeys.EventDescription  : blog.eventDescription,
-                EventCollectionKeys.PhotoURL        : blog.photoURL,
-                EventCollectionKeys.DocumentIdKey      : blog.documentId
+            .document(event.documentId).setData([
+                EventCollectionKeys.CreatedAt     : event.createdAt,
+                EventCollectionKeys.PersonID       : event.personID,
+                EventCollectionKeys.EventDescription  : event.eventDescription,
+                EventCollectionKeys.PhotoURL        : event.photoURL,
+                EventCollectionKeys.DocumentIdKey      : event.documentId
                 ])
             { (error) in
                 if let error = error {
                     print("posting blog error: \(error)")
                 } else {
-                    print("blog posted successfully to ref: \(blog.documentId)")
+                    print("blog posted successfully to ref: \(event.documentId)")
                 }
         }
     }

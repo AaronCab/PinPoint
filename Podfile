@@ -15,6 +15,9 @@
   pod 'SnapKit'
   pod 'Firebase/Messaging'
 
+  pod 'SCLAlertView'
+
+
 end
 
 target 'PinPoint' do

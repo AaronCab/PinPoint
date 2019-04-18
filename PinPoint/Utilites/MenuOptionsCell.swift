@@ -21,8 +21,7 @@ class MenuOptionsCell: UITableViewCell {
     let descriptionLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.text = "Pan, Lechuga, y Tomate"
+        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         return label
         
     }()
@@ -36,8 +35,8 @@ class MenuOptionsCell: UITableViewCell {
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
         iconImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         iconImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 12).isActive = true
-        iconImageView.heightAnchor.constraint(equalToConstant: 24).isActive = true
-        iconImageView.widthAnchor.constraint(equalToConstant: 24).isActive = true
+        iconImageView.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        iconImageView.widthAnchor.constraint(equalToConstant: 35).isActive = true
         
         addSubview(descriptionLabel)
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -48,7 +47,7 @@ class MenuOptionsCell: UITableViewCell {
         
     }
     required init?(coder aDecoder: NSCoder) {
-        fatalError("dsada")
+        fatalError("Fatal Error")
     }
     // Mark: - Handlers
     
