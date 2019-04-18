@@ -32,6 +32,7 @@ class LoginWithExistingViewController: UIViewController {
         accountExistingView.emailToLogin.delegate = self
         accountExistingView.passwordToLogin.delegate = self
         authService.authserviceExistingAccountDelegate = self
+        hideKeyboardWhenTappedAround()
         
     }
     

@@ -27,6 +27,7 @@ class EditProfileViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(editProfile)
         introViewStuff()
+        hideKeyboardWhenTappedAround()
     }
 
     
