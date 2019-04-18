@@ -22,15 +22,16 @@ class CategoryCell: UICollectionViewCell {
     let categoryName: UILabel = {
         let catName = UILabel()
         catName.text = "Event Name"
-        catName.numberOfLines = 2
-        catName.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        catName.font = UIFont.init(name: "futura", size: 16)
+//        catName.numberOfLines = 2
+        catName.textAlignment = .center 
+        catName.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        catName.font = UIFont.init(name: "futura", size: 12)
         return catName
     }()
     
     let categoryImage: UIImageView = {
         let catImg = UIImageView()
-        catImg.image = UIImage(named: "icons8-ask-question-25")
+        catImg.image = UIImage(named: "icons8-health-calendar-100")
         catImg.contentMode = .scaleAspectFill
         catImg.layer.cornerRadius = 20
         catImg.layer.masksToBounds = true
@@ -58,14 +59,14 @@ class CategoryCell: UICollectionViewCell {
         categoryCellContainerView.addSubview(categoryImage)
         
         categoryName.snp.makeConstraints { (make) in
-            make.top.equalTo(10)
-            make.height.equalTo(25)
+            make.top.equalTo(15)
+            make.height.equalTo(15)
             make.left.equalTo(20)
             make.width.equalTo(50)
         }
         
         categoryImage.snp.makeConstraints { (make) in
-            make.top.equalTo(categoryName.snp.bottom).offset(15)
+            make.top.equalTo(categoryName.snp.bottom).offset(10)
             make.left.equalTo(20)
             make.right.equalTo(-20)
             make.height.equalTo(35)

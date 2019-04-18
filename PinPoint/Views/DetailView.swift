@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 
 class DetailView: UIView {
+  
     
     lazy var detailLabel: UILabel = {
         let label = UILabel()
@@ -32,11 +33,11 @@ class DetailView: UIView {
     lazy var detailTextView: UITextView = {
         let textView = UITextView()
         textView.isEditable = false
-        textView.backgroundColor = .yellow
+        textView.backgroundColor = .clear
         textView.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         textView.font = UIFont.init(name: "futura", size: 18)
         textView.text = "Key"
-        textView.textColor = .black
+        textView.textColor = .white
         return textView
     }()
 
@@ -74,7 +75,7 @@ class DetailView: UIView {
         commonInit()
     }
     private func commonInit(){
-        self.backgroundColor = #colorLiteral(red: 0.910360992, green: 0.1213598326, blue: 0.1217759624, alpha: 1)
+        self.backgroundColor = #colorLiteral(red: 1, green: 0.3315477967, blue: 0.3251088858, alpha: 1)
         setUpView()
     }
     private func setUpView(){
