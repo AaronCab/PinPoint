@@ -13,7 +13,9 @@ class HomeSplashView: UIView {
     // don't forget merge this new file
     lazy var splashView: UIView = {
         let vw = UIView(frame: CGRect(x: 100, y: 100, width: 128, height: 128))
-        vw.backgroundColor = #colorLiteral(red: 0.9615442157, green: 0.1090296283, blue: 0.1115608588, alpha: 1)
+        vw.backgroundColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
+        
+
         vw.layer.shadowOffset = .zero
         vw.layer.shadowColor = UIColor.yellow.cgColor
         vw.layer.shadowRadius = 20

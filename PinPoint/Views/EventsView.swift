@@ -18,7 +18,7 @@ class EventsView: UIView {
         layout.itemSize = CGSize.init(width: 400, height: 750)
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
-        cv.backgroundColor = .red
+        cv.backgroundColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
         return cv
     } ()
     override init(frame: CGRect) {
