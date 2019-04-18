@@ -61,7 +61,7 @@ class DetailViewController: UIViewController {
                 detailView.detailImageView.kf.setImage(with: URL(string: (custom.photoURL.description)), placeholder: UIImage(named: "pinpointred"))
             detailView.detailLabel.text = custom.displayName
             detailView.detailTextView.text = custom.eventDescription
-                if profileOfUser.coverImageURL == nil{
+                if profileOfUser.photoURL != nil{
                     detailView.displayUserPic.kf.setImage(with: URL(string: (profileOfUser.photoURL!)), placeholder: UIImage(named: "pinpointred"))
             }
                 else{
