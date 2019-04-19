@@ -34,6 +34,7 @@ class EditProfileView: UIView {
     
     var profilePicture: UIImageView = {
         let imageView = UIImageView()
+        imageView.layer.cornerRadius = 20
         imageView.image = UIImage(named: "placeholder-image")
         return imageView
     }()
@@ -41,7 +42,7 @@ class EditProfileView: UIView {
     var displayName: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
-        textField.layer.cornerRadius = 15
+      //  textField.layer.cornerRadius = 15
         textField.font = UIFont.init(name: "futura", size: 14)
         textField.placeholder = " U S E R N A M E"
         textField.font = UIFont.systemFont(ofSize: 14, weight: .light)
@@ -51,7 +52,7 @@ class EditProfileView: UIView {
     var email: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
-        textField.layer.cornerRadius = 15
+      //  textField.layer.cornerRadius = 15
         textField.font = UIFont.init(name: "futura", size: 14)
         textField.placeholder = " E M A I L"
         textField.font = UIFont.systemFont(ofSize: 14, weight: .light)
@@ -61,7 +62,7 @@ class EditProfileView: UIView {
     var firstName: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
-        textField.layer.cornerRadius = 15
+       // textField.layer.cornerRadius = 15
         textField.font = UIFont.init(name: "futura", size: 14)
         textField.font = UIFont.systemFont(ofSize: 14, weight: .light)
         textField.placeholder = "First Name"
@@ -71,7 +72,7 @@ class EditProfileView: UIView {
     var lastName: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
-        textField.layer.cornerRadius = 15
+       // textField.layer.cornerRadius = 15
         textField.font = UIFont.init(name: "futura", size: 14)
         textField.font = UIFont.systemFont(ofSize: 14, weight: .light)
         textField.placeholder = "Last Name"
@@ -82,7 +83,7 @@ class EditProfileView: UIView {
         let label = UILabel()
         label.backgroundColor = .clear
         label.textAlignment = .center
-        label.layer.cornerRadius = 15
+       // label.layer.cornerRadius = 15
         label.font = UIFont.init(name: "futura", size: 20)
         label.text = "B I O"
         return label
@@ -96,6 +97,29 @@ class EditProfileView: UIView {
         return button
     }()
     
+    lazy var stackViewContainer: UIView = {
+        let vc = UIView()
+        vc.layer.cornerRadius = 10
+        vc.layer.masksToBounds = true
+        vc.backgroundColor = .clear
+        return vc
+    }()
+
+    
+    lazy var fieldContainerView:  UIStackView = {
+        let fv = UIStackView(arrangedSubviews: [displayName,
+                                                email,
+                                                firstName,
+                                                lastName,
+                                                bioLabel  ])
+        fv.axis = .vertical
+        fv.distribution = .fillEqually
+        fv.spacing = 2
+        fv.layer.masksToBounds = true
+        fv.layer.cornerRadius = 10
+        return fv
+    }()
+    
     var saveEdit: UIButton = {
         let button = UIButton()
         button.setImage(#imageLiteral(resourceName: "icons8-compose-100"), for: .normal)
@@ -105,7 +129,7 @@ class EditProfileView: UIView {
     
     var picImage: UIButton = {
         let button = UIButton()
-         button.setImage(#imageLiteral(resourceName: "icons8-customer-240"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "icons8-customer-240"), for: .normal)
         button.backgroundColor = .white
         return button
     }()
@@ -113,18 +137,18 @@ class EditProfileView: UIView {
     private func commonInit(){
         addGradient()
         profilePictureConstrant()
-        displayNameConstrant()
-        firstNameConstrant()
-        lastNameConstrant()
+      //  displayNameConstrant()
+       // firstNameConstrant()
+       // lastNameConstrant()
         picImageConstrant()
-        emailConstrant()
+     //   emailConstrant()
         saveEditConstrant()
-        bioLabelConstrant()
+     //   bioLabelConstrant()
         bioConstrant()
     }
     
     
-    var loggedInUserModel: UserLogedInModel!{
+    var loggedInUserModel: ProfileOfUser!{
         didSet{
             bio.setTitle(loggedInUserModel.bio ?? "", for: .normal)
             if let picture = loggedInUserModel.photoURL{
@@ -152,82 +176,95 @@ extension EditProfileView{
         
         profilePicture.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 35).isActive = true
         profilePicture.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -35).isActive = true
-    }
-    
-    private func displayNameConstrant(){
-        addSubview(displayName)
-        displayName.translatesAutoresizingMaskIntoConstraints = false
-        displayName.topAnchor.constraint(equalTo: profilePicture.bottomAnchor, constant: 20).isActive = true
-        displayName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 35).isActive = true
-        displayName.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        displayName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -35).isActive = true
-    }
-    
-    
-    
-    private func firstNameConstrant(){
-        addSubview(firstName)
-        firstName.translatesAutoresizingMaskIntoConstraints = false
-        firstName.topAnchor.constraint(equalTo: displayName.bottomAnchor, constant: 15).isActive = true
-        firstName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 35).isActive = true
         
-        firstName.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        firstName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -35).isActive = true
+        self.addSubview(stackViewContainer)
+        stackViewContainer.addSubview(fieldContainerView)
+        stackViewContainer.snp.makeConstraints { (make) in
+            make.left.equalTo(20)
+            make.right.equalTo(-20)
+            make.top.equalTo(profilePicture.snp.bottom).offset(50)
+            make.height.equalTo(150)
+        }
+        fieldContainerView.snp.makeConstraints { (make) in
+            make.edges.equalTo(stackViewContainer)
+        }
+
     }
     
-    private func lastNameConstrant(){
-        addSubview(lastName)
-        lastName.translatesAutoresizingMaskIntoConstraints = false
-        lastName.topAnchor.constraint(equalTo: firstName.bottomAnchor, constant: 15).isActive = true
-        lastName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 35).isActive = true
-        
-        lastName.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        lastName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -35).isActive = true
-    }
-    
-    private func emailConstrant(){
-        addSubview(email)
-        email.translatesAutoresizingMaskIntoConstraints = false
-        email.topAnchor.constraint(equalTo: lastName.bottomAnchor, constant: 15).isActive = true
-        email.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 35).isActive = true
-        
-        email.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        email.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -35).isActive = true
-    }
-    
-    
-    private func bioLabelConstrant(){
-        addSubview(bioLabel)
-        bioLabel.translatesAutoresizingMaskIntoConstraints = false
-        bioLabel.topAnchor.constraint(equalTo: email.bottomAnchor, constant: 15).isActive = true
-        bioLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        bioLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
-    }
+//    private func displayNameConstrant(){
+//        addSubview(displayName)
+//        displayName.translatesAutoresizingMaskIntoConstraints = false
+//        displayName.topAnchor.constraint(equalTo: profilePicture.bottomAnchor, constant: 20).isActive = true
+//        displayName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 35).isActive = true
+//        displayName.heightAnchor.constraint(equalToConstant: 40).isActive = true
+//        displayName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -35).isActive = true
+//    }
+//
+//
+//
+//    private func firstNameConstrant(){
+//        addSubview(firstName)
+//        firstName.translatesAutoresizingMaskIntoConstraints = false
+//        firstName.topAnchor.constraint(equalTo: displayName.bottomAnchor, constant: 15).isActive = true
+//        firstName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 35).isActive = true
+//
+//        firstName.heightAnchor.constraint(equalToConstant: 40).isActive = true
+//        firstName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -35).isActive = true
+//    }
+//
+//    private func lastNameConstrant(){
+//        addSubview(lastName)
+//        lastName.translatesAutoresizingMaskIntoConstraints = false
+//        lastName.topAnchor.constraint(equalTo: firstName.bottomAnchor, constant: 15).isActive = true
+//        lastName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 35).isActive = true
+//
+//        lastName.heightAnchor.constraint(equalToConstant: 40).isActive = true
+//        lastName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -35).isActive = true
+//    }
+//
+//    private func emailConstrant(){
+//        addSubview(email)
+//        email.translatesAutoresizingMaskIntoConstraints = false
+//        email.topAnchor.constraint(equalTo: lastName.bottomAnchor, constant: 15).isActive = true
+//        email.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 35).isActive = true
+//
+//        email.heightAnchor.constraint(equalToConstant: 40).isActive = true
+//        email.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -35).isActive = true
+//    }
+//
+//
+//    private func bioLabelConstrant(){
+//        addSubview(bioLabel)
+//        bioLabel.translatesAutoresizingMaskIntoConstraints = false
+//        bioLabel.topAnchor.constraint(equalTo: email.bottomAnchor, constant: 15).isActive = true
+//        bioLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
+//        bioLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
+//    }
     
     private func picImageConstrant(){
         addSubview(picImage)
         picImage.translatesAutoresizingMaskIntoConstraints = false
         picImage.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
         picImage.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
-        picImage.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.3).isActive = true
-        picImage.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor,multiplier: 0.3).isActive = true
+        picImage.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.10).isActive = true
+        picImage.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor,multiplier: 0.10).isActive = true
     }
-
+    
     
     private func saveEditConstrant(){
         addSubview(saveEdit)
         saveEdit.translatesAutoresizingMaskIntoConstraints = false
         saveEdit.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
         saveEdit.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
-        saveEdit.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.3).isActive = true
-        saveEdit.heightAnchor.constraint(equalTo:safeAreaLayoutGuide.heightAnchor, multiplier: 0.3).isActive = true 
+        saveEdit.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.10).isActive = true
+        saveEdit.heightAnchor.constraint(equalTo:safeAreaLayoutGuide.heightAnchor, multiplier: 0.10).isActive = true
         
     }
     
     private func bioConstrant(){
         addSubview(bio)
         bio.translatesAutoresizingMaskIntoConstraints = false
-        bio.bottomAnchor.constraint(equalTo: picImage.topAnchor, constant: -10).isActive = true
+//        bio.bottomAnchor.constraint(equalTo: picImage.topAnchor, constant: -10).isActive = true
         bio.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 35).isActive = true
         bio.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -35).isActive = true
         bio.topAnchor.constraint(equalTo: bioLabel.bottomAnchor, constant: 25).isActive = true

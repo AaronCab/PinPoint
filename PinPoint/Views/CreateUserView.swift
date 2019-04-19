@@ -25,8 +25,8 @@ class CreateUserView: UIView {
     private var gradient: CAGradientLayer!
     
     private func addGradient(){
-        let firstColor = UIColor.init(red: 247/255, green: 0/255, blue: 0/255, alpha: 1)
-        let secondColor = UIColor.init(red: 247/255, green: 0/255, blue: 0/255, alpha: 1)
+        let firstColor = UIColor.init(red: 255/255, green: 0/255, blue: 0/255, alpha: 1)
+        let secondColor = UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
         gradient = CAGradientLayer()
         gradient.frame = self.bounds
         gradient.colors = [firstColor.cgColor, secondColor.cgColor]
@@ -49,7 +49,7 @@ class CreateUserView: UIView {
     var emailCreatedwith: UITextField = {
         let textfield = UITextField()
         textfield.backgroundColor = .white
-        textfield.textColor = .red
+        textfield.textColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
         textfield.placeholder = "Email"
         return textfield
     }()
@@ -57,7 +57,7 @@ class CreateUserView: UIView {
     var passwordCreatedWith: UITextField = {
         let textfield = UITextField()
         textfield.backgroundColor = .white
-        textfield.textColor = .red
+        textfield.textColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
         textfield.placeholder = "Password"
         textfield.isSecureTextEntry = true
         return textfield
@@ -66,7 +66,7 @@ class CreateUserView: UIView {
     var displayName: UITextField = {
         let textfield = UITextField()
         textfield.backgroundColor = .white
-        textfield.textColor = .red
+        textfield.textColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
         textfield.placeholder = "Display Name"
         return textfield
     }()
@@ -108,13 +108,13 @@ class CreateUserView: UIView {
     }()
     
     private func commonInit(){
-        addGradient()
         addSubview(cancel)
         addSubview(create)
         setUpView()
     }
     
     private func setUpView() {
+        addGradient()
         self.addSubview(logo)
         self.addSubview(stackViewContainer)
         stackViewContainer.addSubview(fieldContainerView)

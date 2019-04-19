@@ -27,7 +27,7 @@ class BioViewController: UIViewController {
         let rightBarItem = UIBarButtonItem(customView: bioView.save)
         bioView.save.addTarget(self, action: #selector(saveBio), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = rightBarItem
-        
+        hideKeyboardWhenTappedAround()
     }
     
  

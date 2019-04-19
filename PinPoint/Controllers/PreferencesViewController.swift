@@ -47,6 +47,7 @@ class PreferencesViewController: UIViewController {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         }
+        hideKeyboardWhenTappedAround()
     }
     
     @objc func imagePicker(){

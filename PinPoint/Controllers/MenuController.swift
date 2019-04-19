@@ -30,7 +30,7 @@ class MenuController: UIViewController {
         tableView.dataSource = self
         
         tableView.register(MenuOptionsCell.self, forCellReuseIdentifier: reuseIdentifier)
-        tableView.backgroundColor = .red
+        tableView.backgroundColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
         tableView.separatorStyle = .none
         tableView.rowHeight = 64
         
@@ -54,6 +54,7 @@ extension MenuController: UITableViewDataSource, UITableViewDelegate {
         cell.descriptionLabel.text = menuOption?.description
         cell.iconImageView.image = menuOption?.image
         cell.selectionStyle = .blue
+        cell.backgroundColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
         return cell
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -64,7 +65,7 @@ extension MenuController: UITableViewDataSource, UITableViewDelegate {
         header.textLabel?.font = UIFont(name: "Futura", size: 36)
         header.textLabel?.backgroundColor = UIColor.clear
         header.textLabel?.textColor = UIColor.white
-        header.contentView.backgroundColor = .red
+        header.contentView.backgroundColor = .clear
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let menuOption = MenuOption(rawValue: indexPath.row)

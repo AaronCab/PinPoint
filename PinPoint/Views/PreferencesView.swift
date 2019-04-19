@@ -12,16 +12,6 @@ import MapKit
 
 class PreferencesView: UIView {
 
-    private var gradient: CAGradientLayer!
-    
-    private func addGradient(){
-        let firstColor = UIColor.init(cgColor: #colorLiteral(red: 0.690956533, green: 0.0340622142, blue: 0.1003342643, alpha: 1))
-        let secondColor = UIColor.init(cgColor: #colorLiteral(red: 0.9200486541, green: 0.03262991831, blue: 0.1368149519, alpha: 1))
-        gradient = CAGradientLayer()
-        gradient.frame = self.bounds
-        gradient.colors = [firstColor.cgColor, secondColor.cgColor]
-        self.layer.insertSublayer(gradient, at: 0)
-    }
     
     let preferenceContainerView: UIView = {
         let pCV = UIView()
@@ -35,7 +25,7 @@ class PreferencesView: UIView {
             layout.scrollDirection = .vertical 
             layout.itemSize = CGSize.init(width: 100, height: 100)
             let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-            cv.backgroundColor = .red
+            cv.backgroundColor = #colorLiteral(red: 1, green: 0.3315477967, blue: 0.3251088858, alpha: 1)
             return cv
         }()
     
@@ -50,11 +40,12 @@ class PreferencesView: UIView {
     }()
     var locationButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.8669512868, green: 0.8864203095, blue: 0.8792492747, alpha: 0.8279109589)
+        button.backgroundColor = .white
         button.setTitleColor(#colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1), for: .normal)
         button.setTitle("Find Location", for: .normal)
         button.titleLabel?.font = UIFont(name:
             "futura", size: 18)
+        button.layer.cornerRadius = 15
         button.isEnabled = true
         return button
     }()
@@ -89,7 +80,7 @@ class PreferencesView: UIView {
     }
     private func commonInit(){
         self.categoryCollectionView.register(CategoryCell.self, forCellWithReuseIdentifier: "CategoryCell")
-        addGradient()
+          self.backgroundColor = #colorLiteral(red: 1, green: 0.3315477967, blue: 0.3251088858, alpha: 1)
         setUpView()
     }
    private func setUpView(){
