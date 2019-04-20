@@ -33,7 +33,7 @@ class BioView: UIView {
     lazy var cancel: UIButton = {
         var button = UIButton()
         button.setTitle("Cancel", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(#colorLiteral(red: 0.3249823451, green: 0.3050363064, blue: 0.3227334023, alpha: 1), for: .normal)
         button.isEnabled = true
         return button
     }()
@@ -41,7 +41,7 @@ class BioView: UIView {
     lazy var save: UIButton = {
         var button = UIButton()
         button.setTitle("Save Bio", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(#colorLiteral(red: 0.3249823451, green: 0.3050363064, blue: 0.3227334023, alpha: 1), for: .normal)
         button.isEnabled = true
         return button
     }()
