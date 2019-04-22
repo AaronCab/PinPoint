@@ -70,14 +70,31 @@ class DetailViewController: UIViewController {
                 
             }
             detailView.displayUserLabel.text = profileOfUser.displayName
-            detailView.messageButton.addTarget(self, action: #selector(messageVC), for: .touchUpInside)
+            detailView.messageButton.addTarget(self, action: #selector(addAsAFriend), for: .touchUpInside)
             
         }
     }
     
-    @objc func messageVC(){
-        let messageView = EventsViewController()
+    @objc func addAsAFriend(){
         
-        self.navigationController?.pushViewController(messageView, animated: true)
+      let alertController = UIAlertController(title: nil, message: "Are you sure you want add this person", preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction.init(title: "Sure", style: .default, handler: { (action) in
+            if let user = self.authService.getCurrentUser(){
+                let pendingFriend = DBService.firestoreDB.collection(ProfileCollectionKeys.CollectionKey).document(self.custom.personID)
+                
+                pendingFriend.updateData([
+                    ProfileCollectionKeys.PendingFriends : FieldValue.arrayUnion([user.uid])]) { (error) in
+                        if let error = error{
+                            self.showAlert(title: "error", message: error.localizedDescription)
+                            
+                        }else{
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                }
+            }
+        }))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        self.present(alertController, animated: true)
     }
+
 }

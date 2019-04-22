@@ -11,16 +11,16 @@ import UIKit
 class ChatLogTableViewCell: UITableViewCell {
     
     
-    let eventName: UILabel = {
-        let en = UILabel()
-        en.text = "Event Name"
-        en.numberOfLines = 2
-        en.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        en.font = UIFont.init(name: "futura", size: 16)
-        return en
+    let friendName: UILabel = {
+        let fn = UILabel()
+        fn.text = "Event Name"
+        fn.numberOfLines = 2
+        fn.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        fn.font = UIFont.init(name: "futura", size: 16)
+        return fn
     }()
     
-    let eventImageView: UIImageView = {
+    let friendImageView: UIImageView = {
         let ei = UIImageView()
         ei.image = UIImage(named: "icons8-ask-question-25")
         ei.contentMode = .scaleAspectFill
@@ -63,8 +63,8 @@ class ChatLogTableViewCell: UITableViewCell {
     
     private func setupCell() {
         self.addSubview(chatStackView)
-        chatStackView.addSubview(eventImageView)
-        chatStackView.addSubview(eventName)
+        chatStackView.addSubview(friendImageView)
+        chatStackView.addSubview(friendName)
         chatStackView.addSubview(yesButton)
         chatStackView.addSubview(noButton)
         
@@ -72,18 +72,22 @@ class ChatLogTableViewCell: UITableViewCell {
             make.edges.equalToSuperview()
         }
         
-        eventImageView.snp.makeConstraints { (make) in
+        friendImageView.snp.makeConstraints { (make) in
             make.left.equalTo(5)
             make.height.width.equalTo(50)
         }
         
-        eventName.snp.makeConstraints { (make) in
-            make.left.equalTo(eventImageView.snp.right).offset(5)
+        friendName.snp.makeConstraints { (make) in
+            make.left.equalTo(friendImageView.snp.right)
+            make.centerY.equalToSuperview()
+        }
+        yesButton.snp.makeConstraints { (make) in
+            make.left.equalTo(friendName.snp.right)
             make.centerY.equalToSuperview()
         }
         
-        yesButton.snp.makeConstraints { (make) in
-            make.left.equalTo(eventName.snp.right).offset(5)
+        noButton.snp.makeConstraints { (make) in
+            make.left.equalTo(yesButton.snp_right)
             make.centerY.equalToSuperview()
         }
         

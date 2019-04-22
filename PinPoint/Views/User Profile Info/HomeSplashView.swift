@@ -12,18 +12,28 @@ import SnapKit
 class HomeSplashView: UIView {
     // don't forget merge this new file
     lazy var splashView: UIView = {
-        let vw = UIView(frame: CGRect(x: 100, y: 100, width: 128, height: 128))
-        vw.backgroundColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
-        
-        vw.layer.shadowRadius = 20
-        vw.layer.shadowOpacity = 0
+//        let vw = UIView(frame: CGRect(x: 100, y: 100, width: 300, height: 300))
+        let vw = UIView()
+     vw.backgroundColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
+        vw.layer.shadowColor = UIColor.black.cgColor
+        vw.layer.shadowOpacity = 1
+        vw.layer.shadowOffset = CGSize.zero
+        vw.layer.shadowRadius = 10
         vw.layer.shadowPath = UIBezierPath(rect: vw.bounds).cgPath
+        vw.layer.shouldRasterize = true
+
         return vw
     }()
     
     
     let logoImage: UIImageView = {
         let li = UIImageView()
+        li.layer.shadowColor = UIColor.black.cgColor
+        li.layer.shadowOpacity = 1
+        li.layer.shadowOffset = CGSize.zero
+        li.layer.shadowRadius = 10
+        li.layer.shadowPath = UIBezierPath(rect: li.bounds).cgPath
+        li.layer.shouldRasterize = true
         li.image = UIImage(#imageLiteral(resourceName: "IMG_0279.PNG"))
         return li
     }()
@@ -48,11 +58,12 @@ class HomeSplashView: UIView {
         splashView.addSubview(logoImage)
         splashView.snp.makeConstraints { (make) in
             make.centerWithinMargins.equalToSuperview()
-           make.top.right.equalTo(50)
-            make.bottom.left.equalTo(-50)
+          // make.top.right.equalTo(50)
+         //   make.bottom.left.equalTo(-50)
+            make.edges.equalToSuperview()
         }
         logoImage.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
+            make.center.equalTo(splashView.snp.center)
             make.height.equalTo(300)
             make.width.equalTo(350)
         }

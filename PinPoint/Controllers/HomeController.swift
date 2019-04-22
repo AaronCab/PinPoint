@@ -173,11 +173,11 @@ class HomeController: UIViewController {
     }
     func friendRequestsPageOn() {
         self.navigationItem.rightBarButtonItem = nil
-        contentView.removeFromSuperview()
-        contentView = UIView.init(frame: UIScreen.main.bounds)
         self.navigationItem.title = "F R I E N D  R E Q U E S T S"
-        contentView.addSubview(requestsView)
-        view.addSubview(contentView)
+        let friendVC = EventsViewController()
+        self.navigationController?.pushViewController(friendVC, animated: true)
+//        contentView.addSubview(friendVC.view)
+//        view.addSubview(contentView)
     }
     func eventsPageOn() {
         self.navigationItem.rightBarButtonItem = nil
@@ -387,13 +387,49 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         }
         let addCalendarAction = UIAlertAction(title: "Add to Calendar", style: .default, handler: { alert in
             let thisEvent = self.event[senderTag.tag]
-            let addedToCalender = EventsDataModel.init()
+//
+//
+//            let addToCalendar = EventCalendarData(description: (thisEvent.name?.text)!, createdAt: date!)
+//
+//            addEventToCalendar(date: , title: thisEvent.name?.text)
+//            self.showAlert(title: "PinPoint", message: "Successfully Added to Calendar")
         })
         alertController.addAction(cancelAction)
         alertController.addAction(favoriteActione)
         alertController.addAction(addCalendarAction)
         present(alertController, animated: true)
         
+    }
+    func addEventToCalendar(date: Date, title: String) {
+        let eventStore: EKEventStore = EKEventStore()
+        eventStore.requestAccess(to: .event) {(granted, error) in
+            if (granted) && (error == nil)
+            {
+                print("granted \(granted)")
+                print("error \(error)")
+                
+                let event:EKEvent = EKEvent(eventStore: eventStore)
+                DispatchQueue.main.async {
+                    event.title = title
+                }
+                event.startDate = date
+                event.endDate = date
+                event.calendar = eventStore.defaultCalendarForNewEvents
+                do {
+                    try eventStore.save(event, span: .thisEvent)
+                } catch let error as NSError{
+                    print("error: \(error)")
+                }
+                //                let
+                //                EventsDataModel.addEvent(event: <#T##EventsData#>)
+                
+            } else {
+                print("error: \(error)")
+                
+            }
+            
+        }
+        print("pressed")
     }
     @objc func moreInfoDisvover(senderTag: UIButton){
         guard let user = authService.getCurrentUser() else {
