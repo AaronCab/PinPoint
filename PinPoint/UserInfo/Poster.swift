@@ -20,6 +20,7 @@ struct ProfileOfUser {
     let lastName: String?
     let bio: String?
     let friends: [String]?
+    let pendingFriends: [String]?
     let blockedUser: [String]?
     
     public var fullName: String {
@@ -35,8 +36,9 @@ struct ProfileOfUser {
          firstName: String?,
          lastName: String?,
          bio: String?,
-         friends: [String],
-         blockedUser: [String]) {
+         friends: [String]?,
+         blockedUser: [String]?,
+         pendingFriends: [String]?) {
         self.ProfileId = userId
         self.displayName = displayName
         self.email = email
@@ -48,6 +50,7 @@ struct ProfileOfUser {
         self.bio = bio
         self.friends = friends
         self.blockedUser = blockedUser
+        self.pendingFriends = pendingFriends
     }
     
     init(dict: [String: Any]) {
@@ -62,5 +65,6 @@ struct ProfileOfUser {
         self.bio = dict[ProfileCollectionKeys.BioKey] as? String ?? "fellow bloggers are looking forward to reading your bio"
         self.friends = dict[ProfileCollectionKeys.FriendsKey] as? [String] ?? [""]
         self.blockedUser = dict[ProfileCollectionKeys.isBlocked] as? [String] ?? [""]
+        self.pendingFriends = dict[ProfileCollectionKeys.PendingFriends] as? [String] ?? [""]
     }
 }
