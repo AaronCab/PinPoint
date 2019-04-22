@@ -31,13 +31,15 @@ class ChatLogTableViewCell: UITableViewCell {
     
     let yesButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "Yes"), for: .normal)
+      //  button.setImage(UIImage(named: "Yes"), for: .normal)
+        button.setImage(UIImage(#imageLiteral(resourceName: "icons8-ok-100.png")), for: .normal)
         return button
     }()
     
     let noButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "No"), for: .normal)
+//        button.setImage(UIImage(named: "No"), for: .normal)
+        button.setImage(UIImage(#imageLiteral(resourceName: "sports.png")), for: .normal)
         return button
     }()
     
@@ -73,21 +75,25 @@ class ChatLogTableViewCell: UITableViewCell {
         }
         
         friendImageView.snp.makeConstraints { (make) in
-            make.left.equalTo(5)
+            make.left.equalTo(25)
             make.height.width.equalTo(50)
+            make.centerY.equalToSuperview()
         }
         
         friendName.snp.makeConstraints { (make) in
-            make.left.equalTo(friendImageView.snp.right)
+            make.left.equalTo(friendImageView.snp.right).offset(5)
+            make.height.width.equalTo(50)
             make.centerY.equalToSuperview()
         }
         yesButton.snp.makeConstraints { (make) in
-            make.left.equalTo(friendName.snp.right)
+            make.right.equalTo(noButton.snp.left).offset(-5)
+            make.height.width.equalTo(50)
             make.centerY.equalToSuperview()
         }
         
         noButton.snp.makeConstraints { (make) in
-            make.left.equalTo(yesButton.snp_right)
+            make.right.equalToSuperview().offset(-25)
+            make.height.width.equalTo(50)
             make.centerY.equalToSuperview()
         }
         
