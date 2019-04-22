@@ -22,7 +22,6 @@ class CategoryCell: UICollectionViewCell {
     let categoryName: UILabel = {
         let catName = UILabel()
         catName.text = "Event Name"
-//        catName.numberOfLines = 2
         catName.textAlignment = .center 
         catName.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
         catName.font = UIFont.init(name: "futura", size: 12)
