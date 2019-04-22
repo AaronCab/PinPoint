@@ -23,9 +23,10 @@ class EventsCell: UICollectionViewCell {
     let eventName: UILabel = {
         let en = UILabel()
         en.text = "Event Name"
+        en.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        en.font = UIFont.init(name: "futura", size: 16)
         en.numberOfLines = 2
-        en.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-        en.font = UIFont.init(name: "futura", size: 15)
+        en.textAlignment = .center 
         return en
     }()
     
@@ -96,9 +97,8 @@ class EventsCell: UICollectionViewCell {
         
         eventName.snp.makeConstraints { (make) in
             make.top.equalTo(eventCellContainerView.snp.top)
-            
-            make.centerX.equalTo(eventCellContainerView.snp.centerX)
-            
+            make.left.equalTo(20)
+            make.right.equalTo(-20)
             
         }
         eventImageView.snp.makeConstraints { (make) in
@@ -110,8 +110,8 @@ class EventsCell: UICollectionViewCell {
         }
         eventDescription.snp.makeConstraints { (make) in
             make.top.equalTo(eventImageView.snp.bottom).offset(15)
-            make.left.equalTo(20)
-            make.right.equalTo(-20)
+            make.left.equalTo(25)
+            make.right.equalTo(-25)
             make.height.equalTo(200)
         }
         eventStartTime.snp.makeConstraints { (make) in
