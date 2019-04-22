@@ -247,20 +247,8 @@
 		93088BC0225BAECD0067F09D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0D636EAD22678459008E5128 /* HomeSplashView.swift */,
-				93088BB9225BA6F90067F09D /* LoginView.swift */,
-				93088BBB225BA70A0067F09D /* CreateUserView.swift */,
-				93088BBD225BA7200067F09D /* AccountExistingView.swift */,
-				93088BDA225E3A0D0067F09D /* EventsView.swift */,
-				93088BDE225E3D620067F09D /* PreferencesView.swift */,
-				93088BE2225E3DAA0067F09D /* InterestView.swift */,
-				93088BF0225E54430067F09D /* FavoritesView.swift */,
-				93088BF4225E54C30067F09D /* CreatedView.swift */,
-				93088BF8225E55020067F09D /* ProfileView.swift */,
-				9311D704226122D000AF2BC6 /* DetailView.swift */,
-				9311D7082264D31D00AF2BC6 /* EditProfileView.swift */,
-				9311D70A2264DF6C00AF2BC6 /* DiscoverView.swift */,
-				93FF2FB32264FF2500A350E2 /* BioView.swift */,
+				93C9A871226E68DA00146B3E /* User Profile Info */,
+				93C9A872226E693C00146B3E /* Event Info  */,
 				961AF28D2267874A00C8E07F /* LocationView.swift */,
 				96E1BD93226A1DEF00F43C01 /* ChatLogView.swift */,
 			);
@@ -351,6 +339,34 @@
 				9314F78A2257B2F4009E0BB7 /* GoogleService-Info.plist */,
 			);
 			path = PinPoint;
+			sourceTree = "<group>";
+		};
+		93C9A871226E68DA00146B3E /* User Profile Info */ = {
+			isa = PBXGroup;
+			children = (
+				0D636EAD22678459008E5128 /* HomeSplashView.swift */,
+				93088BBB225BA70A0067F09D /* CreateUserView.swift */,
+				93088BBD225BA7200067F09D /* AccountExistingView.swift */,
+				93FF2FB32264FF2500A350E2 /* BioView.swift */,
+				93088BF8225E55020067F09D /* ProfileView.swift */,
+				9311D7082264D31D00AF2BC6 /* EditProfileView.swift */,
+				93088BB9225BA6F90067F09D /* LoginView.swift */,
+			);
+			path = "User Profile Info";
+			sourceTree = "<group>";
+		};
+		93C9A872226E693C00146B3E /* Event Info  */ = {
+			isa = PBXGroup;
+			children = (
+				93088BDA225E3A0D0067F09D /* EventsView.swift */,
+				93088BDE225E3D620067F09D /* PreferencesView.swift */,
+				93088BE2225E3DAA0067F09D /* InterestView.swift */,
+				93088BF0225E54430067F09D /* FavoritesView.swift */,
+				93088BF4225E54C30067F09D /* CreatedView.swift */,
+				9311D704226122D000AF2BC6 /* DetailView.swift */,
+				9311D70A2264DF6C00AF2BC6 /* DiscoverView.swift */,
+			);
+			path = "Event Info ";
 			sourceTree = "<group>";
 		};
 		D9B7DBB19B1F6A174232B3E6 /* Pods */ = {
