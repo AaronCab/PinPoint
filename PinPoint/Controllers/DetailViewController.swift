@@ -62,13 +62,20 @@ class DetailViewController: UIViewController {
             detailView.detailLabel.text = custom.displayName
             detailView.detailTextView.text = custom.eventDescription
                 if profileOfUser.photoURL != nil{
-                    detailView.displayUserPic.kf.setImage(with: URL(string: (profileOfUser.photoURL!)), placeholder: UIImage(named: "pinpointred"))
+                    detailView.displayUserPic.kf.setImage(with: URL(string: (profileOfUser.photoURL)!), placeholder: UIImage(named: "pinpointred"))
             }
                 else{
                     detailView.displayUserPic.image = UIImage(named: "pinpointred")
                 }
                 detailView.displayUserLabel.text = profileOfUser.displayName
+            detailView.messageButton.addTarget(self, action: #selector(messageVC), for: .touchUpInside)
             
     }
+    }
+    
+    @objc func messageVC(){
+        let messageView = EventsViewController()
+        
+    self.navigationController?.pushViewController(messageView, animated: true)
     }
 }

@@ -14,7 +14,7 @@
   pod 'Toucan'
   pod 'SnapKit'
   pod 'Firebase/Messaging'
-
+  pod 'Firebase/Database'
   pod 'SCLAlertView'
 
 
