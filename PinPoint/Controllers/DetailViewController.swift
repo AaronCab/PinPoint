@@ -33,9 +33,9 @@ class DetailViewController: UIViewController {
         if favorite != nil{
             detailView.detailImageView.kf.indicatorType = .activity
             if favorite.imageUrl == nil{
-                detailView.detailImageView.image = UIImage(named: "pinpointred")
+                detailView.detailImageView.image = UIImage(named: "PinPoint_Logo_Clear")
             }else{
-                detailView.detailImageView.kf.setImage(with: URL(string: (favorite.imageUrl!)), placeholder: UIImage(named: "pinpointred"))
+                detailView.detailImageView.kf.setImage(with: URL(string: (favorite.imageUrl!)), placeholder: UIImage(named: "PinPoint_Logo_Clear"))
             }
             detailView.detailLabel.text = favorite.name
             detailView.detailTextView.text = favorite.description
@@ -44,9 +44,9 @@ class DetailViewController: UIViewController {
         if event != nil{
         detailView.detailImageView.kf.indicatorType = .activity
         if event.logo?.original.url == nil{
-            detailView.detailImageView.image = UIImage(named: "pinpointred")
+            detailView.detailImageView.image = UIImage(named: "PinPoint_Logo_Clear")
         }else{
-            detailView.detailImageView.kf.setImage(with: URL(string: (event.logo?.original.url)!), placeholder: UIImage(named: "pinpointred"))
+            detailView.detailImageView.kf.setImage(with: URL(string: (event.logo?.original.url)!), placeholder: UIImage(named: "PinPoint_Logo_Clear"))
         }
         detailView.detailLabel.text = event.name?.text
             detailView.detailTextView.text = event.description?.text
@@ -58,14 +58,15 @@ class DetailViewController: UIViewController {
         }
         if custom != nil{
             detailView.detailImageView.kf.indicatorType = .activity
-                detailView.detailImageView.kf.setImage(with: URL(string: (custom.photoURL.description)), placeholder: UIImage(named: "pinpointred"))
+                detailView.detailImageView.kf.setImage(with: URL(string: (custom.photoURL.description)), placeholder: UIImage(named: "PinPoint_Logo_Clear"))
             detailView.detailLabel.text = custom.displayName
             detailView.detailTextView.text = custom.eventDescription
                 if profileOfUser.photoURL != nil{
-                    detailView.displayUserPic.kf.setImage(with: URL(string: (profileOfUser.photoURL!)), placeholder: UIImage(named: "pinpointred"))
+                    detailView.displayUserPic.kf.setImage(with: URL(string: (profileOfUser.photoURL!)), placeholder: UIImage(named: "PinPoint_Logo_Clear"))
             }
                 else{
-                    detailView.displayUserPic.image = UIImage(named: "pinpointred")
+                    detailView.displayUserPic.image = UIImage(named: "PinPoint_Logo_Clear")
+                    
                 }
                 detailView.displayUserLabel.text = profileOfUser.displayName
             

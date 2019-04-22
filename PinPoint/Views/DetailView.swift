@@ -25,6 +25,9 @@ class DetailView: UIView {
     lazy var detailImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "icons8-ask-question-25")
+        image.backgroundColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
+
+
         image.contentMode = .scaleAspectFill
         image.layer.cornerRadius = 20
         image.layer.masksToBounds = true
@@ -37,12 +40,12 @@ class DetailView: UIView {
         textView.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         textView.font = UIFont.init(name: "futura", size: 18)
         textView.text = "Key"
-        textView.textColor = .white
+        textView.textColor = #colorLiteral(red: 1, green: 0.3315477967, blue: 0.3251088858, alpha: 1)
         return textView
     }()
 
-    lazy var displayUserPic: UIImageView = {
-        let userPic = UIImageView()
+    lazy var displayUserPic: CircularImageView = {
+        let userPic = CircularImageView()
         userPic.image = UIImage(named: "placeholder-image")
         userPic.contentMode = .scaleAspectFill
         userPic.layer.masksToBounds = true
@@ -75,7 +78,7 @@ class DetailView: UIView {
         commonInit()
     }
     private func commonInit(){
-        self.backgroundColor = #colorLiteral(red: 1, green: 0.3315477967, blue: 0.3251088858, alpha: 1)
+        self.backgroundColor = .white
         setUpView()
     }
     private func setUpView(){
