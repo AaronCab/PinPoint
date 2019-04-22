@@ -80,14 +80,15 @@ class DetailViewController: UIViewController {
       let alertController = UIAlertController(title: nil, message: "Are you sure you want add this person", preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction.init(title: "Sure", style: .default, handler: { (action) in
             if let user = self.authService.getCurrentUser(){
-                let pendingFriend = DBService.firestoreDB.collection(ProfileCollectionKeys.CollectionKey).document(self.custom.documentId)
-                
+                let pendingFriend = DBService.firestoreDB.collection(ProfileCollectionKeys.CollectionKey).document(self.custom.personID)
                 
                 pendingFriend.updateData([
-                    ProfileCollectionKeys.FriendsKey : FieldValue.arrayUnion([user.uid])]) { (error) in
+                    ProfileCollectionKeys.PendingFriends : FieldValue.arrayUnion([user.uid])]) { (error) in
                         if let error = error{
                             self.showAlert(title: "error", message: error.localizedDescription)
                             
+                        }else{
+                            self.dismiss(animated: true, completion: nil)
                         }
                 }
             }
