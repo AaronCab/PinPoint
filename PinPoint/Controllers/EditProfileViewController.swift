@@ -108,7 +108,7 @@ class EditProfileViewController: UIViewController {
     ProfileCollectionKeys.BioKey: bio ])
     }
     }
-        self.dismiss(animated: true)
+        self.navigationController?.popViewController(animated: true)
         self.navigationItem.rightBarButtonItem?.isEnabled = true
     }
         else{

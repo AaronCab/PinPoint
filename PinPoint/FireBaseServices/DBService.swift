@@ -19,7 +19,6 @@ struct EventCollectionKeys {
     static let Long = "long"
     static let EmailKey = "email"
     static let IsTrusted = "isTrusted"
-    static let isBlocked = "isBlocked"
     static let CreatedAt = "createdAt"
     static let EventDescription = "eventDescription"
     static let EventType = "eventType"
@@ -38,6 +37,7 @@ struct ProfileCollectionKeys {
     static let BioKey = "bio"
     static let FriendsKey = "friendsKey"
     static let PhotoBucket = "photoBucket"
+    static let isBlocked = "isBlocked"
 }
 
 

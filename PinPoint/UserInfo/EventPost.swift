@@ -18,11 +18,10 @@ struct EventCreatedByUser {
     let displayName: String
     let email: String
     let eventType: String
-    let isTrustedUser: Bool
-    let isBlocked: Bool
+    let isTrustedUser: [String]?
     let documentId: String
     
-    init(createdAt: String, personID: String, photoURL: String, eventDescription: String, lat: Double, long: Double, displayName: String, email: String, isTrustedUser: Bool, isBlocked: Bool, eventType: String, documentID: String){
+    init(createdAt: String, personID: String, photoURL: String, eventDescription: String, lat: Double, long: Double, displayName: String, email: String, isTrustedUser: [String], isBlocked: Bool, eventType: String, documentID: String){
         self.createdAt = createdAt
         self.personID = personID
         self.photoURL = photoURL
@@ -33,7 +32,6 @@ struct EventCreatedByUser {
         self.email = email
         self.eventType = eventType
         self.isTrustedUser = isTrustedUser
-        self.isBlocked = isBlocked
         self.documentId = documentID
     }
     init(dict: [String: Any]) {
@@ -45,8 +43,7 @@ struct EventCreatedByUser {
         self.long = dict[EventCollectionKeys.Long] as? Double ?? 0.0
         self.displayName = dict[EventCollectionKeys.DisplayNameKey] as? String ?? "No DisplayName"
         self.email = dict[EventCollectionKeys.EmailKey] as? String ?? "No email"
-        self.isTrustedUser = dict[EventCollectionKeys.IsTrusted] as? Bool ?? false
-        self.isBlocked = dict[EventCollectionKeys.isBlocked] as? Bool ?? false
+        self.isTrustedUser = dict[EventCollectionKeys.IsTrusted] as? [String] ?? [""]
         self.eventType = dict[EventCollectionKeys.EventType] as? String ?? "No event type"
         self.documentId = dict[EventCollectionKeys.DocumentIdKey] as? String ?? "No ID"
     }
