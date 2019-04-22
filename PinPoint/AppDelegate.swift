@@ -20,6 +20,7 @@ import Firebase
             let containerView = ContainerController()
             window?.rootViewController = containerView
             window?.makeKeyAndVisible()
+        self.window?.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             return true
         //added comment
     }
