@@ -320,7 +320,9 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         }
         if collectionView == preferencesView.categoryCollectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
-            cell.categoryName.text = catagoriesInAnArray[indexPath.row]
+            let category = catagoriesInAnArray[indexPath.row]
+            cell.categoryName.text = category
+            cell.categoryImage.image = UIImage(named: category)
             return cell
         }
         else {
