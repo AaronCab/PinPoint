@@ -37,7 +37,7 @@ class HomeController: UIViewController {
     var eventCell = EventsCell()
     let loginView = LoginView()
     let requestsView = RequestsView()
-    var eventsCalendar = EventsDataModel.getEventData()
+    var eventsInCalendar = EventsDataModel.getEventData()
     
     var catagories = [
         "Business": "101",
@@ -58,6 +58,8 @@ class HomeController: UIViewController {
             }
         }
     }
+    
+    
     let authService = AppDelegate.authservice
     private var listener: ListenerRegistration!
     var createdEvent = [EventCreatedByUser](){
@@ -382,7 +384,8 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             self.showAlert(title: "PinPoint", message: "Successfully Favorites Event")
         }
         let addCalendarAction = UIAlertAction(title: "Add to Calendar", style: .default, handler: { alert in
-            
+            let thisEvent = self.event[senderTag.tag]
+            let addedToCalender = EventsDataModel.init()
         })
         alertController.addAction(cancelAction)
         alertController.addAction(favoriteActione)
