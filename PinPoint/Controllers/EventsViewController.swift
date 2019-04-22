@@ -17,22 +17,24 @@ class EventsViewController: UIViewController {
     // needs to be renamed
     
     var chatView = ChatLogView()
-    let ref = Database.database().reference().child("messages")
     let authService = AppDelegate.authservice
     var listener: ListenerRegistration!
-    var loggedInUserModel: ProfileOfUser!
+    var loggedInUserModel: ProfileOfUser!{
+        didSet{
+//            self.chatView.chatLogTableView.reloadData()
+            chatView.chatLogTableView.dataSource = self
+            chatView.chatLogTableView.delegate = self
+        }
+    }
     var friendThatRequested: ProfileOfUser!
-    let friendRef = Database.database().reference().child(ProfileCollectionKeys.FriendsKey)
-    let pendingFriendRef = Database.database().reference().child(ProfileCollectionKeys.PendingFriends)
 
     
   
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(chatView)
-        chatView.chatLogTableView.dataSource = self
-        chatView.chatLogTableView.delegate = self
         updateUser()
+
     }
   
 }
@@ -53,12 +55,24 @@ extension EventsViewController: UITableViewDelegate, UITableViewDataSource{
             cell.textLabel?.text = "No friends request found"
             return UITableViewCell()
         }
+        let friend = updateFriend(friendID: pendingFriends[indexPath.row])
         
-        cell.textLabel?.text = pendingFriends[indexPath.row]
+        cell.friendName.text = friend?.displayName
+        cell.noButton.tag = indexPath.row
+        cell.yesButton.tag = indexPath.row
+        if friend?.photoURL != nil{
+            cell.friendImageView.kf.setImage(with: URL(string: (friend?.photoURL)!), placeholder: UIImage(named: "pinpointred"))
+        }else{
+            cell.friendImageView.image = UIImage(named: "pinpointred")
+        }
+
         
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 300
+    }
     
 }
 
@@ -76,6 +90,22 @@ func updateUser(){
     }
     })
     }
+    }
+    
+    func updateFriend(friendID: String) -> ProfileOfUser?{
+        var friendFound: ProfileOfUser?
+        if let user = authService.getCurrentUser(){
+            self.listener = DBService.firestoreDB
+                .collection(ProfileCollectionKeys.CollectionKey)
+                .addSnapshotListener({ (data, error) in
+                    if let data = data{
+                        friendFound = data.documents.map { ProfileOfUser(dict: $0.data()) }
+                            .filter(){$0.ProfileId == friendID}.first
+                        
+                    }
+                })
+        }
+        return friendFound
     }
     
     @objc func acceptedRequest(tag: UIButton){
