@@ -40,8 +40,11 @@ class CreatedView: UIView {
     }()
     lazy var label: UILabel = {
         let label = UILabel()
+        label.text = "Event Name"
+        label.numberOfLines = 2
+        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        label.font = UIFont.init(name: "futura", size: 16)
         label.textAlignment = .center
-        label.font = UIFont(name: "futura", size: 30.0)
         return label
     }()
     lazy var textView: UITextView = {
@@ -71,39 +74,57 @@ class CreatedView: UIView {
         addGradient()
         addSubview(cancel)
         addSubview(create)
-        imageConstraints()
-        labelConstraint()
-        textViewConstraint()
+        addSubview(label)
+        addSubview(textView)
+        addSubview(createdPicture)
+        label.snp.makeConstraints { (make) in
+            make.topMargin.equalTo(self.snp_topMargin).offset(15)
+            make.width.equalTo(350)
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
+        }
+        createdPicture.snp.makeConstraints { (make) in
+            make.top.equalTo(label.snp.bottom)
+            make.width.equalTo(350)
+            make.height.equalTo(350)
+            make.centerX.equalTo(self.snp.centerX)
+        }
+        textView.snp.makeConstraints { (make) in
+            make.top.equalTo(createdPicture.snp.bottom).offset(15)
+            make.left.equalTo(35)
+            make.right.equalTo(-35)
+            make.height.equalTo(200)
+        }
     }
     
 }
 extension CreatedView{
     
-        private func imageConstraints(){
-        addSubview(createdPicture)
-        createdPicture.translatesAutoresizingMaskIntoConstraints = false
-        createdPicture.topAnchor.constraint(equalTo: topAnchor, constant: 100).isActive = true
-        createdPicture.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.5).isActive = true
-        createdPicture.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.5).isActive = true
-        createdPicture.centerXAnchor.constraint(equalTo:safeAreaLayoutGuide.centerXAnchor).isActive = true
-    }
-    private func labelConstraint(){
-        addSubview(label)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.topAnchor.constraint(equalTo: createdPicture.bottomAnchor, constant: 8).isActive = true
-        label.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, constant: 30).isActive = true
-        
-    }
-    
-    private func textViewConstraint(){
-        addSubview(textView)
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 10).isActive = true
-        textView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.3).isActive = true
-        textView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 1).isActive = true
-        textView.centerXAnchor.constraint(equalTo:safeAreaLayoutGuide.centerXAnchor).isActive = true
-        
-    }
+//        private func imageConstraints(){
+//        addSubview(createdPicture)
+//        createdPicture.translatesAutoresizingMaskIntoConstraints = false
+//        createdPicture.topAnchor.constraint(equalTo: topAnchor, constant: 100).isActive = true
+//        createdPicture.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.5).isActive = true
+//        createdPicture.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.5).isActive = true
+//        createdPicture.centerXAnchor.constraint(equalTo:safeAreaLayoutGuide.centerXAnchor).isActive = true
+//    }
+//    private func labelConstraint(){
+//        addSubview(label)
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.topAnchor.constraint(equalTo: createdPicture.bottomAnchor, constant: 8).isActive = true
+//        label.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, constant: 30).isActive = true
+//
+//    }
+//
+//    private func textViewConstraint(){
+//        addSubview(textView)
+//        textView.translatesAutoresizingMaskIntoConstraints = false
+//        textView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 10).isActive = true
+//        textView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.3).isActive = true
+//        textView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 1).isActive = true
+//        textView.centerXAnchor.constraint(equalTo:safeAreaLayoutGuide.centerXAnchor).isActive = true
+//
+//    }
 
 }
 
