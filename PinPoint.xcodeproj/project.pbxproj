@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		05256F68225E739E0060B9B1 /* MenuCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05256F67225E739E0060B9B1 /* MenuCategories.swift */; };
+		05522F0D226E4A98007B112D /* EventsCalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05522F0C226E4A98007B112D /* EventsCalendarModel.swift */; };
+		05522F0F226E4B01007B112D /* EventsCalendarData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05522F0E226E4B01007B112D /* EventsCalendarData.swift */; };
+		05522F11226E4C38007B112D /* DataPersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05522F10226E4C38007B112D /* DataPersistenceManager.swift */; };
 		05C7284C22666A2C000F353E /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C7284B22666A2C000F353E /* CategoryModel.swift */; };
 		0D636EAE22678459008E5128 /* HomeSplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D636EAD22678459008E5128 /* HomeSplashView.swift */; };
 		93088B9D225B95E20067F09D /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93088B9C225B95E20067F09D /* Date+Extensions.swift */; };
@@ -78,10 +81,15 @@
 		961AF28C226785D000C8E07F /* LocationResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961AF28B226785D000C8E07F /* LocationResultController.swift */; };
 		961AF28E2267874A00C8E07F /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961AF28D2267874A00C8E07F /* LocationView.swift */; };
 		961AF290226788B600C8E07F /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961AF28F226788B600C8E07F /* LocationTableViewCell.swift */; };
+		96E1BD94226A1DEF00F43C01 /* ChatLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E1BD93226A1DEF00F43C01 /* ChatLogView.swift */; };
+		96E1BD96226A1F1900F43C01 /* ChatLogTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E1BD95226A1F1900F43C01 /* ChatLogTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		05256F67225E739E0060B9B1 /* MenuCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCategories.swift; sourceTree = "<group>"; };
+		05522F0C226E4A98007B112D /* EventsCalendarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsCalendarModel.swift; sourceTree = "<group>"; };
+		05522F0E226E4B01007B112D /* EventsCalendarData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsCalendarData.swift; sourceTree = "<group>"; };
+		05522F10226E4C38007B112D /* DataPersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistenceManager.swift; sourceTree = "<group>"; };
 		05C7284B22666A2C000F353E /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		0D636EAD22678459008E5128 /* HomeSplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSplashView.swift; sourceTree = "<group>"; };
 		146FB7134DA418F51EC1E8D3 /* Pods-PinPoint.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PinPoint.debug.xcconfig"; path = "Target Support Files/Pods-PinPoint/Pods-PinPoint.debug.xcconfig"; sourceTree = "<group>"; };
@@ -156,6 +164,8 @@
 		961AF28B226785D000C8E07F /* LocationResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationResultController.swift; sourceTree = "<group>"; };
 		961AF28D2267874A00C8E07F /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		961AF28F226788B600C8E07F /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
+		96E1BD93226A1DEF00F43C01 /* ChatLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogView.swift; sourceTree = "<group>"; };
+		96E1BD95226A1F1900F43C01 /* ChatLogTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatLogTableViewCell.swift; path = ../Utilites/ChatLogTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +262,7 @@
 				9311D70A2264DF6C00AF2BC6 /* DiscoverView.swift */,
 				93FF2FB32264FF2500A350E2 /* BioView.swift */,
 				961AF28D2267874A00C8E07F /* LocationView.swift */,
+				96E1BD93226A1DEF00F43C01 /* ChatLogView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -276,6 +287,7 @@
 				93FF2FB92266346500A350E2 /* CategoryCell.swift */,
 				961AF28F226788B600C8E07F /* LocationTableViewCell.swift */,
 				93FF2FBB2267C8E600A350E2 /* DiscoverCell.swift */,
+				96E1BD95226A1F1900F43C01 /* ChatLogTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -289,6 +301,9 @@
 				93088BD0225BD2200067F09D /* AppError.swift */,
 				93088BD2225BD2360067F09D /* APIClient.swift */,
 				93088BD4225BD2B70067F09D /* EventsModel.swift */,
+				05522F0C226E4A98007B112D /* EventsCalendarModel.swift */,
+				05522F10226E4C38007B112D /* DataPersistenceManager.swift */,
+				05522F0E226E4B01007B112D /* EventsCalendarData.swift */,
 				05C7284B22666A2C000F353E /* CategoryModel.swift */,
 				93088BEA225E41D80067F09D /* UserModel.swift */,
 				93BFA702225FC5E90074FD34 /* LoggedInUserModel.swift */,
@@ -511,11 +526,13 @@
 				93088BFB225E715C0067F09D /* Location.swift in Sources */,
 				9314F7792257B041009E0BB7 /* AppDelegate.swift in Sources */,
 				93088BCF225BD20A0067F09D /* NetworkHandler.swift in Sources */,
+				96E1BD96226A1F1900F43C01 /* ChatLogTableViewCell.swift in Sources */,
 				961AF28C226785D000C8E07F /* LocationResultController.swift in Sources */,
 				93BFA6FD225F93DC0074FD34 /* FavoritesCell.swift in Sources */,
 				93088BBE225BA7200067F09D /* AccountExistingView.swift in Sources */,
 				93088BC8225BB1330067F09D /* MenuOptions.swift in Sources */,
 				93088BA1225B963C0067F09D /* UIViewController+Alerts.swift in Sources */,
+				05522F11226E4C38007B112D /* DataPersistenceManager.swift in Sources */,
 				93088BC2225BB0B80067F09D /* Protocols.swift in Sources */,
 				05256F68225E739E0060B9B1 /* MenuCategories.swift in Sources */,
 				93088BEF225E542F0067F09D /* FavoritesViewController.swift in Sources */,
@@ -536,11 +553,14 @@
 				9311D70D2264DF8100AF2BC6 /* DiscoverViewController.swift in Sources */,
 				9311D7092264D31D00AF2BC6 /* EditProfileView.swift in Sources */,
 				93088BCD225BB1680067F09D /* MenuController.swift in Sources */,
+				96E1BD94226A1DEF00F43C01 /* ChatLogView.swift in Sources */,
 				93088BDB225E3A0D0067F09D /* EventsView.swift in Sources */,
 				93088BAD225B9B270067F09D /* EventPost.swift in Sources */,
 				93FF2FB42264FF2500A350E2 /* BioView.swift in Sources */,
+				05522F0F226E4B01007B112D /* EventsCalendarData.swift in Sources */,
 				93088BC6225BB10D0067F09D /* ContainerController.swift in Sources */,
 				93088BA9225B9A520067F09D /* StorageService.swift in Sources */,
+				05522F0D226E4A98007B112D /* EventsCalendarModel.swift in Sources */,
 				93088BB4225BA6580067F09D /* LoginViewController.swift in Sources */,
 				93088BE3225E3DAA0067F09D /* InterestView.swift in Sources */,
 				961AF28E2267874A00C8E07F /* LocationView.swift in Sources */,
@@ -696,13 +716,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9528M3AFGV;
+				DEVELOPMENT_TEAM = 9DV268QUJB;
 				INFOPLIST_FILE = PinPoint/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = .org.pursuit.PinPoint;
+				PRODUCT_BUNDLE_IDENTIFIER = ".org.pursuit.PinPoint-.org.pursuit.PinPoint-.org.pursuit.PinPoint-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -715,13 +735,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9528M3AFGV;
+				DEVELOPMENT_TEAM = 9DV268QUJB;
 				INFOPLIST_FILE = PinPoint/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = .org.pursuit.PinPoint;
+				PRODUCT_BUNDLE_IDENTIFIER = ".org.pursuit.PinPoint-.org.pursuit.PinPoint-.org.pursuit.PinPoint-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

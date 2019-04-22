@@ -90,7 +90,7 @@ class ProfileView: UIView {
     }()
     var settingsButton: UIButton = {
        let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "icons8-more-100-2"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "PinPoint_Logo_Clear"), for: .normal)
         button.backgroundColor = .clear
         return button 
     }()

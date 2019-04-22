@@ -64,6 +64,7 @@ extension CreateAccountViewController: AuthServiceCreateNewAccountDelegate{
     
     func didCreateNewAccount(_ authservice: AuthService, pinpointUser: ProfileOfUser) {
         self.navigationController?.popViewController(animated: true)
+      HomeController().loadView()
         
     }
     

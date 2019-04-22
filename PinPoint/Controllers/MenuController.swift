@@ -30,7 +30,7 @@ class MenuController: UIViewController {
         tableView.dataSource = self
         
         tableView.register(MenuOptionsCell.self, forCellReuseIdentifier: reuseIdentifier)
-        tableView.backgroundColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
+        tableView.backgroundColor = #colorLiteral(red: 0.1910400689, green: 0.2061233521, blue: 0.2311887741, alpha: 1)
         tableView.separatorStyle = .none
         tableView.rowHeight = 64
         
@@ -53,8 +53,9 @@ extension MenuController: UITableViewDataSource, UITableViewDelegate {
         let menuOption = MenuOption(rawValue: indexPath.row)
         cell.descriptionLabel.text = menuOption?.description
         cell.iconImageView.image = menuOption?.image
-        cell.selectionStyle = .blue
-        cell.backgroundColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
+        cell.selectionStyle = .none
+        cell.backgroundColor = .clear
+        
         return cell
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -65,7 +66,7 @@ extension MenuController: UITableViewDataSource, UITableViewDelegate {
         header.textLabel?.font = UIFont(name: "Futura", size: 36)
         header.textLabel?.backgroundColor = UIColor.clear
         header.textLabel?.textColor = UIColor.white
-        header.contentView.backgroundColor = .clear
+        header.contentView.backgroundColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let menuOption = MenuOption(rawValue: indexPath.row)
@@ -82,7 +83,7 @@ extension MenuController: UITableViewDataSource, UITableViewDelegate {
             delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .preferences)
         }
         if indexPath.row == 4 {
-            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .messaging)
+            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .requests)
         }
         if indexPath.row == 5 {
             delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .profile)

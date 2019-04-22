@@ -23,9 +23,11 @@ class EventsCell: UICollectionViewCell {
     let eventName: UILabel = {
         let en = UILabel()
         en.text = "Event Name"
-        en.numberOfLines = 2
         en.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         en.font = UIFont.init(name: "futura", size: 16)
+        en.numberOfLines = 2
+        en.textAlignment = .center
+        en.textColor = #colorLiteral(red: 0.2176656425, green: 0.06067546457, blue: 0.03762038797, alpha: 1)
         return en
     }()
     
@@ -44,7 +46,7 @@ class EventsCell: UICollectionViewCell {
         et.backgroundColor = .clear
         et.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         et.font = UIFont.init(name: "futura", size: 18)
-        et.textColor = .white
+        et.textColor = #colorLiteral(red: 0.2158689201, green: 0.05760341883, blue: 0.03225985169, alpha: 1)
         return et
     }()
     
@@ -52,6 +54,7 @@ class EventsCell: UICollectionViewCell {
         let es = UILabel()
         es.text = "Start Time"
         es.font = UIFont.init(name: "futura", size: 18)
+        es.textColor = #colorLiteral(red: 0.2158689201, green: 0.05760341883, blue: 0.03225985169, alpha: 1)
         return es
     }()
     
@@ -59,6 +62,7 @@ class EventsCell: UICollectionViewCell {
         let ee = UILabel()
         ee.text = "End Time"
         ee.font = UIFont.init(name: "futura", size: 18)
+        ee.textColor = #colorLiteral(red: 0.2158689201, green: 0.05760341883, blue: 0.03225985169, alpha: 1)
         return ee
     }()
     
@@ -94,9 +98,8 @@ class EventsCell: UICollectionViewCell {
         
         eventName.snp.makeConstraints { (make) in
             make.top.equalTo(eventCellContainerView.snp.top)
-            
-            make.centerX.equalTo(eventCellContainerView.snp.centerX)
-            
+            make.left.equalTo(20)
+            make.right.equalTo(-20)
             
         }
         eventImageView.snp.makeConstraints { (make) in
@@ -108,8 +111,8 @@ class EventsCell: UICollectionViewCell {
         }
         eventDescription.snp.makeConstraints { (make) in
             make.top.equalTo(eventImageView.snp.bottom).offset(15)
-            make.left.equalTo(20)
-            make.right.equalTo(-20)
+            make.left.equalTo(25)
+            make.right.equalTo(-25)
             make.height.equalTo(200)
         }
         eventStartTime.snp.makeConstraints { (make) in

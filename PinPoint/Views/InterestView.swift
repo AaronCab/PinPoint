@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MessageView: UIView {
+class RequestsView: UIView {
     
     lazy var messageCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()

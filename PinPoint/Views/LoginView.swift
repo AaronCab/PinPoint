@@ -35,7 +35,7 @@ class LoginView: UIView {
         let button = UIButton()
         button.backgroundColor = .white
         button.layer.cornerRadius = 5
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.darkGray, for: .normal)
         button.setTitle("FACEBOOK LOGIN", for: .normal)
         button.isEnabled = true
         return button
@@ -44,7 +44,7 @@ class LoginView: UIView {
         let button = UIButton()
         button.backgroundColor = .white
         button.layer.cornerRadius = 5
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.darkGray, for: .normal)
         button.setTitle("GMAIL LOGIN", for: .normal)
         button.isEnabled = true
         return button
@@ -53,7 +53,7 @@ class LoginView: UIView {
         let button = UIButton()
         button.backgroundColor = .white
         button.layer.cornerRadius = 5
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.darkGray, for: .normal)
         button.setTitle("EXISTING ACCOUNT LOGIN", for: .normal)
         button.isEnabled = true
         return button
@@ -63,7 +63,7 @@ class LoginView: UIView {
         let button = UIButton()
         button.backgroundColor = .white
         button.layer.cornerRadius = 5
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.darkGray, for: .normal)
         button.setTitle("CREATE NEW ACCOUNT", for: .normal)
         button.isEnabled = true
         return button
@@ -95,11 +95,6 @@ class LoginView: UIView {
     
     func commonInit(){
         addGradient()
-        //        facebookLoginConstrant()
-        //        gmailLoginConstrant()
-        //        customEmailLoginConstrant()
-       // logoLabelConstrant()
-        //        createAccountConstrant()
         setupViews()
     }
     
@@ -117,50 +112,4 @@ class LoginView: UIView {
             make.centerY.equalTo(self.snp.centerY).offset(-176)
         }
     }
-    
-//    private func logoLabelConstrant(){
-//       // addSubview(logo)
-//        logo.translatesAutoresizingMaskIntoConstraints = false
-//        logo.centerXAnchor.constraint(equalTo: gmailLoginButton.centerXAnchor, constant: 0).isActive = true
-//        logo.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.7).isActive = true
-//        logo.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-//        logo.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
-//    }
-    //    private func facebookLoginConstrant(){
-    //        addSubview(facebookLogIn)
-    //        facebookLogIn.translatesAutoresizingMaskIntoConstraints = false
-    //        facebookLogIn.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
-    //        facebookLogIn.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor, constant: 0).isActive = true
-    //        facebookLogIn.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-    //        facebookLogIn.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
-    //    }
-    //
-    //    private func gmailLoginConstrant(){
-    //        addSubview(gmailLoginButton)
-    //        gmailLoginButton.translatesAutoresizingMaskIntoConstraints = false
-    //        gmailLoginButton.centerXAnchor.constraint(equalTo: facebookLogIn.centerXAnchor, constant: 0).isActive = true
-    //        gmailLoginButton.topAnchor.constraint(equalTo: facebookLogIn.bottomAnchor, constant: 30).isActive = true
-    //        gmailLoginButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-    //        gmailLoginButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
-    //    }
-    //
-    //    private func customEmailLoginConstrant(){
-    //        addSubview(customEmailLogin)
-    //        customEmailLogin.translatesAutoresizingMaskIntoConstraints = false
-    //        customEmailLogin.centerXAnchor.constraint(equalTo: gmailLoginButton.centerXAnchor, constant: 0).isActive = true
-    //        customEmailLogin.topAnchor.constraint(equalTo: gmailLoginButton.bottomAnchor, constant: 30).isActive = true
-    //        customEmailLogin.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-    //        customEmailLogin.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
-    //    }
-    //
-    //
-    //    private func createAccountConstrant(){
-    //        addSubview(createAccountHere)
-    //        createAccountHere.translatesAutoresizingMaskIntoConstraints = false
-    //        createAccountHere.centerXAnchor.constraint(equalTo: gmailLoginButton.centerXAnchor, constant: 0).isActive = true
-    //        createAccountHere.topAnchor.constraint(equalTo: customEmailLogin.bottomAnchor, constant: 30).isActive = true
-    //        createAccountHere.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-    //        createAccountHere.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
-    //    }
-    
 }

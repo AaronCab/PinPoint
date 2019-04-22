@@ -19,11 +19,12 @@ struct EventCollectionKeys {
     static let Long = "long"
     static let EmailKey = "email"
     static let IsTrusted = "isTrusted"
-    static let isBlocked = "isBlocked"
     static let CreatedAt = "createdAt"
     static let EventDescription = "eventDescription"
     static let EventType = "eventType"
-      static let DocumentIdKey = "documentId"
+    static let DocumentIdKey = "documentId"
+    static let Message = "message"
+    static let Pending = "pending"
 }
 struct ProfileCollectionKeys {
     static let CollectionKey = "Profile"
@@ -38,6 +39,8 @@ struct ProfileCollectionKeys {
     static let BioKey = "bio"
     static let FriendsKey = "friendsKey"
     static let PhotoBucket = "photoBucket"
+    static let isBlocked = "isBlocked"
+    static let PendingFriends = "PendingFriends"
 }
 
 
@@ -93,7 +96,7 @@ final class DBService {
     static public func deleteEvent(blog: EventCreatedByUser, completion: @escaping (Error?) -> Void) {
         DBService.firestoreDB
             .collection(EventCollectionKeys.CollectionKeys)
-            .document(blog.personID)
+            .document(blog.documentId)
             .delete { (error) in
                 if let error = error {
                     completion(error)
