@@ -20,10 +20,11 @@ class DiscoverCell: UICollectionViewCell {
     
     let eventName: UILabel = {
         let en = UILabel()
-        en.text = "Event Name"
         en.numberOfLines = 2
         en.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         en.font = UIFont.init(name: "futura", size: 16)
+        en.text = "Event Name"
+        en.textColor = .yellow 
         return en
     }()
     
