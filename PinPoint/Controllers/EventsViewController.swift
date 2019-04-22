@@ -21,6 +21,10 @@ class EventsViewController: UIViewController {
     let authService = AppDelegate.authservice
     var listener: ListenerRegistration!
     var loggedInUserModel: ProfileOfUser!
+    var friendThatRequested: ProfileOfUser!
+    let friendRef = Database.database().reference().child(ProfileCollectionKeys.FriendsKey)
+    let pendingFriendRef = Database.database().reference().child(ProfileCollectionKeys.PendingFriends)
+
     
   
     override func viewDidLoad() {
@@ -72,5 +76,38 @@ func updateUser(){
     }
     })
     }
+    }
+    
+    @objc func acceptedRequest(tag: UIButton){
+        if let user = authService.getCurrentUser(){
+        let pendingFriend = DBService.firestoreDB.collection(ProfileCollectionKeys.CollectionKey).document(user.uid)
+            
+            
+            pendingFriend.updateData([
+                ProfileCollectionKeys.FriendsKey : FieldValue.arrayUnion([loggedInUserModel.friends![tag.tag]])]) { (error) in
+                    if let error = error{
+                        self.showAlert(title: "error", message: error.localizedDescription)
+                    }else{
+                        pendingFriend.updateData([
+                            ProfileCollectionKeys.PendingFriends : FieldValue.arrayRemove([tag.tag])], completion: { (error) in
+                                if let error = error{
+                                    self.showAlert(title: "Error", message: error.localizedDescription)
+                                }
+                        })
+                    }
+            }
+        }
+    }
+    
+    @objc func rejectedRequest(tag: UIButton){
+       if let user = authService.getCurrentUser() {
+        let pendingFriend = DBService.firestoreDB.collection(ProfileCollectionKeys.CollectionKey).document(user.uid)
+            pendingFriend.updateData([
+                ProfileCollectionKeys.PendingFriends : FieldValue.arrayRemove([tag.tag])], completion: { (error) in
+                    if let error = error{
+                        self.showAlert(title: "Error", message: error.localizedDescription)
+                    }
+            })
+        }
     }
 }
