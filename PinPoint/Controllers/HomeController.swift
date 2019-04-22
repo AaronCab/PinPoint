@@ -35,7 +35,7 @@ class HomeController: UIViewController {
     var categoryCell = CategoryCell()
     var eventCell = EventsCell()
     let loginView = LoginView()
-    let messagesView = MessageView()
+    let requestsView = RequestsView()
     
     var catagories = [
         "Business": "101",
@@ -167,12 +167,12 @@ class HomeController: UIViewController {
         navigationItem.title = "P I N P O I N T"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "hamburgerMenu").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMenuToggle))
     }
-    func messagingPageOn() {
+    func friendRequestsPageOn() {
         self.navigationItem.rightBarButtonItem = nil
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
-        self.navigationItem.title = "M E S S A G E S"
-        contentView.addSubview(messagesView)
+        self.navigationItem.title = "F R I E N D  R E Q U E S T S"
+        contentView.addSubview(requestsView)
         view.addSubview(contentView)
     }
     func eventsPageOn() {
