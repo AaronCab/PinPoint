@@ -26,7 +26,8 @@ class EventsCell: UICollectionViewCell {
         en.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         en.font = UIFont.init(name: "futura", size: 16)
         en.numberOfLines = 2
-        en.textAlignment = .center 
+        en.textAlignment = .center
+        en.textColor = #colorLiteral(red: 0.2176656425, green: 0.06067546457, blue: 0.03762038797, alpha: 1)
         return en
     }()
     

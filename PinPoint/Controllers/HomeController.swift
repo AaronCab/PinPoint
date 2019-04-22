@@ -9,6 +9,7 @@
 import UIKit
 import Toucan
 import CoreLocation
+import EventKit
 import Firebase
 import FirebaseAuth
 import SafariServices
@@ -36,6 +37,7 @@ class HomeController: UIViewController {
     var eventCell = EventsCell()
     let loginView = LoginView()
     let requestsView = RequestsView()
+    var eventsCalendar = EventsDataModel.getEventData()
     
     var catagories = [
         "Business": "101",
