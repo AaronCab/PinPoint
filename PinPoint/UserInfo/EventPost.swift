@@ -18,7 +18,7 @@ struct EventCreatedByUser {
     let displayName: String
     let email: String
     let eventType: String
-    let isTrustedUser: [String]
+    let isTrustedUser: [String]?
     let documentId: String
     
     init(createdAt: String, personID: String, photoURL: String, eventDescription: String, lat: Double, long: Double, displayName: String, email: String, isTrustedUser: [String], isBlocked: Bool, eventType: String, documentID: String){

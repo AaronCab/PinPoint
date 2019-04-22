@@ -19,8 +19,8 @@ struct ProfileOfUser {
     let firstName: String?
     let lastName: String?
     let bio: String?
-    let friends: [String]
-    let blockedUser: [String]
+    let friends: [String]?
+    let blockedUser: [String]?
     
     public var fullName: String {
         return ((firstName ?? "") + " " + (lastName ?? "")).trimmingCharacters(in: .whitespacesAndNewlines)
@@ -61,6 +61,6 @@ struct ProfileOfUser {
         self.lastName = dict[ProfileCollectionKeys.LastNameKey] as? String ?? "LastName"
         self.bio = dict[ProfileCollectionKeys.BioKey] as? String ?? "fellow bloggers are looking forward to reading your bio"
         self.friends = dict[ProfileCollectionKeys.FriendsKey] as? [String] ?? [""]
-        self.blockedUser dict[ProfileCollectionKeys.isBlocked] as? [String] ?? [""]
+        self.blockedUser = dict[ProfileCollectionKeys.isBlocked] as? [String] ?? [""]
     }
 }
