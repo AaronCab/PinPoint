@@ -30,12 +30,12 @@ enum MenuOption: Int, CustomStringConvertible {
     
     var image: UIImage  {
         switch self {
-        case .Discover: return UIImage(named: "icons8-today-240.png") ?? UIImage()
-        case .Nearby: return UIImage(named: "icons8-map-80") ?? UIImage()
-        case .Favorites: return UIImage(named: "icons8-star-80.png") ?? UIImage()
-        case .Preferences: return UIImage(named: "icons8-map-pinpoint-80.png") ?? UIImage()
-        case .Requests: return UIImage(named: "icons8-chat-51") ?? UIImage()
-        case .Profile: return UIImage(named: "icons8-customer-240.png") ?? UIImage()
+        case .Discover: return UIImage(named: "icons8-planner-100") ?? UIImage()
+        case .Nearby: return UIImage(named: "icons8-target-100") ?? UIImage()
+        case .Favorites: return UIImage(named: "icons8-star-100") ?? UIImage()
+        case .Preferences: return UIImage(named: "icons8-test-passed-100") ?? UIImage()
+        case .Requests: return UIImage(named: "icons8-ok-100") ?? UIImage()
+        case .Profile: return UIImage(named: "icons8-contact-100") ?? UIImage()
             
             
         }
