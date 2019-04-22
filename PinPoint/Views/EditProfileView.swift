@@ -34,7 +34,8 @@ class EditProfileView: UIView {
     
     var profilePicture: UIImageView = {
         let imageView = UIImageView()
-        imageView.layer.cornerRadius = 20
+        imageView.layer.cornerRadius =  50 * 0.5
+        imageView.layer.masksToBounds = true
         imageView.image = UIImage(named: "placeholder-image")
         return imageView
     }()
