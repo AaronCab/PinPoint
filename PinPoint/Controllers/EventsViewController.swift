@@ -49,29 +49,30 @@ extension EventsViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = chatView.chatLogTableView.dequeueReusableCell(withIdentifier: "chatLogTableViewCell", for: indexPath) as? ChatLogTableViewCell else { return UITableViewCell() }
-        
-        guard let pendingFriends = loggedInUserModel.pendingFriends else{
-            cell.textLabel?.text = "No friends request found"
-            return UITableViewCell()
+        guard let cell = chatView.chatLogTableView.dequeueReusableCell(withIdentifier: "chatLogTableViewCell", for: indexPath) as? ChatLogTableViewCell,
+         let pendingFriends = loggedInUserModel.pendingFriends else{
+                return UITableViewCell()
         }
-        let friend = updateFriend(friendID: pendingFriends[indexPath.row])
-        
-        cell.friendName.text = friend?.displayName
+        updateFriend(friendID: pendingFriends[indexPath.row]) { (profile, error) in
+            if let profile = profile{
+                cell.friendName.text = profile.displayName
+                if profile.photoURL != nil{
+                    cell.friendImageView.kf.setImage(with: URL(string: (profile.photoURL)!), placeholder: UIImage(named: "pinpointred"))
+                }else{
+                    cell.friendImageView.image = UIImage(named: "pinpointred")
+                }
+            }
+        }
         cell.noButton.tag = indexPath.row
         cell.yesButton.tag = indexPath.row
-        if friend?.photoURL != nil{
-            cell.friendImageView.kf.setImage(with: URL(string: (friend?.photoURL)!), placeholder: UIImage(named: "pinpointred"))
-        }else{
-            cell.friendImageView.image = UIImage(named: "pinpointred")
-        }
+
 
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 300
+        return 100
     }
     
 }
@@ -92,8 +93,8 @@ func updateUser(){
     }
     }
     
-    func updateFriend(friendID: String) -> ProfileOfUser?{
-        var friendFound: ProfileOfUser?
+    func updateFriend(friendID: String, completeion: @escaping (ProfileOfUser?, Error?) -> Void){
+        var friendFound: ProfileOfUser!
         if let user = authService.getCurrentUser(){
             self.listener = DBService.firestoreDB
                 .collection(ProfileCollectionKeys.CollectionKey)
@@ -101,11 +102,13 @@ func updateUser(){
                     if let data = data{
                         friendFound = data.documents.map { ProfileOfUser(dict: $0.data()) }
                             .filter(){$0.ProfileId == friendID}.first
-                        
+                        completeion(friendFound, nil)
+                    }
+                    if let error = error{
+                        completeion(nil, error)
                     }
                 })
         }
-        return friendFound
     }
     
     @objc func acceptedRequest(tag: UIButton){
