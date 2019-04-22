@@ -14,11 +14,7 @@
   pod 'Toucan'
   pod 'SnapKit'
   pod 'Firebase/Messaging'
-<<<<<<< HEAD
-  pod ‘Firebase/Database’
-=======
   pod 'Firebase/Database'
->>>>>>> 1e467e77eadc2ac959a20502bef0ef219e8fa73f
   pod 'SCLAlertView'
 
 
