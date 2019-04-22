@@ -53,7 +53,8 @@ final class AuthService {
                                            lastName: nil,
                                            bio: nil,
                                            friends: [],
-                                           blockedUser: [])
+                                           blockedUser: [],
+                                           pendingFriends: [])
                 DBService.createPinPointuser(user: pinpointUser, completion: { (error) in
                     if let error = error {
                         self.authserviceCreateNewAccountDelegate?.didRecieveErrorCreatingAccount(self, error: error)

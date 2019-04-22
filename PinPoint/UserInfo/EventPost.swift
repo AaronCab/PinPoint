@@ -19,9 +19,12 @@ struct EventCreatedByUser {
     let email: String
     let eventType: String
     let isTrustedUser: [String]?
+    let message: [String]?
     let documentId: String
+    let pending: [String]?
     
-    init(createdAt: String, personID: String, photoURL: String, eventDescription: String, lat: Double, long: Double, displayName: String, email: String, isTrustedUser: [String], isBlocked: Bool, eventType: String, documentID: String){
+    
+    init(createdAt: String, personID: String, photoURL: String, eventDescription: String, lat: Double, long: Double, displayName: String, email: String, isTrustedUser: [String], eventType: String, documentID: String, message: [String], pending: [String]){
         self.createdAt = createdAt
         self.personID = personID
         self.photoURL = photoURL
@@ -33,6 +36,8 @@ struct EventCreatedByUser {
         self.eventType = eventType
         self.isTrustedUser = isTrustedUser
         self.documentId = documentID
+        self.message = message
+        self.pending = pending
     }
     init(dict: [String: Any]) {
         self.createdAt = dict[EventCollectionKeys.CreatedAt] as? String ?? "No Created Date"
@@ -46,5 +51,7 @@ struct EventCreatedByUser {
         self.isTrustedUser = dict[EventCollectionKeys.IsTrusted] as? [String] ?? [""]
         self.eventType = dict[EventCollectionKeys.EventType] as? String ?? "No event type"
         self.documentId = dict[EventCollectionKeys.DocumentIdKey] as? String ?? "No ID"
+        self.message = dict[EventCollectionKeys.Message] as? [String] ?? [""]
+        self.pending = dict[EventCollectionKeys.Pending] as? [String] ?? [""]
     }
 }
