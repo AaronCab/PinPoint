@@ -24,8 +24,8 @@ class EventsCell: UICollectionViewCell {
         let en = UILabel()
         en.text = "Event Name"
         en.numberOfLines = 2
-        en.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        en.font = UIFont.init(name: "futura", size: 16)
+        en.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        en.font = UIFont.init(name: "futura", size: 15)
         return en
     }()
     
@@ -44,7 +44,7 @@ class EventsCell: UICollectionViewCell {
         et.backgroundColor = .clear
         et.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         et.font = UIFont.init(name: "futura", size: 18)
-        et.textColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
+        et.textColor = #colorLiteral(red: 0.2158689201, green: 0.05760341883, blue: 0.03225985169, alpha: 1)
         return et
     }()
     
@@ -52,6 +52,7 @@ class EventsCell: UICollectionViewCell {
         let es = UILabel()
         es.text = "Start Time"
         es.font = UIFont.init(name: "futura", size: 18)
+        es.textColor = #colorLiteral(red: 0.2158689201, green: 0.05760341883, blue: 0.03225985169, alpha: 1)
         return es
     }()
     
@@ -59,6 +60,7 @@ class EventsCell: UICollectionViewCell {
         let ee = UILabel()
         ee.text = "End Time"
         ee.font = UIFont.init(name: "futura", size: 18)
+        ee.textColor = #colorLiteral(red: 0.2158689201, green: 0.05760341883, blue: 0.03225985169, alpha: 1)
         return ee
     }()
     
