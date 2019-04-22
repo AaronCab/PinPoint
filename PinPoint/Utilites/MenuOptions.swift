@@ -13,7 +13,7 @@ enum MenuOption: Int, CustomStringConvertible {
     case Nearby
     case Favorites
     case Preferences
-    case Messages
+    case Requests
     case Profile
     
     var description: String {
@@ -22,7 +22,7 @@ enum MenuOption: Int, CustomStringConvertible {
         case .Nearby: return "Nearby Events"
         case .Favorites: return "Favorites"
         case .Preferences: return "Preferences"
-        case .Messages: return "Messages"
+        case .Requests: return "Friend Requests"
         case .Profile: return "Profile"
             
         }
@@ -34,7 +34,7 @@ enum MenuOption: Int, CustomStringConvertible {
         case .Nearby: return UIImage(named: "icons8-map-80") ?? UIImage()
         case .Favorites: return UIImage(named: "icons8-star-80.png") ?? UIImage()
         case .Preferences: return UIImage(named: "icons8-map-pinpoint-80.png") ?? UIImage()
-        case .Messages: return UIImage(named: "icons8-chat-51") ?? UIImage()
+        case .Requests: return UIImage(named: "icons8-chat-51") ?? UIImage()
         case .Profile: return UIImage(named: "icons8-customer-240.png") ?? UIImage()
             
             

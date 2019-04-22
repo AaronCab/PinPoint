@@ -10,7 +10,7 @@ import UIKit
 
 class InterestViewController: UIViewController {
     
-    var interestView = MessageView()
+    var interestView = RequestsView()
     
     
 
