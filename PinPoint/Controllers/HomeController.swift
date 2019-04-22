@@ -393,14 +393,14 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             print("no logged user")
             return
         }
-        let createdEvent1 = createdEvent[senderTag.tag]
+        let userCreatedEvent = createdEvent[senderTag.tag]
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [unowned self] (action) in
             self.confirmDeletionActionSheet(handler: { (action) in
                 
-                if user.uid == createdEvent1.personID{
-                    DBService.deleteEvent(blog: createdEvent1){ [weak self] (error) in
+                if user.uid ==  userCreatedEvent.personID{
+                    DBService.deleteEvent(blog: userCreatedEvent){ [weak self] (error) in
                         if let error = error {
                             self?.showAlert(title: "Error deleting event", message: error.localizedDescription)
                         } else {
@@ -410,7 +410,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
                 
             })
         }
-        if user.uid == createdEvent1.personID{
+        if user.uid == userCreatedEvent.personID{
             alertController.addAction(deleteAction)
 
         }

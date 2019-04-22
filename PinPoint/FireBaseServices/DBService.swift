@@ -96,7 +96,7 @@ final class DBService {
     static public func deleteEvent(blog: EventCreatedByUser, completion: @escaping (Error?) -> Void) {
         DBService.firestoreDB
             .collection(EventCollectionKeys.CollectionKeys)
-            .document(blog.personID)
+            .document(blog.documentId)
             .delete { (error) in
                 if let error = error {
                     completion(error)
