@@ -53,7 +53,7 @@ extension MenuController: UITableViewDataSource, UITableViewDelegate {
         let menuOption = MenuOption(rawValue: indexPath.row)
         cell.descriptionLabel.text = menuOption?.description
         cell.iconImageView.image = menuOption?.image
-        cell.selectionStyle = .none
+        cell.selectionStyle = .default
         cell.backgroundColor = .clear
         
         return cell
