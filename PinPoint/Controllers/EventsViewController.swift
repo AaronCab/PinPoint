@@ -14,29 +14,63 @@ import Firebase
 import FirebaseDatabase
 
 class EventsViewController: UIViewController {
+    // needs to be renamed
     
     var chatView = ChatLogView()
     let ref = Database.database().reference().child("messages")
+    let authService = AppDelegate.authservice
+    var listener: ListenerRegistration!
+    var loggedInUserModel: ProfileOfUser!
     
   
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(chatView)
-        chatView.chatTextField.delegate = self
+        chatView.chatLogTableView.dataSource = self
+        chatView.chatLogTableView.delegate = self
+        updateUser()
     }
   
 }
 
-
-extension EventsViewController: UITextFieldDelegate{
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if let textsend = textField.text{
-        let childRef = ref.childByAutoId()
-        let textToSend = ["text": textsend]
-        childRef.updateChildValues(textToSend)
+extension EventsViewController: UITableViewDelegate, UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if loggedInUserModel.pendingFriends!.count == 0{
+            return 1
+        }else{
+            return loggedInUserModel.pendingFriends!.count
         }
-        return true
     }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = chatView.chatLogTableView.dequeueReusableCell(withIdentifier: "chatLogTableViewCell", for: indexPath) as? ChatLogTableViewCell else { return UITableViewCell() }
+        
+        guard let pendingFriends = loggedInUserModel.pendingFriends else{
+            cell.textLabel?.text = "No friends request found"
+            return UITableViewCell()
+        }
+        
+        cell.textLabel?.text = pendingFriends[indexPath.row]
+        
+        return cell
+    }
+    
+    
 }
 
 
+
+extension EventsViewController{
+func updateUser(){
+    if let user = authService.getCurrentUser(){
+    self.listener = DBService.firestoreDB
+    .collection(ProfileCollectionKeys.CollectionKey)
+    .addSnapshotListener({ (data, error) in
+    if let data = data{
+    self.loggedInUserModel = data.documents.map { ProfileOfUser(dict: $0.data()) }
+    .filter(){$0.ProfileId == user.uid}.first
+    }
+    })
+    }
+    }
+}

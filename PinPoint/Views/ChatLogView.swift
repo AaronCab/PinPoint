@@ -36,7 +36,6 @@ class ChatLogView: UIView {
     private func commonInit() {
         backgroundColor = .white
         self.chatLogTableView.register(ChatLogTableViewCell.self, forCellReuseIdentifier: "chatLogTableViewCell")
-        setupTextField()
          setupTableView()
         
     }
@@ -44,19 +43,11 @@ class ChatLogView: UIView {
     private func setupTableView() {
         addSubview(chatLogTableView)
         chatLogTableView.translatesAutoresizingMaskIntoConstraints = false
-        chatLogTableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
+        chatLogTableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
         chatLogTableView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         chatLogTableView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         chatLogTableView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        chatLogTableView.bottomAnchor.constraint(equalTo: chatTextField.topAnchor).isActive = true
+        chatLogTableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     
-    private func setupTextField(){
-        addSubview(chatTextField)
-        chatTextField.translatesAutoresizingMaskIntoConstraints = false
-        chatTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        chatTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
-        chatTextField.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 10).isActive = true
-        chatTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
-    }
 }
