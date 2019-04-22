@@ -35,8 +35,8 @@ class CreatedView: UIView {
     }()
     var createdPicture: UIImageView = {
         let imageView = UIImageView()
-        imageView.layer.cornerRadius = 15
-        imageView.layer.masksToBounds = true
+       // imageView.layer.cornerRadius = 15
+       // imageView.layer.masksToBounds = true
         imageView.image = UIImage(named: "placeholder-image")
         return imageView
     }()

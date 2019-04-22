@@ -78,12 +78,17 @@ class ChatLogTableViewCell: UITableViewCell {
         }
         
         eventName.snp.makeConstraints { (make) in
-            make.left.equalTo(eventImageView.snp.right).offset(5)
+            make.left.equalTo(eventImageView.snp.right)
             make.centerY.equalToSuperview()
         }
         
         yesButton.snp.makeConstraints { (make) in
-            make.left.equalTo(eventName.snp.right).offset(5)
+            make.left.equalTo(eventName.snp.right)
+            make.centerY.equalToSuperview()
+        }
+        
+        noButton.snp.makeConstraints { (make) in
+            make.left.equalTo(yesButton.snp_right)
             make.centerY.equalToSuperview()
         }
         
