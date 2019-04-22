@@ -43,7 +43,7 @@ class FavoritesCell: UICollectionViewCell {
         et.backgroundColor = .clear
         et.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         et.font = UIFont.init(name: "futura", size: 18)
-        et.textColor = .white
+        et.textColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
         return et
     }()
     
