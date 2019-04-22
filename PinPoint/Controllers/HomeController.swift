@@ -279,7 +279,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             cell.eventImageView.kf.indicatorType = .activity
             cell.moreInfoButton.tag = indexPath.row
             cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.photoURL)), placeholder: UIImage(named: "pinpointred"))
-            cell.moreInfoButton.addTarget(self, action: #selector(moreInfoFav), for: .touchUpInside)
+            cell.moreInfoButton.addTarget(self, action: #selector(moreInfoDisvover), for: .touchUpInside)
             return cell
         }
         if collectionView == eventsView.myCollectionView {
@@ -367,8 +367,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             let catgoriesDVC = DetailViewController()
             
         }
-        
-        
+
     }
     @objc func moreInfo(senderTag: UIButton){
         
@@ -389,6 +388,38 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         present(alertController, animated: true)
         
     }
+    @objc func moreInfoDisvover(senderTag: UIButton){
+        guard let user = authService.getCurrentUser() else {
+            print("no logged user")
+            return
+        }
+        let createdEvent1 = createdEvent[senderTag.tag]
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [unowned self] (action) in
+            self.confirmDeletionActionSheet(handler: { (action) in
+                
+                if user.uid == createdEvent1.personID{
+                    DBService.deleteEvent(blog: createdEvent1){ [weak self] (error) in
+                        if let error = error {
+                            self?.showAlert(title: "Error deleting event", message: error.localizedDescription)
+                        } else {
+                            self?.showAlert(title: "Deleted successfully", message: nil)                        }
+                    }
+                }
+                
+            })
+        }
+        if user.uid == createdEvent1.personID{
+            alertController.addAction(deleteAction)
+
+        }
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true)
+        
+    }
+   
     @objc private func fetchEvents(){
         refreshControl.beginRefreshing()
         listener = DBService.firestoreDB
