@@ -173,11 +173,11 @@ class HomeController: UIViewController {
     }
     func friendRequestsPageOn() {
         self.navigationItem.rightBarButtonItem = nil
-        contentView.removeFromSuperview()
-        contentView = UIView.init(frame: UIScreen.main.bounds)
         self.navigationItem.title = "F R I E N D  R E Q U E S T S"
-        contentView.addSubview(requestsView)
-        view.addSubview(contentView)
+        let friendVC = EventsViewController()
+        self.navigationController?.pushViewController(friendVC, animated: true)
+//        contentView.addSubview(friendVC.view)
+//        view.addSubview(contentView)
     }
     func eventsPageOn() {
         self.navigationItem.rightBarButtonItem = nil
