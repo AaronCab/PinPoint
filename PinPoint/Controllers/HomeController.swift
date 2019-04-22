@@ -53,9 +53,9 @@ class HomeController: UIViewController {
         didSet {
             DispatchQueue.main.async {
                 self.favoriteView.myCollectionView.reloadData()
-                }
             }
         }
+    }
     let authService = AppDelegate.authservice
     private var listener: ListenerRegistration!
     var createdEvent = [EventCreatedByUser](){
@@ -73,8 +73,8 @@ class HomeController: UIViewController {
         }
     }
     var favoriteCell = FavoritesCell()
-
-
+    
+    
     private var userModel: UserLogedInModel!
     var currentLocation = CLLocation(){
         didSet{
@@ -86,12 +86,12 @@ class HomeController: UIViewController {
     }
     lazy var refreshControl: UIRefreshControl = {
         let rc = UIRefreshControl()
-            discoverView.discoverCollectionView.refreshControl = rc
+        discoverView.discoverCollectionView.refreshControl = rc
         rc.addTarget(self, action: #selector(fetchEvents), for: .valueChanged)
         return rc
     }()
-
-
+    
+    
     private func getCategory(){
         ApiClient.getCategoryEvents(distance: "5km", location: location, categoryID: "") { (error, data) in
             if let error = error {
@@ -99,8 +99,8 @@ class HomeController: UIViewController {
             } else if let data = data {
                 self.event = data
             }
-        
-    }
+            
+        }
     }
     
     var location = "Manhattan"
@@ -113,7 +113,7 @@ class HomeController: UIViewController {
         ip.delegate = self
         return ip
     }()
-
+    
     var delegate: HomeControllerDelegate?
     
     override func viewDidLoad() {
@@ -133,7 +133,7 @@ class HomeController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(homeSplashImage)
         view.addSubview(contentView)
-
+        
         preferencesView.categoryCollectionView.dataSource = self
         preferencesView.categoryCollectionView.delegate = self 
         discoverView.discoverCollectionView.delegate = self
@@ -242,14 +242,14 @@ class HomeController: UIViewController {
             view.addSubview(profileView)
         }
         
-
+        
     }
     
     func defaultView(){
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
         contentView.addSubview(loginView)
-
+        
     }
 }
 
@@ -267,7 +267,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             return catagoriesInAnArray.count
             
         }
-
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -320,7 +320,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
             cell.categoryName.text = catagoriesInAnArray[indexPath.row]
             return cell
-    }
+        }
         else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? EventsCell else { return UICollectionViewCell() }
             let currentEvent = createdEvent[indexPath.row]
@@ -330,10 +330,10 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             cell.moreInfoButton.tag = indexPath.row
             cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.photoURL)), placeholder: UIImage(named: "pinpointred"))
             cell.moreInfoButton.addTarget(self, action: #selector(moreInfoFav), for: .touchUpInside)
-
+            
             return cell
-          
-
+            
+            
         }
         
     }
@@ -351,24 +351,23 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         case .custom:
             let customDVC = DetailViewController()
             DBService.firestoreDB
-                    .collection(ProfileCollectionKeys.CollectionKey)
-                    .addSnapshotListener({ (data, error) in
-                        if let data = data{
-                           let user = data.documents.map { ProfileOfUser(dict: $0.data()) }
-                                .filter(){$0.ProfileId == self.createdEvent[indexPath.row].personID}.first
-                            customDVC.profileOfUser = user
-                            customDVC.custom = self.createdEvent[indexPath.row]
-                            self.navigationController?.pushViewController(customDVC, animated: true)
-                        }else if let error = error{
-                            print(error)
-                        }
-                    })
+                .collection(ProfileCollectionKeys.CollectionKey)
+                .addSnapshotListener({ (data, error) in
+                    if let data = data{
+                        let user = data.documents.map { ProfileOfUser(dict: $0.data()) }
+                            .filter(){$0.ProfileId == self.createdEvent[indexPath.row].personID}.first
+                        customDVC.profileOfUser = user
+                        customDVC.custom = self.createdEvent[indexPath.row]
+                        self.navigationController?.pushViewController(customDVC, animated: true)
+                    }else if let error = error{
+                        print(error)
+                    }
+                })
         case .catagories:
-        let catgoriesDVC = DetailViewController()
+            let catgoriesDVC = DetailViewController()
             
         }
 
-    
     }
     @objc func moreInfo(senderTag: UIButton){
         
@@ -380,8 +379,12 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             FavoritesDataManager.saveToDocumentsDirectory(favoriteArticle: favoriteEvent)
             self.showAlert(title: "PinPoint", message: "Successfully Favorites Event")
         }
+        let addCalendarAction = UIAlertAction(title: "Add to Calendar", style: .default, handler: { alert in
+            
+        })
         alertController.addAction(cancelAction)
         alertController.addAction(favoriteActione)
+        alertController.addAction(addCalendarAction)
         present(alertController, animated: true)
         
     }
