@@ -35,7 +35,7 @@ class LoginView: UIView {
         let button = UIButton()
         button.backgroundColor = .white
         button.layer.cornerRadius = 5
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.darkGray, for: .normal)
         button.setTitle("FACEBOOK LOGIN", for: .normal)
         button.isEnabled = true
         return button
@@ -44,7 +44,7 @@ class LoginView: UIView {
         let button = UIButton()
         button.backgroundColor = .white
         button.layer.cornerRadius = 5
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.darkGray, for: .normal)
         button.setTitle("GMAIL LOGIN", for: .normal)
         button.isEnabled = true
         return button
@@ -53,7 +53,7 @@ class LoginView: UIView {
         let button = UIButton()
         button.backgroundColor = .white
         button.layer.cornerRadius = 5
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.darkGray, for: .normal)
         button.setTitle("EXISTING ACCOUNT LOGIN", for: .normal)
         button.isEnabled = true
         return button
@@ -63,7 +63,7 @@ class LoginView: UIView {
         let button = UIButton()
         button.backgroundColor = .white
         button.layer.cornerRadius = 5
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.darkGray, for: .normal)
         button.setTitle("CREATE NEW ACCOUNT", for: .normal)
         button.isEnabled = true
         return button
