@@ -21,7 +21,7 @@ class EventsViewController: UIViewController {
     var listener: ListenerRegistration!
     var loggedInUserModel: ProfileOfUser!{
         didSet{
-//            self.chatView.chatLogTableView.reloadData()
+           self.chatView.chatLogTableView.reloadData()
             chatView.chatLogTableView.dataSource = self
             chatView.chatLogTableView.delegate = self
         }
@@ -65,6 +65,11 @@ extension EventsViewController: UITableViewDelegate, UITableViewDataSource{
         }
         cell.noButton.tag = indexPath.row
         cell.yesButton.tag = indexPath.row
+        cell.blockBotton.tag = indexPath.row
+        cell.yesButton.addTarget(self, action: #selector(acceptedRequest), for: .touchUpInside)
+        cell.noButton.addTarget(self, action: #selector(rejectedRequest), for: .touchUpInside)
+        cell.blockBotton.addTarget(self, action: #selector(blockedUser), for: .touchUpInside)
+
 
 
         
@@ -117,12 +122,12 @@ func updateUser(){
             
             
             pendingFriend.updateData([
-                ProfileCollectionKeys.FriendsKey : FieldValue.arrayUnion([loggedInUserModel.friends![tag.tag]])]) { (error) in
+                ProfileCollectionKeys.FriendsKey : FieldValue.arrayUnion([loggedInUserModel.pendingFriends![tag.tag]])]) { (error) in
                     if let error = error{
                         self.showAlert(title: "error", message: error.localizedDescription)
                     }else{
                         pendingFriend.updateData([
-                            ProfileCollectionKeys.PendingFriends : FieldValue.arrayRemove([tag.tag])], completion: { (error) in
+                            ProfileCollectionKeys.PendingFriends : FieldValue.arrayRemove( [(self.loggedInUserModel.pendingFriends![tag.tag]) as Any])], completion: { (error) in
                                 if let error = error{
                                     self.showAlert(title: "Error", message: error.localizedDescription)
                                 }
@@ -135,12 +140,12 @@ func updateUser(){
     @objc func rejectedRequest(tag: UIButton){
        if let user = authService.getCurrentUser() {
         let pendingFriend = DBService.firestoreDB.collection(ProfileCollectionKeys.CollectionKey).document(user.uid)
-            pendingFriend.updateData([
-                ProfileCollectionKeys.PendingFriends : FieldValue.arrayRemove([tag.tag])], completion: { (error) in
-                    if let error = error{
-                        self.showAlert(title: "Error", message: error.localizedDescription)
-                    }
-            })
+        pendingFriend.updateData([
+            ProfileCollectionKeys.PendingFriends : FieldValue.arrayRemove( [(self.loggedInUserModel.pendingFriends![tag.tag]) as Any])], completion: { (error) in
+                if let error = error{
+                    self.showAlert(title: "Error", message: error.localizedDescription)
+                }
+        })
         }
     }
     
@@ -150,12 +155,12 @@ func updateUser(){
             
             
             pendingFriend.updateData([
-                ProfileCollectionKeys.isBlocked : FieldValue.arrayUnion([loggedInUserModel.friends![tag.tag]])]) { (error) in
+                ProfileCollectionKeys.isBlocked : FieldValue.arrayUnion([loggedInUserModel.pendingFriends![tag.tag]])]) { (error) in
                     if let error = error{
                         self.showAlert(title: "error", message: error.localizedDescription)
                     }else{
                         pendingFriend.updateData([
-                            ProfileCollectionKeys.PendingFriends : FieldValue.arrayRemove([tag.tag])], completion: { (error) in
+                            ProfileCollectionKeys.PendingFriends : FieldValue.arrayRemove( [(self.loggedInUserModel.pendingFriends![tag.tag]) as Any])], completion: { (error) in
                                 if let error = error{
                                     self.showAlert(title: "Error", message: error.localizedDescription)
                                 }
