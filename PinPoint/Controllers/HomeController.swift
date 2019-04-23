@@ -190,6 +190,8 @@ class HomeController: UIViewController {
         whatToSeque = .event
         contentView.addSubview(eventsView)
         view.addSubview(contentView)
+        navigationItem.searchController = nil
+
     }
     
     func discoverPageOn() {
@@ -202,6 +204,7 @@ class HomeController: UIViewController {
         whatToSeque = .custom
         discoverView.addEventButton.addTarget(self, action: #selector(addEventCommand), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = rightBarItem
+        navigationItem.searchController = nil
         
     }
     
@@ -227,6 +230,7 @@ class HomeController: UIViewController {
         whatToSeque = .favorite
         contentView.addSubview(favoriteView)
         view.addSubview(contentView)
+        navigationItem.searchController = nil
     }
     func profilePageOn() {
         if authService.getCurrentUser() == nil{
@@ -235,6 +239,7 @@ class HomeController: UIViewController {
             self.navigationItem.title = "P R O F I L E"
             contentView.addSubview(loginView)
             view.addSubview(loginView)
+            navigationItem.searchController = nil
         }else{
             contentView.removeFromSuperview()
             contentView = UIView.init(frame: UIScreen.main.bounds)
@@ -246,6 +251,7 @@ class HomeController: UIViewController {
             contentView.addSubview(profileView)
             updateUser()
             view.addSubview(profileView)
+            navigationItem.searchController = nil
         }
         
         
