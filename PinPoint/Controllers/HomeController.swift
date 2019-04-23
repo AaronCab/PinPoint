@@ -378,8 +378,8 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
                     }
                 })
         case .catagories:
-            let catdvc = PreferencesView()
-            
+            //let catdvc = PreferencesView()
+            print("end it here")
         }
 
     }
