@@ -22,9 +22,10 @@ struct EventCreatedByUser {
     let message: [String]?
     let documentId: String
     let pending: [String]?
+    let startedAt: Date
     
     
-    init(createdAt: String, personID: String, photoURL: String, eventDescription: String, lat: Double, long: Double, displayName: String, email: String, isTrustedUser: [String], eventType: String, documentID: String, message: [String], pending: [String]){
+    init(createdAt: String, personID: String, photoURL: String, eventDescription: String, lat: Double, long: Double, displayName: String, email: String, isTrustedUser: [String], eventType: String, documentID: String, message: [String], pending: [String], startedAt: Date){
         self.createdAt = createdAt
         self.personID = personID
         self.photoURL = photoURL
@@ -38,6 +39,7 @@ struct EventCreatedByUser {
         self.documentId = documentID
         self.message = message
         self.pending = pending
+        self.startedAt = startedAt
     }
     init(dict: [String: Any]) {
         self.createdAt = dict[EventCollectionKeys.CreatedAt] as? String ?? "No Created Date"
@@ -53,5 +55,8 @@ struct EventCreatedByUser {
         self.documentId = dict[EventCollectionKeys.DocumentIdKey] as? String ?? "No ID"
         self.message = dict[EventCollectionKeys.Message] as? [String] ?? [""]
         self.pending = dict[EventCollectionKeys.Pending] as? [String] ?? [""]
+        let dateString = dict[EventCollectionKeys.StartedAt] as? String ?? ""
+        let formate = DateFormatter()
+        self.startedAt = formate.date(from: dateString) ?? Date()
     }
 }

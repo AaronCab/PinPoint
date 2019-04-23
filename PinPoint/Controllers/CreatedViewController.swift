@@ -102,7 +102,7 @@ class CreatedViewController: UIViewController {
                                         print("fail to post iamge with error: \(error.localizedDescription)")
                                     } else if let imageURL = imageURL {
                                         print("image posted and recieved imageURL - post dish to database: \(imageURL)")
-                                        let thisEvent = EventCreatedByUser(createdAt: Date.getISOTimestamp(), personID: user.uid, photoURL: imageURL.absoluteString, eventDescription: createdEventDescription, lat: 40.4358, long: 50.6785, displayName: user.displayName!, email: user.email!, isTrustedUser: [], eventType: "test", documentID: docRef.documentID, message: [], pending: [])
+                                        let thisEvent = EventCreatedByUser(createdAt: Date.getISOTimestamp(), personID: user.uid, photoURL: imageURL.absoluteString, eventDescription: createdEventDescription, lat: 40.4358, long: 50.6785, displayName: user.displayName!, email: user.email!, isTrustedUser: [], eventType: "test", documentID: docRef.documentID, message: [], pending: [], startedAt: Date())
 ;                                        DBService.postEvent(event: thisEvent){ [weak self] error in
                                             if let error = error {
                                                 self?.showAlert(title: "Posting Event Error", message: error.localizedDescription)
