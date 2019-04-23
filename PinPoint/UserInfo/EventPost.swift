@@ -56,7 +56,7 @@ struct EventCreatedByUser {
         self.message = dict[EventCollectionKeys.Message] as? [String] ?? [""]
         self.pending = dict[EventCollectionKeys.Pending] as? [String] ?? [""]
         let dateString = dict[EventCollectionKeys.StartedAt] as? String ?? ""
-        let formate = DateFormatter()
+        let formate = ISO8601DateFormatter()
         self.startedAt = formate.date(from: dateString) ?? Date()
     }
 }
