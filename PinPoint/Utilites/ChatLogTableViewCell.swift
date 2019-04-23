@@ -15,8 +15,8 @@ class ChatLogTableViewCell: UITableViewCell {
         let fn = UILabel()
         fn.text = "Event Name"
         fn.numberOfLines = 2
-        fn.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        fn.font = UIFont.init(name: "futura", size: 16)
+        fn.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        fn.font = UIFont.init(name: "futura", size: 20)
         return fn
     }()
     
@@ -31,15 +31,24 @@ class ChatLogTableViewCell: UITableViewCell {
     
     let yesButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "Yes"), for: .normal)
+      //  button.setImage(UIImage(named: "Yes"), for: .normal)
+        button.setImage(UIImage(#imageLiteral(resourceName: "icons8-ok-50.png")), for: .normal)
         return button
     }()
     
     let noButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "No"), for: .normal)
+//        button.setImage(UIImage(named: "No"), for: .normal)
+        button.setImage(UIImage(#imageLiteral(resourceName: "icons8-cancel-50.png")), for: .normal)
         return button
     }()
+    
+    let blockBotton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(#imageLiteral(resourceName: "icons8-unavailable-filled-50.png")), for: .normal)
+        return button
+    }()
+    
     
     lazy var chatStackView:UIView = {
         let veiw = UIView()
@@ -67,27 +76,38 @@ class ChatLogTableViewCell: UITableViewCell {
         chatStackView.addSubview(friendName)
         chatStackView.addSubview(yesButton)
         chatStackView.addSubview(noButton)
+        chatStackView.addSubview(blockBotton)
         
         chatStackView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
         
         friendImageView.snp.makeConstraints { (make) in
-            make.left.equalTo(5)
+            make.left.equalTo(25)
             make.height.width.equalTo(50)
+            make.centerY.equalToSuperview()
         }
         
         friendName.snp.makeConstraints { (make) in
-            make.left.equalTo(friendImageView.snp.right)
+            make.left.equalTo(friendImageView.snp.right).offset(5)
+            make.width.equalTo(90)
             make.centerY.equalToSuperview()
         }
         yesButton.snp.makeConstraints { (make) in
-            make.left.equalTo(friendName.snp.right)
+            make.right.equalTo(noButton.snp.left).offset(-5)
+            make.height.width.equalTo(50)
             make.centerY.equalToSuperview()
         }
         
         noButton.snp.makeConstraints { (make) in
-            make.left.equalTo(yesButton.snp_right)
+            make.right.equalTo(blockBotton.snp.left).offset(-5)
+            make.height.width.equalTo(50)
+            make.centerY.equalToSuperview()
+        }
+        
+        blockBotton.snp.makeConstraints { (make) in
+            make.right.equalToSuperview().offset(-25)
+            make.height.width.equalTo(50)
             make.centerY.equalToSuperview()
         }
         
