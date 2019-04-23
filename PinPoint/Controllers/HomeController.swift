@@ -387,12 +387,13 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         }
         let addCalendarAction = UIAlertAction(title: "Add to Calendar", style: .default, handler: { alert in
             let thisEvent = self.event[senderTag.tag]
-//
-//
-//            let addToCalendar = EventCalendarData(description: (thisEvent.name?.text)!, createdAt: date!)
-//
-//            addEventToCalendar(date: , title: thisEvent.name?.text)
-//            self.showAlert(title: "PinPoint", message: "Successfully Added to Calendar")
+            let formatter = ISO8601DateFormatter()
+            guard let start = thisEvent.start?.utc,
+            let date = formatter.date(from: start),
+            let title = thisEvent.name?.text else { return }
+
+            self.addEventToCalendar(date: date, title: title)
+            self.showAlert(title: "PinPoint", message: "Successfully Added to Calendar")
         })
         alertController.addAction(cancelAction)
         alertController.addAction(favoriteActione)
