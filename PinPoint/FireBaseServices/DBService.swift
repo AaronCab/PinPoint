@@ -25,6 +25,7 @@ struct EventCollectionKeys {
     static let DocumentIdKey = "documentId"
     static let Message = "message"
     static let Pending = "pending"
+    static let StartedAt = "startedAt"
 }
 struct ProfileCollectionKeys {
     static let CollectionKey = "Profile"

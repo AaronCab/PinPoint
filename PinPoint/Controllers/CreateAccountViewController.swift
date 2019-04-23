@@ -36,6 +36,7 @@ class CreateAccountViewController: UIViewController {
     }
     
     @objc func createProfile(){
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
         guard let userName = createUserView.displayName.text,
             let email = createUserView.emailCreatedwith.text,
             let password = createUserView.passwordCreatedWith.text
@@ -47,11 +48,11 @@ class CreateAccountViewController: UIViewController {
         email.isEmpty &&
         password.isEmpty{
             showAlert(title: "Missing Fields", message: "Please fill out all info")
+            self.navigationItem.rightBarButtonItem?.isEnabled = true
 
         }else{
         authService.createNewAccount(username: userName, email: email, password: password)
         }
-
         }
 
     
