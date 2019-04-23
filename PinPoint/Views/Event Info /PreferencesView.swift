@@ -83,6 +83,7 @@ class PreferencesView: UIView {
           self.backgroundColor = #colorLiteral(red: 1, green: 0.3315477967, blue: 0.3251088858, alpha: 1)
         setUpView()
     }
+    
    private func setUpView(){
     searchBar = searchController.searchBar
     self.addSubview(preferenceContainerView)
