@@ -143,4 +143,27 @@ func updateUser(){
             })
         }
     }
+    
+    @objc func blockedUser(tag: UIButton){
+        if let user = authService.getCurrentUser(){
+            let pendingFriend = DBService.firestoreDB.collection(ProfileCollectionKeys.CollectionKey).document(user.uid)
+            
+            
+            pendingFriend.updateData([
+                ProfileCollectionKeys.isBlocked : FieldValue.arrayUnion([loggedInUserModel.friends![tag.tag]])]) { (error) in
+                    if let error = error{
+                        self.showAlert(title: "error", message: error.localizedDescription)
+                    }else{
+                        pendingFriend.updateData([
+                            ProfileCollectionKeys.PendingFriends : FieldValue.arrayRemove([tag.tag])], completion: { (error) in
+                                if let error = error{
+                                    self.showAlert(title: "Error", message: error.localizedDescription)
+                                }
+                        })
+                    }
+            }
+        }
+    }
+
+    
 }
