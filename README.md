@@ -13,6 +13,9 @@
 
 
 # Requirements
+- iOS 10.0+ / Mac OS X 10.11+ 
+- Xcode 10.0+
+- Swift 4.2+
 
 # Built With
 - Firebase
