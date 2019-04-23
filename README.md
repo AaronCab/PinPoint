@@ -11,5 +11,9 @@
 - Our goal is to hone in on an event for our user that will take into account their varying parameters. 
 - We also aim to provide the user the option to break free from the mold and create their own events.
 
+
+# Requirements
+
+
 # Contrubutors
 
