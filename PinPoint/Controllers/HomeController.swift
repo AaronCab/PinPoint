@@ -38,6 +38,8 @@ class HomeController: UIViewController {
     let loginView = LoginView()
     let requestsView = RequestsView()
     var eventsInCalendar = EventsDataModel.getEventData()
+    var detailUserOfProfile: ProfileOfUser!
+
     
     
     var catagories = [
@@ -366,17 +368,18 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             let customDVC = DetailViewController()
             DBService.firestoreDB
                 .collection(ProfileCollectionKeys.CollectionKey)
-                .addSnapshotListener({ (data, error) in
-                    if let data = data{
-                        let user = data.documents.map { ProfileOfUser(dict: $0.data()) }
-                            .filter(){$0.ProfileId == self.createdEvent[indexPath.row].personID}.first
-                        customDVC.profileOfUser = user
-                        customDVC.custom = self.createdEvent[indexPath.row]
-                        self.navigationController?.pushViewController(customDVC, animated: true)
-                    }else if let error = error{
-                        print(error)
-                    }
-                })
+                .getDocuments(source: .server, completion: { (data, error) in
+                        if let data = data{
+                            let otherUser = data.documents.map { ProfileOfUser(dict: $0.data()) }
+                                .filter(){$0.ProfileId == self.createdEvent[indexPath.row].personID}.first
+                            customDVC.profileOfUser = otherUser
+                            customDVC.custom = self.createdEvent[indexPath.row]
+                            self.navigationController?.pushViewController(customDVC, animated: true)
+                        }else if let error = error{
+                            print(error)
+                        }
+                    })
+
         case .catagories:
             let catdvc = PreferencesView()
             
@@ -430,7 +433,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
                     print("error: \(error)")
                 }
                 //                let
-                //                EventsDataModel.addEvent(event: <#T##EventsData#>)
+                //                EventsDataModel.addEvent(event: )
                 
             } else {
                 print("error: \(error)")
