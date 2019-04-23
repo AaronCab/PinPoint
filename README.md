@@ -14,6 +14,19 @@
 
 # Requirements
 
+# Built With
+- Firebase
+- KingFisher
+- Toucan
+- SnapKit
 
-# Contrubutors
+# Links
+[Trello](https://trello.com/b/Xkw7SBd9/53-capstone-group-2)
 
+
+# Contributors
+
+- [Genesis Mosquera](https://github.com/GMosquera1)  
+- [Aaron Cabreja](https://github.com/AaronCab) 
+- [Jason Delfyette](https://github.com/Jason4D) 
+- [Jeffrey Almonte](https://github.com/jalmonte83) 
