@@ -39,6 +39,7 @@ class HomeController: UIViewController {
     let requestsView = RequestsView()
     var eventsInCalendar = EventsDataModel.getEventData()
     
+    
     var catagories = [
         "Business": "101",
         "ScienceAndTech": "102",
@@ -189,6 +190,8 @@ class HomeController: UIViewController {
         whatToSeque = .event
         contentView.addSubview(eventsView)
         view.addSubview(contentView)
+        navigationItem.searchController = nil
+
     }
     
     func discoverPageOn() {
@@ -201,6 +204,7 @@ class HomeController: UIViewController {
         whatToSeque = .custom
         discoverView.addEventButton.addTarget(self, action: #selector(addEventCommand), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = rightBarItem
+        navigationItem.searchController = nil
         
     }
     
@@ -212,6 +216,7 @@ class HomeController: UIViewController {
         whatToSeque = .catagories
         contentView.addSubview(preferencesView)
         view.addSubview(contentView)
+        navigationItem.searchController = preferencesView.searchController
     }
     
     func favoritesPageOn() {
@@ -225,6 +230,7 @@ class HomeController: UIViewController {
         whatToSeque = .favorite
         contentView.addSubview(favoriteView)
         view.addSubview(contentView)
+        navigationItem.searchController = nil
     }
     func profilePageOn() {
         if authService.getCurrentUser() == nil{
@@ -233,6 +239,7 @@ class HomeController: UIViewController {
             self.navigationItem.title = "P R O F I L E"
             contentView.addSubview(loginView)
             view.addSubview(loginView)
+            navigationItem.searchController = nil
         }else{
             contentView.removeFromSuperview()
             contentView = UIView.init(frame: UIScreen.main.bounds)
@@ -244,6 +251,7 @@ class HomeController: UIViewController {
             contentView.addSubview(profileView)
             updateUser()
             view.addSubview(profileView)
+            navigationItem.searchController = nil
         }
         
         
@@ -370,7 +378,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
                     }
                 })
         case .catagories:
-            let catgoriesDVC = DetailViewController()
+            let catdvc = PreferencesView()
             
         }
 
@@ -387,12 +395,13 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         }
         let addCalendarAction = UIAlertAction(title: "Add to Calendar", style: .default, handler: { alert in
             let thisEvent = self.event[senderTag.tag]
-//
-//
-//            let addToCalendar = EventCalendarData(description: (thisEvent.name?.text)!, createdAt: date!)
-//
-//            addEventToCalendar(date: , title: thisEvent.name?.text)
-//            self.showAlert(title: "PinPoint", message: "Successfully Added to Calendar")
+            let formatter = ISO8601DateFormatter()
+            guard let start = thisEvent.start?.utc,
+            let date = formatter.date(from: start),
+            let title = thisEvent.name?.text else { return }
+
+            self.addEventToCalendar(date: date, title: title)
+            self.showAlert(title: "PinPoint", message: "Successfully Added to Calendar")
         })
         alertController.addAction(cancelAction)
         alertController.addAction(favoriteActione)

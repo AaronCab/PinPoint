@@ -24,6 +24,8 @@
 	<string>PinPoint would like access to your Location. Allow?</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>PinPoint would like access to your Camera. Allow? </string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>PinPoint would like access to your Calendar. Allow?</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>

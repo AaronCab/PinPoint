@@ -50,13 +50,13 @@ class PreferencesView: UIView {
         return button
     }()
     
-    private var locationResultsController: LocationResultController = {
+     var locationResultsController: LocationResultController = {
         var locationController = LocationResultController()
         return locationController
         
     }()
     
-    private lazy var searchController: UISearchController = {
+     lazy var searchController: UISearchController = {
         let sc = UISearchController(searchResultsController: locationResultsController)
         sc.searchResultsUpdater = locationResultsController
         sc.hidesNavigationBarDuringPresentation = false
