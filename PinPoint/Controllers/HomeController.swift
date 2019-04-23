@@ -39,6 +39,7 @@ class HomeController: UIViewController {
     let requestsView = RequestsView()
     var eventsInCalendar = EventsDataModel.getEventData()
     
+    
     var catagories = [
         "Business": "101",
         "ScienceAndTech": "102",
@@ -212,6 +213,7 @@ class HomeController: UIViewController {
         whatToSeque = .catagories
         contentView.addSubview(preferencesView)
         view.addSubview(contentView)
+        navigationItem.searchController = preferencesView.searchController
     }
     
     func favoritesPageOn() {
@@ -370,7 +372,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
                     }
                 })
         case .catagories:
-            let catgoriesDVC = DetailViewController()
+            let catdvc = PreferencesView()
             
         }
 
