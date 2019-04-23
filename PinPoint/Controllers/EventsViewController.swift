@@ -53,6 +53,8 @@ extension EventsViewController: UITableViewDelegate, UITableViewDataSource{
          let pendingFriends = loggedInUserModel.pendingFriends else{
                 return UITableViewCell()
         }
+        
+        if pendingFriends.count != 0{
         updateFriend(friendID: pendingFriends[indexPath.row]) { (profile, error) in
             if let profile = profile{
                 cell.friendName.text = profile.displayName
@@ -63,13 +65,24 @@ extension EventsViewController: UITableViewDelegate, UITableViewDataSource{
                 }
             }
         }
+            cell.noButton.isEnabled = true
+            cell.yesButton.isEnabled = true
+            cell.blockBotton.isEnabled = true
         cell.noButton.tag = indexPath.row
         cell.yesButton.tag = indexPath.row
         cell.blockBotton.tag = indexPath.row
         cell.yesButton.addTarget(self, action: #selector(acceptedRequest), for: .touchUpInside)
         cell.noButton.addTarget(self, action: #selector(rejectedRequest), for: .touchUpInside)
         cell.blockBotton.addTarget(self, action: #selector(blockedUser), for: .touchUpInside)
-
+        }else{
+            self.chatView.chatLogTableView.reloadData()
+            cell.friendName.text = "No Friends Here"
+            cell.noButton.isEnabled = false
+            cell.yesButton.isEnabled = false
+            cell.blockBotton.isEnabled = false
+            cell.friendImageView.image = nil
+            
+        }
 
 
         
