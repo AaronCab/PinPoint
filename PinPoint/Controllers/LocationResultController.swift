@@ -13,9 +13,11 @@ protocol LocationResultsControllerDelegate: AnyObject {
     func didSelectCoordinate(_ locationResultsController: LocationResultController, coordinate: CLLocationCoordinate2D)
     func didScrollTableView(_ locationResultsController: LocationResultController)
 }
-
+protocol LocationString {
+    func getString(address: String)
+}
 class LocationResultController: UIViewController{
-    
+    var delegate2: LocationString?
     var locationView = LocationView()
     
     private let searchCompleter = MKLocalSearchCompleter()
@@ -53,6 +55,7 @@ extension LocationResultController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let suggestion = completerResults[indexPath.row]
         let addressString = suggestion.subtitle.isEmpty ? suggestion.title : suggestion.subtitle
+        print(addressString)
         LocationService.getCoordinate(addressString: addressString) { (coordinate, error) in
             if let error = error {
                 print("error getting coordinate: \(error)")
@@ -61,7 +64,7 @@ extension LocationResultController: UITableViewDelegate {
                 self.delegate?.didSelectCoordinate(self, coordinate: coordinate)
             }
         }
-        
+        self.delegate2?.getString(address: addressString)
         dismiss(animated: true)
     }
 }

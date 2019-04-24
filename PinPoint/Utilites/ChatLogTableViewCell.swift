@@ -31,14 +31,12 @@ class ChatLogTableViewCell: UITableViewCell {
     
     let yesButton: UIButton = {
         let button = UIButton()
-      //  button.setImage(UIImage(named: "Yes"), for: .normal)
         button.setImage(UIImage(#imageLiteral(resourceName: "icons8-ok-50.png")), for: .normal)
         return button
     }()
     
     let noButton: UIButton = {
         let button = UIButton()
-//        button.setImage(UIImage(named: "No"), for: .normal)
         button.setImage(UIImage(#imageLiteral(resourceName: "icons8-cancel-50.png")), for: .normal)
         return button
     }()
