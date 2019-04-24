@@ -77,6 +77,7 @@
 		93FF2FBA2266346500A350E2 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FF2FB92266346500A350E2 /* CategoryCell.swift */; };
 		93FF2FBC2267C8E600A350E2 /* DiscoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FF2FBB2267C8E600A350E2 /* DiscoverCell.swift */; };
 		94F65BFC0759B9FC879F0B3A /* Pods_PinPoint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E6346C23E7AB50CCD79EA1B /* Pods_PinPoint.framework */; };
+		960EBCB42270972A00D00A41 /* DetailEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960EBCB32270972A00D00A41 /* DetailEventViewController.swift */; };
 		961AF28A2267821700C8E07F /* ExtensionHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961AF2892267821700C8E07F /* ExtensionHomeController.swift */; };
 		961AF28C226785D000C8E07F /* LocationResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961AF28B226785D000C8E07F /* LocationResultController.swift */; };
 		961AF28E2267874A00C8E07F /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961AF28D2267874A00C8E07F /* LocationView.swift */; };
@@ -160,6 +161,7 @@
 		93FF2FB72266298400A350E2 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		93FF2FB92266346500A350E2 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		93FF2FBB2267C8E600A350E2 /* DiscoverCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCell.swift; sourceTree = "<group>"; };
+		960EBCB32270972A00D00A41 /* DetailEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailEventViewController.swift; sourceTree = "<group>"; };
 		961AF2892267821700C8E07F /* ExtensionHomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionHomeController.swift; sourceTree = "<group>"; };
 		961AF28B226785D000C8E07F /* LocationResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationResultController.swift; sourceTree = "<group>"; };
 		961AF28D2267874A00C8E07F /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				961AF2892267821700C8E07F /* ExtensionHomeController.swift */,
 				93088BCC225BB1680067F09D /* MenuController.swift */,
 				93088BD6225E39AD0067F09D /* EventsViewController.swift */,
+				960EBCB32270972A00D00A41 /* DetailEventViewController.swift */,
 				93088BDC225E3D490067F09D /* PreferencesViewController.swift */,
 				93088BE0225E3D7E0067F09D /* InterestViewController.swift */,
 				93088BEE225E542F0067F09D /* FavoritesViewController.swift */,
@@ -544,6 +547,7 @@
 				93088BCF225BD20A0067F09D /* NetworkHandler.swift in Sources */,
 				96E1BD96226A1F1900F43C01 /* ChatLogTableViewCell.swift in Sources */,
 				961AF28C226785D000C8E07F /* LocationResultController.swift in Sources */,
+				960EBCB42270972A00D00A41 /* DetailEventViewController.swift in Sources */,
 				93BFA6FD225F93DC0074FD34 /* FavoritesCell.swift in Sources */,
 				93088BBE225BA7200067F09D /* AccountExistingView.swift in Sources */,
 				93088BC8225BB1330067F09D /* MenuOptions.swift in Sources */,
