@@ -81,6 +81,7 @@ class HomeController: UIViewController {
     
     
     private var userModel: UserLogedInModel!
+    
     var currentLocation = CLLocation(){
         didSet{
             preferencesView.locationButton.setTitle(location, for: .normal)
@@ -568,6 +569,7 @@ extension HomeController: CLLocationManagerDelegate {
         }
     }
 }
+
 
 extension HomeController{
     
