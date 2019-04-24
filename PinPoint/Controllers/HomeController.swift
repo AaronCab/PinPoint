@@ -39,7 +39,7 @@ class HomeController: UIViewController {
     let requestsView = RequestsView()
     var eventsInCalendar = EventsDataModel.getEventData()
     var detailUserOfProfile: ProfileOfUser!
-
+    
     
     
     var catagories = [
@@ -179,8 +179,8 @@ class HomeController: UIViewController {
         self.navigationItem.title = "F R I E N D  R E Q U E S T S"
         let friendVC = EventsViewController()
         self.navigationController?.pushViewController(friendVC, animated: true)
-//        contentView.addSubview(friendVC.view)
-//        view.addSubview(contentView)
+        //        contentView.addSubview(friendVC.view)
+        //        view.addSubview(contentView)
     }
     func eventsPageOn() {
         self.navigationItem.rightBarButtonItem = nil
@@ -193,7 +193,7 @@ class HomeController: UIViewController {
         contentView.addSubview(eventsView)
         view.addSubview(contentView)
         navigationItem.searchController = nil
-
+        
     }
     
     func discoverPageOn() {
@@ -335,6 +335,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             let category = catagoriesInAnArray[indexPath.row]
             cell.categoryName.text = category
             cell.categoryImage.image = UIImage(named: category)
+            
             return cell
         }
         else {
@@ -369,22 +370,22 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             DBService.firestoreDB
                 .collection(ProfileCollectionKeys.CollectionKey)
                 .getDocuments(source: .server, completion: { (data, error) in
-                        if let data = data{
-                            let otherUser = data.documents.map { ProfileOfUser(dict: $0.data()) }
-                                .filter(){$0.ProfileId == self.createdEvent[indexPath.row].personID}.first
-                            customDVC.profileOfUser = otherUser
-                            customDVC.custom = self.createdEvent[indexPath.row]
-                            self.navigationController?.pushViewController(customDVC, animated: true)
-                        }else if let error = error{
-                            print(error)
-                        }
-                    })
-
+                    if let data = data{
+                        let otherUser = data.documents.map { ProfileOfUser(dict: $0.data()) }
+                            .filter(){$0.ProfileId == self.createdEvent[indexPath.row].personID}.first
+                        customDVC.profileOfUser = otherUser
+                        customDVC.custom = self.createdEvent[indexPath.row]
+                        self.navigationController?.pushViewController(customDVC, animated: true)
+                    }else if let error = error{
+                        print(error)
+                    }
+                })
+            
         case .catagories:
             //let catdvc = PreferencesView()
             print("end it here")
         }
-
+        
     }
     @objc func moreInfo(senderTag: UIButton){
         
@@ -400,10 +401,14 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             let thisEvent = self.event[senderTag.tag]
             let formatter = ISO8601DateFormatter()
             guard let start = thisEvent.start?.utc,
-            let date = formatter.date(from: start),
-            let title = thisEvent.name?.text else { return }
-
-            self.addEventToCalendar(date: date, title: title)
+                let end = thisEvent.end?.utc,
+                let dateStart = formatter.date(from: start),
+                let dateEnd = formatter.date(from: end),
+                let notes = thisEvent.description?.text,
+                let title = thisEvent.name?.text else { return }
+            
+            
+            self.addEventToCalendar(date: dateStart, dateEnd: dateEnd, title: title, notes: notes)
             self.showAlert(title: "PinPoint", message: "Successfully Added to Calendar")
         })
         alertController.addAction(cancelAction)
@@ -412,7 +417,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         present(alertController, animated: true)
         
     }
-    func addEventToCalendar(date: Date, title: String) {
+    func addEventToCalendar(date: Date, dateEnd: Date, title: String, notes: String) {
         let eventStore: EKEventStore = EKEventStore()
         eventStore.requestAccess(to: .event) {(granted, error) in
             if (granted) && (error == nil)
@@ -421,25 +426,20 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
                 print("error \(error)")
                 
                 let event:EKEvent = EKEvent(eventStore: eventStore)
-                DispatchQueue.main.async {
-                    event.title = title
-                }
+                event.title = title
                 event.startDate = date
-                event.endDate = date
+                event.endDate = dateEnd
+                event.notes = notes
                 event.calendar = eventStore.defaultCalendarForNewEvents
                 do {
                     try eventStore.save(event, span: .thisEvent)
                 } catch let error as NSError{
                     print("error: \(error)")
                 }
-                //                let
-                //                EventsDataModel.addEvent(event: )
                 
             } else {
                 print("error: \(error)")
-                
             }
-            
         }
         print("pressed")
     }
@@ -467,14 +467,14 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         }
         if user.uid == userCreatedEvent.personID{
             alertController.addAction(deleteAction)
-
+            
         }
         alertController.addAction(cancelAction)
         
         present(alertController, animated: true)
         
     }
-   
+    
     @objc private func fetchEvents(){
         refreshControl.beginRefreshing()
         listener = DBService.firestoreDB
