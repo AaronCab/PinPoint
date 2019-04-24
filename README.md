@@ -10,3 +10,26 @@
 - We aim to encourage social interactions and engagements to create a vibrant community for our friends and family.
 - Our goal is to hone in on an event for our user that will take into account their varying parameters. 
 - We also aim to provide the user the option to break free from the mold and create their own events.
+
+
+# Requirements
+- iOS 10.0+ / Mac OS X 10.11+ 
+- Xcode 10.0+
+- Swift 4.2+
+
+# Built With
+- Firebase
+- KingFisher
+- Toucan
+- SnapKit
+
+# Links
+[Trello](https://trello.com/b/Xkw7SBd9/53-capstone-group-2)
+
+
+# Contributors
+
+- [Genesis Mosquera](https://github.com/GMosquera1)  
+- [Aaron Cabreja](https://github.com/AaronCab) 
+- [Jason Delfyette](https://github.com/Jason4D) 
+- [Jeffrey Almonte](https://github.com/jalmonte83) 

@@ -10,7 +10,6 @@ import UIKit
 import SnapKit
 
 class HomeSplashView: UIView {
-    // don't forget merge this new file
     lazy var splashView: UIView = {
 //        let vw = UIView(frame: CGRect(x: 100, y: 100, width: 300, height: 300))
         let vw = UIView()
@@ -57,10 +56,10 @@ class HomeSplashView: UIView {
         self.addSubview(splashView)
         splashView.addSubview(logoImage)
         splashView.snp.makeConstraints { (make) in
-            make.centerWithinMargins.equalToSuperview()
-          // make.top.right.equalTo(50)
-         //   make.bottom.left.equalTo(-50)
-            make.edges.equalToSuperview()
+            make.center.equalToSuperview()
+           make.top.right.equalTo(50)
+            make.bottom.left.equalTo(-50)
+           // make.edges.equalToSuperview()
         }
         logoImage.snp.makeConstraints { (make) in
             make.center.equalTo(splashView.snp.center)
