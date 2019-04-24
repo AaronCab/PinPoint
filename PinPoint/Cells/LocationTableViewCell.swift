@@ -11,7 +11,7 @@ import UIKit
 class LocationTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: "LocationCell")
+        super.init(style: .subtitle, reuseIdentifier: "LocationCell")
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -13,7 +13,8 @@ import CoreLocation
 class PreferencesViewController: UIViewController {
     
     var preferencesView = PreferencesView()
-    
+    var locationView = LocationView()
+    var locationViewHeight = NSLayoutConstraint()
     var currentLocation: CLLocation! {
         didSet{
             preferencesView.locationButton.setTitle(location, for: .normal)
@@ -23,9 +24,6 @@ class PreferencesViewController: UIViewController {
     var locationService = LocationService()
     var long: Double!
     var lat: Double!
-    
-    
-
     
     private lazy var imagePickerController: UIImagePickerController = {
         let ip = UIImagePickerController()
@@ -39,7 +37,8 @@ class PreferencesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(preferencesView)
+        setUpViews()
+        locationViewHeight = locationView.heightAnchor.constraint(greaterThanOrEqualToConstant: 0)
         //preferencesView.pictureButton.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
         preferencesView.locationButton.addTarget(self, action: #selector(locationFinder), for: .touchUpInside)
         self.locationManager.requestWhenInUseAuthorization()
@@ -70,6 +69,33 @@ class PreferencesViewController: UIViewController {
 
     @objc func locationFinder(){
         
+    }
+    
+    private func setUpViews(){
+        setUpPrefrencesView()
+        setUpLocationView()
+    }
+    private func setUpPrefrencesView(){
+        view.addSubview(preferencesView)
+        preferencesView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            preferencesView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            preferencesView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            preferencesView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            preferencesView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            ])
+    }
+    private func setUpLocationView(){
+    view.addSubview(locationView)
+        locationView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            locationView.topAnchor.constraint(equalTo: preferencesView.searchBar.bottomAnchor),
+            locationView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            locationView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        //   locationView.bottomAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor)
+            locationView.heightAnchor.constraint(equalToConstant: 0)
+            
+            ])
     }
 }
 
