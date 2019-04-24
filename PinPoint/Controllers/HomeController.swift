@@ -37,8 +37,9 @@ class HomeController: UIViewController {
     var eventCell = EventsCell()
     let loginView = LoginView()
     let requestsView = RequestsView()
+    let friendView = ChatLogView()
     var eventsInCalendar = EventsDataModel.getEventData()
-    var detailUserOfProfile: ProfileOfUser!
+    var userProfile: ProfileOfUser!
 
     
     
@@ -161,7 +162,36 @@ class HomeController: UIViewController {
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         }
         fetchEvents()
-        
+        if let user = authService.getCurrentUser(){
+        DBService.firestoreDB
+            .collection(ProfileCollectionKeys.CollectionKey)
+            .getDocuments(source: .server, completion: { (data, error) in
+                if let data = data{
+                    self.userProfile = data.documents.map { ProfileOfUser(dict: $0.data()) }
+                        .filter(){$0.ProfileId == user.uid}.first
+                }else if let error = error{
+                    self.showAlert(title: nil, message: error.localizedDescription)
+                }
+            })
+        }
+    }
+    
+    func updateFriend(friendID: String, completeion: @escaping (ProfileOfUser?, Error?) -> Void){
+        var friendFound: ProfileOfUser!
+        if let user = authService.getCurrentUser(){
+            self.listener = DBService.firestoreDB
+                .collection(ProfileCollectionKeys.CollectionKey)
+                .addSnapshotListener({ (data, error) in
+                    if let data = data{
+                        friendFound = data.documents.map { ProfileOfUser(dict: $0.data()) }
+                            .filter(){$0.ProfileId == friendID}.first
+                        completeion(friendFound, nil)
+                    }
+                    if let error = error{
+                        completeion(nil, error)
+                    }
+                })
+        }
     }
     
     @objc func handleMenuToggle() {
@@ -176,11 +206,18 @@ class HomeController: UIViewController {
     }
     func friendRequestsPageOn() {
         self.navigationItem.rightBarButtonItem = nil
+        contentView.removeFromSuperview()
+        contentView = UIView.init(frame: UIScreen.main.bounds)
+        friendView.chatLogTableView.delegate = self
+        friendView.chatLogTableView.dataSource = self
         self.navigationItem.title = "F R I E N D  R E Q U E S T S"
-        let friendVC = EventsViewController()
-        self.navigationController?.pushViewController(friendVC, animated: true)
-//        contentView.addSubview(friendVC.view)
-//        view.addSubview(contentView)
+        let rightBarItem = UIBarButtonItem(customView: friendView.settingsButton)
+        self.navigationItem.rightBarButtonItem = rightBarItem
+        friendView.settingsButton.addTarget(self, action: #selector(pendingFreinds), for: .touchUpInside)
+        contentView.addSubview(friendView)
+        view.addSubview(contentView)
+        navigationItem.searchController = nil
+
     }
     func eventsPageOn() {
         self.navigationItem.rightBarButtonItem = nil

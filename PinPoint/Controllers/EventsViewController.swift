@@ -33,7 +33,7 @@ class EventsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(chatView)
-        updateUser()
+//        updateUser()
 
     }
   
@@ -68,6 +68,9 @@ extension EventsViewController: UITableViewDelegate, UITableViewDataSource{
             cell.noButton.isEnabled = true
             cell.yesButton.isEnabled = true
             cell.blockBotton.isEnabled = true
+            cell.blockBotton.isHidden = false
+            cell.yesButton.isHidden = false
+            cell.noButton.isHidden = false
         cell.noButton.tag = indexPath.row
         cell.yesButton.tag = indexPath.row
         cell.blockBotton.tag = indexPath.row
@@ -80,6 +83,9 @@ extension EventsViewController: UITableViewDelegate, UITableViewDataSource{
             cell.noButton.isEnabled = false
             cell.yesButton.isEnabled = false
             cell.blockBotton.isEnabled = false
+            cell.blockBotton.isHidden = true
+            cell.yesButton.isHidden = true
+            cell.noButton.isHidden = true
             cell.friendImageView.image = nil
             
         }
@@ -98,18 +104,7 @@ extension EventsViewController: UITableViewDelegate, UITableViewDataSource{
 
 
 extension EventsViewController{
-func updateUser(){
-    if let user = authService.getCurrentUser(){
-    self.listener = DBService.firestoreDB
-    .collection(ProfileCollectionKeys.CollectionKey)
-    .addSnapshotListener({ (data, error) in
-    if let data = data{
-    self.loggedInUserModel = data.documents.map { ProfileOfUser(dict: $0.data()) }
-    .filter(){$0.ProfileId == user.uid}.first
-    }
-    })
-    }
-    }
+
     
     func updateFriend(friendID: String, completeion: @escaping (ProfileOfUser?, Error?) -> Void){
         var friendFound: ProfileOfUser!

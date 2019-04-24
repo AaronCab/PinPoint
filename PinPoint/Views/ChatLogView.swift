@@ -22,6 +22,21 @@ class ChatLogView: UIView {
         vtv.backgroundColor = .white
         return vtv
     }()
+    
+    public var settingsButton: UIButton = {
+        let button = UIButton()
+        button.setImage(#imageLiteral(resourceName: "icons8-ok-100"), for: .normal)
+        button.backgroundColor = .clear
+        return button
+    }()
+    
+    var number: UILabel = {
+        let button = UILabel()
+        button.backgroundColor = .red
+        button.textColor = .white
+        button.text = "0"
+        return button
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
@@ -37,7 +52,9 @@ class ChatLogView: UIView {
         backgroundColor = .white
         self.chatLogTableView.register(ChatLogTableViewCell.self, forCellReuseIdentifier: "chatLogTableViewCell")
          setupTableView()
-        
+//        settingsButtonConstraint()
+//        numberLayout()
+//        
     }
     
     private func setupTableView() {
@@ -49,5 +66,18 @@ class ChatLogView: UIView {
         chatLogTableView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         chatLogTableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
+    
+//    private func settingsButtonConstraint() {
+//        addSubview(settingsButton)
+//        settingsButton.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([settingsButton.heightAnchor.constraint(equalToConstant: 40), settingsButton.widthAnchor.constraint(equalToConstant: 45)])
+//    }
+    
+//    private func numberLayout(){
+//        addSubview(number)
+//        number.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([number.topAnchor.constraint(equalTo: settingsButton.bottomAnchor, constant: 5), number.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -15),number.heightAnchor.constraint(equalToConstant: 20), number.widthAnchor.constraint(equalToConstant: 20)])
+//
+//    }
     
 }
