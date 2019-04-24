@@ -41,11 +41,13 @@ extension LocationResultController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath)
-        
         let suggestion = completerResults[indexPath.row]
         // Each suggestion is a MKLocalSearchCompletion with a title, subtitle
+        
         cell.textLabel?.text = suggestion.title
         cell.detailTextLabel?.text = suggestion.subtitle
+        cell.backgroundColor = .white
+        
         
         return cell
     }
@@ -66,6 +68,9 @@ extension LocationResultController: UITableViewDelegate {
         }
         self.delegate2?.getString(address: addressString)
         dismiss(animated: true)
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 65
     }
 }
 

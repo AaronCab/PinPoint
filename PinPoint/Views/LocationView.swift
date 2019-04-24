@@ -11,7 +11,7 @@ import UIKit
 class LocationView: UIView {
     public lazy var locationTableView: UITableView = {
         let vtv = UITableView()
-        vtv.backgroundColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
+        vtv.backgroundColor = .white
         return vtv
     }()
     
