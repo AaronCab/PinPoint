@@ -23,9 +23,9 @@ class PreferencesView: UIView {
             let layout = UICollectionViewFlowLayout()
             layout.minimumLineSpacing = 16
             layout.scrollDirection = .vertical 
-            layout.itemSize = CGSize.init(width: 100, height: 100)
+            layout.itemSize = CGSize.init(width: 115, height: 115)
             let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-            cv.backgroundColor = #colorLiteral(red: 1, green: 0.3315477967, blue: 0.3251088858, alpha: 1)
+            cv.backgroundColor = .clear
             return cv
         }()
     
@@ -80,7 +80,7 @@ class PreferencesView: UIView {
     }
     private func commonInit(){
         self.categoryCollectionView.register(CategoryCell.self, forCellWithReuseIdentifier: "CategoryCell")
-          self.backgroundColor = #colorLiteral(red: 1, green: 0.3315477967, blue: 0.3251088858, alpha: 1)
+          self.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         setUpView()
     }
     
@@ -105,13 +105,13 @@ class PreferencesView: UIView {
         make.top.equalTo(searchBar.snp.bottom).offset(15)
         make.left.equalTo(20)
         make.right.equalTo(-20)
-        make.height.equalTo(50)
+        make.height.equalTo(60)
     }
     categoryCollectionView.snp.makeConstraints { (make) in
-        make.top.equalTo(locationButton.snp.bottom).offset(15)
+        make.top.equalTo(locationButton.snp.bottom).offset(30)
         make.left.equalTo(20)
         make.right.equalTo(-20)
-        make.height.equalTo(600)
+        make.height.equalTo(700)
     }
     
     }

@@ -60,9 +60,9 @@ struct ProfileOfUser {
         self.photoURL = dict[ProfileCollectionKeys.PhotoURLKey] as? String ?? ""
         self.coverImageURL = dict[ProfileCollectionKeys.CoverImageURLKey] as? String ?? ""
         self.joinedDate = dict[ProfileCollectionKeys.JoinedDateKey] as? String ?? ""
-        self.firstName = dict[ProfileCollectionKeys.FirstNameKey] as? String ?? "FirstName"
-        self.lastName = dict[ProfileCollectionKeys.LastNameKey] as? String ?? "LastName"
-        self.bio = dict[ProfileCollectionKeys.BioKey] as? String ?? "fellow bloggers are looking forward to reading your bio"
+        self.firstName = dict[ProfileCollectionKeys.FirstNameKey] as? String ?? "First Name"
+        self.lastName = dict[ProfileCollectionKeys.LastNameKey] as? String ?? "Last Name"
+        self.bio = dict[ProfileCollectionKeys.BioKey] as? String ?? "fellow users are looking forward to reading your bio"
         self.friends = dict[ProfileCollectionKeys.FriendsKey] as? [String] ?? [""]
         self.blockedUser = dict[ProfileCollectionKeys.isBlocked] as? [String] ?? [""]
         self.pendingFriends = dict[ProfileCollectionKeys.PendingFriends] as? [String] ?? [""]
