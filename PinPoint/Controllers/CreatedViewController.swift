@@ -47,7 +47,7 @@ class CreatedViewController: UIViewController {
                                                   action: #selector(photoLibraryButtonPressed))
         let flexibleSpaceBarItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         toolbar.items = [cameraBarItem, flexibleSpaceBarItem, photoLibraryBarItem]
-        if !UIImagePickerController.isSourceTypeAvailable(.camera) {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) == false {
             cameraBarItem.isEnabled = false
         }
     }

@@ -70,6 +70,7 @@ class HomeController: UIViewController {
     var authService = AppDelegate.authservice{
         didSet{
             profilePageOn()
+            view.reloadInputViews()
         }
     }
     private var listener: ListenerRegistration!
