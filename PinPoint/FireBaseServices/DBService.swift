@@ -84,7 +84,9 @@ final class DBService {
                 EventCollectionKeys.PersonID       : event.personID,
                 EventCollectionKeys.EventDescription  : event.eventDescription,
                 EventCollectionKeys.PhotoURL        : event.photoURL,
-                EventCollectionKeys.DocumentIdKey      : event.documentId
+                EventCollectionKeys.DocumentIdKey      : event.documentId,
+                EventCollectionKeys.DisplayNameKey : event.displayName,
+                EventCollectionKeys.StartedAt : event.startedAt
                 ])
             { (error) in
                 if let error = error {
