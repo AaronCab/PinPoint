@@ -33,6 +33,7 @@ class CreatedViewController: UIViewController {
         createdEvent.create.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = rightBarItem
         configureInputAccessoryView()
+        hideKeyboardWhenTappedAround()
     }
 
     private func configureInputAccessoryView() {

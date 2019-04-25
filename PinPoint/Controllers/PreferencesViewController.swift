@@ -72,8 +72,9 @@ class PreferencesViewController: UIViewController {
     }
     
     private func setUpViews(){
-        setUpPrefrencesView()
-        setUpLocationView()
+//        setUpPrefrencesView()
+//        setUpLocationView()
+        view.addSubview(locationView)
     }
     private func setUpPrefrencesView(){
         view.addSubview(preferencesView)
