@@ -132,9 +132,9 @@ class HomeController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(homeSplashImage)
         viewdidLoadLayout()
     }
+    
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -142,7 +142,10 @@ class HomeController: UIViewController {
             loginView.removeFromSuperview()
         }
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        view.addSubview(homeSplashImage)
+    }
+
     private func viewdidLoadLayout(){
         view.backgroundColor = .white
         view.addSubview(contentView)
@@ -250,8 +253,6 @@ class HomeController: UIViewController {
             view.addSubview(homeSplashImage)
             navigationItem.searchController = nil
         } else {
-            
-            
             contentView = UIView.init(frame: UIScreen.main.bounds)
             contentView.addSubview(discoverView)
             view.addSubview(contentView)
