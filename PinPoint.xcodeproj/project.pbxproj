@@ -78,6 +78,7 @@
 		93FF2FBC2267C8E600A350E2 /* DiscoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FF2FBB2267C8E600A350E2 /* DiscoverCell.swift */; };
 		94F65BFC0759B9FC879F0B3A /* Pods_PinPoint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E6346C23E7AB50CCD79EA1B /* Pods_PinPoint.framework */; };
 		960EBCB42270972A00D00A41 /* DetailEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960EBCB32270972A00D00A41 /* DetailEventViewController.swift */; };
+		960EBCB622721E6100D00A41 /* HomeControllerExtensionForDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960EBCB522721E6100D00A41 /* HomeControllerExtensionForDelegates.swift */; };
 		961AF28A2267821700C8E07F /* ExtensionHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961AF2892267821700C8E07F /* ExtensionHomeController.swift */; };
 		961AF28C226785D000C8E07F /* LocationResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961AF28B226785D000C8E07F /* LocationResultController.swift */; };
 		961AF28E2267874A00C8E07F /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961AF28D2267874A00C8E07F /* LocationView.swift */; };
@@ -162,6 +163,7 @@
 		93FF2FB92266346500A350E2 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		93FF2FBB2267C8E600A350E2 /* DiscoverCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCell.swift; sourceTree = "<group>"; };
 		960EBCB32270972A00D00A41 /* DetailEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailEventViewController.swift; sourceTree = "<group>"; };
+		960EBCB522721E6100D00A41 /* HomeControllerExtensionForDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeControllerExtensionForDelegates.swift; sourceTree = "<group>"; };
 		961AF2892267821700C8E07F /* ExtensionHomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionHomeController.swift; sourceTree = "<group>"; };
 		961AF28B226785D000C8E07F /* LocationResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationResultController.swift; sourceTree = "<group>"; };
 		961AF28D2267874A00C8E07F /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 				93088BB7225BA6D70067F09D /* LoginWithExistingViewController.swift */,
 				93088BC5225BB10D0067F09D /* ContainerController.swift */,
 				93088BCA225BB1570067F09D /* HomeController.swift */,
+				960EBCB522721E6100D00A41 /* HomeControllerExtensionForDelegates.swift */,
 				961AF28B226785D000C8E07F /* LocationResultController.swift */,
 				961AF2892267821700C8E07F /* ExtensionHomeController.swift */,
 				93088BCC225BB1680067F09D /* MenuController.swift */,
@@ -580,6 +583,7 @@
 				05522F0F226E4B01007B112D /* EventsCalendarData.swift in Sources */,
 				93088BC6225BB10D0067F09D /* ContainerController.swift in Sources */,
 				93088BA9225B9A520067F09D /* StorageService.swift in Sources */,
+				960EBCB622721E6100D00A41 /* HomeControllerExtensionForDelegates.swift in Sources */,
 				05522F0D226E4A98007B112D /* EventsCalendarModel.swift in Sources */,
 				93088BB4225BA6580067F09D /* LoginViewController.swift in Sources */,
 				93088BE3225E3DAA0067F09D /* InterestView.swift in Sources */,

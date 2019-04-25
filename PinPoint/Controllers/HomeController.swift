@@ -5,6 +5,7 @@
 //  Created by Aaron Cabreja on 4/8/19.
 //  Copyright © 2019 Pursuit. All rights reserved.
 //
+//make a bool protocol
 
 import UIKit
 import Toucan
@@ -40,8 +41,8 @@ class HomeController: UIViewController {
     let friendView = ChatLogView()
     var eventsInCalendar = EventsDataModel.getEventData()
     var detailUserOfProfile: ProfileOfUser!
-    
-
+    var createDelegate = CreateAccountViewController()
+    var logginDelegate = LoginWithExistingViewController()
     var userProfile: ProfileOfUser!
 
     
@@ -67,12 +68,8 @@ class HomeController: UIViewController {
     }
     
     
-    var authService = AppDelegate.authservice{
-        didSet{
-            profilePageOn()
-            view.reloadInputViews()
-        }
-    }
+    var authService = AppDelegate.authservice
+    
     private var listener: ListenerRegistration!
     var createdEvent = [EventCreatedByUser](){
         didSet{
@@ -135,9 +132,10 @@ class HomeController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(homeSplashImage)
         viewdidLoadLayout()
     }
-    
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         if authService.getCurrentUser() != nil{
@@ -147,8 +145,10 @@ class HomeController: UIViewController {
     
     private func viewdidLoadLayout(){
         view.backgroundColor = .white
-        view.addSubview(homeSplashImage)
         view.addSubview(contentView)
+        
+        authService.authserviceExistingAccountDelegate = self
+        authService.authserviceCreateNewAccountDelegate = self
         
         preferencesView.categoryCollectionView.dataSource = self
         preferencesView.categoryCollectionView.delegate = self 
@@ -311,6 +311,7 @@ class HomeController: UIViewController {
         
     }
 }
+
 
 extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
     
