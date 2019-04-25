@@ -10,11 +10,15 @@ import UIKit
 
 extension HomeController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let number = userProfile.friends{
+        if userProfile == nil{
+            return 0
+        }
+        else if let number = userProfile.friends{
             return number.count
         }else{
-            return 1
+            return 0
         }
+
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
