@@ -23,6 +23,7 @@ class CreatedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .white
         view.addSubview(createdEvent)
         let leftBarItem = UIBarButtonItem(customView: createdEvent.cancel)
         createdEvent.cancel.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
@@ -36,7 +37,7 @@ class CreatedViewController: UIViewController {
 
     private func configureInputAccessoryView() {
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 44))
-        createdEvent.textView.inputAccessoryView = toolbar
+        createdEvent.eventText.inputAccessoryView = toolbar
         let cameraBarItem = UIBarButtonItem(barButtonSystemItem: .camera,
                                             target: self,
                                             action: #selector(cameraButtonPressed))
@@ -83,7 +84,7 @@ class CreatedViewController: UIViewController {
     @objc func updateCreatedEvent(){
         self.navigationItem.rightBarButtonItem?.isEnabled = true
 
-      guard let createdEventDescription = createdEvent.textView.text,
+      guard let createdEventDescription = createdEvent.eventText.text,
         !createdEventDescription.isEmpty,
          let imageData = selectedImage?.jpegData(compressionQuality: 1.0) else {
             print("missing fields")
