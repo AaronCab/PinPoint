@@ -24,7 +24,7 @@ class DiscoverCell: UICollectionViewCell {
         en.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         en.font = UIFont.init(name: "futura", size: 16)
         en.text = "Event Name"
-        en.textColor = .yellow 
+        en.textColor = #colorLiteral(red: 0.3176470697, green: 0.07450980693, blue: 0.02745098062, alpha: 1)
         return en
     }()
     
