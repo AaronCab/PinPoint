@@ -13,7 +13,7 @@ class CategoryCell: UICollectionViewCell {
     
     let categoryCellContainerView: UIView = {
         let categoryView = UIView()
-        categoryView.backgroundColor = .white
+        categoryView.backgroundColor = .clear
         categoryView.layer.cornerRadius = 10
         categoryView.layer.masksToBounds = true
         return categoryView
@@ -22,9 +22,9 @@ class CategoryCell: UICollectionViewCell {
     let categoryName: UILabel = {
         let catName = UILabel()
         catName.text = "Event Name"
-        catName.textAlignment = .center 
-        catName.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
-        catName.font = UIFont.init(name: "futura", size: 12)
+        catName.textAlignment = .center
+        catName.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        catName.font = UIFont.init(name: "futura", size: 14)
         return catName
     }()
     
@@ -32,7 +32,6 @@ class CategoryCell: UICollectionViewCell {
         let catImg = UIImageView()
         catImg.image = UIImage(named: "icons8-health-calendar-100")
         catImg.contentMode = .scaleAspectFill
-        catImg.layer.cornerRadius = 20
         catImg.layer.masksToBounds = true
         return catImg
     }()
@@ -60,16 +59,17 @@ class CategoryCell: UICollectionViewCell {
         categoryName.snp.makeConstraints { (make) in
             make.top.equalTo(15)
             make.height.equalTo(15)
-            make.left.equalTo(20)
-            make.width.equalTo(50)
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
         }
         
         categoryImage.snp.makeConstraints { (make) in
-            make.top.equalTo(categoryName.snp.bottom).offset(10)
-            make.left.equalTo(20)
-            make.right.equalTo(-20)
-            make.height.equalTo(35)
-            make.width.equalTo(35)
+            make.top.equalTo(categoryName.snp.bottom).offset(7)
+            make.left.equalTo(15)
+            make.right.equalTo(-15)
+            make.height.equalTo(71)
+            make.width.equalTo(26)
+            make.bottom.equalTo(self.snp.bottom).offset(7)
         }
     }
     

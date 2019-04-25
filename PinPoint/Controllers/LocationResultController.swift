@@ -13,9 +13,11 @@ protocol LocationResultsControllerDelegate: AnyObject {
     func didSelectCoordinate(_ locationResultsController: LocationResultController, coordinate: CLLocationCoordinate2D)
     func didScrollTableView(_ locationResultsController: LocationResultController)
 }
-
+protocol LocationString {
+    func getString(address: String)
+}
 class LocationResultController: UIViewController{
-    
+    var delegate2: LocationString?
     var locationView = LocationView()
     
     private let searchCompleter = MKLocalSearchCompleter()
@@ -39,11 +41,13 @@ extension LocationResultController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath)
-        
         let suggestion = completerResults[indexPath.row]
         // Each suggestion is a MKLocalSearchCompletion with a title, subtitle
+        
         cell.textLabel?.text = suggestion.title
         cell.detailTextLabel?.text = suggestion.subtitle
+        cell.backgroundColor = .white
+        
         
         return cell
     }
@@ -53,6 +57,7 @@ extension LocationResultController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let suggestion = completerResults[indexPath.row]
         let addressString = suggestion.subtitle.isEmpty ? suggestion.title : suggestion.subtitle
+        print(addressString)
         LocationService.getCoordinate(addressString: addressString) { (coordinate, error) in
             if let error = error {
                 print("error getting coordinate: \(error)")
@@ -61,8 +66,11 @@ extension LocationResultController: UITableViewDelegate {
                 self.delegate?.didSelectCoordinate(self, coordinate: coordinate)
             }
         }
-        
+        self.delegate2?.getString(address: addressString)
         dismiss(animated: true)
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 65
     }
 }
 

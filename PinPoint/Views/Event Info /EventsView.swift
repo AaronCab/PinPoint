@@ -38,7 +38,6 @@ class EventsView: UIView {
     
     private func setup() {
         addSubview(myCollectionView)
-        
         myCollectionView.translatesAutoresizingMaskIntoConstraints = false
         myCollectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
         myCollectionView.bottomAnchor.constraint(equalTo:  safeAreaLayoutGuide.bottomAnchor).isActive = true

@@ -23,6 +23,7 @@ class CreatedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .white
         view.addSubview(createdEvent)
         let leftBarItem = UIBarButtonItem(customView: createdEvent.cancel)
         createdEvent.cancel.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
@@ -32,11 +33,12 @@ class CreatedViewController: UIViewController {
         createdEvent.create.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = rightBarItem
         configureInputAccessoryView()
+        hideKeyboardWhenTappedAround()
     }
 
     private func configureInputAccessoryView() {
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 44))
-        createdEvent.textView.inputAccessoryView = toolbar
+        createdEvent.eventText.inputAccessoryView = toolbar
         let cameraBarItem = UIBarButtonItem(barButtonSystemItem: .camera,
                                             target: self,
                                             action: #selector(cameraButtonPressed))
@@ -46,7 +48,7 @@ class CreatedViewController: UIViewController {
                                                   action: #selector(photoLibraryButtonPressed))
         let flexibleSpaceBarItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         toolbar.items = [cameraBarItem, flexibleSpaceBarItem, photoLibraryBarItem]
-        if !UIImagePickerController.isSourceTypeAvailable(.camera) {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) == false {
             cameraBarItem.isEnabled = false
         }
     }
@@ -82,9 +84,15 @@ class CreatedViewController: UIViewController {
 }
     @objc func updateCreatedEvent(){
         self.navigationItem.rightBarButtonItem?.isEnabled = true
-
-      guard let createdEventDescription = createdEvent.textView.text,
+ let formatter = ISO8601DateFormatter()
+      guard let createdEventDescription = createdEvent.eventText.text,
         !createdEventDescription.isEmpty,
+        let createdEventName = createdEvent.createName.text,
+        !createdEventName.isEmpty,
+//        let createdStartDate = createdEvent.startText.text,
+//        !createdStartDate.isEmpty,
+       
+        
          let imageData = selectedImage?.jpegData(compressionQuality: 1.0) else {
             print("missing fields")
             return
@@ -101,8 +109,8 @@ class CreatedViewController: UIViewController {
                                     if let error = error {
                                         print("fail to post iamge with error: \(error.localizedDescription)")
                                     } else if let imageURL = imageURL {
-                                        print("image posted and recieved imageURL - post dish to database: \(imageURL)")
-                                        let thisEvent = EventCreatedByUser(createdAt: Date.getISOTimestamp(), personID: user.uid, photoURL: imageURL.absoluteString, eventDescription: createdEventDescription, lat: 40.4358, long: 50.6785, displayName: user.displayName!, email: user.email!, isTrustedUser: [], eventType: "test", documentID: docRef.documentID, message: [], pending: [])
+                                        print("image posted and recieved imageURL - post event to database: \(imageURL)")
+                                        let thisEvent = EventCreatedByUser(createdAt: Date.getISOTimestamp(), personID: user.uid, photoURL: imageURL.absoluteString, eventDescription: createdEventDescription, lat: 40.4358, long: 50.6785, displayName: createdEventName, email: user.email!, isTrustedUser: [], eventType: createdEventName, documentID: docRef.documentID, message: [], pending: [], startedAt: Date())
 ;                                        DBService.postEvent(event: thisEvent){ [weak self] error in
                                             if let error = error {
                                                 self?.showAlert(title: "Posting Event Error", message: error.localizedDescription)
@@ -115,7 +123,6 @@ class CreatedViewController: UIViewController {
                                         self?.navigationItem.rightBarButtonItem?.isEnabled = true
                                     }
         }
-        dismiss(animated: true)
 
     }
 }

@@ -22,80 +22,113 @@ class CreatedView: UIView {
     lazy var cancel: UIButton = {
         var button = UIButton()
         button.setTitle("Cancel", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.isEnabled = true
         return button
     }()
     lazy var create: UIButton = {
         var button = UIButton()
         button.setTitle("Create Event", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.isEnabled = true
         return button
     }()
+    lazy var createName: UITextField = {
+        let createTF = UITextField()
+        createTF.placeholder = "Enter Name of Event"
+        createTF.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        createTF.font = UIFont.init(name: "futura", size: 20)
+        createTF.textAlignment = .center
+        return createTF
+    }()
     var createdPicture: UIImageView = {
         let imageView = UIImageView()
-       // imageView.layer.cornerRadius = 15
-       // imageView.layer.masksToBounds = true
+        imageView.layer.cornerRadius = 15
+        imageView.layer.masksToBounds = true
         imageView.image = UIImage(named: "placeholder-image")
         return imageView
     }()
-    lazy var label: UILabel = {
-        let label = UILabel()
-        label.text = "Event Name"
-        label.numberOfLines = 2
-        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        label.font = UIFont.init(name: "futura", size: 16)
-        label.textAlignment = .center
-        return label
-    }()
-    lazy var textView: UITextView = {
-        let textView = UITextView()
-        textView.backgroundColor = #colorLiteral(red: 0.9397123456, green: 0.7953640819, blue: 0.7539283037, alpha: 1)
-        textView.font = UIFont(name:"futura" , size:18);
-        return textView
-    }()
-
+//    lazy var textView: UITextView = {
+//        let textView = UITextView()
+//        textView.backgroundColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
+//        textView.font = UIFont(name:"futura" , size: 16)
+//        textView.text = "Enter Event's Description"
+//        textView.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+//        return textView
+//    }()
     
-    private var gradient: CAGradientLayer!
+    lazy var eventText: UITextField = {
+        let eventText = UITextField()
+        eventText.placeholder = "Enter Event's Description"
+        eventText.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        eventText.font = UIFont.init(name: "futura", size: 18)
+        return eventText
+    }()
+    lazy var locationText: UITextField = {
+        let locationTF = UITextField()
+        locationTF.placeholder = "Enter Location of Event"
+        locationTF.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        locationTF.font = UIFont.init(name: "futura", size: 18)
+        return locationTF
+    }()
+    lazy var startText: UITextField = {
+        let startTF = UITextField()
+        startTF.placeholder = "Starts At:"
+        startTF.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        startTF.font = UIFont.init(name: "futura", size: 18)
+        return startTF
+    }()
+    lazy var endText: UITextField = {
+        let endTF = UITextField()
+        endTF.placeholder = "Ends At:"
+        endTF.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        endTF.font = UIFont.init(name: "futura", size: 18)
+        return endTF
+    }()
     var addEventButton: UIButton = {
         let button = UIButton()
         button.setImage(#imageLiteral(resourceName: "icons8-create-25"), for: .normal)
         button.backgroundColor = .clear
         return button
     }()
-    private func addGradient(){
-        let firstColor = UIColor.init(red: 255/255, green: 0/255, blue: 0/255, alpha: 1)
-        let secondColor = UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
-        gradient = CAGradientLayer()
-        gradient.frame = self.bounds
-        gradient.colors = [firstColor.cgColor, secondColor.cgColor]
-        self.layer.insertSublayer(gradient, at: 0)
-    }
     private func commonInit(){
-        addGradient()
         addSubview(cancel)
         addSubview(create)
-        addSubview(label)
-        addSubview(textView)
+        addSubview(createName)
+        addSubview(eventText)
         addSubview(createdPicture)
-        label.snp.makeConstraints { (make) in
+        addSubview(locationText)
+        addSubview(startText)
+        addSubview(endText)
+        createName.snp.makeConstraints { (make) in
             make.topMargin.equalTo(self.snp_topMargin).offset(15)
             make.width.equalTo(350)
             make.left.equalTo(10)
             make.right.equalTo(-10)
         }
         createdPicture.snp.makeConstraints { (make) in
-            make.top.equalTo(label.snp.bottom)
-            make.width.equalTo(350)
-            make.height.equalTo(350)
+            make.top.equalTo(createName.snp.bottom).offset(15)
+            make.width.equalTo(300)
+            make.height.equalTo(300)
             make.centerX.equalTo(self.snp.centerX)
         }
-        textView.snp.makeConstraints { (make) in
-            make.top.equalTo(createdPicture.snp.bottom).offset(15)
+        eventText.snp.makeConstraints { (make) in
+            make.top.equalTo(createdPicture.snp.bottom).offset(20)
             make.left.equalTo(35)
             make.right.equalTo(-35)
-            make.height.equalTo(200)
+        }
+       
+        locationText.snp.makeConstraints { (make) in
+            make.top.equalTo(eventText.snp.bottom).offset(15)
+            make.left.equalTo(35)
+        }
+        startText.snp.makeConstraints { (make) in
+            make.top.equalTo(locationText.snp.bottom).offset(15)
+            make.left.equalTo(35)
+        }
+        endText.snp.makeConstraints { (make) in
+            make.top.equalTo(startText.snp.bottom).offset(15)
+            make.left.equalTo(35)
         }
     }
     

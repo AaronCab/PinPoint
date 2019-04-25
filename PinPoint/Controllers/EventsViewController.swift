@@ -21,7 +21,7 @@ class EventsViewController: UIViewController {
     var listener: ListenerRegistration!
     var loggedInUserModel: ProfileOfUser!{
         didSet{
-//            self.chatView.chatLogTableView.reloadData()
+           self.chatView.chatLogTableView.reloadData()
             chatView.chatLogTableView.dataSource = self
             chatView.chatLogTableView.delegate = self
         }
@@ -33,7 +33,7 @@ class EventsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(chatView)
-        updateUser()
+//        updateUser()
 
     }
   
@@ -41,8 +41,11 @@ class EventsViewController: UIViewController {
 
 extension EventsViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if loggedInUserModel == nil{
+            return 0
+        }
         if loggedInUserModel.pendingFriends!.count == 0{
-            return 1
+            return 0
         }else{
             return loggedInUserModel.pendingFriends!.count
         }
@@ -53,6 +56,8 @@ extension EventsViewController: UITableViewDelegate, UITableViewDataSource{
          let pendingFriends = loggedInUserModel.pendingFriends else{
                 return UITableViewCell()
         }
+        
+        if pendingFriends.count != 0{
         updateFriend(friendID: pendingFriends[indexPath.row]) { (profile, error) in
             if let profile = profile{
                 cell.friendName.text = profile.displayName
@@ -63,8 +68,30 @@ extension EventsViewController: UITableViewDelegate, UITableViewDataSource{
                 }
             }
         }
+            cell.noButton.isEnabled = true
+            cell.yesButton.isEnabled = true
+            cell.blockBotton.isEnabled = true
+            cell.blockBotton.isHidden = false
+            cell.yesButton.isHidden = false
+            cell.noButton.isHidden = false
         cell.noButton.tag = indexPath.row
         cell.yesButton.tag = indexPath.row
+        cell.blockBotton.tag = indexPath.row
+        cell.yesButton.addTarget(self, action: #selector(acceptedRequest), for: .touchUpInside)
+        cell.noButton.addTarget(self, action: #selector(rejectedRequest), for: .touchUpInside)
+        cell.blockBotton.addTarget(self, action: #selector(blockedUser), for: .touchUpInside)
+        }else{
+            self.chatView.chatLogTableView.reloadData()
+            cell.friendName.text = "No Friends Here"
+            cell.noButton.isEnabled = false
+            cell.yesButton.isEnabled = false
+            cell.blockBotton.isEnabled = false
+            cell.blockBotton.isHidden = true
+            cell.yesButton.isHidden = true
+            cell.noButton.isHidden = true
+            cell.friendImageView.image = nil
+            
+        }
 
 
         
@@ -80,18 +107,7 @@ extension EventsViewController: UITableViewDelegate, UITableViewDataSource{
 
 
 extension EventsViewController{
-func updateUser(){
-    if let user = authService.getCurrentUser(){
-    self.listener = DBService.firestoreDB
-    .collection(ProfileCollectionKeys.CollectionKey)
-    .addSnapshotListener({ (data, error) in
-    if let data = data{
-    self.loggedInUserModel = data.documents.map { ProfileOfUser(dict: $0.data()) }
-    .filter(){$0.ProfileId == user.uid}.first
-    }
-    })
-    }
-    }
+
     
     func updateFriend(friendID: String, completeion: @escaping (ProfileOfUser?, Error?) -> Void){
         var friendFound: ProfileOfUser!
@@ -117,12 +133,12 @@ func updateUser(){
             
             
             pendingFriend.updateData([
-                ProfileCollectionKeys.FriendsKey : FieldValue.arrayUnion([loggedInUserModel.friends![tag.tag]])]) { (error) in
+                ProfileCollectionKeys.FriendsKey : FieldValue.arrayUnion([loggedInUserModel.pendingFriends![tag.tag]])]) { (error) in
                     if let error = error{
                         self.showAlert(title: "error", message: error.localizedDescription)
                     }else{
                         pendingFriend.updateData([
-                            ProfileCollectionKeys.PendingFriends : FieldValue.arrayRemove([tag.tag])], completion: { (error) in
+                            ProfileCollectionKeys.PendingFriends : FieldValue.arrayRemove( [(self.loggedInUserModel.pendingFriends![tag.tag]) as Any])], completion: { (error) in
                                 if let error = error{
                                     self.showAlert(title: "Error", message: error.localizedDescription)
                                 }
@@ -135,12 +151,12 @@ func updateUser(){
     @objc func rejectedRequest(tag: UIButton){
        if let user = authService.getCurrentUser() {
         let pendingFriend = DBService.firestoreDB.collection(ProfileCollectionKeys.CollectionKey).document(user.uid)
-            pendingFriend.updateData([
-                ProfileCollectionKeys.PendingFriends : FieldValue.arrayRemove([tag.tag])], completion: { (error) in
-                    if let error = error{
-                        self.showAlert(title: "Error", message: error.localizedDescription)
-                    }
-            })
+        pendingFriend.updateData([
+            ProfileCollectionKeys.PendingFriends : FieldValue.arrayRemove( [(self.loggedInUserModel.pendingFriends![tag.tag]) as Any])], completion: { (error) in
+                if let error = error{
+                    self.showAlert(title: "Error", message: error.localizedDescription)
+                }
+        })
         }
     }
     
@@ -150,12 +166,12 @@ func updateUser(){
             
             
             pendingFriend.updateData([
-                ProfileCollectionKeys.isBlocked : FieldValue.arrayUnion([loggedInUserModel.friends![tag.tag]])]) { (error) in
+                ProfileCollectionKeys.isBlocked : FieldValue.arrayUnion([loggedInUserModel.pendingFriends![tag.tag]])]) { (error) in
                     if let error = error{
                         self.showAlert(title: "error", message: error.localizedDescription)
                     }else{
                         pendingFriend.updateData([
-                            ProfileCollectionKeys.PendingFriends : FieldValue.arrayRemove([tag.tag])], completion: { (error) in
+                            ProfileCollectionKeys.PendingFriends : FieldValue.arrayRemove( [(self.loggedInUserModel.pendingFriends![tag.tag]) as Any])], completion: { (error) in
                                 if let error = error{
                                     self.showAlert(title: "Error", message: error.localizedDescription)
                                 }

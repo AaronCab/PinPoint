@@ -20,6 +20,10 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCalendarsUsageDescription</key>
+	<string>PinPoint would like access to your Calendar. Allow?</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Allow PinPoint to use Camera? </string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>PinPoint would like access to your Location. Allow?</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>

@@ -9,11 +9,16 @@
 import UIKit
 import Firebase
 
+protocol loggedInSuccess {
+    func loggedIn(bool: Bool)
+}
+
 class LoginWithExistingViewController: UIViewController {
     
     
     var accountExistingView = AccountExistingView()
     var authService = AppDelegate.authservice
+    var delegate: loggedInSuccess?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,11 +66,17 @@ class LoginWithExistingViewController: UIViewController {
 extension LoginWithExistingViewController: AuthServiceExistingAccountDelegate{
     func didRecieveErrorSigningToExistingAccount(_ authservice: AuthService, error: Error) {
         showAlert(title: "Error", message: error.localizedDescription)
+        delegate?.loggedIn(bool: false)
     }
     
     func didSignInToExistingAccount(_ authservice: AuthService, user: User) {
+        delegate?.loggedIn(bool: true)
         
-        self.navigationController?.popViewController(animated: true)
+        if let homeController = (parent as? UINavigationController)?.viewControllers.first as? HomeController {
+            homeController.loginView.removeFromSuperview()
+            homeController.reloadInputViews()
+            navigationController?.popViewController(animated: true)
+        }
         
     }
     

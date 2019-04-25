@@ -52,9 +52,9 @@ final class AuthService {
                                            firstName: nil,
                                            lastName: nil,
                                            bio: nil,
-                                           friends: [],
-                                           blockedUser: [],
-                                           pendingFriends: [])
+                                           friends: nil,
+                                           blockedUser: nil,
+                                           pendingFriends: nil)
                 DBService.createPinPointuser(user: pinpointUser, completion: { (error) in
                     if let error = error {
                         self.authserviceCreateNewAccountDelegate?.didRecieveErrorCreatingAccount(self, error: error)
@@ -72,6 +72,7 @@ final class AuthService {
                 self.authserviceExistingAccountDelegate?.didRecieveErrorSigningToExistingAccount(self, error: error)
             } else if let authDataResult = authDataResult {
                 self.authserviceExistingAccountDelegate?.didSignInToExistingAccount(self, user: authDataResult.user)
+        
             }
         }
     }

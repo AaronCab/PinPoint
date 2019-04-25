@@ -5,6 +5,7 @@
 //  Created by Aaron Cabreja on 4/8/19.
 //  Copyright © 2019 Pursuit. All rights reserved.
 //
+//make a bool protocol
 
 import UIKit
 import Toucan
@@ -37,7 +38,14 @@ class HomeController: UIViewController {
     var eventCell = EventsCell()
     let loginView = LoginView()
     let requestsView = RequestsView()
+    let friendView = ChatLogView()
     var eventsInCalendar = EventsDataModel.getEventData()
+    var detailUserOfProfile: ProfileOfUser!
+    var createDelegate = CreateAccountViewController()
+    var logginDelegate = LoginWithExistingViewController()
+    var userProfile: ProfileOfUser!
+
+    
     
     var catagories = [
         "Business": "101",
@@ -60,7 +68,8 @@ class HomeController: UIViewController {
     }
     
     
-    let authService = AppDelegate.authservice
+    var authService = AppDelegate.authservice
+    
     private var listener: ListenerRegistration!
     var createdEvent = [EventCreatedByUser](){
         didSet{
@@ -80,6 +89,7 @@ class HomeController: UIViewController {
     
     
     private var userModel: UserLogedInModel!
+    
     var currentLocation = CLLocation(){
         didSet{
             preferencesView.locationButton.setTitle(location, for: .normal)
@@ -122,12 +132,12 @@ class HomeController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(homeSplashImage)
         viewdidLoadLayout()
     }
-    
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        
         if authService.getCurrentUser() != nil{
             loginView.removeFromSuperview()
         }
@@ -135,8 +145,10 @@ class HomeController: UIViewController {
     
     private func viewdidLoadLayout(){
         view.backgroundColor = .white
-        view.addSubview(homeSplashImage)
         view.addSubview(contentView)
+        
+        authService.authserviceExistingAccountDelegate = self
+        authService.authserviceCreateNewAccountDelegate = self
         
         preferencesView.categoryCollectionView.dataSource = self
         preferencesView.categoryCollectionView.delegate = self 
@@ -158,7 +170,36 @@ class HomeController: UIViewController {
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         }
         fetchEvents()
-        
+        if let user = authService.getCurrentUser(){
+        DBService.firestoreDB
+            .collection(ProfileCollectionKeys.CollectionKey)
+            .getDocuments(source: .server, completion: { (data, error) in
+                if let data = data{
+                    self.userProfile = data.documents.map { ProfileOfUser(dict: $0.data()) }
+                        .filter(){$0.ProfileId == user.uid}.first
+                }else if let error = error{
+                    self.showAlert(title: nil, message: error.localizedDescription)
+                }
+            })
+        }
+    }
+    
+    func updateFriend(friendID: String, completeion: @escaping (ProfileOfUser?, Error?) -> Void){
+        var friendFound: ProfileOfUser!
+        if authService.getCurrentUser() != nil{
+            self.listener = DBService.firestoreDB
+                .collection(ProfileCollectionKeys.CollectionKey)
+                .addSnapshotListener({ (data, error) in
+                    if let data = data{
+                        friendFound = data.documents.map { ProfileOfUser(dict: $0.data()) }
+                            .filter(){$0.ProfileId == friendID}.first
+                        completeion(friendFound, nil)
+                    }
+                    if let error = error{
+                        completeion(nil, error)
+                    }
+                })
+        }
     }
     
     @objc func handleMenuToggle() {
@@ -173,11 +214,18 @@ class HomeController: UIViewController {
     }
     func friendRequestsPageOn() {
         self.navigationItem.rightBarButtonItem = nil
+        contentView.removeFromSuperview()
+        contentView = UIView.init(frame: UIScreen.main.bounds)
+        friendView.chatLogTableView.delegate = self
+        friendView.chatLogTableView.dataSource = self
         self.navigationItem.title = "F R I E N D  R E Q U E S T S"
-        let friendVC = EventsViewController()
-        self.navigationController?.pushViewController(friendVC, animated: true)
-//        contentView.addSubview(friendVC.view)
-//        view.addSubview(contentView)
+        let rightBarItem = UIBarButtonItem(customView: friendView.settingsButton)
+        self.navigationItem.rightBarButtonItem = rightBarItem
+        friendView.settingsButton.addTarget(self, action: #selector(pendingFreinds), for: .touchUpInside)
+        contentView.addSubview(friendView)
+        view.addSubview(contentView)
+        navigationItem.searchController = nil
+
     }
     func eventsPageOn() {
         self.navigationItem.rightBarButtonItem = nil
@@ -189,19 +237,31 @@ class HomeController: UIViewController {
         whatToSeque = .event
         contentView.addSubview(eventsView)
         view.addSubview(contentView)
+        navigationItem.searchController = nil
+        
     }
     
     func discoverPageOn() {
-        contentView.removeFromSuperview()
-        contentView = UIView.init(frame: UIScreen.main.bounds)
-        contentView.addSubview(discoverView)
-        view.addSubview(contentView)
-        self.navigationItem.title = "D I S C O V E R"
-        let rightBarItem = UIBarButtonItem(customView: discoverView.addEventButton)
-        whatToSeque = .custom
-        discoverView.addEventButton.addTarget(self, action: #selector(addEventCommand), for: .touchUpInside)
-        self.navigationItem.rightBarButtonItem = rightBarItem
-        
+        if authService.getCurrentUser() == nil{
+            contentView.removeFromSuperview()
+            contentView = UIView.init(frame: UIScreen.main.bounds)
+            self.navigationItem.title = "W E L C O M E"
+            contentView.addSubview(homeSplashImage)
+            view.addSubview(homeSplashImage)
+            navigationItem.searchController = nil
+        } else {
+            
+            
+            contentView = UIView.init(frame: UIScreen.main.bounds)
+            contentView.addSubview(discoverView)
+            view.addSubview(contentView)
+            self.navigationItem.title = "D I S C O V E R"
+            let rightBarItem = UIBarButtonItem(customView: discoverView.addEventButton)
+            whatToSeque = .custom
+            discoverView.addEventButton.addTarget(self, action: #selector(addEventCommand), for: .touchUpInside)
+            self.navigationItem.rightBarButtonItem = rightBarItem
+            navigationItem.searchController = nil
+        }
     }
     
     func preferencesPageOn() {
@@ -212,6 +272,7 @@ class HomeController: UIViewController {
         whatToSeque = .catagories
         contentView.addSubview(preferencesView)
         view.addSubview(contentView)
+        navigationItem.searchController = preferencesView.searchController
     }
     
     func favoritesPageOn() {
@@ -225,6 +286,7 @@ class HomeController: UIViewController {
         whatToSeque = .favorite
         contentView.addSubview(favoriteView)
         view.addSubview(contentView)
+        navigationItem.searchController = nil
     }
     func profilePageOn() {
         if authService.getCurrentUser() == nil{
@@ -233,6 +295,7 @@ class HomeController: UIViewController {
             self.navigationItem.title = "P R O F I L E"
             contentView.addSubview(loginView)
             view.addSubview(loginView)
+            navigationItem.searchController = nil
         }else{
             contentView.removeFromSuperview()
             contentView = UIView.init(frame: UIScreen.main.bounds)
@@ -244,6 +307,7 @@ class HomeController: UIViewController {
             contentView.addSubview(profileView)
             updateUser()
             view.addSubview(profileView)
+            navigationItem.searchController = nil
         }
         
         
@@ -256,6 +320,7 @@ class HomeController: UIViewController {
         
     }
 }
+
 
 extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
     
@@ -282,6 +347,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             cell.eventName.text = currentEvent.displayName
             cell.eventImageView.kf.indicatorType = .activity
             cell.moreInfoButton.tag = indexPath.row
+            cell.eventStartTime.text = currentEvent.startedAt.description.formatISODateString(dateFormat: "MMM d, h:mm a")
             cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.photoURL)), placeholder: UIImage(named: "pinpointred"))
             cell.moreInfoButton.addTarget(self, action: #selector(moreInfoDisvover), for: .touchUpInside)
             return cell
@@ -325,6 +391,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             let category = catagoriesInAnArray[indexPath.row]
             cell.categoryName.text = category
             cell.categoryImage.image = UIImage(named: category)
+            
             return cell
         }
         else {
@@ -358,22 +425,23 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             let customDVC = DetailViewController()
             DBService.firestoreDB
                 .collection(ProfileCollectionKeys.CollectionKey)
-                .addSnapshotListener({ (data, error) in
+                .getDocuments(source: .server, completion: { (data, error) in
                     if let data = data{
-                        let user = data.documents.map { ProfileOfUser(dict: $0.data()) }
+                        let otherUser = data.documents.map { ProfileOfUser(dict: $0.data()) }
                             .filter(){$0.ProfileId == self.createdEvent[indexPath.row].personID}.first
-                        customDVC.profileOfUser = user
+                        customDVC.profileOfUser = otherUser
                         customDVC.custom = self.createdEvent[indexPath.row]
                         self.navigationController?.pushViewController(customDVC, animated: true)
                     }else if let error = error{
                         print(error)
                     }
                 })
-        case .catagories:
-            let catgoriesDVC = DetailViewController()
             
+        case .catagories:
+            //let catdvc = PreferencesView()
+            print("end it here")
         }
-
+        
     }
     @objc func moreInfo(senderTag: UIButton){
         
@@ -387,12 +455,17 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         }
         let addCalendarAction = UIAlertAction(title: "Add to Calendar", style: .default, handler: { alert in
             let thisEvent = self.event[senderTag.tag]
-//
-//
-//            let addToCalendar = EventCalendarData(description: (thisEvent.name?.text)!, createdAt: date!)
-//
-//            addEventToCalendar(date: , title: thisEvent.name?.text)
-//            self.showAlert(title: "PinPoint", message: "Successfully Added to Calendar")
+            let formatter = ISO8601DateFormatter()
+            guard let start = thisEvent.start?.utc,
+                let end = thisEvent.end?.utc,
+                let dateStart = formatter.date(from: start),
+                let dateEnd = formatter.date(from: end),
+                let notes = thisEvent.description?.text,
+                let title = thisEvent.name?.text else { return }
+            
+            
+            self.addEventToCalendar(date: dateStart, dateEnd: dateEnd, title: title, notes: notes)
+            self.showAlert(title: "PinPoint", message: "Successfully Added to Calendar")
         })
         alertController.addAction(cancelAction)
         alertController.addAction(favoriteActione)
@@ -400,7 +473,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         present(alertController, animated: true)
         
     }
-    func addEventToCalendar(date: Date, title: String) {
+    func addEventToCalendar(date: Date, dateEnd: Date, title: String, notes: String) {
         let eventStore: EKEventStore = EKEventStore()
         eventStore.requestAccess(to: .event) {(granted, error) in
             if (granted) && (error == nil)
@@ -409,25 +482,20 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
                 print("error \(error)")
                 
                 let event:EKEvent = EKEvent(eventStore: eventStore)
-                DispatchQueue.main.async {
-                    event.title = title
-                }
+                event.title = title
                 event.startDate = date
-                event.endDate = date
+                event.endDate = dateEnd
+                event.notes = notes
                 event.calendar = eventStore.defaultCalendarForNewEvents
                 do {
                     try eventStore.save(event, span: .thisEvent)
                 } catch let error as NSError{
                     print("error: \(error)")
                 }
-                //                let
-                //                EventsDataModel.addEvent(event: <#T##EventsData#>)
                 
             } else {
                 print("error: \(error)")
-                
             }
-            
         }
         print("pressed")
     }
@@ -455,14 +523,14 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         }
         if user.uid == userCreatedEvent.personID{
             alertController.addAction(deleteAction)
-
+            
         }
         alertController.addAction(cancelAction)
         
         present(alertController, animated: true)
         
     }
-   
+    
     @objc private func fetchEvents(){
         refreshControl.beginRefreshing()
         listener = DBService.firestoreDB
@@ -559,6 +627,7 @@ extension HomeController: CLLocationManagerDelegate {
         }
     }
 }
+
 
 extension HomeController{
     
