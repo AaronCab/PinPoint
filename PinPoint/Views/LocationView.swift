@@ -34,7 +34,7 @@ class LocationView: UIView {
     private func setupTableView() {
         addSubview(locationTableView)
         locationTableView.translatesAutoresizingMaskIntoConstraints = false
-        locationTableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
+        locationTableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
         locationTableView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         locationTableView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         locationTableView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true

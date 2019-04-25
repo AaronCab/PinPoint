@@ -13,74 +13,53 @@ class ProfileView: UIView {
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         commonInit()
+        self.backgroundColor = .white
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
-    
-    
-    private var gradient: CAGradientLayer!
-
-    private func addGradient(){
-        let firstColor = UIColor.init(red: 255/255, green: 0/255, blue: 0/255, alpha: 1)
-        let secondColor = UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
-        gradient = CAGradientLayer()
-        gradient.frame = self.bounds
-        gradient.colors = [firstColor.cgColor, secondColor.cgColor]
-        self.layer.insertSublayer(gradient, at: 0)
-    }
-    
     var profilePicture: CircularImageView = {
         let imageView = CircularImageView()
         return imageView
     }()
-    
-    
     var displayName: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
-        label.layer.cornerRadius = 15
-        label.font = UIFont.init(name: "futura", size: 14)
+        label.font = UIFont.init(name: "futura", size: 16)
         label.text = " U S E R N A M E"
-        label.font = UIFont.systemFont(ofSize: 14, weight: .light)
+        label.textColor = #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         return label
     }()
-    
     var email: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
-        label.layer.cornerRadius = 15
-        label.font = UIFont.init(name: "futura", size: 14)
+        label.font = UIFont.init(name: "futura", size: 16)
         label.text = " E M A I L"
-        label.font = UIFont.systemFont(ofSize: 14, weight: .light)
-        
+        label.textColor = #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         return label
     }()
-    
     var name: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
         label.layer.cornerRadius = 15
+        label.textColor = #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1)
         label.font = UIFont.init(name: "futura", size: 14)
-        label.font = UIFont.systemFont(ofSize: 14, weight: .light)
+        label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
         label.text = " N A M E"
-        
         return label
     }()
-    
     var bioLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
         label.textAlignment = .center
-        label.textColor = #colorLiteral(red: 0.2380180061, green: 0.2380180061, blue: 0.2380180061, alpha: 1)
-        label.layer.cornerRadius = 15
+        label.textColor = #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1)
         label.font = UIFont.init(name: "futura", size: 20)
         label.text = "B I O"
         return label
     }()
-    
     var bio: UITextView = {
         let textView = UITextView()
         textView.backgroundColor = .clear
@@ -96,7 +75,6 @@ class ProfileView: UIView {
     }()
     
     private func commonInit(){
-        addGradient()
         profilePictureConstraint()
         displayNameConstraint()
         nameConstraint()
@@ -105,8 +83,7 @@ class ProfileView: UIView {
         bioConstraint()
         settingsButtonConstraint()
     }
-    
-    
+
     var loggedInUserModel: ProfileOfUser?{
         didSet{
             bio.text = loggedInUserModel?.bio ?? ""
