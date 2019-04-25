@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class EditProfileView: UIView {
     
@@ -20,18 +21,6 @@ class EditProfileView: UIView {
         commonInit()
     }
     
-    
-    private var gradient: CAGradientLayer!
-    
-    private func addGradient(){
-        let firstColor = UIColor.init(red: 255/255, green: 0/255, blue: 0/255, alpha: 1)
-        let secondColor = UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
-        gradient = CAGradientLayer()
-        gradient.frame = self.bounds
-        gradient.colors = [firstColor.cgColor, secondColor.cgColor]
-        self.layer.insertSublayer(gradient, at: 0)
-    }
-    
     var profilePicture: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius =  50 * 0.5
@@ -43,29 +32,26 @@ class EditProfileView: UIView {
     var displayName: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
-      //  textField.layer.cornerRadius = 15
-        textField.font = UIFont.init(name: "futura", size: 14)
+        textField.font = UIFont.init(name: "futura", size: 16)
         textField.placeholder = " U S E R N A M E"
-        textField.font = UIFont.systemFont(ofSize: 14, weight: .light)
+        textField.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         return textField
     }()
     
     var email: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
-      //  textField.layer.cornerRadius = 15
-        textField.font = UIFont.init(name: "futura", size: 14)
+        textField.font = UIFont.init(name: "futura", size: 16)
         textField.placeholder = " E M A I L"
-        textField.font = UIFont.systemFont(ofSize: 14, weight: .light)
+        textField.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         return textField
     }()
     
     var firstName: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
-       // textField.layer.cornerRadius = 15
-        textField.font = UIFont.init(name: "futura", size: 14)
-        textField.font = UIFont.systemFont(ofSize: 14, weight: .light)
+        textField.font = UIFont.init(name: "futura", size: 16)
+        textField.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         textField.placeholder = "First Name"
         return textField
     }()
@@ -73,9 +59,8 @@ class EditProfileView: UIView {
     var lastName: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
-       // textField.layer.cornerRadius = 15
-        textField.font = UIFont.init(name: "futura", size: 14)
-        textField.font = UIFont.systemFont(ofSize: 14, weight: .light)
+        textField.font = UIFont.init(name: "futura", size: 16)
+        textField.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         textField.placeholder = "Last Name"
         return textField
     }()
@@ -84,7 +69,6 @@ class EditProfileView: UIView {
         let label = UILabel()
         label.backgroundColor = .clear
         label.textAlignment = .center
-       // label.layer.cornerRadius = 15
         label.font = UIFont.init(name: "futura", size: 20)
         label.text = "B I O"
         return label
@@ -123,28 +107,23 @@ class EditProfileView: UIView {
     
     var saveEdit: UIButton = {
         let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "icons8-compose-100"), for: .normal)
-        button.backgroundColor = .white
+        button.setImage(#imageLiteral(resourceName: "icons8-compose-100").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.backgroundColor = .clear
         return button
     }()
     
     var picImage: UIButton = {
         let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "icons8-customer-240"), for: .normal)
-        button.backgroundColor = .white
+        button.setImage(#imageLiteral(resourceName: "icons8-customer-240").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.backgroundColor = .clear
         return button
     }()
     
     private func commonInit(){
-        addGradient()
+        self.backgroundColor = .white
         profilePictureConstrant()
-      //  displayNameConstrant()
-       // firstNameConstrant()
-       // lastNameConstrant()
         picImageConstrant()
-     //   emailConstrant()
         saveEditConstrant()
-     //   bioLabelConstrant()
         bioConstrant()
     }
     
