@@ -42,7 +42,6 @@ class ProfileView: UIView {
         label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         return label
     }()
-    
     var name: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
@@ -51,10 +50,8 @@ class ProfileView: UIView {
         label.font = UIFont.init(name: "futura", size: 14)
         label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
         label.text = " N A M E"
-        
         return label
     }()
-    
     var bioLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -63,7 +60,6 @@ class ProfileView: UIView {
         label.text = "B I O"
         return label
     }()
-    
     var bio: UITextView = {
         let textView = UITextView()
         textView.backgroundColor = .clear
@@ -87,8 +83,7 @@ class ProfileView: UIView {
         bioConstraint()
         settingsButtonConstraint()
     }
-    
-    
+
     var loggedInUserModel: ProfileOfUser?{
         didSet{
             bio.text = loggedInUserModel?.bio ?? ""
