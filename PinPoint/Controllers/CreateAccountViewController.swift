@@ -8,11 +8,15 @@
 
 import UIKit
 import Firebase
+protocol createdAccount {
+    func createdAccount(bool: Bool)
+}
 
 class CreateAccountViewController: UIViewController {
     
     var createUserView = CreateUserView()
     var authService = AppDelegate.authservice
+    var delegate: createdAccount?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,12 +65,17 @@ class CreateAccountViewController: UIViewController {
 extension CreateAccountViewController: AuthServiceCreateNewAccountDelegate{
     func didRecieveErrorCreatingAccount(_ authservice: AuthService, error: Error) {
         showAlert(title: "Error", message: error.localizedDescription)
+        delegate?.createdAccount(bool: false)
     }
     
     func didCreateNewAccount(_ authservice: AuthService, pinpointUser: ProfileOfUser) {
+        delegate?.createdAccount(bool: true)
+        if let homeController = (parent as? UINavigationController)?.viewControllers.first as? HomeController {
+            homeController.loginView.removeFromSuperview()
+            homeController.reloadInputViews()
+            navigationController?.popViewController(animated: true)
+        }
         self.navigationController?.popViewController(animated: true)
-      HomeController().loadView()
-        
     }
     
     

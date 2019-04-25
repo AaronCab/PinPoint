@@ -72,6 +72,7 @@ final class AuthService {
                 self.authserviceExistingAccountDelegate?.didRecieveErrorSigningToExistingAccount(self, error: error)
             } else if let authDataResult = authDataResult {
                 self.authserviceExistingAccountDelegate?.didSignInToExistingAccount(self, user: authDataResult.user)
+        
             }
         }
     }
