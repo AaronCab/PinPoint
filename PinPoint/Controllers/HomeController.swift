@@ -67,7 +67,11 @@ class HomeController: UIViewController {
     }
     
     
-    let authService = AppDelegate.authservice
+    var authService = AppDelegate.authservice{
+        didSet{
+            profilePageOn()
+        }
+    }
     private var listener: ListenerRegistration!
     var createdEvent = [EventCreatedByUser](){
         didSet{
@@ -182,7 +186,7 @@ class HomeController: UIViewController {
     
     func updateFriend(friendID: String, completeion: @escaping (ProfileOfUser?, Error?) -> Void){
         var friendFound: ProfileOfUser!
-        if let user = authService.getCurrentUser(){
+        if authService.getCurrentUser() != nil{
             self.listener = DBService.firestoreDB
                 .collection(ProfileCollectionKeys.CollectionKey)
                 .addSnapshotListener({ (data, error) in
@@ -215,11 +219,6 @@ class HomeController: UIViewController {
         friendView.chatLogTableView.delegate = self
         friendView.chatLogTableView.dataSource = self
         self.navigationItem.title = "F R I E N D  R E Q U E S T S"
-        let friendVC = EventsViewController()
-        self.navigationController?.pushViewController(friendVC, animated: true)
-        //        contentView.addSubview(friendVC.view)
-        //        view.addSubview(contentView)
-
         let rightBarItem = UIBarButtonItem(customView: friendView.settingsButton)
         self.navigationItem.rightBarButtonItem = rightBarItem
         friendView.settingsButton.addTarget(self, action: #selector(pendingFreinds), for: .touchUpInside)

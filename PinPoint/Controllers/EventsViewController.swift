@@ -41,6 +41,9 @@ class EventsViewController: UIViewController {
 
 extension EventsViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if loggedInUserModel == nil{
+            return 0
+        }
         if loggedInUserModel.pendingFriends!.count == 0{
             return 1
         }else{
