@@ -242,17 +242,26 @@ class HomeController: UIViewController {
     }
     
     func discoverPageOn() {
-        contentView.removeFromSuperview()
-        contentView = UIView.init(frame: UIScreen.main.bounds)
-        contentView.addSubview(discoverView)
-        view.addSubview(contentView)
-        self.navigationItem.title = "D I S C O V E R"
-        let rightBarItem = UIBarButtonItem(customView: discoverView.addEventButton)
-        whatToSeque = .custom
-        discoverView.addEventButton.addTarget(self, action: #selector(addEventCommand), for: .touchUpInside)
-        self.navigationItem.rightBarButtonItem = rightBarItem
-        navigationItem.searchController = nil
-        
+        if authService.getCurrentUser() == nil{
+            contentView.removeFromSuperview()
+            contentView = UIView.init(frame: UIScreen.main.bounds)
+            self.navigationItem.title = "W E L C O M E"
+            contentView.addSubview(homeSplashImage)
+            view.addSubview(homeSplashImage)
+            navigationItem.searchController = nil
+        } else {
+            
+            
+            contentView = UIView.init(frame: UIScreen.main.bounds)
+            contentView.addSubview(discoverView)
+            view.addSubview(contentView)
+            self.navigationItem.title = "D I S C O V E R"
+            let rightBarItem = UIBarButtonItem(customView: discoverView.addEventButton)
+            whatToSeque = .custom
+            discoverView.addEventButton.addTarget(self, action: #selector(addEventCommand), for: .touchUpInside)
+            self.navigationItem.rightBarButtonItem = rightBarItem
+            navigationItem.searchController = nil
+        }
     }
     
     func preferencesPageOn() {
