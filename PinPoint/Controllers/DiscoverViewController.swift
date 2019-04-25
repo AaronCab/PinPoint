@@ -23,6 +23,7 @@ class DiscoverViewController: UIViewController {
         view.addSubview(discoverView)
         discoverView.discoverCollectionView.dataSource = self
         discoverView.discoverCollectionView.delegate = self
+        hideKeyboardWhenTappedAround()
     }
     
 
