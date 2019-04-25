@@ -21,7 +21,7 @@ class EditProfileView: UIView {
     }
     
     var profilePicture: CircularImageView = {
-      let imageView = CircularImageView()
+        let imageView = CircularImageView()
         return imageView
     }()
     var displayName: UITextField = {
@@ -53,7 +53,7 @@ class EditProfileView: UIView {
         let button = UIButton()
         button.backgroundColor = #colorLiteral(red: 0.9213752151, green: 0.2994325757, blue: 0.291195482, alpha: 1)
         button.setTitleColor(.black, for: .normal)
-        button.setTitle("B I O", for: .normal)
+        button.setTitle("E D I T  B I O", for: .normal)
         button.layer.cornerRadius = 10
         return button
     }()
@@ -69,7 +69,7 @@ class EditProfileView: UIView {
         let fv = UIStackView(arrangedSubviews: [displayName,
                                                 firstName,
                                                 lastName,
-                                            ])
+            ])
         fv.axis = .vertical
         fv.distribution = .fillEqually
         fv.spacing = 2
@@ -78,14 +78,14 @@ class EditProfileView: UIView {
         return fv
     }()
     
-    var saveEdit: UIButton = {
+    var editButton: UIButton = {
         let button = UIButton()
         button.setImage(#imageLiteral(resourceName: "icons8-contact-100").withRenderingMode(.alwaysOriginal), for: .normal)
         button.backgroundColor = .clear
         return button
     }()
     
-    var picImage: UIButton = {
+    var picButton: UIButton = {
         let button = UIButton()
         button.setImage(#imageLiteral(resourceName: "icons8-favorite-folder-100").withRenderingMode(.alwaysOriginal), for: .normal)
         button.backgroundColor = .clear
@@ -95,8 +95,8 @@ class EditProfileView: UIView {
     private func commonInit(){
         self.backgroundColor = .white
         profilePictureConstraint()
-        picImageConstraint()
-        saveEditConstraint()
+        picButtonConstraint()
+        saveEditButtonConstraint()
         bioConstraint()
     }
     
@@ -141,35 +141,39 @@ extension EditProfileView{
         fieldContainerView.snp.makeConstraints { (make) in
             make.edges.equalTo(stackViewContainer)
         }
-
-    }
-    private func picImageConstraint(){
-        addSubview(picImage)
-        picImage.translatesAutoresizingMaskIntoConstraints = false
-        picImage.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
-        picImage.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
-        picImage.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.10).isActive = true
-        picImage.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor,multiplier: 0.10).isActive = true
-    }
-    
-    
-    private func saveEditConstraint(){
-        addSubview(saveEdit)
-    saveEdit.translatesAutoresizingMaskIntoConstraints = false
-        saveEdit.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
-        saveEdit.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
-        saveEdit.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.10).isActive = true
-        saveEdit.heightAnchor.constraint(equalTo:safeAreaLayoutGuide.heightAnchor, multiplier: 0.10).isActive = true
         
     }
     
     private func bioConstraint(){
         addSubview(bio)
-        bio.translatesAutoresizingMaskIntoConstraints = false
-        bio.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 35).isActive = true
-        bio.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -35).isActive = true
-        bio.topAnchor.constraint(equalTo: lastName.bottomAnchor, constant: 25).isActive = true
+        bio.snp.makeConstraints { (make) in
+            make.left.equalTo(20)
+            make.right.equalTo(-20)
+            make.top.equalTo(stackViewContainer.snp.bottom).offset(10)
+            make.height.equalTo(25)
+        }
         
     }
+    private func picButtonConstraint(){
+        addSubview(picButton)
+        picButton.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview().offset(-150)
+              make.centerY.equalToSuperview().offset(175)
+                    make.height.width.equalTo(60)
+        }
+    }
+    
+    
+    private func saveEditButtonConstraint(){
+        addSubview(editButton)
+        
+        editButton.snp.makeConstraints { (make) in
+            make.top.equalTo(picButton.snp.bottom).offset(10)
+            make.height.width.equalTo(60)
+            make.right.equalTo(picButton)
+        }
+        
+    }
+
     
 }

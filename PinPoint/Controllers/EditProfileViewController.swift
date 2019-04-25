@@ -33,9 +33,9 @@ class EditProfileViewController: UIViewController {
     
     
     func introViewStuff(){
-        editProfile.picImage.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
+        editProfile.picButton.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
         editProfile.bio.addTarget(self, action: #selector(bioController), for: .touchUpInside)
-        editProfile.saveEdit.addTarget(self, action: #selector(updateProifle), for: .touchUpInside)
+        editProfile.editButton.addTarget(self, action: #selector(updateProifle), for: .touchUpInside)
     }
     
     
@@ -61,7 +61,7 @@ class EditProfileViewController: UIViewController {
         present(alertSheet, animated: true, completion: nil)
     }
     @objc func updateProifle(){
-        editProfile.saveEdit.isEnabled = false
+        editProfile.editButton.isEnabled = false
     
     guard let imageDataforProfile = selectedImage?.jpegData(compressionQuality: 1.0) else {
     return
@@ -76,7 +76,7 @@ class EditProfileViewController: UIViewController {
         let bio = editProfile.bio.titleLabel?.text,
         !bio.isEmpty else {
             showAlert(title: "Empty Fields", message: nil)
-            editProfile.saveEdit.isEnabled = true
+            editProfile.editButton.isEnabled = true
             return
         }
 
