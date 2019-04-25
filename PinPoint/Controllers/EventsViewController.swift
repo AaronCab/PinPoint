@@ -45,7 +45,7 @@ extension EventsViewController: UITableViewDelegate, UITableViewDataSource{
             return 0
         }
         if loggedInUserModel.pendingFriends!.count == 0{
-            return 1
+            return 0
         }else{
             return loggedInUserModel.pendingFriends!.count
         }

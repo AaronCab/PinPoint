@@ -122,7 +122,6 @@ class CreatedViewController: UIViewController {
                                         self?.navigationItem.rightBarButtonItem?.isEnabled = true
                                     }
         }
-        dismiss(animated: true)
 
     }
 }

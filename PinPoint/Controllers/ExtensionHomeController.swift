@@ -13,10 +13,10 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource{
         if userProfile == nil{
             return 0
         }
-        else if let number = userProfile.friends{
-            return number.count
-        }else{
+        if userProfile.friends![0] == ""{
             return 0
+        } else {
+            return userProfile.friends!.count
         }
 
     }
@@ -66,6 +66,9 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if userProfile.friends?.count == 0{
+            
+        }else{
         DBService.firestoreDB
             .collection(ProfileCollectionKeys.CollectionKey)
             .getDocuments(source: .server, completion: { (data, error) in
@@ -79,6 +82,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource{
                     print(error)
                 }
             })
+    }
     }
     
     

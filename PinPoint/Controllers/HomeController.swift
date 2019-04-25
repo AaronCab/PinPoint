@@ -140,7 +140,6 @@ class HomeController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        
         if authService.getCurrentUser() != nil{
             loginView.removeFromSuperview()
         }
