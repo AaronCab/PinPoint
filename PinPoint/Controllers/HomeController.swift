@@ -70,6 +70,7 @@ class HomeController: UIViewController {
     var authService = AppDelegate.authservice{
         didSet{
             profilePageOn()
+            view.reloadInputViews()
         }
     }
     private var listener: ListenerRegistration!
@@ -139,7 +140,6 @@ class HomeController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        
         if authService.getCurrentUser() != nil{
             loginView.removeFromSuperview()
         }
