@@ -8,7 +8,7 @@
 
 import UIKit
 import Toucan
-
+import Firebase
 class ContainerController: UIViewController {
     // MARK: - Properties
     
@@ -17,6 +17,7 @@ class ContainerController: UIViewController {
     var eventsView: EventsViewController!
     var interestsView: InterestViewController!
     var isExpanded = false
+    let authService = AppDelegate.authservice
     override func viewDidLoad() {
         super.viewDidLoad()
         configureHomeController()
@@ -69,6 +70,7 @@ class ContainerController: UIViewController {
         animateStatusBar()
     }
     func didSelectMenuOption(menuOption: MenuOption) {
+
         switch menuOption {
         case .Discover:
             print("show discover")
@@ -101,6 +103,7 @@ extension ContainerController: HomeControllerDelegate {
         
         guard let homeController = centerController.children.first as? HomeController,
         let menuCategories = menuCategories else { return }
+
         switch menuCategories {
         case .discover:
             homeController.discoverPageOn()
