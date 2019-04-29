@@ -76,7 +76,6 @@ class PreferencesView: UIView {
         sc.searchBar.placeholder = "search for your own location"
         sc.dimsBackgroundDuringPresentation = false
         sc.obscuresBackgroundDuringPresentation = false
-//        definesPresentationContext = true
         sc.searchBar.autocapitalizationType = .none
         return sc
     }()
