@@ -252,6 +252,7 @@ class HomeController: UIViewController {
             view.addSubview(homeSplashImage)
             navigationItem.searchController = nil
         } else {
+            contentView.removeFromSuperview()
             contentView = UIView.init(frame: UIScreen.main.bounds)
             contentView.addSubview(discoverView)
             view.addSubview(contentView)

@@ -12,7 +12,20 @@ import MapKit
 
 class PreferencesView: UIView {
 
-    
+    lazy var cancel: UIButton = {
+        var button = UIButton()
+        button.setTitle("Cancel", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.isEnabled = true
+        return button
+    }()
+    lazy var create: UIButton = {
+        var button = UIButton()
+        button.setTitle("Seve", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.isEnabled = true
+        return button
+    }()
     let preferenceContainerView: UIView = {
         let pCV = UIView()
         pCV.backgroundColor = .clear
@@ -79,6 +92,8 @@ class PreferencesView: UIView {
         commonInit()
     }
     private func commonInit(){
+        addSubview(cancel)
+        addSubview(create)
         self.categoryCollectionView.register(CategoryCell.self, forCellWithReuseIdentifier: "CategoryCell")
           self.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         setUpView()

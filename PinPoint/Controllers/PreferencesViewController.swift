@@ -40,6 +40,14 @@ class PreferencesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViews()
+        view.addSubview(preferencesView)
+        let leftBarItem = UIBarButtonItem(customView: preferencesView.cancel)
+        preferencesView.cancel.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
+        self.navigationItem.leftBarButtonItem = leftBarItem
+        let rightBarItem = UIBarButtonItem(customView: preferencesView.create)
+        preferencesView.create.addTarget(self, action: #selector(savePreference), for: .touchUpInside)
+        preferencesView.create.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
+        self.navigationItem.rightBarButtonItem = rightBarItem
         locationViewHeight = locationView.heightAnchor.constraint(greaterThanOrEqualToConstant: 0)
         //preferencesView.pictureButton.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
         preferencesView.locationButton.addTarget(self, action: #selector(locationFinder), for: .touchUpInside)
@@ -72,10 +80,15 @@ class PreferencesViewController: UIViewController {
     @objc func locationFinder(){
         
     }
-    
+    @objc func dismissView(){
+        navigationController?.popViewController(animated: true)
+    }
+    @objc func savePreference(){
+        
+    }
     private func setUpViews(){
-//        setUpPrefrencesView()
-//        setUpLocationView()
+        setUpPrefrencesView()
+        setUpLocationView()
         view.addSubview(locationView)
     }
     private func setUpPrefrencesView(){
