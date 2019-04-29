@@ -149,7 +149,6 @@ class HomeController: UIViewController {
         
         authService.authserviceExistingAccountDelegate = self
         authService.authserviceCreateNewAccountDelegate = self
-        
         preferencesView.categoryCollectionView.dataSource = self
         preferencesView.categoryCollectionView.delegate = self 
         discoverView.discoverCollectionView.delegate = self
@@ -234,6 +233,9 @@ class HomeController: UIViewController {
         eventsView.myCollectionView.dataSource = self
         eventsView.myCollectionView.delegate = self
         self.navigationItem.title = "N E A R B Y  E V E N T S"
+         let rightBarItem = UIBarButtonItem(customView: eventsView.preferencesButton)
+        eventsView.preferencesButton.addTarget(self, action: #selector(preferencesCommand), for: .touchUpInside)
+        self.navigationItem.rightBarButtonItem = rightBarItem
         whatToSeque = .event
         contentView.addSubview(eventsView)
         view.addSubview(contentView)
@@ -721,6 +723,10 @@ extension HomeController: AuthServiceSignOutDelegate{
     @objc func addEventCommand(){
         let createVC = CreatedViewController()
         self.navigationController?.pushViewController(createVC, animated: true)
+    }
+    @objc func preferencesCommand(){
+    let preferencesVC = PreferencesViewController()
+    self.navigationController?.pushViewController(preferencesVC, animated: true)
     }
 }
 

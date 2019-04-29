@@ -11,10 +11,12 @@ import Toucan
 import CoreLocation
 
 class PreferencesViewController: UIViewController {
-    
+    var centerController: UIViewController!
     var preferencesView = PreferencesView()
     var locationView = LocationView()
     var locationViewHeight = NSLayoutConstraint()
+    
+
     var currentLocation: CLLocation! {
         didSet{
             preferencesView.locationButton.setTitle(location, for: .normal)
