@@ -348,8 +348,8 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             cell.eventName.text = currentEvent.displayName
             cell.eventImageView.kf.indicatorType = .activity
             cell.moreInfoButton.tag = indexPath.row
-            cell.eventStartTime.text = "Start Date: \(currentEvent.startedAt.description.formatISODateString(dateFormat: "MMM d, h:mm a"))"
-            cell.eventEndTime.text = "End Date: \(currentEvent.endDate.description.formatISODateString(dateFormat: "MMM d, h:mm a"))"
+            cell.eventStartTime.text = "Start Date: \(currentEvent.startedAt?.dateValue() ?? Date())"
+            cell.eventEndTime.text = "End Date: \(currentEvent.endDate?.dateValue() ?? Date())"
             cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.photoURL)), placeholder: UIImage(named: "pinpointred"))
             cell.moreInfoButton.addTarget(self, action: #selector(moreInfoDisvover), for: .touchUpInside)
             return cell

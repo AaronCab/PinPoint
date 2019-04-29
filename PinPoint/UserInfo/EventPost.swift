@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import Firebase
 struct EventCreatedByUser {
     let createdAt: String
     let personID: String
@@ -22,11 +22,11 @@ struct EventCreatedByUser {
     let message: [String]?
     let documentId: String
     let pending: [String]?
-    let startedAt: Date
-    let endDate: Date
+    let startedAt: Timestamp?
+    let endDate: Timestamp?
     
     
-    init(createdAt: String, personID: String, photoURL: String, eventDescription: String, lat: Double, long: Double, displayName: String, email: String, isTrustedUser: [String], eventType: String, documentID: String, message: [String], pending: [String], startedAt: Date, endDate: Date){
+    init(createdAt: String, personID: String, photoURL: String, eventDescription: String, lat: Double, long: Double, displayName: String, email: String, isTrustedUser: [String], eventType: String, documentID: String, message: [String], pending: [String], startedAt: Timestamp?, endDate: Timestamp?){
         self.createdAt = createdAt
         self.personID = personID
         self.photoURL = photoURL
@@ -55,12 +55,9 @@ struct EventCreatedByUser {
         self.isTrustedUser = dict[EventCollectionKeys.IsTrusted] as? [String] ?? [""]
         self.eventType = dict[EventCollectionKeys.EventType] as? String ?? "No event type"
         self.documentId = dict[EventCollectionKeys.DocumentIdKey] as? String ?? "No ID"
-        self.message = dict[EventCollectionKeys.Message] as? [String] ?? [""]
-        self.pending = dict[EventCollectionKeys.Pending] as? [String] ?? [""]
-        let dateString = dict[EventCollectionKeys.StartedAt] as? String ?? ""
-        let formate = ISO8601DateFormatter()
-        self.startedAt = formate.date(from: dateString) ?? Date()
-        let dateStringforEndtime = dict[EventCollectionKeys.EndDate] as? String ?? ""
-        self.endDate = formate.date(from: dateString) ?? Date()
+        self.message = dict[EventCollectionKeys.Message] as? [String]
+        self.pending = dict[EventCollectionKeys.Pending] as? [String]
+        self.startedAt = dict[EventCollectionKeys.StartedAt] as? Timestamp
+        self.endDate = dict[EventCollectionKeys.EndDate] as? Timestamp
     }
 }

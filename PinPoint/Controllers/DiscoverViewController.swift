@@ -45,8 +45,8 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewData
         cell.eventDescription.text = currentEvent.eventDescription
         cell.eventName.text = currentEvent.displayName
         cell.eventImageView.kf.indicatorType = .activity
-        cell.eventEndTime.text = "End Date: \(currentEvent.endDate.description)"
-        cell.eventStartTime.text = "Start Date: \(currentEvent.startedAt.description)"
+        cell.eventEndTime.text = "End Date: \(currentEvent.endDate?.description)"
+        cell.eventStartTime.text = "Start Date: \(currentEvent.startedAt?.description)"
         cell.moreInfoButton.tag = indexPath.row
         cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.photoURL)), placeholder: UIImage(named: "pinpointred"))
         return cell

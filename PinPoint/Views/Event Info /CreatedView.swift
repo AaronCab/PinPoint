@@ -48,14 +48,6 @@ class CreatedView: UIView {
         imageView.image = UIImage(named: "placeholder-image")
         return imageView
     }()
-//    lazy var textView: UITextView = {
-//        let textView = UITextView()
-//        textView.backgroundColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
-//        textView.font = UIFont(name:"futura" , size: 16)
-//        textView.text = "Enter Event's Description"
-//        textView.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-//        return textView
-//    }()
     
     lazy var eventText: UITextField = {
         let eventText = UITextField()
@@ -71,18 +63,12 @@ class CreatedView: UIView {
         locationTF.font = UIFont.init(name: "futura", size: 18)
         return locationTF
     }()
-    lazy var startText: UITextField = {
-        let startTF = UITextField()
-        startTF.placeholder = "Starts At:"
-        startTF.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        startTF.font = UIFont.init(name: "futura", size: 18)
+    lazy var startText: UIDatePicker = {
+        let startTF = UIDatePicker()
         return startTF
     }()
-    lazy var endText: UITextField = {
-        let endTF = UITextField()
-        endTF.placeholder = "Ends At:"
-        endTF.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        endTF.font = UIFont.init(name: "futura", size: 18)
+    lazy var endText: UIDatePicker = {
+        let endTF = UIDatePicker()
         return endTF
     }()
     var addEventButton: UIButton = {
