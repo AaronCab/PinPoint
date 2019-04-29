@@ -77,7 +77,7 @@ class FavoritesCell: UICollectionViewCell {
     let switchView: UISwitch = {
         let sv = UISwitch()
         sv.thumbTintColor = .black
-        sv.onTintColor = .white
+        sv.onTintColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
         return sv
     }()
     
