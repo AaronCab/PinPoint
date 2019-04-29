@@ -80,14 +80,14 @@ class EditProfileView: UIView {
     
     var editButton: UIButton = {
         let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "icons8-contact-100").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "icons8-save-100").withRenderingMode(.alwaysOriginal), for: .normal)
         button.backgroundColor = .clear
         return button
     }()
     
     var picButton: UIButton = {
         let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "icons8-favorite-folder-100").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "icons8-add-image-100").withRenderingMode(.alwaysOriginal), for: .normal)
         button.backgroundColor = .clear
         return button
     }()
