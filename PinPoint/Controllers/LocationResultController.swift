@@ -56,7 +56,7 @@ extension LocationResultController: UITableViewDataSource {
 extension LocationResultController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let suggestion = completerResults[indexPath.row]
-        let addressString = suggestion.subtitle.isEmpty ? suggestion.title : suggestion.subtitle
+        let addressString = suggestion.title.isEmpty ? suggestion.subtitle : suggestion.title
         print(addressString)
         LocationService.getCoordinate(addressString: addressString) { (coordinate, error) in
             if let error = error {
@@ -101,5 +101,6 @@ extension LocationResultController: MKLocalSearchCompleterDelegate {
 extension LocationResultController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         delegate?.didScrollTableView(self)
+        
     }
 }

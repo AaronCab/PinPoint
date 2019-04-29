@@ -22,7 +22,7 @@ enum detailViewSeque{
     case catagories
 }
 
-class HomeController: UIViewController {
+class HomeController: UIViewController{
     var contentView = UIView.init(frame: UIScreen.main.bounds)
     func loadFavorites() {
         self.favorite = FavoritesDataManager.fetchItemsFromDocumentsDirectory()
@@ -44,6 +44,7 @@ class HomeController: UIViewController {
     var createDelegate = CreateAccountViewController()
     var logginDelegate = LoginWithExistingViewController()
     var userProfile: ProfileOfUser!
+    var locationDelegate: LocationString!
 
     
     
@@ -98,13 +99,6 @@ class HomeController: UIViewController {
             
         }
     }
-    lazy var refreshControl: UIRefreshControl = {
-        let rc = UIRefreshControl()
-        discoverView.discoverCollectionView.refreshControl = rc
-        rc.addTarget(self, action: #selector(fetchEvents), for: .valueChanged)
-        return rc
-    }()
-    
     
     private func getCategory(){
         ApiClient.getCategoryEvents(distance: "5km", location: location, categoryID: "") { (error, data) in
@@ -117,7 +111,11 @@ class HomeController: UIViewController {
         }
     }
     
-    var location = "Manhattan"
+    var location = "Manhattan"{
+        didSet{
+            getCategory()
+        }
+    }
     var selectedImageValue: UIImage?
     var locationManager: CLLocationManager!
     var long: Double!
@@ -159,6 +157,7 @@ class HomeController: UIViewController {
         preferencesViewStuff()
         configureNavigationBar()
         getCategory()
+        locationDelegate = self
         authService.authserviceSignOutDelegate = self
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -534,7 +533,6 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
     }
     
     @objc private func fetchEvents(){
-        refreshControl.beginRefreshing()
         listener = DBService.firestoreDB
             .collection(EventCollectionKeys.CollectionKeys).addSnapshotListener { [weak self] (snapshot, error) in
                 if let error = error {
@@ -542,9 +540,6 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
                 } else if let snapshot = snapshot {
                     self?.createdEvent = snapshot.documents.map { EventCreatedByUser(dict: $0.data()) }
                         .sorted { $0.createdAt.date() > $1.createdAt.date() }
-                }
-                DispatchQueue.main.async {
-                    self?.refreshControl.endRefreshing()
                 }
         }
     }
