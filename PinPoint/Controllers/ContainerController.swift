@@ -108,7 +108,7 @@ extension ContainerController: HomeControllerDelegate {
         case.nearby:
             homeController.eventsPageOn()
         case .favorites:
-            homeController.favoritesPageOn()
+            homeController.favoritesPageOn() 
         case .requests:
             homeController.friendRequestsPageOn()
         case .profile:
