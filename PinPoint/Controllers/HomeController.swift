@@ -251,10 +251,10 @@ class HomeController: UIViewController {
             contentView.removeFromSuperview()
             contentView = UIView.init(frame: UIScreen.main.bounds)
             self.navigationItem.title = "W E L C O M E"
-            contentView.addSubview(homeSplashImage)
-            view.addSubview(homeSplashImage)
+            view.backgroundColor = .white
             navigationItem.searchController = nil
         } else {
+            contentView.removeFromSuperview()
             contentView = UIView.init(frame: UIScreen.main.bounds)
             contentView.addSubview(discoverView)
             view.addSubview(contentView)
