@@ -142,12 +142,10 @@ class HomeController: UIViewController {
             loginView.removeFromSuperview()
         }
     }
-    override func viewWillAppear(_ animated: Bool) {
-        view.addSubview(homeSplashImage)
-    }
 
     private func viewdidLoadLayout(){
         view.backgroundColor = .white
+        view.addSubview(homeSplashImage)
         view.addSubview(contentView)
         
         authService.authserviceExistingAccountDelegate = self
