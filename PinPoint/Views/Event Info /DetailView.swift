@@ -16,9 +16,10 @@ class DetailView: UIView {
         let label = UILabel()
         label.text = "Event Name"
         label.numberOfLines = 2
-        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        label.font = UIFont.init(name: "futura", size: 16)
+        label.font = UIFont.systemFont(ofSize: 19, weight: .semibold)
+        label.font = UIFont.init(name: "futura", size: 19)
         label.textAlignment = .center
+        label.textColor = #colorLiteral(red: 0.3098039329, green: 0.01568627544, blue: 0.1294117719, alpha: 1)
         return label
     }()
     
@@ -26,8 +27,6 @@ class DetailView: UIView {
         let image = UIImageView()
         image.image = UIImage(named: "icons8-ask-question-25")
         image.backgroundColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
-
-
         image.contentMode = .scaleAspectFill
         image.layer.cornerRadius = 20
         image.layer.masksToBounds = true
@@ -40,7 +39,7 @@ class DetailView: UIView {
         textView.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         textView.font = UIFont.init(name: "futura", size: 18)
         textView.text = "Key"
-        textView.textColor = #colorLiteral(red: 1, green: 0.3315477967, blue: 0.3251088858, alpha: 1)
+        textView.textColor = #colorLiteral(red: 0.3176470697, green: 0.07450980693, blue: 0.02745098062, alpha: 1)
         return textView
     }()
 
@@ -57,13 +56,13 @@ class DetailView: UIView {
         displayLabel.text = "User Name"
         displayLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
         displayLabel.font = UIFont.init(name: "futura", size: 14)
-        displayLabel.textColor = .black
+        displayLabel.textColor = #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1)
         return displayLabel
     }()
     
     lazy var messageButton: UIButton = {
        let button = UIButton()
-       button.setImage(#imageLiteral(resourceName: "icons8-chat-51"), for: .normal)
+       button.setImage(#imageLiteral(resourceName: "icons8-ok-100"), for: .normal)
         button.isEnabled = true
         return button
     }()
@@ -96,7 +95,7 @@ class DetailView: UIView {
             make.right.equalTo(-10)
          }                         
         detailImageView.snp.makeConstraints { (make) in
-            make.top.equalTo(detailLabel.snp.bottom)
+            make.top.equalTo(detailLabel.snp.bottom).offset(15)
             make.width.equalTo(350)
             make.height.equalTo(350)
             make.centerX.equalTo(self.snp.centerX)

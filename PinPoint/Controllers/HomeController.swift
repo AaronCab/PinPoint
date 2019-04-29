@@ -142,12 +142,10 @@ class HomeController: UIViewController {
             loginView.removeFromSuperview()
         }
     }
-    override func viewWillAppear(_ animated: Bool) {
-        view.addSubview(homeSplashImage)
-    }
 
     private func viewdidLoadLayout(){
         view.backgroundColor = .white
+        view.addSubview(homeSplashImage)
         view.addSubview(contentView)
         
         authService.authserviceExistingAccountDelegate = self
@@ -251,7 +249,7 @@ class HomeController: UIViewController {
             contentView.removeFromSuperview()
             contentView = UIView.init(frame: UIScreen.main.bounds)
             self.navigationItem.title = "W E L C O M E"
-            view.backgroundColor = .white
+            view.addSubview(homeSplashImage)
             navigationItem.searchController = nil
         } else {
             contentView.removeFromSuperview()
@@ -297,7 +295,7 @@ class HomeController: UIViewController {
             contentView = UIView.init(frame: UIScreen.main.bounds)
             self.navigationItem.title = "P R O F I L E"
             contentView.addSubview(loginView)
-            view.addSubview(loginView)
+            view.addSubview(contentView)
             navigationItem.searchController = nil
         }else{
             contentView.removeFromSuperview()
@@ -309,7 +307,7 @@ class HomeController: UIViewController {
             self.navigationItem.rightBarButtonItem = rightBarItem
             contentView.addSubview(profileView)
             updateUser()
-            view.addSubview(profileView)
+            view.addSubview(contentView)
             navigationItem.searchController = nil
         }
         
