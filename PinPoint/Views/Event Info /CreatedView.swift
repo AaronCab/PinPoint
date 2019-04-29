@@ -65,10 +65,14 @@ class CreatedView: UIView {
     }()
     lazy var startText: UIDatePicker = {
         let startTF = UIDatePicker()
+        startTF.timeZone = NSTimeZone.local
+//        startTF.addTarget(self, action: "dateSelected", for: UIControl.Event.valueChanged)
+//        startTF.frame =
         return startTF
     }()
     lazy var endText: UIDatePicker = {
         let endTF = UIDatePicker()
+         endTF.timeZone = NSTimeZone.local
         return endTF
     }()
     var addEventButton: UIButton = {
@@ -110,10 +114,12 @@ class CreatedView: UIView {
         }
         startText.snp.makeConstraints { (make) in
             make.top.equalTo(locationText.snp.bottom).offset(15)
+            make.height.equalTo(110)
             make.left.equalTo(35)
         }
         endText.snp.makeConstraints { (make) in
-            make.top.equalTo(startText.snp.bottom).offset(15)
+            make.top.equalTo(startText.snp.bottom).offset(5)
+             make.height.equalTo(110)
             make.left.equalTo(35)
         }
     }
