@@ -8,6 +8,7 @@
 
 import UIKit
 import Toucan
+import Firebase
 class CreatedViewController: UIViewController {
     var createdEvent = CreatedView()
     var authService = AppDelegate.authservice
@@ -84,13 +85,14 @@ class CreatedViewController: UIViewController {
 }
     @objc func updateCreatedEvent(){
         self.navigationItem.rightBarButtonItem?.isEnabled = true
- let formatter = ISO8601DateFormatter()
+        let createdStartDate = createdEvent.startText.date
+        let endDate = createdEvent.endText.date
+ let startDate = Timestamp.init(date: createdStartDate)
+        let endDatePick = Timestamp.init(date: endDate)
       guard let createdEventDescription = createdEvent.eventText.text,
         !createdEventDescription.isEmpty,
         let createdEventName = createdEvent.createName.text,
         !createdEventName.isEmpty,
-        let createdStartDate = formatter.date(from:createdEvent.startText.text!),
-        let endDate = formatter.date(from: createdEvent.endText.text!),
          let imageData = selectedImage?.jpegData(compressionQuality: 1.0) else {
             print("missing fields")
             return
@@ -108,7 +110,7 @@ class CreatedViewController: UIViewController {
                                         print("fail to post iamge with error: \(error.localizedDescription)")
                                     } else if let imageURL = imageURL {
                                         print("image posted and recieved imageURL - post event to database: \(imageURL)")
-                                        let thisEvent = EventCreatedByUser(createdAt: Date.getISOTimestamp(), personID: user.uid, photoURL: imageURL.absoluteString, eventDescription: createdEventDescription, lat: 40.4358, long: 50.6785, displayName: createdEventName, email: user.email!, isTrustedUser: [], eventType: createdEventName, documentID: docRef.documentID, message: [], pending: [], startedAt: createdStartDate, endDate: endDate)
+                                        let thisEvent = EventCreatedByUser(createdAt: Date.getISOTimestamp(), personID: user.uid, photoURL: imageURL.absoluteString, eventDescription: createdEventDescription, lat: 40.4358, long: 50.6785, displayName: createdEventName, email: user.email!, isTrustedUser: [], eventType: createdEventName, documentID: docRef.documentID, message: [], pending: [], startedAt: startDate, endDate: endDatePick)
 ;                                        DBService.postEvent(event: thisEvent){ [weak self] error in
                                             if let error = error {
                                                 self?.showAlert(title: "Posting Event Error", message: error.localizedDescription)
