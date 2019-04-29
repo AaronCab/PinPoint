@@ -21,6 +21,12 @@ class EventsView: UIView {
         cv.backgroundColor = .white
         return cv
     } ()
+    var preferencesButton: UIButton = {
+        let button = UIButton()
+        button.setImage(#imageLiteral(resourceName: "icons8-create-25"), for: .normal)
+        button.backgroundColor = .clear
+        return button
+    }()
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         backgroundColor = .white
@@ -34,6 +40,7 @@ class EventsView: UIView {
     func commonInit(){
         self.myCollectionView.register(EventsCell.self, forCellWithReuseIdentifier: "CollectionViewCell")
         setup()
+        preferencesButtonConstraint()
     }
     
     private func setup() {
@@ -46,4 +53,12 @@ class EventsView: UIView {
         myCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
     }
     
+}
+extension EventsView{
+    
+    private func preferencesButtonConstraint() {
+        addSubview(preferencesButton)
+        preferencesButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([preferencesButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10), preferencesButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10),preferencesButton.heightAnchor.constraint(equalToConstant: 40), preferencesButton.widthAnchor.constraint(equalToConstant: 45)])
+    }
 }
