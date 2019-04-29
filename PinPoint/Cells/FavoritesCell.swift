@@ -144,7 +144,7 @@ class FavoritesCell: UICollectionViewCell {
         }
         
         switchView.snp.makeConstraints { (make) in
-            make.top.equalTo(eventEndTime.snp_bottom).offset(20)
+            make.top.equalTo(eventEndTime.snp_bottom).offset(28)
             make.height.equalTo(50)
             make.left.equalTo(moreInfoButton.snp.right).offset(50)
         }
