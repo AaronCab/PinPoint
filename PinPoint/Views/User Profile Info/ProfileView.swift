@@ -39,8 +39,8 @@ class ProfileView: UIView {
         label.backgroundColor = .clear
         label.layer.cornerRadius = 15
         label.textColor = #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1)
-        label.font = UIFont.init(name: "futura", size: 14)
-        label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        label.font = UIFont.init(name: "futura", size: 16)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         label.text = " N A M E"
         return label
     }()
@@ -56,6 +56,7 @@ class ProfileView: UIView {
         let textView = UITextView()
         textView.backgroundColor = .clear
         textView.layer.cornerRadius = 10
+        textView.font = UIFont.init(name: "futura", size: 16)
         textView.isEditable = false
         return textView
     }()

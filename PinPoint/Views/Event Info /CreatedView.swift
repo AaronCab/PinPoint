@@ -134,32 +134,7 @@ class CreatedView: UIView {
     
 }
 extension CreatedView{
-    
-//        private func imageConstraints(){
-//        addSubview(createdPicture)
-//        createdPicture.translatesAutoresizingMaskIntoConstraints = false
-//        createdPicture.topAnchor.constraint(equalTo: topAnchor, constant: 100).isActive = true
-//        createdPicture.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.5).isActive = true
-//        createdPicture.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.5).isActive = true
-//        createdPicture.centerXAnchor.constraint(equalTo:safeAreaLayoutGuide.centerXAnchor).isActive = true
-//    }
-//    private func labelConstraint(){
-//        addSubview(label)
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.topAnchor.constraint(equalTo: createdPicture.bottomAnchor, constant: 8).isActive = true
-//        label.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, constant: 30).isActive = true
-//
-//    }
-//
-//    private func textViewConstraint(){
-//        addSubview(textView)
-//        textView.translatesAutoresizingMaskIntoConstraints = false
-//        textView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 10).isActive = true
-//        textView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.3).isActive = true
-//        textView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 1).isActive = true
-//        textView.centerXAnchor.constraint(equalTo:safeAreaLayoutGuide.centerXAnchor).isActive = true
-//
-//    }
+
 
 }
 
