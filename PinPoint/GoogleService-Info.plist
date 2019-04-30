@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>911095430321-lpd3vuqiahsjgg91si05lfqku38iehha.apps.googleusercontent.com</string>
+	<string>777912704079-8cuh0kr69ops28s77l0e9ndvajr4h6rd.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.911095430321-lpd3vuqiahsjgg91si05lfqku38iehha</string>
+	<string>com.googleusercontent.apps.777912704079-8cuh0kr69ops28s77l0e9ndvajr4h6rd</string>
 	<key>API_KEY</key>
-	<string>AIzaSyA5DE_ySEZp0wTuiEKsGkV34syAtR4wvJo</string>
+	<string>AIzaSyAtJS_O34gg6KaBqQWWLXrHMMseEbA-gAA</string>
 	<key>GCM_SENDER_ID</key>
-	<string>911095430321</string>
+	<string>777912704079</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>org.pursuit.PinPoint</string>
+	<string>org.pursuit.pinpoint.app</string>
 	<key>PROJECT_ID</key>
-	<string>pinpoint-1554384719382</string>
+	<string>pinpointevents-1c70e</string>
 	<key>STORAGE_BUCKET</key>
-	<string>pinpoint-1554384719382.appspot.com</string>
+	<string>pinpointevents-1c70e.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:911095430321:ios:6c3d90a2a09f6664</string>
+	<string>1:777912704079:ios:c6e7e988bd6ae511</string>
 	<key>DATABASE_URL</key>
-	<string>https://pinpoint-1554384719382.firebaseio.com</string>
+	<string>https://pinpointevents-1c70e.firebaseio.com</string>
 </dict>
 </plist>
