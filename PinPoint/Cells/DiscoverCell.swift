@@ -47,6 +47,16 @@ class DiscoverCell: UICollectionViewCell {
         return et
     }()
     
+    let eventLocation: UITextView = {
+        let el = UITextView()
+        el.isEditable = false
+        el.backgroundColor = .clear
+        el.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        el.font = UIFont.init(name: "futura", size: 18)
+        el.textColor = #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1)
+        return el
+    }()
+    
     let eventStartTime: UILabel = {
         let es = UILabel()
         es.text = "Start Time"
@@ -89,6 +99,7 @@ class DiscoverCell: UICollectionViewCell {
         eventCellContainerView.addSubview(eventName)
         eventCellContainerView.addSubview(eventImageView)
         eventCellContainerView.addSubview(eventDescription)
+        eventCellContainerView.addSubview(eventLocation)
         eventCellContainerView.addSubview(eventStartTime)
         eventCellContainerView.addSubview(eventEndTime)
         eventCellContainerView.addSubview(moreInfoButton)
@@ -113,8 +124,13 @@ class DiscoverCell: UICollectionViewCell {
             make.right.equalTo(-20)
             make.height.equalTo(200)
         }
-        eventStartTime.snp.makeConstraints { (make) in
+        
+        eventLocation.snp.makeConstraints { (make) in
             make.top.equalTo(eventDescription.snp.bottom).offset(15)
+            make.left.equalTo(20)
+        }
+        eventStartTime.snp.makeConstraints { (make) in
+            make.top.equalTo(eventLocation.snp.bottom).offset(15)
             make.left.equalTo(20)
         }
         eventEndTime.snp.makeConstraints { (make) in

@@ -250,6 +250,8 @@ class HomeController: UIViewController{
             self.navigationItem.title = "W E L C O M E"
             view.addSubview(homeSplashImage)
             navigationItem.searchController = nil
+            navigationItem.rightBarButtonItem = nil
+            
         } else {
             contentView.removeFromSuperview()
             contentView = UIView.init(frame: UIScreen.main.bounds)
@@ -343,12 +345,26 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         if collectionView == discoverView.discoverCollectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DiscoverCell", for: indexPath) as? DiscoverCell else { return UICollectionViewCell() }
             let currentEvent = createdEvent[indexPath.row]
+            cell.eventLocation.text = currentEvent.location
             cell.eventDescription.text = currentEvent.eventDescription
             cell.eventName.text = currentEvent.displayName
             cell.eventImageView.kf.indicatorType = .activity
             cell.moreInfoButton.tag = indexPath.row
-            cell.eventStartTime.text = "Start Date: \(currentEvent.startedAt?.dateValue() ?? Date())"
-            cell.eventEndTime.text = "End Date: \(currentEvent.endDate?.dateValue() ?? Date())"
+            
+            if let thisDate = currentEvent.startedAt?.dateValue() {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MMM d, h:mm a"
+                let dateString = dateFormatter.string(from: thisDate)
+                cell.eventStartTime.text = "Start Date: \(dateString)"
+
+            }
+            if let thisDate = currentEvent.endDate?.dateValue() {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MMM d, h:mm a"
+                let dateString = dateFormatter.string(from: thisDate)
+                cell.eventEndTime.text = "End Date: \(dateString)"
+            }
+            
             cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.photoURL)), placeholder: UIImage(named: "pinpointred"))
             cell.moreInfoButton.addTarget(self, action: #selector(moreInfoDisvover), for: .touchUpInside)
             return cell
