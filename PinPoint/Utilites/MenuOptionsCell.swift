@@ -9,7 +9,7 @@
 import UIKit
 
 class MenuOptionsCell: UITableViewCell {
-    // Mark: - Properties
+
     let iconImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
@@ -25,7 +25,7 @@ class MenuOptionsCell: UITableViewCell {
         return label
         
     }()
-    // Mark: - Init
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -41,14 +41,10 @@ class MenuOptionsCell: UITableViewCell {
         addSubview(descriptionLabel)
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        descriptionLabel.leftAnchor.constraint(equalTo: iconImageView.rightAnchor, constant: 12).isActive = true
-        
-        
-        
+        descriptionLabel.leftAnchor.constraint(equalTo: iconImageView.rightAnchor, constant: 12).isActive = true    
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("Fatal Error")
     }
-    // Mark: - Handlers
     
 }

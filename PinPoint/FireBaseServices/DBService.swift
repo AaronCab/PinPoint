@@ -11,6 +11,7 @@ import FirebaseFirestore
 import Firebase
 
 struct EventCollectionKeys {
+    static let Location = "locationString"
     static let CollectionKeys = "event"
     static let PersonID = "personID"
     static let PhotoURL = "PhotoURL"
@@ -26,6 +27,7 @@ struct EventCollectionKeys {
     static let Message = "message"
     static let Pending = "pending"
     static let StartedAt = "startedAt"
+    static let EndDate = "endDate"
 }
 struct ProfileCollectionKeys {
     static let CollectionKey = "Profile"
@@ -86,7 +88,9 @@ final class DBService {
                 EventCollectionKeys.PhotoURL        : event.photoURL,
                 EventCollectionKeys.DocumentIdKey      : event.documentId,
                 EventCollectionKeys.DisplayNameKey : event.displayName,
-                EventCollectionKeys.StartedAt : event.startedAt
+                EventCollectionKeys.StartedAt : event.startedAt,
+                EventCollectionKeys.EndDate: event.endDate,
+                EventCollectionKeys.Location: event.location
                 ])
             { (error) in
                 if let error = error {

@@ -33,22 +33,14 @@ class ProfileView: UIView {
         label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         return label
     }()
-    var email: UILabel = {
-        let label = UILabel()
-        label.backgroundColor = .clear
-        label.font = UIFont.init(name: "futura", size: 16)
-        label.text = " E M A I L"
-        label.textColor = #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1)
-        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        return label
-    }()
+
     var name: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
         label.layer.cornerRadius = 15
         label.textColor = #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1)
-        label.font = UIFont.init(name: "futura", size: 14)
-        label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        label.font = UIFont.init(name: "futura", size: 16)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         label.text = " N A M E"
         return label
     }()
@@ -64,6 +56,7 @@ class ProfileView: UIView {
         let textView = UITextView()
         textView.backgroundColor = .clear
         textView.layer.cornerRadius = 10
+        textView.font = UIFont.init(name: "futura", size: 16)
         textView.isEditable = false
         return textView
     }()
@@ -78,7 +71,6 @@ class ProfileView: UIView {
         profilePictureConstraint()
         displayNameConstraint()
         nameConstraint()
-        emailConstraint()
         bioLabelConstraint()
         bioConstraint()
         settingsButtonConstraint()
@@ -135,20 +127,10 @@ extension ProfileView{
         name.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -35).isActive = true
     }
     
-    private func emailConstraint(){
-        addSubview(email)
-        email.translatesAutoresizingMaskIntoConstraints = false
-        email.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 15).isActive = true
-        email.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 35).isActive = true
-        
-        email.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        email.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -35).isActive = true
-    }
-    
     private func bioLabelConstraint(){
         addSubview(bioLabel)
         bioLabel.translatesAutoresizingMaskIntoConstraints = false
-        bioLabel.topAnchor.constraint(equalTo: email.bottomAnchor, constant: 10).isActive = true
+        bioLabel.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 10).isActive = true
         bioLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
         bioLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     }

@@ -22,7 +22,7 @@ enum detailViewSeque{
     case catagories
 }
 
-class HomeController: UIViewController {
+class HomeController: UIViewController{
     var contentView = UIView.init(frame: UIScreen.main.bounds)
     func loadFavorites() {
         self.favorite = FavoritesDataManager.fetchItemsFromDocumentsDirectory()
@@ -44,6 +44,7 @@ class HomeController: UIViewController {
     var createDelegate = CreateAccountViewController()
     var logginDelegate = LoginWithExistingViewController()
     var userProfile: ProfileOfUser!
+    var locationDelegate: LocationString!
 
     
     
@@ -98,13 +99,6 @@ class HomeController: UIViewController {
             
         }
     }
-    lazy var refreshControl: UIRefreshControl = {
-        let rc = UIRefreshControl()
-        discoverView.discoverCollectionView.refreshControl = rc
-        rc.addTarget(self, action: #selector(fetchEvents), for: .valueChanged)
-        return rc
-    }()
-    
     
     private func getCategory(){
         ApiClient.getCategoryEvents(distance: "5km", location: location, categoryID: "") { (error, data) in
@@ -117,7 +111,11 @@ class HomeController: UIViewController {
         }
     }
     
-    var location = "Manhattan"
+    var location = "Manhattan"{
+        didSet{
+            getCategory()
+        }
+    }
     var selectedImageValue: UIImage?
     var locationManager: CLLocationManager!
     var long: Double!
@@ -142,17 +140,14 @@ class HomeController: UIViewController {
             loginView.removeFromSuperview()
         }
     }
-    override func viewWillAppear(_ animated: Bool) {
-        view.addSubview(homeSplashImage)
-    }
 
     private func viewdidLoadLayout(){
         view.backgroundColor = .white
+        view.addSubview(homeSplashImage)
         view.addSubview(contentView)
         
         authService.authserviceExistingAccountDelegate = self
         authService.authserviceCreateNewAccountDelegate = self
-        
         preferencesView.categoryCollectionView.dataSource = self
         preferencesView.categoryCollectionView.delegate = self 
         discoverView.discoverCollectionView.delegate = self
@@ -162,6 +157,7 @@ class HomeController: UIViewController {
         preferencesViewStuff()
         configureNavigationBar()
         getCategory()
+        locationDelegate = self
         authService.authserviceSignOutDelegate = self
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -237,6 +233,9 @@ class HomeController: UIViewController {
         eventsView.myCollectionView.dataSource = self
         eventsView.myCollectionView.delegate = self
         self.navigationItem.title = "N E A R B Y  E V E N T S"
+         let rightBarItem = UIBarButtonItem(customView: eventsView.preferencesButton)
+        eventsView.preferencesButton.addTarget(self, action: #selector(preferencesCommand), for: .touchUpInside)
+        self.navigationItem.rightBarButtonItem = rightBarItem
         whatToSeque = .event
         contentView.addSubview(eventsView)
         view.addSubview(contentView)
@@ -249,10 +248,12 @@ class HomeController: UIViewController {
             contentView.removeFromSuperview()
             contentView = UIView.init(frame: UIScreen.main.bounds)
             self.navigationItem.title = "W E L C O M E"
-            contentView.addSubview(homeSplashImage)
             view.addSubview(homeSplashImage)
             navigationItem.searchController = nil
+            navigationItem.rightBarButtonItem = nil
+            
         } else {
+            contentView.removeFromSuperview()
             contentView = UIView.init(frame: UIScreen.main.bounds)
             contentView.addSubview(discoverView)
             view.addSubview(contentView)
@@ -295,7 +296,7 @@ class HomeController: UIViewController {
             contentView = UIView.init(frame: UIScreen.main.bounds)
             self.navigationItem.title = "P R O F I L E"
             contentView.addSubview(loginView)
-            view.addSubview(loginView)
+            view.addSubview(contentView)
             navigationItem.searchController = nil
         }else{
             contentView.removeFromSuperview()
@@ -307,7 +308,7 @@ class HomeController: UIViewController {
             self.navigationItem.rightBarButtonItem = rightBarItem
             contentView.addSubview(profileView)
             updateUser()
-            view.addSubview(profileView)
+            view.addSubview(contentView)
             navigationItem.searchController = nil
         }
         
@@ -344,11 +345,26 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         if collectionView == discoverView.discoverCollectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DiscoverCell", for: indexPath) as? DiscoverCell else { return UICollectionViewCell() }
             let currentEvent = createdEvent[indexPath.row]
+            cell.eventLocation.text = currentEvent.location
             cell.eventDescription.text = currentEvent.eventDescription
             cell.eventName.text = currentEvent.displayName
             cell.eventImageView.kf.indicatorType = .activity
             cell.moreInfoButton.tag = indexPath.row
-            cell.eventStartTime.text = currentEvent.startedAt.description.formatISODateString(dateFormat: "MMM d, h:mm a")
+            
+            if let thisDate = currentEvent.startedAt?.dateValue() {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MMM d, h:mm a"
+                let dateString = dateFormatter.string(from: thisDate)
+                cell.eventStartTime.text = "Start Date: \(dateString)"
+
+            }
+            if let thisDate = currentEvent.endDate?.dateValue() {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MMM d, h:mm a"
+                let dateString = dateFormatter.string(from: thisDate)
+                cell.eventEndTime.text = "End Date: \(dateString)"
+            }
+            
             cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.photoURL)), placeholder: UIImage(named: "pinpointred"))
             cell.moreInfoButton.addTarget(self, action: #selector(moreInfoDisvover), for: .touchUpInside)
             return cell
@@ -412,6 +428,32 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         
     }
     
+    // testing to see cell snap
+    func snapToNearestCell(_ collectionView: UICollectionView) {
+        for i in 0..<collectionView.numberOfItems(inSection: 0) {
+            let collectionViewFlowLayout = (discoverView.discoverCollectionView.collectionViewLayout as! UICollectionViewFlowLayout)
+            let itemWithSpaceWidth = collectionViewFlowLayout.itemSize.width + collectionViewFlowLayout.minimumLineSpacing
+            let itemWidth = collectionViewFlowLayout.itemSize.width
+            
+            if collectionView.contentOffset.x <= CGFloat(i) * itemWithSpaceWidth + itemWidth / 2 {
+                let indexPath = IndexPath(item: i, section: 0)
+                collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+                break
+            }
+        }
+    }
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        snapToNearestCell(scrollView as! UICollectionView)
+    }
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        snapToNearestCell(scrollView as! UICollectionView)
+    }
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        snapToNearestCell(scrollView as! UICollectionView)
+        
+    }
+    // testing to see cell snap
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch whatToSeque {
         case .event:
@@ -443,6 +485,8 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             print("end it here")
         }
         
+       
+
     }
     @objc func moreInfo(senderTag: UIButton){
         
@@ -533,7 +577,6 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
     }
     
     @objc private func fetchEvents(){
-        refreshControl.beginRefreshing()
         listener = DBService.firestoreDB
             .collection(EventCollectionKeys.CollectionKeys).addSnapshotListener { [weak self] (snapshot, error) in
                 if let error = error {
@@ -541,9 +584,6 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
                 } else if let snapshot = snapshot {
                     self?.createdEvent = snapshot.documents.map { EventCreatedByUser(dict: $0.data()) }
                         .sorted { $0.createdAt.date() > $1.createdAt.date() }
-                }
-                DispatchQueue.main.async {
-                    self?.refreshControl.endRefreshing()
                 }
         }
     }
@@ -722,6 +762,10 @@ extension HomeController: AuthServiceSignOutDelegate{
     @objc func addEventCommand(){
         let createVC = CreatedViewController()
         self.navigationController?.pushViewController(createVC, animated: true)
+    }
+    @objc func preferencesCommand(){
+    let preferencesVC = PreferencesViewController()
+    self.navigationController?.pushViewController(preferencesVC, animated: true)
     }
 }
 

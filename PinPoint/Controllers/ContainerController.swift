@@ -80,8 +80,6 @@ class ContainerController: UIViewController {
             print("show favorites")
         case .Requests:
             print("show messages")
-        case .Preferences:
-            print("show preferences")
         case .Profile:
             print("show profile")
         }
@@ -110,9 +108,7 @@ extension ContainerController: HomeControllerDelegate {
         case.nearby:
             homeController.eventsPageOn()
         case .favorites:
-            homeController.favoritesPageOn()
-        case .preferences:
-            homeController.preferencesPageOn()
+            homeController.favoritesPageOn() 
         case .requests:
             homeController.friendRequestsPageOn()
         case .profile:
