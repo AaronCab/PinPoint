@@ -46,8 +46,6 @@ class HomeController: UIViewController{
     var userProfile: ProfileOfUser!
     var locationDelegate: LocationString!
 
-    
-    
     var catagories = [
         "Business": "101",
         "ScienceAndTech": "102",
@@ -101,7 +99,7 @@ class HomeController: UIViewController{
     }
     
     private func getCategory(){
-        ApiClient.getCategoryEvents(distance: "5km", location: location, categoryID: "") { (error, data) in
+        ApiClient.getCategoryEvents(distance: "5km", location: location, categoryID: "101") { (error, data) in
             if let error = error {
                 print(error.errorMessage())
             } else if let data = data {
@@ -111,7 +109,7 @@ class HomeController: UIViewController{
         }
     }
     
-    var location = "Manhattan"{
+    var location = "Long Island City"{
         didSet{
             getCategory()
         }
@@ -145,7 +143,6 @@ class HomeController: UIViewController{
         view.backgroundColor = .white
         view.addSubview(homeSplashImage)
         view.addSubview(contentView)
-        
         authService.authserviceExistingAccountDelegate = self
         authService.authserviceCreateNewAccountDelegate = self
         preferencesView.categoryCollectionView.dataSource = self
@@ -311,8 +308,6 @@ class HomeController: UIViewController{
             view.addSubview(contentView)
             navigationItem.searchController = nil
         }
-        
-        
     }
     
     func defaultView(){
@@ -422,8 +417,6 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             cell.moreInfoButton.addTarget(self, action: #selector(moreInfoFav), for: .touchUpInside)
             
             return cell
-            
-            
         }
         
     }
@@ -485,8 +478,6 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             print("end it here")
         }
         
-       
-
     }
     @objc func moreInfo(senderTag: UIButton){
         
@@ -669,7 +660,6 @@ extension HomeController: CLLocationManagerDelegate {
     }
 }
 
-
 extension HomeController{
     
     func preferencesViewStuff(){
@@ -691,8 +681,6 @@ extension HomeController{
         alertSheet.addAction(UIAlertAction(title: "Nevermind", style: .cancel, handler: nil))
         present(alertSheet, animated: true, completion: nil)
     }
-    
-    
     
     @objc func locationFinder(){
         
@@ -778,10 +766,8 @@ extension HomeController{
                     if let data = data{
                         self.profileView.loggedInUserModel = data.documents.map { ProfileOfUser(dict: $0.data()) }
                             .filter(){$0.ProfileId == user.uid}.first
-                        
                     }
                 })
         }
     }
-    
 }

@@ -66,7 +66,7 @@ extension MenuController: UITableViewDataSource, UITableViewDelegate {
         header.textLabel?.font = UIFont(name: "Futura", size: 36)
         header.textLabel?.backgroundColor = UIColor.clear
         header.textLabel?.textColor = UIColor.white
-        header.contentView.backgroundColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
+        header.contentView.backgroundColor = #colorLiteral(red: 0.1910400689, green: 0.2061233521, blue: 0.2311887741, alpha: 1)
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let menuOption = MenuOption(rawValue: indexPath.row)
