@@ -49,16 +49,16 @@ class CreateAccountViewController: UIViewController {
                 return
         }
         if userName.isEmpty &&
-        email.isEmpty &&
-        password.isEmpty{
+            email.isEmpty &&
+            password.isEmpty{
             showAlert(title: "Missing Fields", message: "Please fill out all info")
             self.navigationItem.rightBarButtonItem?.isEnabled = true
-
+            
         }else{
-        authService.createNewAccount(username: userName, email: email, password: password)
+            authService.createNewAccount(username: userName, email: email, password: password)
         }
-        }
-
+    }
+    
     
 }
 
