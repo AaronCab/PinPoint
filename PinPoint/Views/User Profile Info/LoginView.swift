@@ -26,14 +26,14 @@ class LoginView: UIView {
         let label = UILabel()
         label.backgroundColor = .clear
         label.text = "P I N P O I N T"
-        label.textColor = .white
+        label.textColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
         label.font = UIFont(name: "Futura", size: 36)
         label.textAlignment = .center
         return label
     }()
     var facebookLogIn: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .white
+        button.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.9372549057, blue: 0.9568627477, alpha: 1)
         button.layer.cornerRadius = 5
         button.setTitleColor(.darkGray, for: .normal)
         button.setTitle("FACEBOOK LOGIN", for: .normal)
@@ -42,7 +42,7 @@ class LoginView: UIView {
     }()
     var gmailLoginButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .white
+        button.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.9372549057, blue: 0.9568627477, alpha: 1)
         button.layer.cornerRadius = 5
         button.setTitleColor(.darkGray, for: .normal)
         button.setTitle("GMAIL LOGIN", for: .normal)
@@ -51,7 +51,7 @@ class LoginView: UIView {
     }()
     var customEmailLogin: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .white
+        button.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.9372549057, blue: 0.9568627477, alpha: 1)
         button.layer.cornerRadius = 5
         button.setTitleColor(.darkGray, for: .normal)
         button.setTitle("EXISTING ACCOUNT LOGIN", for: .normal)
@@ -61,7 +61,7 @@ class LoginView: UIView {
     
     var createAccountHere: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .white
+        button.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.9372549057, blue: 0.9568627477, alpha: 1)
         button.layer.cornerRadius = 5
         button.setTitleColor(.darkGray, for: .normal)
         button.setTitle("CREATE NEW ACCOUNT", for: .normal)
@@ -94,11 +94,12 @@ class LoginView: UIView {
     }
     
     func commonInit(){
-        addGradient()
+       // addGradient()
         setupViews()
     }
     
     private func setupViews() {
+        backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         self.addSubview(logo)
         self.addSubview(loginContainertVeiw)
         loginContainertVeiw.snp.makeConstraints { (make) in
