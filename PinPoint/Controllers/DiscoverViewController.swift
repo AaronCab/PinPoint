@@ -26,6 +26,7 @@ class DiscoverViewController: UIViewController {
         hideKeyboardWhenTappedAround()
     }
     
+    
 
 }
 
@@ -51,6 +52,5 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewData
         cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.photoURL)), placeholder: UIImage(named: "pinpointred"))
         return cell
     }
-    
-    
 }
+

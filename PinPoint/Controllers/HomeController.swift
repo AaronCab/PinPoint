@@ -412,6 +412,32 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         
     }
     
+    // testing to see cell snap
+    func snapToNearestCell(_ collectionView: UICollectionView) {
+        for i in 0..<collectionView.numberOfItems(inSection: 0) {
+            let collectionViewFlowLayout = (discoverView.discoverCollectionView.collectionViewLayout as! UICollectionViewFlowLayout)
+            let itemWithSpaceWidth = collectionViewFlowLayout.itemSize.width + collectionViewFlowLayout.minimumLineSpacing
+            let itemWidth = collectionViewFlowLayout.itemSize.width
+            
+            if collectionView.contentOffset.x <= CGFloat(i) * itemWithSpaceWidth + itemWidth / 2 {
+                let indexPath = IndexPath(item: i, section: 0)
+                collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+                break
+            }
+        }
+    }
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        snapToNearestCell(scrollView as! UICollectionView)
+    }
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        snapToNearestCell(scrollView as! UICollectionView)
+    }
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        snapToNearestCell(scrollView as! UICollectionView)
+        
+    }
+    // testing to see cell snap
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch whatToSeque {
         case .event:
@@ -443,6 +469,8 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             print("end it here")
         }
         
+       
+
     }
     @objc func moreInfo(senderTag: UIButton){
         
