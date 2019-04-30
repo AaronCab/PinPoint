@@ -74,6 +74,7 @@ extension CreateAccountViewController: AuthServiceCreateNewAccountDelegate{
             homeController.loginView.removeFromSuperview()
             homeController.reloadInputViews()
             navigationController?.popViewController(animated: true)
+            homeController.profilePageOn()
         }
         self.navigationController?.popViewController(animated: true)
     }

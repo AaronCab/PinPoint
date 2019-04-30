@@ -76,8 +76,8 @@ extension LoginWithExistingViewController: AuthServiceExistingAccountDelegate{
             homeController.loginView.removeFromSuperview()
             homeController.reloadInputViews()
             navigationController?.popViewController(animated: true)
-        }
-        
+            homeController.profilePageOn()
+        }        
     }
     
     
