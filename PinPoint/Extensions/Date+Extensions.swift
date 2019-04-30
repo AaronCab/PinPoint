@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 extension Date {
     // get an ISO timestamp
     static func getISOTimestamp() -> String {
@@ -14,4 +15,7 @@ extension Date {
         let timestamp = isoDateFormatter.string(from: Date())
         return timestamp
     }
+}
+extension Timestamp{
+    
 }
