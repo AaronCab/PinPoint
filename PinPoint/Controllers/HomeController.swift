@@ -250,6 +250,8 @@ class HomeController: UIViewController{
             self.navigationItem.title = "W E L C O M E"
             view.addSubview(homeSplashImage)
             navigationItem.searchController = nil
+            navigationItem.rightBarButtonItem = nil
+            
         } else {
             contentView.removeFromSuperview()
             contentView = UIView.init(frame: UIScreen.main.bounds)
@@ -343,6 +345,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         if collectionView == discoverView.discoverCollectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DiscoverCell", for: indexPath) as? DiscoverCell else { return UICollectionViewCell() }
             let currentEvent = createdEvent[indexPath.row]
+            cell.eventLocation.text = currentEvent.location
             cell.eventDescription.text = currentEvent.eventDescription
             cell.eventName.text = currentEvent.displayName
             cell.eventImageView.kf.indicatorType = .activity
