@@ -30,7 +30,7 @@ class CreatedView: UIView {
     
     lazy var create: UIButton = {
         var button = UIButton()
-        button.setTitle("Create Event", for: .normal)
+        button.setTitle("Save Event", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.isEnabled = true
         return button
