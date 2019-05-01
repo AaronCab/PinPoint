@@ -19,6 +19,7 @@ class CreatedView: UIView {
         super.init(coder: aDecoder)
         commonInit()
     }
+    
     lazy var cancel: UIButton = {
         var button = UIButton()
         button.setTitle("Cancel", for: .normal)
@@ -26,6 +27,7 @@ class CreatedView: UIView {
         button.isEnabled = true
         return button
     }()
+    
     lazy var create: UIButton = {
         var button = UIButton()
         button.setTitle("Create Event", for: .normal)
@@ -33,6 +35,7 @@ class CreatedView: UIView {
         button.isEnabled = true
         return button
     }()
+    
     lazy var createName: UITextField = {
         let createTF = UITextField()
         createTF.placeholder = "Enter Name of Event"
@@ -41,6 +44,7 @@ class CreatedView: UIView {
         createTF.textAlignment = .center
         return createTF
     }()
+    
     var createdPicture: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 15
@@ -56,6 +60,7 @@ class CreatedView: UIView {
         eventText.font = UIFont.init(name: "futura", size: 18)
         return eventText
     }()
+    
     lazy var locationText: UITextField = {
         let locationTF = UITextField()
         locationTF.placeholder = "Enter Location of Event"
@@ -63,6 +68,15 @@ class CreatedView: UIView {
         locationTF.font = UIFont.init(name: "futura", size: 18)
         return locationTF
     }()
+    
+    lazy var startTextLabel: UILabel = {
+       let startTL = UILabel()
+        startTL.text = "Enter Start of Event"
+        startTL.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        startTL.font = UIFont.init(name: "futura", size: 18)
+        return startTL
+    }()
+    
     lazy var startText: UIDatePicker = {
         let startTF = UIDatePicker()
         startTF.timeZone = NSTimeZone.local
@@ -75,6 +89,14 @@ class CreatedView: UIView {
          endTF.timeZone = NSTimeZone.local
         return endTF
     }()
+    lazy var endTextLabel: UILabel = {
+        let endTL = UILabel()
+        endTL.text = "Enter End of Event"
+        endTL.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        endTL.font = UIFont.init(name: "futura", size: 18)
+        return endTL
+    }()
+    
     var addEventButton: UIButton = {
         let button = UIButton()
         button.setImage(#imageLiteral(resourceName: "icons8-create-25"), for: .normal)
@@ -88,6 +110,8 @@ class CreatedView: UIView {
         addSubview(eventText)
         addSubview(createdPicture)
         addSubview(locationText)
+        addSubview(startTextLabel)
+        addSubview(endTextLabel)
         addSubview(startText)
         addSubview(endText)
         createName.snp.makeConstraints { (make) in
@@ -112,13 +136,25 @@ class CreatedView: UIView {
             make.top.equalTo(eventText.snp.bottom).offset(15)
             make.left.equalTo(35)
         }
-        startText.snp.makeConstraints { (make) in
+        
+        startTextLabel.snp.makeConstraints { (make) in
             make.top.equalTo(locationText.snp.bottom).offset(15)
+            make.left.equalTo(35)
+        }
+        
+        startText.snp.makeConstraints { (make) in
+            make.top.equalTo(startTextLabel.snp.bottom).offset(15)
             make.height.equalTo(110)
             make.left.equalTo(35)
         }
+        
+        endTextLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(startText.snp.bottom).offset(15)
+            make.left.equalTo(35)
+        }
+        
         endText.snp.makeConstraints { (make) in
-            make.top.equalTo(startText.snp.bottom).offset(5)
+            make.top.equalTo(endTextLabel.snp.bottom).offset(5)
              make.height.equalTo(110)
             make.left.equalTo(35)
         }
