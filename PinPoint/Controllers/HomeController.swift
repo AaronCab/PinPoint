@@ -214,7 +214,7 @@ class HomeController: UIViewController{
         contentView = UIView.init(frame: UIScreen.main.bounds)
         friendView.chatLogTableView.delegate = self
         friendView.chatLogTableView.dataSource = self
-        self.navigationItem.title = "F R I E N D  R E Q U E S T S"
+        self.navigationItem.title = "F R I E N D S"
         let rightBarItem = UIBarButtonItem(customView: friendView.settingsButton)
         self.navigationItem.rightBarButtonItem = rightBarItem
         friendView.settingsButton.addTarget(self, action: #selector(pendingFreinds), for: .touchUpInside)
@@ -340,24 +340,24 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         if collectionView == discoverView.discoverCollectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DiscoverCell", for: indexPath) as? DiscoverCell else { return UICollectionViewCell() }
             let currentEvent = createdEvent[indexPath.row]
-            cell.eventLocation.text = currentEvent.location
             cell.eventDescription.text = currentEvent.eventDescription
             cell.eventName.text = currentEvent.displayName
             cell.eventImageView.kf.indicatorType = .activity
+            cell.eventLocation.text = "Located At: \(currentEvent.location)"
             cell.moreInfoButton.tag = indexPath.row
             
             if let thisDate = currentEvent.startedAt?.dateValue() {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "MMM d, h:mm a"
                 let dateString = dateFormatter.string(from: thisDate)
-                cell.eventStartTime.text = "Start Date: \(dateString)"
+                cell.eventStartTime.text = "Starts At: \(dateString)"
 
             }
             if let thisDate = currentEvent.endDate?.dateValue() {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "MMM d, h:mm a"
                 let dateString = dateFormatter.string(from: thisDate)
-                cell.eventEndTime.text = "End Date: \(dateString)"
+                cell.eventEndTime.text = "Ends At: \(dateString)"
             }
             
             cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.photoURL)), placeholder: UIImage(named: "pinpointred"))

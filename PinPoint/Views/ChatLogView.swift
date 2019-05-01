@@ -25,7 +25,7 @@ class ChatLogView: UIView {
     
     public var settingsButton: UIButton = {
         let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "icons8-ok-100"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "friends").withRenderingMode(.alwaysOriginal), for: .normal)
         button.backgroundColor = .clear
         return button
     }()
@@ -52,7 +52,7 @@ class ChatLogView: UIView {
         backgroundColor = .white
         self.chatLogTableView.register(ChatLogTableViewCell.self, forCellReuseIdentifier: "chatLogTableViewCell")
          setupTableView()
-//        settingsButtonConstraint()
+     settingsButtonConstraint()
 //        numberLayout()
 //        
     }
@@ -67,11 +67,11 @@ class ChatLogView: UIView {
         chatLogTableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     
-//    private func settingsButtonConstraint() {
-//        addSubview(settingsButton)
-//        settingsButton.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([settingsButton.heightAnchor.constraint(equalToConstant: 40), settingsButton.widthAnchor.constraint(equalToConstant: 45)])
-//    }
+    private func settingsButtonConstraint() {
+        addSubview(settingsButton)
+        settingsButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([settingsButton.heightAnchor.constraint(equalToConstant: 40), settingsButton.widthAnchor.constraint(equalToConstant: 45)])
+    }
     
 //    private func numberLayout(){
 //        addSubview(number)

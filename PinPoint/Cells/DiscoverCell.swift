@@ -31,7 +31,7 @@ class DiscoverCell: UICollectionViewCell {
     let eventImageView: UIImageView = {
         let ei = UIImageView()
         ei.image = UIImage(named: "icons8-ask-question-25")
-        ei.contentMode = .scaleAspectFill
+        ei.contentMode = .scaleAspectFit 
         ei.layer.cornerRadius = 20
         ei.layer.masksToBounds = true
         return ei
@@ -47,12 +47,12 @@ class DiscoverCell: UICollectionViewCell {
         return et
     }()
     
-    let eventLocation: UITextView = {
-        let el = UITextView()
-        el.isEditable = false
+    let eventLocation: UILabel = {
+        let el = UILabel()
         el.backgroundColor = .clear
+        el.text = "This is a location"
         el.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        el.font = UIFont.init(name: "futura", size: 18)
+        el.font = UIFont.init(name:"futura", size: 18)
         el.textColor = #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1)
         return el
     }()
@@ -122,12 +122,13 @@ class DiscoverCell: UICollectionViewCell {
             make.top.equalTo(eventImageView.snp.bottom).offset(15)
             make.left.equalTo(20)
             make.right.equalTo(-20)
-            make.height.equalTo(200)
+            make.height.equalTo(100)
         }
         
         eventLocation.snp.makeConstraints { (make) in
             make.top.equalTo(eventDescription.snp.bottom).offset(15)
             make.left.equalTo(20)
+          
         }
         eventStartTime.snp.makeConstraints { (make) in
             make.top.equalTo(eventLocation.snp.bottom).offset(15)
