@@ -51,8 +51,9 @@ class DiscoverCell: UICollectionViewCell {
         let el = UITextView()
         el.isEditable = false
         el.backgroundColor = .clear
+        el.text = "This is a location"
         el.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        el.font = UIFont.init(name: "futura", size: 18)
+        el.font = UIFont.init(name:"futura", size: 18)
         el.textColor = #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1)
         return el
     }()
