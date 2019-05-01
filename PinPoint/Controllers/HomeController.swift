@@ -46,8 +46,6 @@ class HomeController: UIViewController{
     var userProfile: ProfileOfUser!
     var locationDelegate: LocationString!
 
-    
-    
     var catagories = [
         "Business": "101",
         "ScienceAndTech": "102",
@@ -101,7 +99,7 @@ class HomeController: UIViewController{
     }
     
     private func getCategory(){
-        ApiClient.getCategoryEvents(distance: "5km", location: location, categoryID: "") { (error, data) in
+        ApiClient.getCategoryEvents(distance: "5km", location: location, categoryID: "101") { (error, data) in
             if let error = error {
                 print(error.errorMessage())
             } else if let data = data {
@@ -111,7 +109,7 @@ class HomeController: UIViewController{
         }
     }
     
-    var location = "Manhattan"{
+    var location = "Long Island City"{
         didSet{
             getCategory()
         }
@@ -145,7 +143,6 @@ class HomeController: UIViewController{
         view.backgroundColor = .white
         view.addSubview(homeSplashImage)
         view.addSubview(contentView)
-        
         authService.authserviceExistingAccountDelegate = self
         authService.authserviceCreateNewAccountDelegate = self
         preferencesView.categoryCollectionView.dataSource = self
@@ -250,6 +247,8 @@ class HomeController: UIViewController{
             self.navigationItem.title = "W E L C O M E"
             view.addSubview(homeSplashImage)
             navigationItem.searchController = nil
+            navigationItem.rightBarButtonItem = nil
+            
         } else {
             contentView.removeFromSuperview()
             contentView = UIView.init(frame: UIScreen.main.bounds)
@@ -309,8 +308,6 @@ class HomeController: UIViewController{
             view.addSubview(contentView)
             navigationItem.searchController = nil
         }
-        
-        
     }
     
     func defaultView(){
@@ -343,12 +340,26 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         if collectionView == discoverView.discoverCollectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DiscoverCell", for: indexPath) as? DiscoverCell else { return UICollectionViewCell() }
             let currentEvent = createdEvent[indexPath.row]
+            cell.eventLocation.text = currentEvent.location
             cell.eventDescription.text = currentEvent.eventDescription
             cell.eventName.text = currentEvent.displayName
             cell.eventImageView.kf.indicatorType = .activity
             cell.moreInfoButton.tag = indexPath.row
-            cell.eventStartTime.text = "Start Date: \(currentEvent.startedAt?.dateValue() ?? Date())"
-            cell.eventEndTime.text = "End Date: \(currentEvent.endDate?.dateValue() ?? Date())"
+            
+            if let thisDate = currentEvent.startedAt?.dateValue() {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MMM d, h:mm a"
+                let dateString = dateFormatter.string(from: thisDate)
+                cell.eventStartTime.text = "Start Date: \(dateString)"
+
+            }
+            if let thisDate = currentEvent.endDate?.dateValue() {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MMM d, h:mm a"
+                let dateString = dateFormatter.string(from: thisDate)
+                cell.eventEndTime.text = "End Date: \(dateString)"
+            }
+            
             cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.photoURL)), placeholder: UIImage(named: "pinpointred"))
             cell.moreInfoButton.addTarget(self, action: #selector(moreInfoDisvover), for: .touchUpInside)
             return cell
@@ -406,11 +417,35 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             cell.moreInfoButton.addTarget(self, action: #selector(moreInfoFav), for: .touchUpInside)
             
             return cell
-            
-            
         }
         
     }
+    
+    // testing to see cell snap
+    func snapToNearestCell(_ collectionView: UICollectionView) {
+        for i in 0..<collectionView.numberOfItems(inSection: 0) {
+            let collectionViewFlowLayout = (discoverView.discoverCollectionView.collectionViewLayout as! UICollectionViewFlowLayout)
+            let itemWithSpaceWidth = collectionViewFlowLayout.itemSize.width + collectionViewFlowLayout.minimumLineSpacing
+            let itemWidth = collectionViewFlowLayout.itemSize.width
+            
+            if collectionView.contentOffset.x <= CGFloat(i) * itemWithSpaceWidth + itemWidth / 2 {
+                let indexPath = IndexPath(item: i, section: 0)
+                collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+                break
+            }
+        }
+    }
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        snapToNearestCell(scrollView as! UICollectionView)
+    }
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        snapToNearestCell(scrollView as! UICollectionView)
+    }
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        snapToNearestCell(scrollView as! UICollectionView)
+        
+    }
+    // testing to see cell snap
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch whatToSeque {
@@ -625,7 +660,6 @@ extension HomeController: CLLocationManagerDelegate {
     }
 }
 
-
 extension HomeController{
     
     func preferencesViewStuff(){
@@ -647,8 +681,6 @@ extension HomeController{
         alertSheet.addAction(UIAlertAction(title: "Nevermind", style: .cancel, handler: nil))
         present(alertSheet, animated: true, completion: nil)
     }
-    
-    
     
     @objc func locationFinder(){
         
@@ -734,10 +766,8 @@ extension HomeController{
                     if let data = data{
                         self.profileView.loggedInUserModel = data.documents.map { ProfileOfUser(dict: $0.data()) }
                             .filter(){$0.ProfileId == user.uid}.first
-                        
                     }
                 })
         }
     }
-    
 }
