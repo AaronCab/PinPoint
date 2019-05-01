@@ -57,8 +57,6 @@ class HomeSplashView: UIView {
         splashView.addSubview(logoImage)
         splashView.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
-//           make.top.right.equalTo(50)
-//            make.bottom.left.equalTo(-50)
             make.edges.equalToSuperview()
         }
         logoImage.snp.makeConstraints { (make) in

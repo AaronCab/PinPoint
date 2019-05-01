@@ -38,7 +38,7 @@ class CreateUserView: UIView {
         
         label.backgroundColor = .clear
         label.text = "P I N P O I N T"
-        label.textColor = .white
+        label.textColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
         label.font = UIFont(name: "Futura", size: 36)
         label.textAlignment = .center
         
@@ -48,16 +48,16 @@ class CreateUserView: UIView {
     
     var emailCreatedwith: UITextField = {
         let textfield = UITextField()
-        textfield.backgroundColor = .white
-        textfield.textColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
+        textfield.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.9372549057, blue: 0.9568627477, alpha: 1)
+        textfield.textColor = #colorLiteral(red: 0.9372549057, green: 0.9372549057, blue: 0.9568627477, alpha: 1)
         textfield.placeholder = "Email"
         return textfield
     }()
     
     var passwordCreatedWith: UITextField = {
         let textfield = UITextField()
-        textfield.backgroundColor = .white
-        textfield.textColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
+        textfield.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.9372549057, blue: 0.9568627477, alpha: 1)
+        textfield.textColor = .darkGray
         textfield.placeholder = "Password"
         textfield.isSecureTextEntry = true
         return textfield
@@ -65,8 +65,8 @@ class CreateUserView: UIView {
     
     var displayName: UITextField = {
         let textfield = UITextField()
-        textfield.backgroundColor = .white
-        textfield.textColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
+        textfield.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.9372549057, blue: 0.9568627477, alpha: 1)
+        textfield.textColor = #colorLiteral(red: 0.9372549057, green: 0.9372549057, blue: 0.9568627477, alpha: 1)
         textfield.placeholder = "Display Name"
         return textfield
     }()
@@ -114,7 +114,7 @@ class CreateUserView: UIView {
     }
     
     private func setUpView() {
-        addGradient()
+        backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         self.addSubview(logo)
         self.addSubview(stackViewContainer)
         stackViewContainer.addSubview(fieldContainerView)

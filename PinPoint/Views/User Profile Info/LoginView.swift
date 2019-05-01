@@ -24,11 +24,18 @@ class LoginView: UIView {
     
     private var logo: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .clear
+      //  label.backgroundColor = .brown
         label.text = "P I N P O I N T"
         label.textColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
         label.font = UIFont(name: "Futura", size: 36)
         label.textAlignment = .center
+        
+        label.layer.shadowColor = UIColor.black.cgColor
+        label.layer.shadowOpacity = 1
+        label.layer.shadowOffset = .zero
+        label.layer.shadowRadius = 20
+        label.layer.shadowPath = UIBezierPath(rect: label.bounds).cgPath
+        label.layer.rasterizationScale = UIScreen.main.scale
         return label
     }()
     var facebookLogIn: UIButton = {
