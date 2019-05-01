@@ -80,8 +80,6 @@ class CreatedView: UIView {
     lazy var startText: UIDatePicker = {
         let startTF = UIDatePicker()
         startTF.timeZone = NSTimeZone.local
-//        startTF.addTarget(self, action: "dateSelected", for: UIControl.Event.valueChanged)
-//        startTF.frame =
         return startTF
     }()
     lazy var endText: UIDatePicker = {
