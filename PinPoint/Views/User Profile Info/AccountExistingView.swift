@@ -38,7 +38,7 @@ class AccountExistingView: UIView {
         
         label.backgroundColor = .clear
         label.text = "P I N P O I N T"
-        label.textColor = .white
+        label.textColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
         label.font = UIFont(name: "Futura", size: 36)
         label.textAlignment = .center
         
@@ -48,7 +48,7 @@ class AccountExistingView: UIView {
     
     var emailToLogin: UITextField = {
         let textfield = UITextField()
-        textfield.backgroundColor = .white
+        textfield.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.9372549057, blue: 0.9568627477, alpha: 1)
         textfield.textColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
         textfield.placeholder = "Email"
         return textfield
@@ -56,7 +56,7 @@ class AccountExistingView: UIView {
     
     var passwordToLogin: UITextField = {
         let textfield = UITextField()
-        textfield.backgroundColor = .white
+        textfield.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.9372549057, blue: 0.9568627477, alpha: 1)
         textfield.textColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
         textfield.placeholder = "Password"
         textfield.isSecureTextEntry = true
@@ -91,16 +91,14 @@ class AccountExistingView: UIView {
     
     
     private func commonInit(){
-        //   emailLoginContrant()
-        //  passwordLoginConstant()
         logoLabelConstrant()
-        addGradient()
         setUpViews()
         addSubview(cancel)
         addSubview(login)
     }
     
     private func setUpViews() {
+        backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         self.addSubview(textFieldContainerVew)
 
          textFieldContainerVew.addSubview(emailToLogin)
@@ -111,18 +109,18 @@ class AccountExistingView: UIView {
             make.height.equalTo(100)
             
         }
+        
         emailToLogin.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
             make.width.equalToSuperview()
             make.height.equalTo(50)
-            
         }
+        
         passwordToLogin.snp.makeConstraints { (make) in
             make.width.equalToSuperview()
             make.top.equalTo(emailToLogin.snp_bottom).offset(2)
             make.bottom.equalTo(textFieldContainerVew.snp.bottom)
         }
-        
     }
     
     private func logoLabelConstrant(){
@@ -133,23 +131,4 @@ class AccountExistingView: UIView {
         logo.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
         logo.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     }
-    
-//    private func emailLoginContrant(){
-//        addSubview(emailToLogin)
-//        emailToLogin.translatesAutoresizingMaskIntoConstraints = false
-//        emailToLogin.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
-//        emailToLogin.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor, constant: 0).isActive = true
-//        emailToLogin.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-//        emailToLogin.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
-//    }
-//    
-//    private func passwordLoginConstant(){
-//        addSubview(passwordToLogin)
-//        passwordToLogin.translatesAutoresizingMaskIntoConstraints = false
-//        passwordToLogin.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
-//        passwordToLogin.topAnchor.constraint(equalTo: emailToLogin.bottomAnchor, constant: 30).isActive = true
-//        passwordToLogin.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-//        passwordToLogin.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
-//    }
-    
 }
