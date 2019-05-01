@@ -75,7 +75,7 @@ class DiscoverCell: UICollectionViewCell {
     
     let moreInfoButton: UIButton = {
         let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "icons8-star-80"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "icons8-test-passed-100"), for: .normal)
         return button
     }()
     
@@ -142,7 +142,7 @@ class DiscoverCell: UICollectionViewCell {
             make.top.equalTo(eventEndTime.snp_bottom).offset(20)
             make.height.equalTo(50)
             make.left.equalTo(20)
-            make.width.equalTo(50)
+            make.width.equalTo(60)
         }
     }
 }

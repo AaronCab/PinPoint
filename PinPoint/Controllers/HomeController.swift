@@ -45,7 +45,7 @@ class HomeController: UIViewController{
     var logginDelegate = LoginWithExistingViewController()
     var userProfile: ProfileOfUser!
     var locationDelegate: LocationString!
-
+    
     var catagories = [
         "Business": "101",
         "ScienceAndTech": "102",
@@ -131,14 +131,14 @@ class HomeController: UIViewController{
         viewdidLoadLayout()
     }
     
-
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         if authService.getCurrentUser() != nil{
             loginView.removeFromSuperview()
         }
     }
-
+    
     private func viewdidLoadLayout(){
         view.backgroundColor = .white
         view.addSubview(homeSplashImage)
@@ -167,16 +167,16 @@ class HomeController: UIViewController{
         }
         fetchEvents()
         if let user = authService.getCurrentUser(){
-        DBService.firestoreDB
-            .collection(ProfileCollectionKeys.CollectionKey)
-            .getDocuments(source: .server, completion: { (data, error) in
-                if let data = data{
-                    self.userProfile = data.documents.map { ProfileOfUser(dict: $0.data()) }
-                        .filter(){$0.ProfileId == user.uid}.first
-                }else if let error = error{
-                    self.showAlert(title: nil, message: error.localizedDescription)
-                }
-            })
+            DBService.firestoreDB
+                .collection(ProfileCollectionKeys.CollectionKey)
+                .getDocuments(source: .server, completion: { (data, error) in
+                    if let data = data{
+                        self.userProfile = data.documents.map { ProfileOfUser(dict: $0.data()) }
+                            .filter(){$0.ProfileId == user.uid}.first
+                    }else if let error = error{
+                        self.showAlert(title: nil, message: error.localizedDescription)
+                    }
+                })
         }
     }
     
@@ -221,7 +221,7 @@ class HomeController: UIViewController{
         contentView.addSubview(friendView)
         view.addSubview(contentView)
         navigationItem.searchController = nil
-
+        
     }
     func eventsPageOn() {
         self.navigationItem.rightBarButtonItem = nil
@@ -230,7 +230,7 @@ class HomeController: UIViewController{
         eventsView.myCollectionView.dataSource = self
         eventsView.myCollectionView.delegate = self
         self.navigationItem.title = "N E A R B Y  E V E N T S"
-         let rightBarItem = UIBarButtonItem(customView: eventsView.preferencesButton)
+        let rightBarItem = UIBarButtonItem(customView: eventsView.preferencesButton)
         eventsView.preferencesButton.addTarget(self, action: #selector(preferencesCommand), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = rightBarItem
         whatToSeque = .event
@@ -351,7 +351,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
                 dateFormatter.dateFormat = "MMM d, h:mm a"
                 let dateString = dateFormatter.string(from: thisDate)
                 cell.eventStartTime.text = "Starts At: \(dateString)"
-
+                
             }
             if let thisDate = currentEvent.endDate?.dateValue() {
                 let dateFormatter = DateFormatter()
@@ -361,7 +361,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             }
             
             cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.photoURL)), placeholder: UIImage(named: "pinpointred"))
-            cell.moreInfoButton.addTarget(self, action: #selector(moreInfoDisvover), for: .touchUpInside)
+            cell.moreInfoButton.addTarget(self, action: #selector(moreInfoDiscover), for: .touchUpInside)
             return cell
         }
         if collectionView == eventsView.myCollectionView {
@@ -535,7 +535,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         }
         print("pressed")
     }
-    @objc func moreInfoDisvover(senderTag: UIButton){
+    @objc func moreInfoDiscover(senderTag: UIButton){
         guard let user = authService.getCurrentUser() else {
             print("no logged user")
             return
@@ -543,15 +543,27 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         let userCreatedEvent = createdEvent[senderTag.tag]
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let addCalendarAction = UIAlertAction(title: "Add to Calendar", style: .default, handler: { alert in
+            let discoverEvent = self.createdEvent[senderTag.tag]
+            let formatter = ISO8601DateFormatter()
+               guard let start = discoverEvent.startedAt?.dateValue(),
+            let end = discoverEvent.endDate?.dateValue() else { return }
+                let notes = discoverEvent.eventDescription
+                let title = discoverEvent.displayName.description
+            
+            
+            self.addEventToCalendar(date: start, dateEnd: end, title: title, notes: notes)
+            self.showAlert(title: "PinPoint", message: "Successfully Added to Calendar")
+        })
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [unowned self] (action) in
             self.confirmDeletionActionSheet(handler: { (action) in
                 
                 if user.uid ==  userCreatedEvent.personID{
                     DBService.deleteEvent(blog: userCreatedEvent){ [weak self] (error) in
                         if let error = error {
-                            self?.showAlert(title: "Error deleting event", message: error.localizedDescription)
+                            self?.showAlert(title: "Error Deleting Event", message: error.localizedDescription)
                         } else {
-                            self?.showAlert(title: "Deleted successfully", message: nil)                        }
+                            self?.showAlert(title: "Deleted Event Successfully", message: nil)                        }
                     }
                 }
                 
@@ -561,6 +573,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             alertController.addAction(deleteAction)
             
         }
+        alertController.addAction(addCalendarAction)
         alertController.addAction(cancelAction)
         
         present(alertController, animated: true)
@@ -733,16 +746,16 @@ extension HomeController: AuthServiceSignOutDelegate{
     }
     
     @objc func allCommands(){
-        let alert = UIAlertController(title: "How can I help you", message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "How can I help you?", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Edit Profile", style: .default, handler: { (edit) in
             let editVC = EditProfileViewController()
             self.navigationController?.pushViewController(editVC, animated: true)
         }))
-        alert.addAction(UIAlertAction(title: "Sign out", style: .default, handler: { (signOut) in
+        alert.addAction(UIAlertAction(title: "Sign Out", style: .default, handler: { (signOut) in
             self.authService.signOutAccount()
         }))
-        alert.addAction(UIAlertAction(title: "User create events", style: .default, handler: { (events) in
-            self.showAlert(title: "Nothing Yet", message: "more to come here stay tune")
+        alert.addAction(UIAlertAction(title: "User Created Events", style: .default, handler: { (events) in
+            self.showAlert(title: "Nothing Yet", message: "Stay tuned")
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(alert, animated: true)
@@ -752,8 +765,8 @@ extension HomeController: AuthServiceSignOutDelegate{
         self.navigationController?.pushViewController(createVC, animated: true)
     }
     @objc func preferencesCommand(){
-    let preferencesVC = PreferencesViewController()
-    self.navigationController?.pushViewController(preferencesVC, animated: true)
+        let preferencesVC = PreferencesViewController()
+        self.navigationController?.pushViewController(preferencesVC, animated: true)
     }
 }
 
