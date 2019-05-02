@@ -165,7 +165,6 @@ class HomeController: UIViewController{
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         }
-        fetchEvents()
         if let user = authService.getCurrentUser(){
             DBService.firestoreDB
                 .collection(ProfileCollectionKeys.CollectionKey)
@@ -173,11 +172,13 @@ class HomeController: UIViewController{
                     if let data = data{
                         self.userProfile = data.documents.map { ProfileOfUser(dict: $0.data()) }
                             .filter(){$0.ProfileId == user.uid}.first
+                        self.fetchEvents()
                     }else if let error = error{
                         self.showAlert(title: nil, message: error.localizedDescription)
                     }
                 })
         }
+
     }
     
     func updateFriend(friendID: String, completeion: @escaping (ProfileOfUser?, Error?) -> Void){
@@ -537,7 +538,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
     }
     @objc func moreInfoDiscover(senderTag: UIButton){
         guard let user = authService.getCurrentUser() else {
-            print("no logged user")
+            showAlert(title: "no loggedin user", message: nil)
             return
         }
         let userCreatedEvent = createdEvent[senderTag.tag]
@@ -585,12 +586,13 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             .collection(EventCollectionKeys.CollectionKeys).addSnapshotListener { [weak self] (snapshot, error) in
                 if let error = error {
                     print("failed to fetch Events with error: \(error.localizedDescription)")
-                } else if let snapshot = snapshot {
-                    self?.createdEvent = snapshot.documents.map { EventCreatedByUser(dict: $0.data()) }
+                }
+                if let snapshot = snapshot {
+                        self?.createdEvent = snapshot.documents.map { EventCreatedByUser(dict: $0.data()) }.filter(){(self!.userProfile.blockedUser?.contains($0.personID) == false)}
                         .sorted { $0.createdAt.date() > $1.createdAt.date() }
+                    }
                 }
         }
-    }
     
     @objc func moreInfoFav(senderTag: UIButton){
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -749,6 +751,7 @@ extension HomeController: AuthServiceSignOutDelegate{
         let alert = UIAlertController(title: "How can I help you?", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Edit Profile", style: .default, handler: { (edit) in
             let editVC = EditProfileViewController()
+            editVC.user = self.userProfile
             self.navigationController?.pushViewController(editVC, animated: true)
         }))
         alert.addAction(UIAlertAction(title: "Sign Out", style: .default, handler: { (signOut) in
