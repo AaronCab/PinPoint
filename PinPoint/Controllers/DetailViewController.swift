@@ -77,7 +77,7 @@ class DetailViewController: UIViewController {
     
     @objc func addAsAFriend(){
         
-      let alertController = UIAlertController(title: nil, message: "Are you sure you want add this person", preferredStyle: .actionSheet)
+      let alertController = UIAlertController(title: nil, message: "Are you sure you want friend this person?", preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction.init(title: "Sure", style: .default, handler: { (action) in
             if let user = self.authService.getCurrentUser(){
                 let pendingFriend = DBService.firestoreDB.collection(ProfileCollectionKeys.CollectionKey).document(self.custom.personID)

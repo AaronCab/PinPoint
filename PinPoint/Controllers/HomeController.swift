@@ -352,14 +352,14 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "MMM d, h:mm a"
                 let dateString = dateFormatter.string(from: thisDate)
-                cell.eventStartTime.text = "Starts At: \(dateString)"
+                cell.eventStartTime.text = "Start Time: \(dateString)"
                 
             }
             if let thisDate = currentEvent.endDate?.dateValue() {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "MMM d, h:mm a"
                 let dateString = dateFormatter.string(from: thisDate)
-                cell.eventEndTime.text = "Ends At: \(dateString)"
+                cell.eventEndTime.text = "End Time: \(dateString)"
             }
             
             cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.photoURL)), placeholder: UIImage(named: "pinpointred"))
@@ -370,7 +370,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? EventsCell else { return UICollectionViewCell() }
             let currentEvent = event[indexPath.row]
             cell.eventDescription.text = currentEvent.description?.text
-            cell.eventStartTime.text = "Start time: \(currentEvent.start?.utc.formatISODateString(dateFormat: "MMM d, h:mm a") ?? "no start time found")"
+            cell.eventStartTime.text = "Start Time: \(currentEvent.start?.utc.formatISODateString(dateFormat: "MMM d, h:mm a") ?? "no start time found")"
             cell.eventEndTime.text = "End Time: \(currentEvent.end?.utc.formatISODateString(dateFormat: "MMM d, h:mm a") ?? "no end time found")"
             cell.eventName.text = currentEvent.name?.text
             cell.eventImageView.kf.indicatorType = .activity
@@ -387,7 +387,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoritesCell", for: indexPath) as? FavoritesCell else { return UICollectionViewCell() }
             let currentEvent = favorite[indexPath.row]
             cell.eventDescription.text = currentEvent.description
-            cell.eventStartTime.text = "Start time: \(currentEvent.start.formatISODateString(dateFormat: "MMM d, h:mm a"))"
+            cell.eventStartTime.text = "Start Time: \(currentEvent.start.formatISODateString(dateFormat: "MMM d, h:mm a"))"
             cell.eventEndTime.text = "End Time: \(currentEvent.end.formatISODateString(dateFormat: "MMM d, h:mm a"))"
             cell.eventName.text = currentEvent.name
             cell.eventImageView.kf.indicatorType = .activity
