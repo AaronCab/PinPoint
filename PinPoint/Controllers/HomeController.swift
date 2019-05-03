@@ -424,7 +424,6 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         
     }
     
-    // testing to see cell snap
     func snapToNearestCell(_ collectionView: UICollectionView) {
         for i in 0..<collectionView.numberOfItems(inSection: 0) {
             let collectionViewFlowLayout = (discoverView.discoverCollectionView.collectionViewLayout as! UICollectionViewFlowLayout)
@@ -516,8 +515,19 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             self.addEventToCalendar(date: dateStart, dateEnd: dateEnd, title: title, notes: notes)
             self.showAlert(title: "PinPoint", message: "Successfully Added to Calendar")
         })
+        let safariActionForNearbyEvents = UIAlertAction(title: "Safari", style: .default) { alert in
+            let nearby = self.event[senderTag.tag]
+            guard let nearbyURL = nearby.url,
+                let url = URL(string: nearbyURL) else {
+                    return
+            }
+            
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+
         alertController.addAction(cancelAction)
         alertController.addAction(favoriteActione)
+        alertController.addAction(safariActionForNearbyEvents)
         alertController.addAction(addCalendarAction)
         present(alertController, animated: true)
         
@@ -568,6 +578,12 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             self.addEventToCalendar(date: start, dateEnd: end, title: title, notes: notes)
             self.showAlert(title: "PinPoint", message: "Successfully Added to Calendar")
         })
+        let favoriteActionForDiscovery = UIAlertAction(title: "Favorite", style: .default) { alert in
+        let thisEvent = self.createdEvent[senderTag.tag]
+            let favoriteEvent = FavoritesModel.init(name: (thisEvent.displayName), description: (thisEvent.eventDescription), imageUrl: thisEvent.photoURL, start: thisEvent.startedAt?.dateValue().description ?? "N/A", end: thisEvent.endDate?.dateValue().description ?? "N/A", capacity: "Creator Decides", status: thisEvent.eventType, url: thisEvent.email)
+        FavoritesDataManager.saveToDocumentsDirectory(favoriteArticle: favoriteEvent)
+        self.showAlert(title: "PinPoint", message: "Successfully Favorites Event")
+        }
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [unowned self] (action) in
             self.confirmDeletionActionSheet(handler: { (action) in
                 
@@ -587,7 +603,9 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             
         }
         alertController.addAction(addCalendarAction)
+        alertController.addAction(favoriteActionForDiscovery)
         alertController.addAction(cancelAction)
+        
         
         present(alertController, animated: true)
         
@@ -620,6 +638,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             let favorite = FavoritesDataManager.fetchItemsFromDocumentsDirectory()[senderTag.tag]
             guard let favURL = favorite.url,
                 let url = URL(string: favURL) else {
+                    
                     return
             }
             
