@@ -111,7 +111,7 @@ class HomeController: UIViewController{
         }
     }
     
-    var location = "Manhatten"{
+    var location = "Manhattan"{
         didSet{
             getCategory()
         }

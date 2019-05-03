@@ -21,7 +21,7 @@ class PreferencesView: UIView {
     }()
     lazy var create: UIButton = {
         var button = UIButton()
-        button.setTitle("Seve", for: .normal)
+        button.setTitle("Save", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.isEnabled = true
         return button
@@ -73,7 +73,7 @@ class PreferencesView: UIView {
         let sc = UISearchController(searchResultsController: locationResultsController)
         sc.searchResultsUpdater = locationResultsController
         sc.hidesNavigationBarDuringPresentation = false
-        sc.searchBar.placeholder = "search for your own location"
+        sc.searchBar.placeholder = "Search for your location"
         sc.dimsBackgroundDuringPresentation = false
         sc.obscuresBackgroundDuringPresentation = false
         sc.searchBar.autocapitalizationType = .none
