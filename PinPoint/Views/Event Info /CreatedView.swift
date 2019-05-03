@@ -45,12 +45,12 @@ class CreatedView: UIView {
         return createTF
     }()
     
-    var createdPicture: UIImageView = {
-        let imageView = UIImageView()
-        imageView.layer.cornerRadius = 15
-        imageView.layer.masksToBounds = true
-        imageView.image = UIImage(named: "placeholder-image")
-        return imageView
+    var createdPicture: UIButton = {
+        let createdButton = UIButton()
+        createdButton.layer.cornerRadius = 15
+        createdButton.layer.masksToBounds = true
+        createdButton.setImage(#imageLiteral(resourceName: "placeholder-image"), for: .normal)
+        return createdButton
     }()
     
     lazy var eventText: UITextField = {
@@ -74,6 +74,7 @@ class CreatedView: UIView {
         startTL.text = "Enter Start of Event"
         startTL.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         startTL.font = UIFont.init(name: "futura", size: 18)
+        startTL.textColor = #colorLiteral(red: 0.7884225249, green: 0.7880350351, blue: 0.8096494675, alpha: 1)
         return startTL
     }()
     
@@ -92,6 +93,7 @@ class CreatedView: UIView {
         endTL.text = "Enter End of Event"
         endTL.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         endTL.font = UIFont.init(name: "futura", size: 18)
+        endTL.textColor = #colorLiteral(red: 0.7884225249, green: 0.7880350351, blue: 0.8096494675, alpha: 1)
         return endTL
     }()
     
@@ -101,6 +103,7 @@ class CreatedView: UIView {
         button.backgroundColor = .clear
         return button
     }()
+    
     private func commonInit(){
         addSubview(cancel)
         addSubview(create)
@@ -120,8 +123,8 @@ class CreatedView: UIView {
         }
         createdPicture.snp.makeConstraints { (make) in
             make.top.equalTo(createName.snp.bottom).offset(15)
-            make.width.equalTo(300)
-            make.height.equalTo(300)
+            make.width.equalTo(275)
+            make.height.equalTo(275)
             make.centerX.equalTo(self.snp.centerX)
         }
         eventText.snp.makeConstraints { (make) in
