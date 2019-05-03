@@ -34,6 +34,8 @@ class EventsViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(chatView)
         self.chatView.chatLogTableView.reloadData()
+        chatView.chatLogTableView.dataSource = self
+        chatView.chatLogTableView.delegate = self
     }
   
 }
@@ -65,6 +67,15 @@ extension EventsViewController: UITableViewDelegate, UITableViewDataSource{
                 }else{
                     cell.friendImageView.image = UIImage(named: "pinpointred")
                 }
+            }else{
+                cell.friendName.text = "No Friends"
+                cell.noButton.isEnabled = false
+                cell.yesButton.isEnabled = false
+                cell.blockBotton.isEnabled = false
+                cell.blockBotton.isHidden = true
+                cell.yesButton.isHidden = true
+                cell.noButton.isHidden = true
+                cell.friendImageView.image = nil
             }
         }
             cell.noButton.isEnabled = true
@@ -79,7 +90,7 @@ extension EventsViewController: UITableViewDelegate, UITableViewDataSource{
         cell.yesButton.addTarget(self, action: #selector(acceptedRequest), for: .touchUpInside)
         cell.noButton.addTarget(self, action: #selector(rejectedRequest), for: .touchUpInside)
         cell.blockBotton.addTarget(self, action: #selector(blockedUser), for: .touchUpInside)
-        }else{
+        }else {
             self.chatView.chatLogTableView.reloadData()
             cell.friendName.text = "No Friends Here"
             cell.noButton.isEnabled = false

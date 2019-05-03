@@ -69,7 +69,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource{
         if userProfile.friends?.count == 0{
             
         }else{
-        DBService.firestoreDB
+            DBService.firestoreDB
             .collection(ProfileCollectionKeys.CollectionKey)
             .getDocuments(source: .server, completion: { (data, error) in
                 if let data = data{
