@@ -57,6 +57,7 @@ class ProfileView: UIView {
         textView.backgroundColor = #colorLiteral(red: 0.9374296665, green: 0.9370631576, blue: 0.958656013, alpha: 1)
         textView.layer.cornerRadius = 5
         textView.font = UIFont.init(name: "futura", size: 16)
+        textView.textColor = #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1)
         textView.isEditable = false
         return textView
     }()
