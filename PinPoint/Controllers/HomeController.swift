@@ -77,6 +77,7 @@ class HomeController: UIViewController{
             }
         }
     }
+    
     var event = [Event](){
         didSet {
             DispatchQueue.main.async {
@@ -99,7 +100,7 @@ class HomeController: UIViewController{
     }
     
     private func getCategory(){
-        ApiClient.getCategoryEvents(distance: "5km", location: location, categoryID: "101") { (error, data) in
+        ApiClient.getCategoryEvents(distance: "5km", location: location.replacingOccurrences(of: " ", with: "-"), categoryID: "101") { (error, data) in
             if let error = error {
                 print(error.errorMessage())
             } else if let data = data {
@@ -109,7 +110,7 @@ class HomeController: UIViewController{
         }
     }
     
-    var location = "Long Island City"{
+    var location = "Manhatten"{
         didSet{
             getCategory()
         }

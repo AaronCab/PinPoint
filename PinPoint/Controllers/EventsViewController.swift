@@ -33,8 +33,7 @@ class EventsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(chatView)
-//        updateUser()
-
+        self.chatView.chatLogTableView.reloadData()
     }
   
 }
