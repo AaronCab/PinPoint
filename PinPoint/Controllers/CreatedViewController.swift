@@ -34,23 +34,18 @@ class CreatedViewController: UIViewController {
         createdEvent.create.addTarget(self, action: #selector(updateCreatedEvent), for: .touchUpInside)
         createdEvent.create.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = rightBarItem
-        tapGesture = UITapGestureRecognizer(target: self, action: #selector(myImgTapped))
-        tapGesture.numberOfTapsRequired = 1
-        tapGesture.numberOfTouchesRequired = 1
-//        selectedImage.addGestureRecognizer(tapGesture)
-//        selectedImage.isUserInteractionEnabled = true
         configureInputAccessoryView()
         hideKeyboardWhenTappedAround()
     }
 
-    @objc func myImgTapped(_ sender: UITapGestureRecognizer) {
-        let tappedImage = tapGesture.view as! UIImageView
-    }
     
     private func configureInputAccessoryView() {
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 44))
         createdEvent.eventText.inputAccessoryView = toolbar
-        createdEvent.locationText.inputAccessoryView = toolbar
+        createdEvent.createdPicture.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
+        }
+    @objc func newPicture() {
+        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 44))
         let cameraBarItem = UIBarButtonItem(barButtonSystemItem: .camera,
                                             target: self,
                                             action: #selector(cameraButtonPressed))
@@ -156,7 +151,7 @@ extension CreatedViewController: UIImagePickerControllerDelegate, UINavigationCo
         }
         let resizedImage = Toucan.init(image: originalImage).resize(CGSize(width: 500, height: 500))
         selectedImage = resizedImage.image
-        createdEvent.createdPicture.image = selectedImage
+        createdEvent.createdPicture.setImage(selectedImage, for: .normal)
         dismiss(animated: true)
     }
     
