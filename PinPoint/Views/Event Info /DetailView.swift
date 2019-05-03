@@ -95,18 +95,18 @@ class DetailView: UIView {
          }                         
         detailImageView.snp.makeConstraints { (make) in
             make.top.equalTo(detailLabel.snp.bottom).offset(15)
-            make.width.equalTo(350)
-            make.height.equalTo(350)
+            make.width.equalTo(325)
+            make.height.equalTo(325)
             make.centerX.equalTo(self.snp.centerX)
         }
         detailTextView.snp.makeConstraints { (make) in
             make.top.equalTo(detailImageView.snp.bottom).offset(15)
             make.left.equalTo(35)
             make.right.equalTo(-35)
-            make.height.equalTo(200)
+            make.height.equalTo(160)
         }
         displayUserPic.snp.makeConstraints { (make) in
-            make.topMargin.equalTo(detailTextView.snp.bottom).offset(25)
+            make.topMargin.equalTo(detailTextView.snp.bottom).offset(10)
             make.width.equalTo(75)
             make.height.equalTo(75)
             make.left.equalTo(50)

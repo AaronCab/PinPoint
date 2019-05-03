@@ -93,7 +93,10 @@ class DiscoverCell: UICollectionViewCell {
         self.addSubview(eventCellContainerView)
         
         eventCellContainerView.snp.makeConstraints { (make) in
-            make.edges.equalTo(contentView)
+            make.top.equalTo(safeAreaInsets)
+            make.bottom.equalTo(safeAreaInsets)
+            make.left.equalTo(safeAreaInsets)
+            make.right.equalTo(safeAreaInsets)
             
         }
         eventCellContainerView.addSubview(eventName)
