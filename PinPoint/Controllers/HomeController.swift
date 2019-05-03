@@ -45,6 +45,7 @@ class HomeController: UIViewController{
     var logginDelegate = LoginWithExistingViewController()
     var userProfile: ProfileOfUser!
     var locationDelegate: LocationString!
+    var friendListener: ListenerRegistration!
     
     var catagories = [
         "Business": "101",
@@ -438,16 +439,26 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         }
     }
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        snapToNearestCell(scrollView as! UICollectionView)
+        if ((scrollView as? UICollectionView) != nil){
+            snapToNearestCell(scrollView as! UICollectionView)
+        }else{
+            
+        }
     }
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if ((scrollView as? UICollectionView) != nil){
         snapToNearestCell(scrollView as! UICollectionView)
+        }else{
+            
+        }
     }
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        if ((scrollView as? UICollectionView) != nil){
         snapToNearestCell(scrollView as! UICollectionView)
-        
+        }else{
+            
+        }
     }
-    // testing to see cell snap
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch whatToSeque {
