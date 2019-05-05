@@ -38,7 +38,8 @@ class DiscoverView: UIView {
         return button
     }()
     private func commonInit(){
-        backgroundColor = .white
+        backgroundColor = .clear
+
         self.discoverCollectionView.register(DiscoverCell.self, forCellWithReuseIdentifier: "DiscoverCell")
         setup()
         addEventButtonConstraint()
