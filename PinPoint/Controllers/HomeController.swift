@@ -22,7 +22,7 @@ enum detailViewSeque{
     case catagories
 }
 
-class HomeController: UIViewController, LocationString{
+class HomeController: UIViewController{
    
     
     var contentView = UIView.init(frame: UIScreen.main.bounds)
@@ -90,21 +90,25 @@ class HomeController: UIViewController, LocationString{
         }
     }
     var favoriteCell = FavoritesCell()
-    
+    var intestedIn = "101"{
+        didSet{
+            self.getCategory(intrest: intestedIn, location: location)
+
+        }
+    }
     
     private var userModel: UserLogedInModel!
     
     var currentLocation = CLLocation(){
         didSet{
             preferencesView.locationButton.setTitle(location, for: .normal)
-            getCategory()
             locationManager.stopUpdatingLocation()
             
         }
     }
     
-    private func getCategory(){
-        ApiClient.getCategoryEvents(distance: "5km", location: location.replacingOccurrences(of: " ", with: "-"), categoryID: "101") { (error, data) in
+    private func getCategory(intrest: String?, location: String?){
+        ApiClient.getCategoryEvents(distance: "5km", location: location?.replacingOccurrences(of: " ", with: "-") ?? "Manhatten", categoryID: intrest ?? "101") { (error, data) in
             if let error = error {
                 print(error.errorMessage())
             } else if let data = data {
@@ -118,8 +122,7 @@ class HomeController: UIViewController, LocationString{
     }
     var location = "Manhattan"{
         didSet{
-            
-            getCategory()
+            getCategory(intrest: intestedIn, location: location)
         }
     }
     var selectedImageValue: UIImage?
@@ -161,8 +164,7 @@ class HomeController: UIViewController, LocationString{
         loginViewStuff()
         preferencesViewStuff()
         configureNavigationBar()
-        getCategory()
-        locationResultsController.delegate2 = self
+        getCategory(intrest: intestedIn, location: location)
         authService.authserviceSignOutDelegate = self
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -807,6 +809,7 @@ extension HomeController: AuthServiceSignOutDelegate{
     @objc func preferencesCommand(){
         let preferencesVC = PreferencesViewController()
 //        preferencesVC.delegate = self as? FinallyATransfer
+        preferencesVC.delegateForIntrest = self
         self.navigationController?.pushViewController(preferencesVC, animated: true)
     }
 }
@@ -824,4 +827,16 @@ extension HomeController{
                 })
         }
     }
+}
+
+extension HomeController: FinallyACatagory{
+    func intrest(catagroy: String) {
+        if let catagory = catagories[catagroy]{
+        intestedIn = catagory
+        }else{
+            
+        }
+    }
+    
+    
 }

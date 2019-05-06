@@ -13,12 +13,16 @@ import CoreLocation
 protocol FinallyATransfer {
     func location(place: String)
 }
+protocol FinallyACatagory {
+    func intrest(catagroy: String)
+}
 
 class PreferencesViewController: UIViewController {
     var centerController: UIViewController!
     var preferencesView = PreferencesView()
     var locationView = LocationView()
     var locationViewHeight = NSLayoutConstraint()
+    var locationViewContorller = LocationResultController()
     
     var catagories = [
         "Business": "101",
@@ -37,12 +41,18 @@ class PreferencesViewController: UIViewController {
         }
     }
     var delegate: FinallyATransfer?
+    var delegateForIntrest: FinallyACatagory?
     var locationManager = CLLocationManager()
     var locationService = LocationService()
     var long: Double!
     var lat: Double!
     
-    var location = "Manhattan"
+    var location = "Manhattan"{
+        didSet{
+            self.delegate?.location(place: location)
+
+        }
+    }
     
 
     override func viewDidLoad() {
@@ -66,6 +76,7 @@ class PreferencesViewController: UIViewController {
         }
         
         hideKeyboardWhenTappedAround()
+        locationViewContorller.delegate2 = self
     }
     
     @objc func locationFinder(){
@@ -89,6 +100,15 @@ extension PreferencesViewController: UICollectionViewDataSource, UICollectionVie
         cell.categoryImage.image = UIImage(named: category)
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CategoryCell
+        let category = catagoriesInAnArray[indexPath.row]
+        cell!.categoryName.text = category
+        
+        
+        delegateForIntrest?.intrest(catagroy: category)
     }
     
     
@@ -119,7 +139,7 @@ extension PreferencesViewController: CLLocationManagerDelegate {
             
             if let city = placeMark.subAdministrativeArea {
                 self.location = city
-                self.delegate?.location(place: self.location)
+                
             }
             
         }
@@ -128,6 +148,7 @@ extension PreferencesViewController: CLLocationManagerDelegate {
 
 extension PreferencesViewController: LocationString{
     func getString(address: String) {
+        location = address
     }
     
     
