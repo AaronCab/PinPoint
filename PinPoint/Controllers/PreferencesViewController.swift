@@ -10,6 +10,10 @@ import UIKit
 import Toucan
 import CoreLocation
 
+protocol FinallyATransfer {
+    func location(place: String)
+}
+
 class PreferencesViewController: UIViewController {
     var centerController: UIViewController!
     var preferencesView = PreferencesView()
@@ -32,6 +36,7 @@ class PreferencesViewController: UIViewController {
             preferencesView.locationButton.setTitle(location, for: .normal)
         }
     }
+    var delegate: FinallyATransfer?
     var locationManager = CLLocationManager()
     var locationService = LocationService()
     var long: Double!
@@ -59,11 +64,11 @@ class PreferencesViewController: UIViewController {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         }
+        
         hideKeyboardWhenTappedAround()
     }
     
     @objc func locationFinder(){
-        
     }
     @objc func dismissView(){
         navigationController?.popViewController(animated: true)
@@ -114,9 +119,16 @@ extension PreferencesViewController: CLLocationManagerDelegate {
             
             if let city = placeMark.subAdministrativeArea {
                 self.location = city
-                
+                self.delegate?.location(place: self.location)
             }
             
         }
     }
+}
+
+extension PreferencesViewController: LocationString{
+    func getString(address: String) {
+    }
+    
+    
 }

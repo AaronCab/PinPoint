@@ -22,12 +22,15 @@ enum detailViewSeque{
     case catagories
 }
 
-class HomeController: UIViewController{
+class HomeController: UIViewController, LocationString{
+   
+    
     var contentView = UIView.init(frame: UIScreen.main.bounds)
     func loadFavorites() {
         self.favorite = FavoritesDataManager.fetchItemsFromDocumentsDirectory()
     }
     var whatToSeque = detailViewSeque.event
+    let locationResultsController = LocationResultController()
     let homeSplashImage = HomeSplashView()
     let preferencesView = PreferencesView()
     let eventsView = EventsView()
@@ -44,7 +47,7 @@ class HomeController: UIViewController{
     var createDelegate = CreateAccountViewController()
     var logginDelegate = LoginWithExistingViewController()
     var userProfile: ProfileOfUser!
-    var locationDelegate: LocationString!
+//    var locationDelegate: LocationString!
     var friendListener: ListenerRegistration!
     
     var catagories = [
@@ -110,9 +113,12 @@ class HomeController: UIViewController{
             
         }
     }
-    
+    func getString(address: String) {
+        self.location = address
+    }
     var location = "Manhattan"{
         didSet{
+            
             getCategory()
         }
     }
@@ -156,7 +162,7 @@ class HomeController: UIViewController{
         preferencesViewStuff()
         configureNavigationBar()
         getCategory()
-        locationDelegate = self
+        locationResultsController.delegate2 = self
         authService.authserviceSignOutDelegate = self
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -800,6 +806,7 @@ extension HomeController: AuthServiceSignOutDelegate{
     }
     @objc func preferencesCommand(){
         let preferencesVC = PreferencesViewController()
+//        preferencesVC.delegate = self as? FinallyATransfer
         self.navigationController?.pushViewController(preferencesVC, animated: true)
     }
 }
