@@ -23,11 +23,14 @@ enum detailViewSeque{
 }
 
 class HomeController: UIViewController{
+   
+    
     var contentView = UIView.init(frame: UIScreen.main.bounds)
     func loadFavorites() {
         self.favorite = FavoritesDataManager.fetchItemsFromDocumentsDirectory()
     }
     var whatToSeque = detailViewSeque.event
+    let locationResultsController = LocationResultController()
     let homeSplashImage = HomeSplashView()
     let preferencesView = PreferencesView()
     let eventsView = EventsView()
@@ -44,7 +47,7 @@ class HomeController: UIViewController{
     var createDelegate = CreateAccountViewController()
     var logginDelegate = LoginWithExistingViewController()
     var userProfile: ProfileOfUser!
-    var locationDelegate: LocationString!
+//    var locationDelegate: LocationString!
     var friendListener: ListenerRegistration!
     
     var catagories = [
@@ -87,21 +90,25 @@ class HomeController: UIViewController{
         }
     }
     var favoriteCell = FavoritesCell()
-    
+    var intestedIn = "101"{
+        didSet{
+            self.getCategory(intrest: intestedIn, location: location)
+
+        }
+    }
     
     private var userModel: UserLogedInModel!
     
     var currentLocation = CLLocation(){
         didSet{
             preferencesView.locationButton.setTitle(location, for: .normal)
-            getCategory()
             locationManager.stopUpdatingLocation()
             
         }
     }
     
-    private func getCategory(){
-        ApiClient.getCategoryEvents(distance: "5km", location: location.replacingOccurrences(of: " ", with: "-"), categoryID: "101") { (error, data) in
+    private func getCategory(intrest: String?, location: String?){
+        ApiClient.getCategoryEvents(distance: "5km", location: location?.replacingOccurrences(of: " ", with: "-") ?? "Manhatten", categoryID: intrest ?? "101") { (error, data) in
             if let error = error {
                 print(error.errorMessage())
             } else if let data = data {
@@ -110,10 +117,12 @@ class HomeController: UIViewController{
             
         }
     }
-    
+    func getString(address: String) {
+        self.location = address
+    }
     var location = "Manhattan"{
         didSet{
-            getCategory()
+            getCategory(intrest: intestedIn, location: location)
         }
     }
     var selectedImageValue: UIImage?
@@ -155,8 +164,7 @@ class HomeController: UIViewController{
         loginViewStuff()
         preferencesViewStuff()
         configureNavigationBar()
-        getCategory()
-        locationDelegate = self
+        getCategory(intrest: intestedIn, location: location)
         authService.authserviceSignOutDelegate = self
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -800,6 +808,8 @@ extension HomeController: AuthServiceSignOutDelegate{
     }
     @objc func preferencesCommand(){
         let preferencesVC = PreferencesViewController()
+//        preferencesVC.delegate = self as? FinallyATransfer
+        preferencesVC.delegateForIntrest = self
         self.navigationController?.pushViewController(preferencesVC, animated: true)
     }
 }
@@ -817,4 +827,16 @@ extension HomeController{
                 })
         }
     }
+}
+
+extension HomeController: FinallyACatagory{
+    func intrest(catagroy: String) {
+        if let catagory = catagories[catagroy]{
+        intestedIn = catagory
+        }else{
+            
+        }
+    }
+    
+    
 }
