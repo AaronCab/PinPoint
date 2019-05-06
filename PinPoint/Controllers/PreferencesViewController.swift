@@ -49,6 +49,7 @@ class PreferencesViewController: UIViewController {
     
     var location = "Manhattan"{
         didSet{
+              locationViewContorller.delegate2 = self
             self.delegate?.location(place: location)
 
         }
@@ -74,9 +75,9 @@ class PreferencesViewController: UIViewController {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         }
-        
+        preferencesView.locationResultsController.delegate2 = self
         hideKeyboardWhenTappedAround()
-        locationViewContorller.delegate2 = self
+//        locationViewContorller.delegate2 = self
     }
     
     @objc func locationFinder(){
