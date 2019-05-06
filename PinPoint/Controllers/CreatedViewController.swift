@@ -10,6 +10,7 @@ import UIKit
 import Toucan
 import Firebase
 class CreatedViewController: UIViewController {
+    var preferencesView = PreferencesView()
     var createdEvent = CreatedView()
     var authService = AppDelegate.authservice
     var selectedImage: UIImage!
@@ -41,9 +42,17 @@ class CreatedViewController: UIViewController {
     
     private func configureInputAccessoryView() {
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 44))
-        createdEvent.eventText.inputAccessoryView = toolbar
+        createdEvent.locationText.inputAccessoryView = toolbar
+        let photoLibraryBarItem = UIBarButtonItem(title: "Search",
+                                                  style: .plain,
+                                                  target: self,
+                                                  action: #selector(searchButtonPressed))
         createdEvent.createdPicture.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
+         toolbar.items = [photoLibraryBarItem]
         }
+    @objc func searchButtonPressed(){
+        navigationItem.searchController = preferencesView.searchController
+    }
     @objc func newPicture() {
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 44))
         let cameraBarItem = UIBarButtonItem(barButtonSystemItem: .camera,

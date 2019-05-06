@@ -36,7 +36,7 @@ class PreferencesView: UIView {
             let layout = UICollectionViewFlowLayout()
             layout.minimumLineSpacing = 16
             layout.scrollDirection = .vertical 
-            layout.itemSize = CGSize.init(width: 115, height: 115)
+            layout.itemSize = CGSize.init(width: 150, height: 150)
             let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
             cv.backgroundColor = .clear
             return cv
