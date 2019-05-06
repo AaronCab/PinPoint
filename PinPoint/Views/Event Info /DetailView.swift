@@ -106,7 +106,7 @@ class DetailView: UIView {
             make.height.equalTo(150)
         }
         displayUserPic.snp.makeConstraints { (make) in
-            make.topMargin.equalTo(detailTextView.snp.bottom).offset(25)
+            make.topMargin.equalTo(detailTextView.snp.bottom).offset(10)
             make.width.equalTo(75)
             make.height.equalTo(75)
             make.left.equalTo(35)
