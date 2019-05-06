@@ -22,6 +22,7 @@ class ProfileView: UIView {
     }
     var profilePicture: CircularImageView = {
         let imageView = CircularImageView()
+        imageView.backgroundColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
         return imageView
     }()
     var displayName: UILabel = {
@@ -81,7 +82,7 @@ class ProfileView: UIView {
         didSet{
             bio.text = loggedInUserModel?.bio ?? ""
             if let picture = loggedInUserModel?.photoURL{
-                profilePicture.kf.setImage(with: URL(string: picture), placeholder: #imageLiteral(resourceName: "placeholder-image.png"))
+                profilePicture.kf.setImage(with: URL(string: picture), placeholder: #imageLiteral(resourceName: "PinPoint_Logo_Clear"))
             }
             name.text = "\(loggedInUserModel?.firstName ?? "") \(loggedInUserModel?.lastName ?? "")"
             displayName.text = "\("@")\(loggedInUserModel?.displayName ?? "")"
