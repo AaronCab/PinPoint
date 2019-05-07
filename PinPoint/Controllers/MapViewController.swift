@@ -147,7 +147,7 @@ extension MapViewController: MKMapViewDelegate {
     private func getDirections(from: CLLocationCoordinate2D, destination: CLLocationCoordinate2D) {
         let request = createDirectionsRequest(fromCoordinate: from, toDestination: destination)
         let directions = MKDirections(request: request)
-        resetMapView(newDirections: directions)
+       // resetMapView(newDirections: directions)
         
         directions.calculate { [unowned self] (response, error) in
             if let error = error {
@@ -155,7 +155,7 @@ extension MapViewController: MKMapViewDelegate {
                 self.showAlert(title: "Can't get Directions", message: "\(error)" )
             } else if let response = response {
                 for route in response.routes {
-                    //                    // extra TODO: show directions word
+                                        // extra TODO: show directions word
                     var stepsStr = ""
                     let steps = route.steps
                     steps.forEach { stepsStr += "\($0.instructions)\n" }
