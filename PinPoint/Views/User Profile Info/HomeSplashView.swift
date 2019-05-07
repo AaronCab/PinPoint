@@ -13,7 +13,7 @@ class HomeSplashView: UIView {
     lazy var splashView: UIView = {
 //        let vw = UIView(frame: CGRect(x: 100, y: 100, width: 300, height: 300))
         let vw = UIView()
-     vw.backgroundColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
+     vw.backgroundColor = .white
         vw.layer.shadowColor = UIColor.black.cgColor
         vw.layer.shadowOpacity = 1
         vw.layer.shadowOffset = CGSize.zero
@@ -33,7 +33,7 @@ class HomeSplashView: UIView {
         li.layer.shadowRadius = 10
         li.layer.shadowPath = UIBezierPath(rect: li.bounds).cgPath
         li.layer.shouldRasterize = true
-        li.image = UIImage(#imageLiteral(resourceName: "IMG_0279.PNG"))
+        li.image = UIImage(#imageLiteral(resourceName: "IMG_0279"))
         return li
     }()
     
