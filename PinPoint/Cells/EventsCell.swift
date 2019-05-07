@@ -34,7 +34,7 @@ class EventsCell: UICollectionViewCell {
     let eventImageView: UIImageView = {
         let ei = UIImageView()
         ei.image = UIImage(named: "icons8-ask-question-25")
-        ei.contentMode = .scaleAspectFill
+        ei.contentMode = .scaleAspectFit
         ei.layer.cornerRadius = 20
         ei.layer.masksToBounds = true
         return ei
