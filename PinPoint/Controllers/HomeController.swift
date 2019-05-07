@@ -164,6 +164,8 @@ class HomeController: UIViewController{
         loginViewStuff()
         preferencesViewStuff()
         configureNavigationBar()
+        listernerForFriends()
+        discoverView.discoverCollectionView.reloadData()
         getCategory(intrest: intestedIn, location: location)
         authService.authserviceSignOutDelegate = self
         locationManager = CLLocationManager()
@@ -808,7 +810,6 @@ extension HomeController: AuthServiceSignOutDelegate{
     }
     @objc func preferencesCommand(){
         let preferencesVC = PreferencesViewController()
-//        preferencesVC.delegate = self as? FinallyATransfer
         preferencesVC.delegateForIntrest = self
         self.navigationController?.pushViewController(preferencesVC, animated: true)
     }
