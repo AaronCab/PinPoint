@@ -86,7 +86,12 @@ class EventsCell: UICollectionViewCell {
         self.addSubview(eventCellContainerView)
         
         eventCellContainerView.snp.makeConstraints { (make) in
-            make.edges.equalTo(contentView)
+make.edges.equalTo(contentView)
+            make.top.equalToSuperview().offset(40)
+            make.bottom.equalToSuperview().offset(-40)
+            
+//            make.top.left.equalTo(25)
+//            make.bottom.right.equalTo(-25)
             
         }
         eventCellContainerView.addSubview(eventName)
@@ -107,7 +112,7 @@ class EventsCell: UICollectionViewCell {
             make.top.equalTo(eventName.snp.bottom).offset(15)
             make.left.equalTo(20)
             make.right.equalTo(-20)
-            make.height.equalTo(300)
+            make.height.equalTo(250)
         }
         eventDescription.snp.makeConstraints { (make) in
             make.top.equalTo(eventImageView.snp.bottom).offset(15)
