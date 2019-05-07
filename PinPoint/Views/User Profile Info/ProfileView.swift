@@ -22,11 +22,12 @@ class ProfileView: UIView {
     }
     var profilePicture: CircularImageView = {
         let imageView = CircularImageView()
+        imageView.backgroundColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
         return imageView
     }()
     var displayName: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .clear
+        label.backgroundColor = #colorLiteral(red: 0.9374296665, green: 0.9370631576, blue: 0.958656013, alpha: 1)
         label.font = UIFont.init(name: "futura", size: 16)
         label.text = " U S E R N A M E"
         label.textColor = #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1)
@@ -36,7 +37,7 @@ class ProfileView: UIView {
 
     var name: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .clear
+        label.backgroundColor = #colorLiteral(red: 0.9374296665, green: 0.9370631576, blue: 0.958656013, alpha: 1)
         label.layer.cornerRadius = 15
         label.textColor = #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1)
         label.font = UIFont.init(name: "futura", size: 16)
@@ -54,15 +55,16 @@ class ProfileView: UIView {
     }()
     var bio: UITextView = {
         let textView = UITextView()
-        textView.backgroundColor = .clear
-        textView.layer.cornerRadius = 10
+        textView.backgroundColor = #colorLiteral(red: 0.9374296665, green: 0.9370631576, blue: 0.958656013, alpha: 1)
+        textView.layer.cornerRadius = 5
         textView.font = UIFont.init(name: "futura", size: 16)
+        textView.textColor = #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1)
         textView.isEditable = false
         return textView
     }()
     var settingsButton: UIButton = {
        let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "PinPoint_Logo_Clear"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "icons8-settings-100"), for: .normal)
         button.backgroundColor = .clear
         return button 
     }()
@@ -80,10 +82,10 @@ class ProfileView: UIView {
         didSet{
             bio.text = loggedInUserModel?.bio ?? ""
             if let picture = loggedInUserModel?.photoURL{
-                profilePicture.kf.setImage(with: URL(string: picture), placeholder: #imageLiteral(resourceName: "placeholder-image.png"))
+                profilePicture.kf.setImage(with: URL(string: picture), placeholder: #imageLiteral(resourceName: "PinPoint_Logo_Clear"))
             }
             name.text = "\(loggedInUserModel?.firstName ?? "") \(loggedInUserModel?.lastName ?? "")"
-            displayName.text = loggedInUserModel?.displayName
+            displayName.text = "\("@")\(loggedInUserModel?.displayName ?? "")"
         }
     }
     
@@ -94,7 +96,7 @@ extension ProfileView{
     private func settingsButtonConstraint() {
         addSubview(settingsButton)
         settingsButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([settingsButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10), settingsButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10),settingsButton.heightAnchor.constraint(equalToConstant: 40), settingsButton.widthAnchor.constraint(equalToConstant: 45)])
+        NSLayoutConstraint.activate([settingsButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10), settingsButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10),settingsButton.heightAnchor.constraint(equalToConstant: 35), settingsButton.widthAnchor.constraint(equalToConstant: 40)])
     }
     
     private func profilePictureConstraint(){
@@ -120,9 +122,8 @@ extension ProfileView{
     private func nameConstraint(){
         addSubview(name)
         name.translatesAutoresizingMaskIntoConstraints = false
-        name.topAnchor.constraint(equalTo: displayName.bottomAnchor, constant: 15).isActive = true
+        name.topAnchor.constraint(equalTo: displayName.bottomAnchor, constant: 2).isActive = true
         name.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 35).isActive = true
-        
         name.heightAnchor.constraint(equalToConstant: 40).isActive = true
         name.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -35).isActive = true
     }

@@ -10,11 +10,19 @@ import UIKit
 import Toucan
 import CoreLocation
 
+protocol FinallyATransfer {
+    func location(place: String)
+}
+protocol FinallyACatagory {
+    func intrest(catagroy: String)
+}
+
 class PreferencesViewController: UIViewController {
     var centerController: UIViewController!
     var preferencesView = PreferencesView()
     var locationView = LocationView()
     var locationViewHeight = NSLayoutConstraint()
+    var locationViewContorller = LocationResultController()
     
     var catagories = [
         "Business": "101",
@@ -32,12 +40,20 @@ class PreferencesViewController: UIViewController {
             preferencesView.locationButton.setTitle(location, for: .normal)
         }
     }
+    var delegate: FinallyATransfer?
+    var delegateForIntrest: FinallyACatagory?
     var locationManager = CLLocationManager()
     var locationService = LocationService()
     var long: Double!
     var lat: Double!
     
-    var location = "Manhattan"
+    var location = "Manhattan"{
+        didSet{
+              locationViewContorller.delegate2 = self
+            self.delegate?.location(place: location)
+
+        }
+    }
     
 
     override func viewDidLoad() {
@@ -59,11 +75,13 @@ class PreferencesViewController: UIViewController {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         }
+        preferencesView.locationResultsController.delegate2 = self
+        preferencesView.locationResultsController.delegate = self
         hideKeyboardWhenTappedAround()
+//        locationViewContorller.delegate2 = self
     }
     
     @objc func locationFinder(){
-        
     }
     @objc func dismissView(){
         navigationController?.popViewController(animated: true)
@@ -84,6 +102,16 @@ extension PreferencesViewController: UICollectionViewDataSource, UICollectionVie
         cell.categoryImage.image = UIImage(named: category)
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CategoryCell
+        let category = catagoriesInAnArray[indexPath.row]
+        cell!.categoryName.text = category
+        
+        
+        delegateForIntrest?.intrest(catagroy: category)
+        cell?.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
     }
     
     
@@ -119,4 +147,23 @@ extension PreferencesViewController: CLLocationManagerDelegate {
             
         }
     }
+}
+
+extension PreferencesViewController: LocationString{
+    func getString(address: String) {
+        location = address
+    }
+    
+    
+}
+extension PreferencesViewController: LocationResultsControllerDelegate{
+    func didSelectCoordinate(_ locationResultsController: LocationResultController, coordinate: CLLocationCoordinate2D, address: String) {
+        preferencesView.searchController.searchBar.text = address
+    }
+    
+    func didScrollTableView(_ locationResultsController: LocationResultController) {
+        
+    }
+    
+    
 }

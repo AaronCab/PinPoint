@@ -14,7 +14,7 @@ class CategoryCell: UICollectionViewCell {
     let categoryCellContainerView: UIView = {
         let categoryView = UIView()
         categoryView.backgroundColor = .clear
-        categoryView.layer.cornerRadius = 10
+        categoryView.layer.cornerRadius = 50
         categoryView.layer.masksToBounds = true
         return categoryView
     }()

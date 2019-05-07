@@ -28,10 +28,10 @@ class DiscoverCell: UICollectionViewCell {
         return en
     }()
     
-    let eventImageView: UIImageView = {
-        let ei = UIImageView()
+    let eventImageView: CornerImageView = {
+        let ei = CornerImageView()
         ei.image = UIImage(named: "icons8-ask-question-25")
-        ei.contentMode = .scaleAspectFill
+        ei.contentMode = .scaleAspectFit 
         ei.layer.cornerRadius = 20
         ei.layer.masksToBounds = true
         return ei
@@ -47,12 +47,12 @@ class DiscoverCell: UICollectionViewCell {
         return et
     }()
     
-    let eventLocation: UITextView = {
-        let el = UITextView()
-        el.isEditable = false
+    let eventLocation: UILabel = {
+        let el = UILabel()
         el.backgroundColor = .clear
+        el.text = "This is a location"
         el.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        el.font = UIFont.init(name: "futura", size: 18)
+        el.font = UIFont.init(name:"futura", size: 18)
         el.textColor = #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1)
         return el
     }()
@@ -75,13 +75,13 @@ class DiscoverCell: UICollectionViewCell {
     
     let moreInfoButton: UIButton = {
         let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "icons8-star-80"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "icons8-test-passed-100"), for: .normal)
         return button
     }()
     
     
     override init(frame: CGRect) {
-        super.init(frame: UIScreen.main.bounds)
+        super.init(frame: frame)
         setupCell()
     }
     
@@ -93,7 +93,10 @@ class DiscoverCell: UICollectionViewCell {
         self.addSubview(eventCellContainerView)
         
         eventCellContainerView.snp.makeConstraints { (make) in
-            make.edges.equalTo(contentView)
+            make.top.equalTo(safeAreaInsets)
+            make.bottom.equalTo(safeAreaInsets)
+            make.left.equalTo(safeAreaInsets)
+            make.right.equalTo(safeAreaInsets)
             
         }
         eventCellContainerView.addSubview(eventName)
@@ -122,12 +125,13 @@ class DiscoverCell: UICollectionViewCell {
             make.top.equalTo(eventImageView.snp.bottom).offset(15)
             make.left.equalTo(20)
             make.right.equalTo(-20)
-            make.height.equalTo(200)
+            make.height.equalTo(100)
         }
         
         eventLocation.snp.makeConstraints { (make) in
             make.top.equalTo(eventDescription.snp.bottom).offset(15)
             make.left.equalTo(20)
+          
         }
         eventStartTime.snp.makeConstraints { (make) in
             make.top.equalTo(eventLocation.snp.bottom).offset(15)
@@ -141,7 +145,7 @@ class DiscoverCell: UICollectionViewCell {
             make.top.equalTo(eventEndTime.snp_bottom).offset(20)
             make.height.equalTo(50)
             make.left.equalTo(20)
-            make.width.equalTo(50)
+            make.width.equalTo(60)
         }
     }
 }

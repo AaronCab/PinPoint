@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 protocol LocationResultsControllerDelegate: AnyObject {
-    func didSelectCoordinate(_ locationResultsController: LocationResultController, coordinate: CLLocationCoordinate2D)
+    func didSelectCoordinate(_ locationResultsController: LocationResultController, coordinate: CLLocationCoordinate2D, address: String)
     func didScrollTableView(_ locationResultsController: LocationResultController)
 }
 protocol LocationString {
@@ -62,11 +62,12 @@ extension LocationResultController: UITableViewDelegate {
             if let error = error {
                 print("error getting coordinate: \(error)")
             } else {
-                print(coordinate)
-                self.delegate?.didSelectCoordinate(self, coordinate: coordinate)
+                self.delegate2?.getString(address: addressString)
+
+                self.delegate?.didSelectCoordinate(self, coordinate: coordinate, address: addressString)
+            
             }
         }
-        self.delegate2?.getString(address: addressString)
         dismiss(animated: true)
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -76,7 +77,7 @@ extension LocationResultController: UITableViewDelegate {
 
 extension LocationResultController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        // Ask `MKLocalSearchCompleter` for new completion suggestions based on the change in the text entered in `UISearchBar`.
+        // Ask `MKLocalSearchCompleter` for new completion suggestions based on the change in the p
         searchCompleter.queryFragment = searchController.searchBar.text ?? ""
     }
 }

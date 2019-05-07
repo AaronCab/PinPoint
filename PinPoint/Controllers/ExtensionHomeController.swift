@@ -69,7 +69,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource{
         if userProfile.friends?.count == 0{
             
         }else{
-        DBService.firestoreDB
+            DBService.firestoreDB
             .collection(ProfileCollectionKeys.CollectionKey)
             .getDocuments(source: .server, completion: { (data, error) in
                 if let data = data{
@@ -96,10 +96,23 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource{
     }
 }
 
-extension HomeController: LocationString{
-    func getString(address: String) {
-        self.location = address
+extension HomeController {
+    
+    func listernerForFriends(){
+if authService.getCurrentUser() != nil{
+    self.friendListener = DBService.firestoreDB
+    .collection(ProfileCollectionKeys.FriendsKey)
+    .addSnapshotListener({ (data, error) in
+    if let error = error{
+        self.showAlert(title: "Error", message: error.localizedDescription)
     }
-    
-    
+    if let _ = data{
+        self.friendView.chatLogTableView.reloadData()
+    }
+    })
+    }
+    }
 }
+    
+    
+

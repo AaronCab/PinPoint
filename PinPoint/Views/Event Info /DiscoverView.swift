@@ -33,12 +33,13 @@ class DiscoverView: UIView {
     }
     var addEventButton: UIButton = {
         let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "icons8-create-25"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "icons8-plus-math-100"), for: .normal)
         button.backgroundColor = .clear
         return button
     }()
     private func commonInit(){
-        backgroundColor = .white
+        backgroundColor = .clear
+
         self.discoverCollectionView.register(DiscoverCell.self, forCellWithReuseIdentifier: "DiscoverCell")
         setup()
         addEventButtonConstraint()
