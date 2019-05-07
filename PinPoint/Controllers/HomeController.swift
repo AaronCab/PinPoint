@@ -447,27 +447,37 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             }
         }
     }
+
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if ((scrollView as? UICollectionView) != nil && !decelerate){
+            snapToNearestCell(scrollView as! UICollectionView)
+        }else{
+            
+        }
+    }
+    
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
         if ((scrollView as? UICollectionView) != nil){
             snapToNearestCell(scrollView as! UICollectionView)
         }else{
             
         }
     }
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if ((scrollView as? UICollectionView) != nil){
-        snapToNearestCell(scrollView as! UICollectionView)
-        }else{
-            
-        }
-    }
-    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        if ((scrollView as? UICollectionView) != nil){
-        snapToNearestCell(scrollView as! UICollectionView)
-        }else{
-            
-        }
-    }
+    
+//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//        if ((scrollView as? UICollectionView) != nil){
+//        snapToNearestCell(scrollView as! UICollectionView)
+//        }else{
+//            
+//        }
+//    }
+//    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+//        if ((scrollView as? UICollectionView) != nil){
+//        snapToNearestCell(scrollView as! UICollectionView)
+//        }else{
+//            
+//        }
+//    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch whatToSeque {
