@@ -20,7 +20,7 @@ enum MenuOption: Int, CustomStringConvertible {
         case .Discover: return "Discover"
         case .Nearby: return "Nearby Events"
         case .Favorites: return "Favorites"
-        case .Requests: return "Friend's Requests"
+        case .Requests: return "Friends"
         case .Profile: return "Profile"
             
         }
