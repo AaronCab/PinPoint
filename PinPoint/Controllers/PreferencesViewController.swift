@@ -76,6 +76,7 @@ class PreferencesViewController: UIViewController {
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         }
         preferencesView.locationResultsController.delegate2 = self
+        preferencesView.locationResultsController.delegate = self
         hideKeyboardWhenTappedAround()
 //        locationViewContorller.delegate2 = self
     }
@@ -110,6 +111,7 @@ extension PreferencesViewController: UICollectionViewDataSource, UICollectionVie
         
         
         delegateForIntrest?.intrest(catagroy: category)
+        cell?.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
     }
     
     
@@ -150,6 +152,17 @@ extension PreferencesViewController: CLLocationManagerDelegate {
 extension PreferencesViewController: LocationString{
     func getString(address: String) {
         location = address
+    }
+    
+    
+}
+extension PreferencesViewController: LocationResultsControllerDelegate{
+    func didSelectCoordinate(_ locationResultsController: LocationResultController, coordinate: CLLocationCoordinate2D, address: String) {
+        preferencesView.searchController.searchBar.text = address
+    }
+    
+    func didScrollTableView(_ locationResultsController: LocationResultController) {
+        
     }
     
     

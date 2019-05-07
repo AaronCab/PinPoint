@@ -532,7 +532,8 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
-
+       
+        
         alertController.addAction(cancelAction)
         alertController.addAction(favoriteActione)
         alertController.addAction(safariActionForNearbyEvents)
@@ -573,6 +574,12 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         }
         let userCreatedEvent = createdEvent[senderTag.tag]
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let mapLoaction = UIAlertAction(title: "Maps", style: .default) { alert in
+            let mapView = MapViewController()
+            mapView.modalTransitionStyle = .flipHorizontal
+            mapView.venues = self.createdEvent
+            self.navigationController?.pushViewController(mapView, animated: true)
+        }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         let addCalendarAction = UIAlertAction(title: "Add to Calendar", style: .default, handler: { alert in
             let discoverEvent = self.createdEvent[senderTag.tag]
@@ -610,6 +617,8 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             alertController.addAction(deleteAction)
             
         }
+        alertController.addAction(mapLoaction)
+
         alertController.addAction(addCalendarAction)
         alertController.addAction(favoriteActionForDiscovery)
         alertController.addAction(cancelAction)

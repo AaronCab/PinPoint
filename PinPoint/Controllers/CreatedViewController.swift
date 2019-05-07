@@ -9,7 +9,18 @@
 import UIKit
 import Toucan
 import Firebase
-class CreatedViewController: UIViewController {
+import CoreLocation
+class CreatedViewController: UIViewController, LocationResultsControllerDelegate {
+   
+    func didSelectCoordinate(_ locationResultsController: LocationResultController, coordinate: CLLocationCoordinate2D, address: String) {
+        createdEvent.locationText.text = address
+    }
+   
+    
+    func didScrollTableView(_ locationResultsController: LocationResultController) {
+        
+    }
+    
     var preferencesView = PreferencesView()
     var createdEvent = CreatedView()
     var authService = AppDelegate.authservice
@@ -37,6 +48,7 @@ class CreatedViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = rightBarItem
         configureInputAccessoryView()
         hideKeyboardWhenTappedAround()
+        preferencesView.locationResultsController.delegate = self
     }
 
     
@@ -99,21 +111,35 @@ class CreatedViewController: UIViewController {
     navigationController?.popViewController(animated: true)
 }
     @objc func updateCreatedEvent(){
+       
         self.navigationItem.rightBarButtonItem?.isEnabled = true
         let createdStartDate = createdEvent.startText.date
         let endDate = createdEvent.endText.date
         let startDate = Timestamp.init(date: createdStartDate)
         let endDatePick = Timestamp.init(date: endDate)
+        
       guard let createdEventDescription = createdEvent.eventText.text,
         !createdEventDescription.isEmpty,
+        
         let createdLocationName = createdEvent.locationText.text,
         !createdLocationName.isEmpty,
         let createdEventName = createdEvent.createName.text,
         !createdEventName.isEmpty,
+        
          let imageData = selectedImage?.jpegData(compressionQuality: 1.0) else {
             print("missing fields")
             return
         }
+        LocationService.getCoordinate(addressString: createdLocationName) { (coordinate, error) in
+            if let error = error {
+                print("error getting coordinate: \(error)")
+            } else {
+                let createdLat = coordinate.latitude
+                let createdLong = coordinate.longitude
+                
+            }
+        }
+
         guard let user = authService.getCurrentUser() else {
             print("no logged user")
             return
@@ -127,7 +153,7 @@ class CreatedViewController: UIViewController {
                                         print("fail to post iamge with error: \(error.localizedDescription)")
                                     } else if let imageURL = imageURL {
                                         print("image posted and recieved imageURL - post event to database: \(imageURL)")
-                                        let thisEvent = EventCreatedByUser(location: createdLocationName, createdAt: Date.getISOTimestamp(), personID: user.uid, photoURL: imageURL.absoluteString, eventDescription: createdEventDescription, lat: 40.4358, long: 50.6785, displayName: createdEventName, email: user.email!, isTrustedUser: [], eventType: createdEventName, documentID: docRef.documentID, message: [], pending: [], startedAt: startDate, endDate: endDatePick)
+                                        let thisEvent = EventCreatedByUser(location: createdLocationName, createdAt: Date.getISOTimestamp(), personID: user.uid, photoURL: imageURL.absoluteString, eventDescription: createdEventDescription, lat: -40.5678, long: 50.6785, displayName: createdEventName, email: user.email!, isTrustedUser: [], eventType: createdEventName, documentID: docRef.documentID, message: [], pending: [], startedAt: startDate, endDate: endDatePick)
 ;                                        DBService.postEvent(event: thisEvent){ [weak self] error in
                                             if let error = error {
                                                 self?.showAlert(title: "Posting Event Error", message: error.localizedDescription)
