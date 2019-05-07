@@ -38,7 +38,7 @@ class EditProfileViewController: UIViewController {
         editProfile.bio.addTarget(self, action: #selector(bioController), for: .touchUpInside)
         editProfile.editButton.addTarget(self, action: #selector(updateProifle), for: .touchUpInside)
         if user.photoURL != nil{
-            editProfile.profilePicture.kf.setImage(with: URL(string: (user.photoURL!)), placeholder: UIImage(named: "pinpointred"))        }
+            editProfile.profilePicture.kf.setImage(with: URL(string: (user.photoURL!)), placeholder: UIImage(#imageLiteral(resourceName: "PinPoint_Logo_Clear")))        }
         else{
             editProfile.profilePicture.image = UIImage(named: "placeholder-image")
         }

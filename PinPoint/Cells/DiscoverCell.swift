@@ -28,8 +28,8 @@ class DiscoverCell: UICollectionViewCell {
         return en
     }()
     
-    let eventImageView: UIImageView = {
-        let ei = UIImageView()
+    let eventImageView: CornerImageView = {
+        let ei = CornerImageView()
         ei.image = UIImage(named: "icons8-ask-question-25")
         ei.contentMode = .scaleAspectFit 
         ei.layer.cornerRadius = 20

@@ -22,6 +22,7 @@ class EditProfileView: UIView {
     
     var profilePicture: CircularImageView = {
         let imageView = CircularImageView()
+        imageView.backgroundColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
         return imageView
     }()
     var displayName: UITextField = {
@@ -108,10 +109,10 @@ class EditProfileView: UIView {
         didSet{
             bio.setTitle(loggedInUserModel.bio ?? "", for: .normal)
             if let picture = loggedInUserModel.photoURL{
-                profilePicture.kf.setImage(with: URL(string: picture), placeholder: #imageLiteral(resourceName: "placeholder-image.png"))
+                profilePicture.kf.setImage(with: URL(string: picture), placeholder: #imageLiteral(resourceName: "PinPoint_Logo_Clear"))
             }
             else{
-                profilePicture.image = UIImage(named: "placeholder-image")
+                profilePicture.image = UIImage(#imageLiteral(resourceName: "PinPoint_Logo_Clear.png"))
             }
             firstName.text = loggedInUserModel.firstName ?? ""
             lastName.text = loggedInUserModel.lastName ?? ""

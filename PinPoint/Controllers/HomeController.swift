@@ -23,11 +23,14 @@ enum detailViewSeque{
 }
 
 class HomeController: UIViewController{
+   
+    
     var contentView = UIView.init(frame: UIScreen.main.bounds)
     func loadFavorites() {
         self.favorite = FavoritesDataManager.fetchItemsFromDocumentsDirectory()
     }
     var whatToSeque = detailViewSeque.event
+    let locationResultsController = LocationResultController()
     let homeSplashImage = HomeSplashView()
     let preferencesView = PreferencesView()
     let eventsView = EventsView()
@@ -44,7 +47,7 @@ class HomeController: UIViewController{
     var createDelegate = CreateAccountViewController()
     var logginDelegate = LoginWithExistingViewController()
     var userProfile: ProfileOfUser!
-    var locationDelegate: LocationString!
+//    var locationDelegate: LocationString!
     var friendListener: ListenerRegistration!
     
     var catagories = [
@@ -87,21 +90,25 @@ class HomeController: UIViewController{
         }
     }
     var favoriteCell = FavoritesCell()
-    
+    var intestedIn = "101"{
+        didSet{
+            self.getCategory(intrest: intestedIn, location: location)
+
+        }
+    }
     
     private var userModel: UserLogedInModel!
     
     var currentLocation = CLLocation(){
         didSet{
             preferencesView.locationButton.setTitle(location, for: .normal)
-            getCategory()
             locationManager.stopUpdatingLocation()
             
         }
     }
     
-    private func getCategory(){
-        ApiClient.getCategoryEvents(distance: "5km", location: location.replacingOccurrences(of: " ", with: "-"), categoryID: "101") { (error, data) in
+    private func getCategory(intrest: String?, location: String?){
+        ApiClient.getCategoryEvents(distance: "10km", location: location?.replacingOccurrences(of: " ", with: "-") ?? "Manhatten", categoryID: intrest ?? "101") { (error, data) in
             if let error = error {
                 print(error.errorMessage())
             } else if let data = data {
@@ -110,10 +117,12 @@ class HomeController: UIViewController{
             
         }
     }
-    
+    func getString(address: String) {
+        self.location = address
+    }
     var location = "Manhattan"{
         didSet{
-            getCategory()
+            getCategory(intrest: intestedIn, location: location)
         }
     }
     var selectedImageValue: UIImage?
@@ -155,8 +164,7 @@ class HomeController: UIViewController{
         loginViewStuff()
         preferencesViewStuff()
         configureNavigationBar()
-        getCategory()
-        locationDelegate = self
+        getCategory(intrest: intestedIn, location: location)
         authService.authserviceSignOutDelegate = self
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -524,7 +532,8 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
-
+       
+        
         alertController.addAction(cancelAction)
         alertController.addAction(favoriteActione)
         alertController.addAction(safariActionForNearbyEvents)
@@ -565,6 +574,12 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         }
         let userCreatedEvent = createdEvent[senderTag.tag]
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let mapLoaction = UIAlertAction(title: "Maps", style: .default) { alert in
+            let mapView = MapViewController()
+            mapView.modalTransitionStyle = .flipHorizontal
+            mapView.venues = self.createdEvent
+            self.navigationController?.pushViewController(mapView, animated: true)
+        }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         let addCalendarAction = UIAlertAction(title: "Add to Calendar", style: .default, handler: { alert in
             let discoverEvent = self.createdEvent[senderTag.tag]
@@ -602,6 +617,8 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             alertController.addAction(deleteAction)
             
         }
+        alertController.addAction(mapLoaction)
+
         alertController.addAction(addCalendarAction)
         alertController.addAction(favoriteActionForDiscovery)
         alertController.addAction(cancelAction)
@@ -800,6 +817,8 @@ extension HomeController: AuthServiceSignOutDelegate{
     }
     @objc func preferencesCommand(){
         let preferencesVC = PreferencesViewController()
+        preferencesVC.delegateForIntrest = self
+        preferencesVC.delegate = self
         self.navigationController?.pushViewController(preferencesVC, animated: true)
     }
 }
@@ -817,4 +836,16 @@ extension HomeController{
                 })
         }
     }
+}
+
+extension HomeController: FinallyACatagory{
+    func intrest(catagroy: String) {
+        if let catagory = catagories[catagroy]{
+        intestedIn = catagory
+        }else{
+            
+        }
+    }
+    
+    
 }

@@ -28,3 +28,11 @@ extension HomeController: AuthServiceExistingAccountDelegate, AuthServiceCreateN
     
     
 }
+
+extension HomeController: FinallyATransfer{
+    func location(place: String) {
+        location = place
+    }
+    
+    
+}

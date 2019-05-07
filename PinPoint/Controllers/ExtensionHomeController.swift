@@ -96,10 +96,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource{
     }
 }
 
-extension HomeController: LocationString{
-    func getString(address: String) {
-        self.location = address
-    }
+
     
     
-}
+
