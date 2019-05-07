@@ -147,6 +147,8 @@ extension MapViewController: MKMapViewDelegate {
     private func getDirections(from: CLLocationCoordinate2D, destination: CLLocationCoordinate2D) {
         let request = createDirectionsRequest(fromCoordinate: from, toDestination: destination)
         let directions = MKDirections(request: request)
+        let url = "http://maps.apple.com/maps?saddr=\(from.latitude),\(from.longitude)&daddr=\(destination.latitude),\(destination.longitude)"
+        UIApplication.shared.openURL(URL(string:url)!)
        // resetMapView(newDirections: directions)
         
         directions.calculate { [unowned self] (response, error) in
