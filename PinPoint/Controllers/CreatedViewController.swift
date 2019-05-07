@@ -9,7 +9,18 @@
 import UIKit
 import Toucan
 import Firebase
-class CreatedViewController: UIViewController {
+import CoreLocation
+class CreatedViewController: UIViewController, LocationResultsControllerDelegate {
+   
+    func didSelectCoordinate(_ locationResultsController: LocationResultController, coordinate: CLLocationCoordinate2D, address: String) {
+        createdEvent.locationText.text = address
+    }
+   
+    
+    func didScrollTableView(_ locationResultsController: LocationResultController) {
+        
+    }
+    
     var preferencesView = PreferencesView()
     var createdEvent = CreatedView()
     var authService = AppDelegate.authservice
@@ -37,6 +48,7 @@ class CreatedViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = rightBarItem
         configureInputAccessoryView()
         hideKeyboardWhenTappedAround()
+        preferencesView.locationResultsController.delegate = self
     }
 
     
@@ -99,6 +111,7 @@ class CreatedViewController: UIViewController {
     navigationController?.popViewController(animated: true)
 }
     @objc func updateCreatedEvent(){
+       
         self.navigationItem.rightBarButtonItem?.isEnabled = true
         let createdStartDate = createdEvent.startText.date
         let endDate = createdEvent.endText.date
@@ -106,6 +119,7 @@ class CreatedViewController: UIViewController {
         let endDatePick = Timestamp.init(date: endDate)
       guard let createdEventDescription = createdEvent.eventText.text,
         !createdEventDescription.isEmpty,
+        
         let createdLocationName = createdEvent.locationText.text,
         !createdLocationName.isEmpty,
         let createdEventName = createdEvent.createName.text,

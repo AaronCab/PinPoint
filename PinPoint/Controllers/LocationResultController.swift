@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 protocol LocationResultsControllerDelegate: AnyObject {
-    func didSelectCoordinate(_ locationResultsController: LocationResultController, coordinate: CLLocationCoordinate2D)
+    func didSelectCoordinate(_ locationResultsController: LocationResultController, coordinate: CLLocationCoordinate2D, address: String)
     func didScrollTableView(_ locationResultsController: LocationResultController)
 }
 protocol LocationString {
@@ -64,7 +64,8 @@ extension LocationResultController: UITableViewDelegate {
             } else {
                 self.delegate2?.getString(address: addressString)
 
-                self.delegate?.didSelectCoordinate(self, coordinate: coordinate)
+                self.delegate?.didSelectCoordinate(self, coordinate: coordinate, address: addressString)
+            
             }
         }
         dismiss(animated: true)
