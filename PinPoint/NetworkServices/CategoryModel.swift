@@ -21,6 +21,7 @@ var catagories = [
 "Health": "107",
 "SportsAndFitness": "108",
     "All": ""]
+    
     var catagoriesInAnArray = ["Business", "ScienceAndTech", "Music","FilmAndMedia","Arts","Fashion", "Health","SportsAndFitness", "All"]
 }
 extension Dictionary where Value : Equatable {
@@ -28,3 +29,5 @@ extension Dictionary where Value : Equatable {
         return self.filter { $1 == val }.map { $0.0 }
     }
 }
+
+
