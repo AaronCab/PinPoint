@@ -96,7 +96,23 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource{
     }
 }
 
-
+extension HomeController {
+    
+    func listernerForFriends(){
+if authService.getCurrentUser() != nil{
+    self.friendListener = DBService.firestoreDB
+    .collection(ProfileCollectionKeys.FriendsKey)
+    .addSnapshotListener({ (data, error) in
+    if let error = error{
+        self.showAlert(title: "Error", message: error.localizedDescription)
+    }
+    if let _ = data{
+        self.friendView.chatLogTableView.reloadData()
+    }
+    })
+    }
+    }
+}
     
     
 

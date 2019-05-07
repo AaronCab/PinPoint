@@ -164,6 +164,8 @@ class HomeController: UIViewController{
         loginViewStuff()
         preferencesViewStuff()
         configureNavigationBar()
+        listernerForFriends()
+        discoverView.discoverCollectionView.reloadData()
         getCategory(intrest: intestedIn, location: location)
         authService.authserviceSignOutDelegate = self
         locationManager = CLLocationManager()

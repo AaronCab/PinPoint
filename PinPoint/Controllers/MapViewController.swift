@@ -67,9 +67,9 @@ class MapViewController: UIViewController {
     
     private func startTrackingUserLocation() {
         mapView.mapView.showsUserLocation = true
-        //        if let location = locationManager.location?.coordinate {
-        //            setAndCenterRegionOnMap(coordiate: location, meters: 5000)
-        //        }
+                if let location = locationManager.location?.coordinate {
+                    setAndCenterRegionOnMap(coordiate: location, meters: 5000)
+                }
         locationManager.startUpdatingLocation()
         previousLocation = getCenterLocation(for: mapView.mapView)
         
@@ -147,7 +147,9 @@ extension MapViewController: MKMapViewDelegate {
     private func getDirections(from: CLLocationCoordinate2D, destination: CLLocationCoordinate2D) {
         let request = createDirectionsRequest(fromCoordinate: from, toDestination: destination)
         let directions = MKDirections(request: request)
-        resetMapView(newDirections: directions)
+        let url = "http://maps.apple.com/maps?saddr=\(from.latitude),\(from.longitude)&daddr=\(destination.latitude),\(destination.longitude)"
+        UIApplication.shared.openURL(URL(string:url)!)
+       // resetMapView(newDirections: directions)
         
         directions.calculate { [unowned self] (response, error) in
             if let error = error {
@@ -155,7 +157,7 @@ extension MapViewController: MKMapViewDelegate {
                 self.showAlert(title: "Can't get Directions", message: "\(error)" )
             } else if let response = response {
                 for route in response.routes {
-                    //                    // extra TODO: show directions word
+                                        // extra TODO: show directions word
                     var stepsStr = ""
                     let steps = route.steps
                     steps.forEach { stepsStr += "\($0.instructions)\n" }
