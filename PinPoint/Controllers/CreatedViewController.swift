@@ -117,6 +117,7 @@ class CreatedViewController: UIViewController, LocationResultsControllerDelegate
         let endDate = createdEvent.endText.date
         let startDate = Timestamp.init(date: createdStartDate)
         let endDatePick = Timestamp.init(date: endDate)
+        
       guard let createdEventDescription = createdEvent.eventText.text,
         !createdEventDescription.isEmpty,
         
@@ -124,10 +125,21 @@ class CreatedViewController: UIViewController, LocationResultsControllerDelegate
         !createdLocationName.isEmpty,
         let createdEventName = createdEvent.createName.text,
         !createdEventName.isEmpty,
+        
          let imageData = selectedImage?.jpegData(compressionQuality: 1.0) else {
             print("missing fields")
             return
         }
+        LocationService.getCoordinate(addressString: createdLocationName) { (coordinate, error) in
+            if let error = error {
+                print("error getting coordinate: \(error)")
+            } else {
+                let createdLat = coordinate.latitude
+                let createdLong = coordinate.longitude
+                
+            }
+        }
+
         guard let user = authService.getCurrentUser() else {
             print("no logged user")
             return
@@ -141,7 +153,7 @@ class CreatedViewController: UIViewController, LocationResultsControllerDelegate
                                         print("fail to post iamge with error: \(error.localizedDescription)")
                                     } else if let imageURL = imageURL {
                                         print("image posted and recieved imageURL - post event to database: \(imageURL)")
-                                        let thisEvent = EventCreatedByUser(location: createdLocationName, createdAt: Date.getISOTimestamp(), personID: user.uid, photoURL: imageURL.absoluteString, eventDescription: createdEventDescription, lat: 40.4358, long: 50.6785, displayName: createdEventName, email: user.email!, isTrustedUser: [], eventType: createdEventName, documentID: docRef.documentID, message: [], pending: [], startedAt: startDate, endDate: endDatePick)
+                                        let thisEvent = EventCreatedByUser(location: createdLocationName, createdAt: Date.getISOTimestamp(), personID: user.uid, photoURL: imageURL.absoluteString, eventDescription: createdEventDescription, lat: -40.5678, long: 50.6785, displayName: createdEventName, email: user.email!, isTrustedUser: [], eventType: createdEventName, documentID: docRef.documentID, message: [], pending: [], startedAt: startDate, endDate: endDatePick)
 ;                                        DBService.postEvent(event: thisEvent){ [weak self] error in
                                             if let error = error {
                                                 self?.showAlert(title: "Posting Event Error", message: error.localizedDescription)
