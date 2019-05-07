@@ -40,7 +40,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource{
             }
             cell.noButton.isEnabled = false
             cell.yesButton.isEnabled = false
-            cell.blockBotton.isEnabled = false
+            cell.blockBotton.isEnabled = true
             cell.blockBotton.isHidden = true
             cell.yesButton.isHidden = true
             cell.noButton.isHidden = true
@@ -48,7 +48,6 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource{
             cell.yesButton.tag = indexPath.row
             cell.blockBotton.tag = indexPath.row
         }else{
-            self.friendView.chatLogTableView.reloadData()
             cell.friendName.text = "No Friends Here"
             cell.noButton.isEnabled = false
             cell.yesButton.isEnabled = false
@@ -98,21 +97,41 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource{
 
 extension HomeController {
     
-    func listernerForFriends(){
-if authService.getCurrentUser() != nil{
-    self.friendListener = DBService.firestoreDB
-    .collection(ProfileCollectionKeys.FriendsKey)
-    .addSnapshotListener({ (data, error) in
-    if let error = error{
-        self.showAlert(title: "Error", message: error.localizedDescription)
+    func listernerForFriends(complete: (@escaping([ProfileOfUser]?, Error?) -> Void)){
+            var friendFound = [ProfileOfUser]()
+            if let user = authService.getCurrentUser(){
+                DBService.firestoreDB.collection(ProfileCollectionKeys.CollectionKey)
+                    .document(user.uid).addSnapshotListener({ (profile, error) in
+                        if let profile = profile?.data(){
+                            
+                            let profile = ProfileOfUser.init(dict: profile)
+                            self.userProfile = profile
+                            
+                            for friend in profile.friends!{
+                                
+                                self.friendListener = DBService.firestoreDB
+                                    .collection(ProfileCollectionKeys.CollectionKey).document(friend)
+                                    .addSnapshotListener({ (data, error) in
+                                        if let data = data?.data(){
+                                            let singleFriend = ProfileOfUser.init(dict: data)
+                                            friendFound.append(singleFriend)
+                                            if profile.pendingFriends?.last == friend{
+                                                complete(friendFound, nil)
+                                            }
+                                        }else if let error = error{
+                                            print(error)
+                                        }
+                                    })
+                            }
+                        }
+                        if let error = error{
+                            complete(nil, error)
+                        }
+                    })
+            }
+        }
     }
-    if let _ = data{
-        self.friendView.chatLogTableView.reloadData()
-    }
-    })
-    }
-    }
-}
+
     
     
 

@@ -46,8 +46,15 @@ class HomeController: UIViewController{
     var detailUserOfProfile: ProfileOfUser!
     var createDelegate = CreateAccountViewController()
     var logginDelegate = LoginWithExistingViewController()
+    var friendsFound = [ProfileOfUser](){
+        didSet{
+            self.friendView.chatLogTableView.delegate = self
+            self.friendView.chatLogTableView.dataSource = self
+            self.friendView.chatLogTableView.reloadData()
+        }
+    }
     var userProfile: ProfileOfUser!
-//    var locationDelegate: LocationString!
+    
     var friendListener: ListenerRegistration!
     
     var catagories = [
@@ -164,7 +171,14 @@ class HomeController: UIViewController{
         loginViewStuff()
         preferencesViewStuff()
         configureNavigationBar()
-        listernerForFriends()
+        listernerForFriends { (friends, error) in
+            if let error = error{
+               self.showAlert(title: "Error", message: error.localizedDescription)
+            }
+            if let friends = friends{
+                self.friendsFound = friends
+            }
+        }
         discoverView.discoverCollectionView.reloadData()
         getCategory(intrest: intestedIn, location: location)
         authService.authserviceSignOutDelegate = self
