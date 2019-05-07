@@ -11,7 +11,7 @@ import Toucan
 import Firebase
 import CoreLocation
 class CreatedViewController: UIViewController, LocationResultsControllerDelegate {
-   
+    var locationDictionary = [String: [Double]]()
     func didSelectCoordinate(_ locationResultsController: LocationResultController, coordinate: CLLocationCoordinate2D, address: String) {
         createdEvent.locationText.text = address
     }
@@ -134,8 +134,9 @@ class CreatedViewController: UIViewController, LocationResultsControllerDelegate
             if let error = error {
                 print("error getting coordinate: \(error)")
             } else {
-                let createdLat = coordinate.latitude
-                let createdLong = coordinate.longitude
+                let lat = coordinate.latitude
+                let long = coordinate.longitude
+                self.locationDictionary[createdLocationName] = [lat,long]
                 
             }
         }
@@ -153,7 +154,7 @@ class CreatedViewController: UIViewController, LocationResultsControllerDelegate
                                         print("fail to post iamge with error: \(error.localizedDescription)")
                                     } else if let imageURL = imageURL {
                                         print("image posted and recieved imageURL - post event to database: \(imageURL)")
-                                        let thisEvent = EventCreatedByUser(location: createdLocationName, createdAt: Date.getISOTimestamp(), personID: user.uid, photoURL: imageURL.absoluteString, eventDescription: createdEventDescription, lat: -40.5678, long: 50.6785, displayName: createdEventName, email: user.email!, isTrustedUser: [], eventType: createdEventName, documentID: docRef.documentID, message: [], pending: [], startedAt: startDate, endDate: endDatePick)
+                                        let thisEvent = EventCreatedByUser(location: createdLocationName, createdAt: Date.getISOTimestamp(), personID: user.uid, photoURL: imageURL.absoluteString, eventDescription: createdEventDescription, lat: 42.3601, long: 71.0589, displayName: createdEventName, email: user.email!, isTrustedUser: [], eventType: createdEventName, documentID: docRef.documentID, message: [], pending: [], startedAt: startDate, endDate: endDatePick)
 ;                                        DBService.postEvent(event: thisEvent){ [weak self] error in
                                             if let error = error {
                                                 self?.showAlert(title: "Posting Event Error", message: error.localizedDescription)
