@@ -13,6 +13,7 @@ import CoreLocation
 class CreatedViewController: UIViewController, LocationResultsControllerDelegate {
     var locationDictionary = [String: [Double]]()
     func didSelectCoordinate(_ locationResultsController: LocationResultController, coordinate: CLLocationCoordinate2D, address: String) {
+        
         createdEvent.locationText.text = address
     }
    
@@ -136,37 +137,39 @@ class CreatedViewController: UIViewController, LocationResultsControllerDelegate
             } else {
                 let lat = coordinate.latitude
                 let long = coordinate.longitude
-                self.locationDictionary[createdLocationName] = [lat,long]
+              
+                
+                guard let user = self.authService.getCurrentUser() else {
+                    print("no logged user")
+                    return
+                }
+                let docRef = DBService.firestoreDB
+                    .collection(EventCollectionKeys.CollectionKeys)
+                    .document()
+                StorageService.postImage(imageData: imageData,
+                                         imageName: "events/\(user.uid)/\(docRef.documentID)"){ [weak self] (error, imageURL) in
+                                            if let error = error {
+                                                print("fail to post iamge with error: \(error.localizedDescription)")
+                                            } else if let imageURL = imageURL {
+                                                print("image posted and recieved imageURL - post event to database: \(imageURL)")
+                                                let thisEvent = EventCreatedByUser(location: createdLocationName, createdAt: Date.getISOTimestamp(), personID: user.uid, photoURL: imageURL.absoluteString, eventDescription: createdEventDescription, lat: lat, long: long, displayName: createdEventName, email: user.email!, isTrustedUser: [], eventType: createdEventName, documentID: docRef.documentID, message: [], pending: [], startedAt: startDate, endDate: endDatePick)
+                                                ;                                        DBService.postEvent(event: thisEvent){ [weak self] error in
+                                                    if let error = error {
+                                                        self?.showAlert(title: "Posting Event Error", message: error.localizedDescription)
+                                                    } else {
+                                                        self?.showAlert(title: "Event Posted", message: "Looking forward to checking out your event") { action in
+                                                            self?.dismiss(animated: true)
+                                                        }
+                                                    }
+                                                }
+                                                self?.navigationItem.rightBarButtonItem?.isEnabled = true
+                                            }
+                }
+                
                 
             }
         }
 
-        guard let user = authService.getCurrentUser() else {
-            print("no logged user")
-            return
-        }
-        let docRef = DBService.firestoreDB
-            .collection(EventCollectionKeys.CollectionKeys)
-            .document()
-        StorageService.postImage(imageData: imageData,
-                                 imageName: "events/\(user.uid)/\(docRef.documentID)"){ [weak self] (error, imageURL) in
-                                    if let error = error {
-                                        print("fail to post iamge with error: \(error.localizedDescription)")
-                                    } else if let imageURL = imageURL {
-                                        print("image posted and recieved imageURL - post event to database: \(imageURL)")
-                                        let thisEvent = EventCreatedByUser(location: createdLocationName, createdAt: Date.getISOTimestamp(), personID: user.uid, photoURL: imageURL.absoluteString, eventDescription: createdEventDescription, lat: 42.3601, long: 71.0589, displayName: createdEventName, email: user.email!, isTrustedUser: [], eventType: createdEventName, documentID: docRef.documentID, message: [], pending: [], startedAt: startDate, endDate: endDatePick)
-;                                        DBService.postEvent(event: thisEvent){ [weak self] error in
-                                            if let error = error {
-                                                self?.showAlert(title: "Posting Event Error", message: error.localizedDescription)
-                                            } else {
-                                                self?.showAlert(title: "Event Posted", message: "Looking forward to checking out your event") { action in
-                                                    self?.dismiss(animated: true)
-                                                }
-                                            }
-                                        }
-                                        self?.navigationItem.rightBarButtonItem?.isEnabled = true
-                                    }
-        }
 
     }
 }
