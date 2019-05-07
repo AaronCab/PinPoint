@@ -67,9 +67,9 @@ class MapViewController: UIViewController {
     
     private func startTrackingUserLocation() {
         mapView.mapView.showsUserLocation = true
-        //        if let location = locationManager.location?.coordinate {
-        //            setAndCenterRegionOnMap(coordiate: location, meters: 5000)
-        //        }
+                if let location = locationManager.location?.coordinate {
+                    setAndCenterRegionOnMap(coordiate: location, meters: 5000)
+                }
         locationManager.startUpdatingLocation()
         previousLocation = getCenterLocation(for: mapView.mapView)
         
