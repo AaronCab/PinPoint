@@ -23,9 +23,13 @@ class EventsViewController: UIViewController {
     var friendThatRequested: ProfileOfUser!
     var friendsFound = [ProfileOfUser](){
         didSet{
-            self.chatView.chatLogTableView.dataSource = self
-            self.chatView.chatLogTableView.delegate = self
+            DispatchQueue.main.async {
+                self.chatView.chatLogTableView.dataSource = self
+                self.chatView.chatLogTableView.delegate = self
+                
                 self.chatView.chatLogTableView.reloadData()
+                
+            }
         }
     }
     
@@ -33,6 +37,10 @@ class EventsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(chatView)
+        
+        self.chatView.chatLogTableView.dataSource = self
+        self.chatView.chatLogTableView.delegate = self
+        
 
         updateFriend { (profileOfFriends, error) in
             if let friends = profileOfFriends{
@@ -42,9 +50,7 @@ class EventsViewController: UIViewController {
                 self.showAlert(title: "Error", message: error.localizedDescription)
             }
         }
-            self.chatView.chatLogTableView.dataSource = self
-            self.chatView.chatLogTableView.delegate = self
-        
+     
     }
   
 }
@@ -118,9 +124,7 @@ extension EventsViewController{
                         
                            let profile = ProfileOfUser.init(dict: profile)
                         self.loggedInUserModel = profile
-                        
                         for friend in profile.pendingFriends!{
-                        
                        self.listener = DBService.firestoreDB
                             .collection(ProfileCollectionKeys.CollectionKey).document(friend)
                         .addSnapshotListener({ (data, error) in
@@ -159,17 +163,23 @@ extension EventsViewController{
                     if let error = error{
                         self.showAlert(title: "error", message: error.localizedDescription)
                     }else{
+                        let freindUpdate =  DBService.firestoreDB.collection(ProfileCollectionKeys.CollectionKey).document((self.loggedInUserModel.pendingFriends![tag.tag]))
+                        freindUpdate.updateData([ProfileCollectionKeys.FriendsKey : FieldValue.arrayUnion([self.loggedInUserModel.ProfileId])])
+
                         pendingFriend.updateData([
                             ProfileCollectionKeys.PendingFriends : FieldValue.arrayRemove( [(self.loggedInUserModel.pendingFriends![tag.tag]) as Any])], completion: { (error) in
                                 if let error = error{
                                     self.showAlert(title: "Error", message: error.localizedDescription)
                                 }else{
+                                    
                                     self.chatView.chatLogTableView.reloadData()
                                 }
                         })
                     }
             }
+                    
                  }))
+                
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
             present(alert, animated: true)
