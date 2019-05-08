@@ -107,6 +107,11 @@ extension HomeController {
                             let profile = ProfileOfUser.init(dict: profile)
                             self.userProfile = profile
                             
+                            if profile.friends?.count == 1 && profile.friends?[0] ==  "" {
+                                complete(nil, nil)
+                                return
+                            }
+                            
                             for friend in profile.friends!{
                                 
                                 self.friendListener = DBService.firestoreDB

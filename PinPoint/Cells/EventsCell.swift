@@ -14,9 +14,21 @@ class EventsCell: UICollectionViewCell {
     
     let eventCellContainerView: UIView = {
         let ev = UIView()
-        ev.backgroundColor = .clear
-        ev.layer.cornerRadius = 20
+        ev.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+       // ev.layer.cornerRadius = 20
+       // ev.layer.masksToBounds = true
+        
+        ev.layer.cornerRadius = 2.0
+        ev.layer.borderWidth = 1.0
+        ev.layer.borderColor =  UIColor.black.cgColor
         ev.layer.masksToBounds = true
+        ev.layer.shadowColor = UIColor.lightGray.cgColor
+        ev.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+        ev.layer.shadowRadius = 2.0
+        ev.layer.shadowOpacity = 1.0
+        ev.layer.masksToBounds = false
+        ev.layer.shadowPath = UIBezierPath(roundedRect: ev.bounds, cornerRadius: ev.layer.cornerRadius).cgPath
+        
         return ev
     }()
     
@@ -69,6 +81,15 @@ class EventsCell: UICollectionViewCell {
     let moreInfoButton: UIButton = {
         let button = UIButton()
         button.setImage(#imageLiteral(resourceName: "icons8-star-80"), for: .normal)
+        //trying to get the button a shadow
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+        button.layer.shadowRadius = 2.0
+        button.layer.shadowOpacity = 1.0
+        button.layer.masksToBounds = false
+        button.layer.shadowPath = UIBezierPath(roundedRect: button.bounds, cornerRadius: button.layer.cornerRadius).cgPath
+        //trying to get the button a shadow
+
         return button
     }()
     
