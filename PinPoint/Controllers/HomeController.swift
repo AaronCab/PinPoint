@@ -115,7 +115,7 @@ class HomeController: UIViewController{
     }
     
     private func getCategory(intrest: String?, location: String?){
-        ApiClient.getCategoryEvents(distance: "10km", location: location?.replacingOccurrences(of: " ", with: "-") ?? "Manhatten", categoryID: intrest ?? "101") { (error, data) in
+        ApiClient.getCategoryEvents(distance: "10km", location: location?.replacingOccurrences(of: " ", with: "-") ?? "Manhattan", categoryID: intrest ?? "101") { (error, data) in
             if let error = error {
                 print(error.errorMessage())
             } else if let data = data {
@@ -281,7 +281,7 @@ class HomeController: UIViewController{
             contentView = UIView.init(frame: UIScreen.main.bounds)
             contentView.addSubview(discoverView)
             view.addSubview(contentView)
-            self.navigationItem.title = "D I S C O V E R"
+            self.navigationItem.title = "P I N P O I N T  E V E N T S"
             let rightBarItem = UIBarButtonItem(customView: discoverView.addEventButton)
             whatToSeque = .custom
             discoverView.addEventButton.addTarget(self, action: #selector(addEventCommand), for: .touchUpInside)
@@ -461,27 +461,37 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             }
         }
     }
+
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if ((scrollView as? UICollectionView) != nil && !decelerate){
+            snapToNearestCell(scrollView as! UICollectionView)
+        }else{
+            
+        }
+    }
+    
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
         if ((scrollView as? UICollectionView) != nil){
             snapToNearestCell(scrollView as! UICollectionView)
         }else{
             
         }
     }
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if ((scrollView as? UICollectionView) != nil){
-        snapToNearestCell(scrollView as! UICollectionView)
-        }else{
-            
-        }
-    }
-    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        if ((scrollView as? UICollectionView) != nil){
-        snapToNearestCell(scrollView as! UICollectionView)
-        }else{
-            
-        }
-    }
+    
+//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//        if ((scrollView as? UICollectionView) != nil){
+//        snapToNearestCell(scrollView as! UICollectionView)
+//        }else{
+//            
+//        }
+//    }
+//    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+//        if ((scrollView as? UICollectionView) != nil){
+//        snapToNearestCell(scrollView as! UICollectionView)
+//        }else{
+//            
+//        }
+//    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch whatToSeque {
@@ -523,7 +533,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             let thisEvent = self.event[senderTag.tag]
             let favoriteEvent = FavoritesModel.init(name: (thisEvent.name?.text)!, description: (thisEvent.description?.text)!, imageUrl: thisEvent.logo?.original.url, start: thisEvent.start!.utc, end: thisEvent.end!.utc, capacity: thisEvent.capacity, status: thisEvent.status, url: thisEvent.url)
             FavoritesDataManager.saveToDocumentsDirectory(favoriteArticle: favoriteEvent)
-            self.showAlert(title: "PinPoint", message: "Successfully Favorites Event")
+            self.showAlert(title: "PinPoint", message: "Successfully Favorited Event")
         }
         let addCalendarAction = UIAlertAction(title: "Add to Calendar", style: .default, handler: { alert in
             let thisEvent = self.event[senderTag.tag]
@@ -585,7 +595,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
     }
     @objc func moreInfoDiscover(senderTag: UIButton){
         guard let user = authService.getCurrentUser() else {
-            showAlert(title: "no loggedin user", message: nil)
+            showAlert(title: "No logged in user", message: nil)
             return
         }
         let userCreatedEvent = createdEvent[senderTag.tag]
@@ -718,7 +728,7 @@ extension HomeController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locational = locations.last else {
-            print("no locations found")
+            print("no location found")
             return
         }
         currentLocation = locational
@@ -822,7 +832,7 @@ extension HomeController: AuthServiceSignOutDelegate{
             self.authService.signOutAccount()
         }))
         alert.addAction(UIAlertAction(title: "User Created Events", style: .default, handler: { (events) in
-            self.showAlert(title: "Nothing Yet", message: "Stay tuned")
+            self.showAlert(title: "Nothing Yet", message: "Stay Tuned")
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(alert, animated: true)

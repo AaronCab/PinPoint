@@ -32,7 +32,7 @@ class FavoritesCell: UICollectionViewCell {
     let eventImageView: UIImageView = {
         let ei = UIImageView()
         ei.image = UIImage(named: "icons8-ask-question-25")
-        ei.contentMode = .scaleAspectFill
+        ei.contentMode = .scaleAspectFit
         ei.layer.cornerRadius = 20
         ei.layer.masksToBounds = true
         return ei
@@ -77,12 +77,12 @@ class FavoritesCell: UICollectionViewCell {
         return view
     }()
     
-    let switchView: UISwitch = {
-        let sv = UISwitch()
-        sv.thumbTintColor = .black
-        sv.onTintColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
-        return sv
-    }()
+//    let switchView: UISwitch = {
+//        let sv = UISwitch()
+//        sv.thumbTintColor = .black
+//        sv.onTintColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
+//        return sv
+//    }()
     
     
     override init(frame: CGRect) {
@@ -107,7 +107,7 @@ class FavoritesCell: UICollectionViewCell {
         eventCellContainerView.addSubview(eventStartTime)
         eventCellContainerView.addSubview(eventEndTime)
         eventCellContainerView.addSubview(moreInfoButton)
-        eventCellContainerView.addSubview(switchView)
+        //eventCellContainerView.addSubview(switchView)
         
         eventName.snp.makeConstraints { (make) in
             make.top.equalTo(eventCellContainerView.snp.top)
@@ -146,11 +146,11 @@ class FavoritesCell: UICollectionViewCell {
             make.width.equalTo(50)
         }
         
-        switchView.snp.makeConstraints { (make) in
-            make.top.equalTo(eventEndTime.snp_bottom).offset(28)
-            make.height.equalTo(50)
-            make.left.equalTo(moreInfoButton.snp.right).offset(50)
-        }
+//        switchView.snp.makeConstraints { (make) in
+//            make.top.equalTo(eventEndTime.snp_bottom).offset(28)
+//            make.height.equalTo(50)
+//            make.left.equalTo(moreInfoButton.snp.right).offset(50)
+//        }
     }
     
 }
