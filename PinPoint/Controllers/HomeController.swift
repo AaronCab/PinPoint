@@ -181,29 +181,29 @@ class HomeController: UIViewController{
         }
         discoverView.discoverCollectionView.reloadData()
         getCategory(intrest: intestedIn, location: location)
-//        authService.authserviceSignOutDelegate = self
-//        locationManager = CLLocationManager()
-//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//        locationManager.startUpdatingLocation()
-//        self.locationManager.requestAlwaysAuthorization()
-//        self.locationManager.requestWhenInUseAuthorization()
-//        if CLLocationManager.locationServicesEnabled() {
-//            locationManager.delegate = self
-//            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-//        }
-//        if let user = authService.getCurrentUser(){
-//            DBService.firestoreDB
-//                .collection(ProfileCollectionKeys.CollectionKey)
-//                .getDocuments(source: .server, completion: { (data, error) in
-//                    if let data = data{
-//                        self.userProfile = data.documents.map { ProfileOfUser(dict: $0.data()) }
-//                            .filter(){$0.ProfileId == user.uid}.first
-//                        self.fetchEvents()
-//                    }else if let error = error{
-//                        self.showAlert(title: nil, message: error.localizedDescription)
-//                    }
-//                })
-//        }
+        authService.authserviceSignOutDelegate = self
+        locationManager = CLLocationManager()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        }
+        if let user = authService.getCurrentUser(){
+            DBService.firestoreDB
+                .collection(ProfileCollectionKeys.CollectionKey)
+                .getDocuments(source: .server, completion: { (data, error) in
+                    if let data = data{
+                        self.userProfile = data.documents.map { ProfileOfUser(dict: $0.data()) }
+                            .filter(){$0.ProfileId == user.uid}.first
+                        self.fetchEvents()
+                    }else if let error = error{
+                        self.showAlert(title: nil, message: error.localizedDescription)
+                    }
+                })
+        }
 
     }
     
