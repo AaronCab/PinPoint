@@ -17,7 +17,7 @@ enum MenuOption: Int, CustomStringConvertible {
     
     var description: String {
         switch self {
-        case .Discover: return "Discover"
+        case .Discover: return "PinPoint Events"
         case .Nearby: return "Nearby Events"
         case .Favorites: return "Favorites"
         case .Requests: return "Friends"
