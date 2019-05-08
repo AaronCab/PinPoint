@@ -146,7 +146,7 @@ class HomeController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewdidLoadLayout()
+       viewdidLoadLayout()
     }
     
     
@@ -164,13 +164,13 @@ class HomeController: UIViewController{
         authService.authserviceExistingAccountDelegate = self
         authService.authserviceCreateNewAccountDelegate = self
         preferencesView.categoryCollectionView.dataSource = self
-        preferencesView.categoryCollectionView.delegate = self 
+        preferencesView.categoryCollectionView.delegate = self
         discoverView.discoverCollectionView.delegate = self
         discoverView.discoverCollectionView.dataSource = self
         locationManager = CLLocationManager()
         loginViewStuff()
         preferencesViewStuff()
-        configureNavigationBar()
+       configureNavigationBar()
         listernerForFriends { (friends, error) in
             if let error = error{
                self.showAlert(title: "Error", message: error.localizedDescription)
@@ -181,29 +181,29 @@ class HomeController: UIViewController{
         }
         discoverView.discoverCollectionView.reloadData()
         getCategory(intrest: intestedIn, location: location)
-        authService.authserviceSignOutDelegate = self
-        locationManager = CLLocationManager()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.startUpdatingLocation()
-        self.locationManager.requestAlwaysAuthorization()
-        self.locationManager.requestWhenInUseAuthorization()
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        }
-        if let user = authService.getCurrentUser(){
-            DBService.firestoreDB
-                .collection(ProfileCollectionKeys.CollectionKey)
-                .getDocuments(source: .server, completion: { (data, error) in
-                    if let data = data{
-                        self.userProfile = data.documents.map { ProfileOfUser(dict: $0.data()) }
-                            .filter(){$0.ProfileId == user.uid}.first
-                        self.fetchEvents()
-                    }else if let error = error{
-                        self.showAlert(title: nil, message: error.localizedDescription)
-                    }
-                })
-        }
+//        authService.authserviceSignOutDelegate = self
+//        locationManager = CLLocationManager()
+//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//        locationManager.startUpdatingLocation()
+//        self.locationManager.requestAlwaysAuthorization()
+//        self.locationManager.requestWhenInUseAuthorization()
+//        if CLLocationManager.locationServicesEnabled() {
+//            locationManager.delegate = self
+//            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+//        }
+//        if let user = authService.getCurrentUser(){
+//            DBService.firestoreDB
+//                .collection(ProfileCollectionKeys.CollectionKey)
+//                .getDocuments(source: .server, completion: { (data, error) in
+//                    if let data = data{
+//                        self.userProfile = data.documents.map { ProfileOfUser(dict: $0.data()) }
+//                            .filter(){$0.ProfileId == user.uid}.first
+//                        self.fetchEvents()
+//                    }else if let error = error{
+//                        self.showAlert(title: nil, message: error.localizedDescription)
+//                    }
+//                })
+//        }
 
     }
     
