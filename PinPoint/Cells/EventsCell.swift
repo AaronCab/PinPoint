@@ -35,6 +35,7 @@ class EventsCell: UICollectionViewCell {
         en.font = UIFont.systemFont(ofSize: 28, weight: .semibold)
         en.font = UIFont.init(name: "futura", size: 28)
         en.textColor = #colorLiteral(red: 0.2176656425, green: 0.06067546457, blue: 0.03762038797, alpha: 1)
+        en.backgroundColor = .clear 
         en.layer.masksToBounds = true
         en.layer.shadowColor = UIColor.lightGray.cgColor
         en.layer.shadowOffset = CGSize(width: 3.0, height: 3.0)
@@ -58,7 +59,7 @@ class EventsCell: UICollectionViewCell {
     let eventDescription: UITextView = {
         let et = UITextView()
         et.isEditable = false
-        et.backgroundColor = #colorLiteral(red: 1, green: 0.9972335696, blue: 0.7505659461, alpha: 1)
+        et.backgroundColor = .clear
         et.layer.cornerRadius = 10
         et.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         et.font = UIFont.init(name: "futura", size: 18)
@@ -135,8 +136,8 @@ class EventsCell: UICollectionViewCell {
         
         eventCellContainerView.snp.makeConstraints { (make) in
 make.edges.equalTo(contentView)
-            make.top.equalToSuperview().offset(40)
-            make.bottom.equalToSuperview().offset(-40)
+            make.top.equalToSuperview().offset(20)
+            make.bottom.equalToSuperview().offset(-20)
             
 //            make.top.left.equalTo(25)
 //            make.bottom.right.equalTo(-25)
@@ -163,7 +164,7 @@ make.edges.equalTo(contentView)
             make.height.equalTo(250)
         }
         eventDescription.snp.makeConstraints { (make) in
-            make.top.equalTo(eventImageView.snp.bottom)//.offset(7)
+            make.top.equalTo(eventImageView.snp.bottom).offset(7)
             make.left.equalTo(20)
             make.right.equalTo(-20)
             make.height.equalTo(200)
