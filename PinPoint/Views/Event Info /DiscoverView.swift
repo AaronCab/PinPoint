@@ -15,7 +15,7 @@ class DiscoverView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 16
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize.init(width: 400, height: 750)
+        layout.itemSize = CGSize.init(width: 388, height: 660)
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
         cv.backgroundColor = .white

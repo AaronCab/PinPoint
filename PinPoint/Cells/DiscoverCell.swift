@@ -27,6 +27,7 @@ class DiscoverCell: UICollectionViewCell {
         let en = UILabel()
         en.text = "Event Name"
         en.numberOfLines = 2
+        en.backgroundColor = .clear
         en.font = UIFont.systemFont(ofSize: 28, weight: .semibold)
         en.font = UIFont.init(name: "futura", size: 28)
         en.textColor = #colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1)
@@ -87,28 +88,40 @@ class DiscoverCell: UICollectionViewCell {
     
     let moreInfoButton: UIButton = {
         let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "icons8-test-passed-100"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "icons8-target-100"), for: .normal)
         return button
     }()
+    let calendarButton: UIButton = {
+        let button = UIButton()
+        button.setImage(#imageLiteral(resourceName: "icons8-planner-100"), for: .normal)
+        return button
+    }()
+    let favoriteButton: UIButton = {
+        let button = UIButton()
+        button.setImage(#imageLiteral(resourceName: "icons8-star-100-2"), for: .normal)
+        return button
+    }()
+    
+    
     private var shadowLayer: CAShapeLayer!
     private var cornerRadius: CGFloat = 25.0
-    private var fillColor: UIColor = #colorLiteral(red: 0.9374296665, green: 0.9370631576, blue: 0.958656013, alpha: 1) // the color applied to the shadowLayer, rather than the view's backgroundColor
-    
+    private var fillColor: UIColor = #colorLiteral(red: 0.9917679429, green: 0.985871613, blue: 0.9962999225, alpha: 1) // the color applied to the shadowLayer, rather than the view's backgroundColor
+
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         if shadowLayer == nil {
             shadowLayer = CAShapeLayer()
-            
+
             shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).cgPath
             shadowLayer.fillColor = fillColor.cgColor
-            
+
             shadowLayer.shadowColor = UIColor.black.cgColor
             shadowLayer.shadowPath = shadowLayer.path
             shadowLayer.shadowOffset = CGSize(width: 0.0, height: 1.0)
             shadowLayer.shadowOpacity = 0.2
             shadowLayer.shadowRadius = 3
-            
+
             layer.insertSublayer(shadowLayer, at: 0)
         }
     }
@@ -126,7 +139,7 @@ class DiscoverCell: UICollectionViewCell {
         self.addSubview(eventCellContainerView)
         
         eventCellContainerView.snp.makeConstraints { (make) in
-            make.top.equalTo(safeAreaInsets)
+            make.top.equalTo(safeAreaInsets).offset(20)
             make.bottom.equalTo(safeAreaInsets)
             make.left.equalTo(safeAreaInsets)
             make.right.equalTo(safeAreaInsets)
@@ -139,10 +152,11 @@ class DiscoverCell: UICollectionViewCell {
         eventCellContainerView.addSubview(eventStartTime)
         eventCellContainerView.addSubview(eventEndTime)
         eventCellContainerView.addSubview(moreInfoButton)
+        eventCellContainerView.addSubview(calendarButton)
+        eventCellContainerView.addSubview(favoriteButton)
         
         eventName.snp.makeConstraints { (make) in
-            make.top.equalTo(eventCellContainerView.snp.top)
-            
+            make.top.equalTo(safeAreaInsets) //(eventCellContainerView.snp.topMargin)
             make.centerX.equalTo(eventCellContainerView.snp.centerX)
             
             
@@ -176,9 +190,17 @@ class DiscoverCell: UICollectionViewCell {
         }
         moreInfoButton.snp.makeConstraints { (make) in
             make.top.equalTo(eventEndTime.snp_bottom).offset(20)
-            make.height.equalTo(50)
-            make.left.equalTo(20)
-            make.width.equalTo(60)
+            make.height.width.equalTo(45)
+            make.left.equalTo(15)
         }
+        favoriteButton.snp.makeConstraints { (make) in
+            make.top.equalTo(eventEndTime.snp_bottom).offset(20)
+            make.left.equalTo(moreInfoButton.snp_right).offset(20)
+            make.height.width.equalTo(45)
+        }
+        calendarButton.snp.makeConstraints { (make) in
+            make.top.equalTo(eventEndTime.snp_bottom).offset(20)
+            make.height.width.equalTo(45)
+            make.left.equalTo(favoriteButton.snp_right).offset(20)        }
     }
 }
