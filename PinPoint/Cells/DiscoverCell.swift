@@ -13,8 +13,14 @@ class DiscoverCell: UICollectionViewCell {
     let eventCellContainerView: UIView = {
         let ev = UIView()
         ev.backgroundColor = .clear
-        ev.layer.cornerRadius = 20
-        ev.layer.masksToBounds = true
+        ev.layer.cornerRadius = 2.0
+        ev.layer.shadowColor = UIColor.lightGray.cgColor
+        ev.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+        ev.layer.shadowRadius = 3.0
+        ev.layer.shadowOpacity = 1.0
+        ev.layer.masksToBounds = false
+        ev.layer.shadowPath = UIBezierPath(roundedRect: ev.bounds, cornerRadius: ev.layer.cornerRadius).cgPath
+        
         return ev
     }()
     
@@ -78,7 +84,28 @@ class DiscoverCell: UICollectionViewCell {
         button.setImage(#imageLiteral(resourceName: "icons8-test-passed-100"), for: .normal)
         return button
     }()
+    private var shadowLayer: CAShapeLayer!
+    private var cornerRadius: CGFloat = 25.0
+    private var fillColor: UIColor = #colorLiteral(red: 0.9374296665, green: 0.9370631576, blue: 0.958656013, alpha: 1) // the color applied to the shadowLayer, rather than the view's backgroundColor
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if shadowLayer == nil {
+            shadowLayer = CAShapeLayer()
+            
+            shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).cgPath
+            shadowLayer.fillColor = fillColor.cgColor
+            
+            shadowLayer.shadowColor = UIColor.black.cgColor
+            shadowLayer.shadowPath = shadowLayer.path
+            shadowLayer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+            shadowLayer.shadowOpacity = 0.2
+            shadowLayer.shadowRadius = 3
+            
+            layer.insertSublayer(shadowLayer, at: 0)
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
