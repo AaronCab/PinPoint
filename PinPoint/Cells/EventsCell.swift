@@ -34,8 +34,8 @@ class EventsCell: UICollectionViewCell {
         en.textAlignment = .center
         en.font = UIFont.systemFont(ofSize: 28, weight: .semibold)
         en.font = UIFont.init(name: "futura", size: 28)
-        en.textColor = #colorLiteral(red: 0.2176656425, green: 0.06067546457, blue: 0.03762038797, alpha: 1)
-        en.backgroundColor = .clear 
+        en.textColor = #colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1)
+        en.backgroundColor = .clear
         en.layer.masksToBounds = true
         en.layer.shadowColor = UIColor.lightGray.cgColor
         en.layer.shadowOffset = CGSize(width: 3.0, height: 3.0)
@@ -59,13 +59,18 @@ class EventsCell: UICollectionViewCell {
     let eventDescription: UITextView = {
         let et = UITextView()
         et.isEditable = false
-        et.backgroundColor = .clear
+        et.backgroundColor = .clear 
         et.layer.cornerRadius = 10
         et.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         et.font = UIFont.init(name: "futura", size: 18)
-        et.layer.borderWidth = 1.0
-        et.layer.borderColor =  #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         et.textColor = #colorLiteral(red: 0.2158689201, green: 0.05760341883, blue: 0.03225985169, alpha: 1)
+        et.layer.borderWidth = 1.5
+        et.layer.borderColor =  #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        et.layer.shadowColor = UIColor.lightGray.cgColor
+        et.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        et.layer.shadowRadius = 3.0
+        et.layer.shadowOpacity = 1.0
+        et.layer.shadowPath = UIBezierPath(roundedRect: et.bounds, cornerRadius: et.layer.cornerRadius).cgPath
         return et
     }()
     
@@ -90,8 +95,8 @@ class EventsCell: UICollectionViewCell {
         button.setImage(#imageLiteral(resourceName: "icons8-star-80"), for: .normal)
         //trying to get the button a shadow
         button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = CGSize(width: 0, height: 2.0)
-        button.layer.shadowRadius = 2.0
+        button.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        button.layer.shadowRadius = 3.0
         button.layer.shadowOpacity = 1.0
         button.layer.masksToBounds = false
         button.layer.shadowPath = UIBezierPath(roundedRect: button.bounds, cornerRadius: button.layer.cornerRadius).cgPath
@@ -167,7 +172,7 @@ make.edges.equalTo(contentView)
             make.top.equalTo(eventImageView.snp.bottom).offset(7)
             make.left.equalTo(20)
             make.right.equalTo(-20)
-            make.height.equalTo(200)
+            make.height.equalTo(175)
         }
         eventStartTime.snp.makeConstraints { (make) in
             make.top.equalTo(eventDescription.snp.bottom).offset(15)

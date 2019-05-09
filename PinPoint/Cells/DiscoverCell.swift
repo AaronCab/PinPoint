@@ -20,17 +20,23 @@ class DiscoverCell: UICollectionViewCell {
         ev.layer.shadowOpacity = 1.0
         ev.layer.masksToBounds = false
         ev.layer.shadowPath = UIBezierPath(roundedRect: ev.bounds, cornerRadius: ev.layer.cornerRadius).cgPath
-        
         return ev
     }()
     
     let eventName: UILabel = {
         let en = UILabel()
-        en.numberOfLines = 2
-        en.font = UIFont.systemFont(ofSize: 19, weight: .semibold)
-        en.font = UIFont.init(name: "futura", size: 19)
         en.text = "Event Name"
-        en.textColor = #colorLiteral(red: 0.3176470697, green: 0.07450980693, blue: 0.02745098062, alpha: 1)
+        en.numberOfLines = 2
+        en.font = UIFont.systemFont(ofSize: 28, weight: .semibold)
+        en.font = UIFont.init(name: "futura", size: 28)
+        en.textColor = #colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1)
+        en.layer.cornerRadius = 2.0
+        en.layer.shadowColor = UIColor.lightGray.cgColor
+        en.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+        en.layer.shadowRadius = 3.0
+        en.layer.shadowOpacity = 1.0
+        en.layer.masksToBounds = false
+        en.layer.shadowPath = UIBezierPath(roundedRect: en.bounds, cornerRadius: en.layer.cornerRadius).cgPath
         return en
     }()
     
