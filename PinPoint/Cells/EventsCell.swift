@@ -38,8 +38,8 @@ class EventsCell: UICollectionViewCell {
         en.backgroundColor = .clear
         en.layer.masksToBounds = true
         en.layer.shadowColor = UIColor.lightGray.cgColor
-        en.layer.shadowOffset = CGSize(width: 3.0, height: 3.0)
-        en.layer.shadowRadius = 2.0
+        en.layer.shadowOffset = CGSize(width: 2.0, height: 3.0)
+        en.layer.shadowRadius = 1.0
         en.layer.shadowOpacity = 1.0
         en.layer.masksToBounds = false
         return en
@@ -59,12 +59,12 @@ class EventsCell: UICollectionViewCell {
     let eventDescription: UITextView = {
         let et = UITextView()
         et.isEditable = false
-        et.backgroundColor = .clear 
+        et.backgroundColor = #colorLiteral(red: 0.9610863328, green: 0.9553727508, blue: 0.965478003, alpha: 1)
         et.layer.cornerRadius = 10
         et.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         et.font = UIFont.init(name: "futura", size: 18)
         et.textColor = #colorLiteral(red: 0.2158689201, green: 0.05760341883, blue: 0.03225985169, alpha: 1)
-        et.layer.borderWidth = 1.5
+        et.layer.borderWidth = 2.0
         et.layer.borderColor =  #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         et.layer.shadowColor = UIColor.lightGray.cgColor
         et.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
@@ -106,7 +106,7 @@ class EventsCell: UICollectionViewCell {
     }()
     private var shadowLayer: CAShapeLayer!
     private var cornerRadius: CGFloat = 25.0
-    private var fillColor: UIColor = #colorLiteral(red: 0.9374296665, green: 0.9370631576, blue: 0.958656013, alpha: 1) // the color applied to the shadowLayer, rather than the view's backgroundColor
+    private var fillColor: UIColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) // the color applied to the shadowLayer, rather than the view's backgroundColor
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -119,8 +119,8 @@ class EventsCell: UICollectionViewCell {
             
             shadowLayer.shadowColor = UIColor.black.cgColor
             shadowLayer.shadowPath = shadowLayer.path
-            shadowLayer.shadowOffset = CGSize(width: 0.0, height: 1.0)
-            shadowLayer.shadowOpacity = 0.2
+            shadowLayer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+            shadowLayer.shadowOpacity = 0.5
             shadowLayer.shadowRadius = 3
             
             layer.insertSublayer(shadowLayer, at: 0)
