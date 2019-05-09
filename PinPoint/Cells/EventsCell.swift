@@ -141,11 +141,10 @@ class EventsCell: UICollectionViewCell {
         
         eventCellContainerView.snp.makeConstraints { (make) in
 make.edges.equalTo(contentView)
-            make.top.equalToSuperview().offset(20)
-            make.bottom.equalToSuperview().offset(-20)
-            
-//            make.top.left.equalTo(25)
-//            make.bottom.right.equalTo(-25)
+            make.top.equalTo(safeAreaInsets).offset(20)
+            make.bottom.equalTo(safeAreaInsets)
+            make.left.equalTo(safeAreaInsets)
+            make.right.equalTo(safeAreaInsets)
             
         }
         eventCellContainerView.addSubview(eventName)
@@ -183,7 +182,7 @@ make.edges.equalTo(contentView)
             make.left.equalTo(20)
         }
         moreInfoButton.snp.makeConstraints { (make) in
-            make.top.equalTo(eventEndTime.snp_bottom).offset(20)
+            make.top.equalTo(eventEndTime.snp_bottom).offset(10)
             make.height.equalTo(50)
             make.left.equalTo(20)
             make.width.equalTo(50)
