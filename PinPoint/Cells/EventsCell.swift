@@ -15,9 +15,6 @@ class EventsCell: UICollectionViewCell {
     let eventCellContainerView: UIView = {
         let ev = UIView()
         ev.backgroundColor = .clear
-       // ev.layer.cornerRadius = 20
-       // ev.layer.masksToBounds = true
-        
         ev.layer.cornerRadius = 2.0
         ev.layer.masksToBounds = true
         ev.layer.shadowColor = UIColor.lightGray.cgColor
@@ -51,6 +48,8 @@ class EventsCell: UICollectionViewCell {
         let ei = UIImageView()
         ei.image = UIImage(named: "icons8-ask-question-25")
         ei.contentMode = .scaleAspectFit
+        ei.layer.shadowColor = UIColor.red.cgColor
+        ei.layer.shadowOffset = CGSize(width: 3.0, height: 3.0)
         ei.layer.cornerRadius = 20
         ei.layer.masksToBounds = true
         return ei
@@ -100,7 +99,7 @@ class EventsCell: UICollectionViewCell {
     }()
     private var shadowLayer: CAShapeLayer!
     private var cornerRadius: CGFloat = 25.0
-    private var fillColor: UIColor = #colorLiteral(red: 0.9223083258, green: 0.8510513902, blue: 0.9434617162, alpha: 1) // the color applied to the shadowLayer, rather than the view's backgroundColor
+    private var fillColor: UIColor = #colorLiteral(red: 0.9374296665, green: 0.9370631576, blue: 0.958656013, alpha: 1) // the color applied to the shadowLayer, rather than the view's backgroundColor
     
     override func layoutSubviews() {
         super.layoutSubviews()

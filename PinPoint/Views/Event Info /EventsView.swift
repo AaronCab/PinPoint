@@ -23,7 +23,7 @@ class EventsView: UIView {
     } ()
     var preferencesButton: UIButton = {
         let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "icons8-slider--filled-45"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "icons8-slider-100"), for: .normal)
         button.backgroundColor = .clear
         return button
     }()
