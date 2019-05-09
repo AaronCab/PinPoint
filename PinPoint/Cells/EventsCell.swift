@@ -47,8 +47,8 @@ class EventsCell: UICollectionViewCell {
         return en
     }()
     
-    let eventImageView: UIImageView = {
-        let ei = UIImageView()
+    let eventImageView: CornerImageView = {
+        let ei = CornerImageView()
         ei.image = UIImage(named: "icons8-ask-question-25")
         ei.contentMode = .scaleAspectFit
         ei.layer.cornerRadius = 20
@@ -59,7 +59,8 @@ class EventsCell: UICollectionViewCell {
     let eventDescription: UITextView = {
         let et = UITextView()
         et.isEditable = false
-        et.backgroundColor = .yellow
+        et.backgroundColor = #colorLiteral(red: 1, green: 0.9972335696, blue: 0.7505659461, alpha: 1)
+        et.layer.cornerRadius = 10
         et.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         et.font = UIFont.init(name: "futura", size: 18)
         et.layer.borderWidth = 1.0
@@ -164,8 +165,8 @@ make.edges.equalTo(contentView)
         }
         eventDescription.snp.makeConstraints { (make) in
             make.top.equalTo(eventImageView.snp.bottom)//.offset(7)
-            make.left.equalTo(25)
-            make.right.equalTo(-25)
+            make.left.equalTo(20)
+            make.right.equalTo(-20)
             make.height.equalTo(200)
         }
         eventStartTime.snp.makeConstraints { (make) in
