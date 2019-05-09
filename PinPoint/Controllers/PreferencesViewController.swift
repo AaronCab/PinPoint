@@ -107,9 +107,9 @@ extension PreferencesViewController: UICollectionViewDataSource, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CategoryCell
         let cell = collectionView.cellForItem(at: indexPath)
-        cell?.layer.borderWidth = 2.0
-        cell?.layer.borderColor = #colorLiteral(red: 0.8022074103, green: 1, blue: 0.9920228124, alpha: 1)
-        cell?.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
+        cell?.layer.borderWidth = 4.0
+        cell?.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        cell?.layer.cornerRadius = 25
         let category = catagoriesInAnArray[indexPath.row]
 //        cell!.categoryName.text = category
         
