@@ -14,17 +14,17 @@ class EventsCell: UICollectionViewCell {
     
     let eventCellContainerView: UIView = {
         let ev = UIView()
-        ev.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        ev.backgroundColor = .clear
        // ev.layer.cornerRadius = 20
        // ev.layer.masksToBounds = true
         
         ev.layer.cornerRadius = 2.0
         ev.layer.borderWidth = 1.0
-        ev.layer.borderColor =  UIColor.black.cgColor
+        ev.layer.borderColor =  #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         ev.layer.masksToBounds = true
         ev.layer.shadowColor = UIColor.lightGray.cgColor
         ev.layer.shadowOffset = CGSize(width: 0, height: 2.0)
-        ev.layer.shadowRadius = 2.0
+        ev.layer.shadowRadius = 3.0
         ev.layer.shadowOpacity = 1.0
         ev.layer.masksToBounds = false
         ev.layer.shadowPath = UIBezierPath(roundedRect: ev.bounds, cornerRadius: ev.layer.cornerRadius).cgPath
@@ -35,11 +35,17 @@ class EventsCell: UICollectionViewCell {
     let eventName: UILabel = {
         let en = UILabel()
         en.text = "Event Name"
-        en.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        en.font = UIFont.init(name: "futura", size: 16)
         en.numberOfLines = 2
         en.textAlignment = .center
+        en.font = UIFont.systemFont(ofSize: 28, weight: .semibold)
+        en.font = UIFont.init(name: "futura", size: 28)
         en.textColor = #colorLiteral(red: 0.2176656425, green: 0.06067546457, blue: 0.03762038797, alpha: 1)
+        en.layer.masksToBounds = true
+        en.layer.shadowColor = UIColor.lightGray.cgColor
+        en.layer.shadowOffset = CGSize(width: 3.0, height: 3.0)
+        en.layer.shadowRadius = 2.0
+        en.layer.shadowOpacity = 1.0
+        en.layer.masksToBounds = false
         return en
     }()
     
@@ -55,9 +61,11 @@ class EventsCell: UICollectionViewCell {
     let eventDescription: UITextView = {
         let et = UITextView()
         et.isEditable = false
-        et.backgroundColor = .clear
+        et.backgroundColor = .yellow
         et.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         et.font = UIFont.init(name: "futura", size: 18)
+        et.layer.borderWidth = 1.0
+        et.layer.borderColor =  #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         et.textColor = #colorLiteral(red: 0.2158689201, green: 0.05760341883, blue: 0.03225985169, alpha: 1)
         return et
     }()
@@ -130,13 +138,13 @@ make.edges.equalTo(contentView)
         }
         eventImageView.snp.makeConstraints { (make) in
             
-            make.top.equalTo(eventName.snp.bottom).offset(15)
+            make.top.equalTo(eventName.snp.bottom).offset(7)
             make.left.equalTo(20)
             make.right.equalTo(-20)
             make.height.equalTo(250)
         }
         eventDescription.snp.makeConstraints { (make) in
-            make.top.equalTo(eventImageView.snp.bottom).offset(15)
+            make.top.equalTo(eventImageView.snp.bottom)//.offset(7)
             make.left.equalTo(25)
             make.right.equalTo(-25)
             make.height.equalTo(200)
