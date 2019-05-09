@@ -10,7 +10,28 @@ import UIKit
 import SnapKit
 
 class CategoryCell: UICollectionViewCell {
+    private var shadowLayer: CAShapeLayer!
+    private var cornerRadius: CGFloat = 25.0
+    private var fillColor: UIColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1) // the color applied to the shadowLayer, rather than the view's backgroundColor
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if shadowLayer == nil {
+            shadowLayer = CAShapeLayer()
+            
+            shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).cgPath
+            shadowLayer.fillColor = fillColor.cgColor
+            
+            shadowLayer.shadowColor = UIColor.black.cgColor
+            shadowLayer.shadowPath = shadowLayer.path
+            shadowLayer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+            shadowLayer.shadowOpacity = 0.2
+            shadowLayer.shadowRadius = 3
+            
+            layer.insertSublayer(shadowLayer, at: 0)
+        }
+    }
     let categoryCellContainerView: UIView = {
         let categoryView = UIView()
         categoryView.backgroundColor = .clear
