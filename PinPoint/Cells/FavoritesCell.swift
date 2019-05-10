@@ -29,8 +29,8 @@ class FavoritesCell: UICollectionViewCell {
         return en
     }()
     
-    let eventImageView: UIImageView = {
-        let ei = UIImageView()
+    let eventImageView: CornerImageView = {
+        let ei = CornerImageView()
         ei.image = UIImage(named: "icons8-ask-question-25")
         ei.contentMode = .scaleAspectFit
         ei.layer.cornerRadius = 20
@@ -84,7 +84,28 @@ class FavoritesCell: UICollectionViewCell {
 //        return sv
 //    }()
     
+    private var shadowLayer: CAShapeLayer!
+    private var cornerRadius: CGFloat = 25.0
+    private var fillColor: UIColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) // the color applied to the shadowLayer, rather than the view's backgroundColor
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if shadowLayer == nil {
+            shadowLayer = CAShapeLayer()
+            
+            shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).cgPath
+            shadowLayer.fillColor = fillColor.cgColor
+            
+            shadowLayer.shadowColor = UIColor.black.cgColor
+            shadowLayer.shadowPath = shadowLayer.path
+            shadowLayer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+            shadowLayer.shadowOpacity = 0.5
+            shadowLayer.shadowRadius = 3
+            
+            layer.insertSublayer(shadowLayer, at: 0)
+        }
+    }
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         setupCell()

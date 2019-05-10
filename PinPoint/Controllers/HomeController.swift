@@ -478,20 +478,6 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         }
     }
     
-//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-//        if ((scrollView as? UICollectionView) != nil){
-//        snapToNearestCell(scrollView as! UICollectionView)
-//        }else{
-//            
-//        }
-//    }
-//    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-//        if ((scrollView as? UICollectionView) != nil){
-//        snapToNearestCell(scrollView as! UICollectionView)
-//        }else{
-//            
-//        }
-//    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch whatToSeque {
