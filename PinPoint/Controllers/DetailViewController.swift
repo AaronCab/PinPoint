@@ -70,13 +70,20 @@ class DetailViewController: UIViewController {
                 
             }
             detailView.displayUserLabel.text = profileOfUser.displayName
+            if custom.personID == authService.getCurrentUser()?.uid{
+                detailView.messageButton.isEnabled = false
+                detailView.messageButton.isHidden = true
+
+                
+            }else{
+                detailView.messageButton.isEnabled = true
+                detailView.messageButton.isHidden = false
             detailView.messageButton.addTarget(self, action: #selector(addAsAFriend), for: .touchUpInside)
-            
+        }
         }
     }
     
     @objc func addAsAFriend(){
-        
       let alertController = UIAlertController(title: nil, message: "Are you sure you want friend this person?", preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction.init(title: "Sure", style: .default, handler: { (action) in
             if let user = self.authService.getCurrentUser(){
