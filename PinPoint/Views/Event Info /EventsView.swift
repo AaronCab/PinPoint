@@ -15,7 +15,7 @@ class EventsView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 16
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize.init(width: 400, height: 750)
+        layout.itemSize = CGSize.init(width: 388, height: 660)
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
         cv.backgroundColor = .white
@@ -23,7 +23,7 @@ class EventsView: UIView {
     } ()
     var preferencesButton: UIButton = {
         let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "icons8-slider--filled-45"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "icons8-slider-100"), for: .normal)
         button.backgroundColor = .clear
         return button
     }()
