@@ -103,11 +103,13 @@ extension ProfileView{
         addSubview(profilePicture)
         profilePicture.translatesAutoresizingMaskIntoConstraints = false
         profilePicture.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 21).isActive = true
-        profilePicture.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.3 ).isActive = true
+        //profilePicture.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.3 ).isActive = true
+        profilePicture.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        profilePicture.widthAnchor.constraint(equalToConstant: 200).isActive = true
         profilePicture.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
-        profilePicture.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 92).isActive = true
-        profilePicture.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -92).isActive = true
+        //profilePicture.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 92).isActive = true
+        //profilePicture.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -92).isActive = true
     }
     
     private func displayNameConstraint(){
