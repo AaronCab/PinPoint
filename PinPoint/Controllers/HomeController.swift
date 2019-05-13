@@ -57,17 +57,18 @@ class HomeController: UIViewController{
     
     var friendListener: ListenerRegistration!
     
-    var catagories = [
+    var categories = [
         "Business": "101",
-        "ScienceAndTech": "102",
+        "Science & Tech": "102",
         "Music": "103",
-        "FilmAndMedia": "104",
+        "Film & Media": "104",
         "Arts": "105",
         "Fashion": "106",
         "Health": "107",
-        "SportsAndFitness": "108",
+        "Sports & Fitness": "108",
         "All": ""]
-    var catagoriesInAnArray = ["Business", "ScienceAndTech", "Music","FilmAndMedia","Arts","Fashion", "Health","SportsAndFitness", "All"]
+    
+    var categoriesInAnArray = ["Business", "Science & Tech", "Music","Film & Media","Arts","Fashion", "Health","Sports & Fitness", "All"]
     
     var favorite = FavoritesDataManager.fetchItemsFromDocumentsDirectory(){
         didSet {
@@ -356,7 +357,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         case .custom:
             return createdEvent.count
         case .catagories:
-            return catagoriesInAnArray.count
+            return categoriesInAnArray.count
             
         }
     }
@@ -428,7 +429,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         }
         if collectionView == preferencesView.categoryCollectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
-            let category = catagoriesInAnArray[indexPath.row]
+            let category = categoriesInAnArray[indexPath.row]
             cell.categoryName.text = category
             cell.categoryImage.image = UIImage(named: category)
             
@@ -856,7 +857,7 @@ extension HomeController{
 
 extension HomeController: FinallyACatagory{
     func intrest(catagroy: String) {
-        if let catagory = catagories[catagroy]{
+        if let catagory = categories[catagroy]{
         intestedIn = catagory
         }else{
             

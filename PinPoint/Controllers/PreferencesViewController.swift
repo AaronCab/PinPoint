@@ -24,17 +24,17 @@ class PreferencesViewController: UIViewController {
     var locationViewHeight = NSLayoutConstraint()
     var locationViewContorller = LocationResultController()
     
-    var catagories = [
+    var categories = [
         "Business": "101",
-        "ScienceAndTech": "102",
+        "Science & Tech": "102",
         "Music": "103",
-        "FilmAndMedia": "104",
+        "Film & Media": "104",
         "Arts": "105",
         "Fashion": "106",
         "Health": "107",
-        "SportsAndFitness": "108",
+        "Sports & Fitness": "108",
         "All": ""]
-    var catagoriesInAnArray = ["Business", "ScienceAndTech", "Music","FilmAndMedia","Arts","Fashion", "Health","SportsAndFitness", "All"]
+    var categoriesInAnArray = ["Business", "Science & Tech", "Music","Film & Media","Arts","Fashion", "Health","Sports & Fitness", "All"]
     var currentLocation: CLLocation! {
         didSet{
             preferencesView.locationButton.setTitle(location, for: .normal)
@@ -78,7 +78,6 @@ class PreferencesViewController: UIViewController {
         preferencesView.locationResultsController.delegate2 = self
         preferencesView.locationResultsController.delegate = self
         hideKeyboardWhenTappedAround()
-//        locationViewContorller.delegate2 = self
     }
     
     @objc func locationFinder(){
@@ -90,14 +89,14 @@ class PreferencesViewController: UIViewController {
         
     }
 }
-extension PreferencesViewController: UICollectionViewDataSource, UICollectionViewDelegate{
+extension PreferencesViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-      return catagoriesInAnArray.count
+      return categoriesInAnArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
-        let category = catagoriesInAnArray[indexPath.row]
+        let category = categoriesInAnArray[indexPath.row]
         cell.categoryName.text = category
         cell.categoryImage.image = UIImage(named: category)
         
@@ -105,17 +104,18 @@ extension PreferencesViewController: UICollectionViewDataSource, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CategoryCell
         let cell = collectionView.cellForItem(at: indexPath)
         cell?.layer.borderWidth = 4.0
         cell?.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         cell?.layer.cornerRadius = 25
-        let category = catagoriesInAnArray[indexPath.row]
-//        cell!.categoryName.text = category
-        
-        
+        let category = categoriesInAnArray[indexPath.row]
         delegateForIntrest?.intrest(catagroy: category)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 130, height: 130)
+    }
+    
     
     
 }
@@ -170,3 +170,4 @@ extension PreferencesViewController: LocationResultsControllerDelegate{
     
     
 }
+

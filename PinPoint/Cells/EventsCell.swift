@@ -205,7 +205,7 @@ make.edges.equalTo(contentView)
             make.height.width.equalTo(45)
         }
         safariEventButton.snp.makeConstraints { (make) in
-            make.top.equalTo(eventEndTime.snp_bottom).offset(15)
+            make.top.equalTo(eventEndTime.snp_bottom).offset(23)
             make.height.equalTo(35)
             make.width.equalTo(30)
             make.left.equalTo(calendarEventButton.snp_right).offset(20)
