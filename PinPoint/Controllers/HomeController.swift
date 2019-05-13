@@ -264,7 +264,6 @@ class HomeController: UIViewController{
         contentView.addSubview(eventsView)
         view.addSubview(contentView)
         navigationItem.searchController = nil
-        
     }
     
     func discoverPageOn() {
@@ -360,7 +359,6 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             return catagoriesInAnArray.count
             
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -371,7 +369,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             cell.eventName.text = currentEvent.displayName
             cell.eventImageView.kf.indicatorType = .activity
             cell.eventLocation.text = "Located At: \(currentEvent.location)"
-            cell.moreInfoButton.tag = indexPath.row
+            cell.mapsButton.tag = indexPath.row
             
             if let thisDate = currentEvent.startedAt?.dateValue() {
                 let dateFormatter = DateFormatter()
@@ -388,7 +386,10 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             }
             
             cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.photoURL)), placeholder: UIImage(named: "pinpointred"))
-            cell.moreInfoButton.addTarget(self, action: #selector(moreInfoDiscover), for: .touchUpInside)
+            cell.mapsButton.addTarget(self, action: #selector(mapDiscover), for: .touchUpInside)
+            cell.favoriteButton.addTarget(self, action: #selector(calDiscover), for: .touchUpInside)
+            cell.calendarButton.addTarget(self, action: #selector(mapDiscover), for: .touchUpInside)
+            
             return cell
         }
         if collectionView == eventsView.myCollectionView {
@@ -399,13 +400,13 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             cell.eventEndTime.text = "End Time: \(currentEvent.end?.utc.formatISODateString(dateFormat: "MMM d, h:mm a") ?? "no end time found")"
             cell.eventName.text = currentEvent.name?.text
             cell.eventImageView.kf.indicatorType = .activity
-            cell.moreInfoButton.tag = indexPath.row
+            cell.favoriteEventButton.tag = indexPath.row
             if currentEvent.logo?.original.url == nil{
                 cell.eventImageView.image = UIImage(named: "pinpointred")
             }else{
                 cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.logo?.original.url)!), placeholder: UIImage(named: "pinpointred"))
             }
-            cell.moreInfoButton.addTarget(self, action: #selector(moreInfo), for: .touchUpInside)
+            cell.favoriteEventButton.addTarget(self, action: #selector(moreInfo), for: .touchUpInside)
             return cell
         }
         if collectionView == favoriteView.myCollectionView {
@@ -439,9 +440,9 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             cell.eventDescription.text = currentEvent.eventDescription
             cell.eventName.text = currentEvent.displayName
             cell.eventImageView.kf.indicatorType = .activity
-            cell.moreInfoButton.tag = indexPath.row
+            cell.favoriteEventButton.tag = indexPath.row
             cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.photoURL)), placeholder: UIImage(named: "pinpointred"))
-            cell.moreInfoButton.addTarget(self, action: #selector(moreInfoFav), for: .touchUpInside)
+            cell.favoriteEventButton.addTarget(self, action: #selector(moreInfoFav), for: .touchUpInside)
             
             return cell
         }
@@ -579,7 +580,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         }
         print("pressed")
     }
-    @objc func moreInfoDiscover(senderTag: UIButton){
+    @objc func mapDiscover(senderTag: UIButton){
         guard let user = authService.getCurrentUser() else {
             showAlert(title: "No logged in user", message: nil)
             return
@@ -593,18 +594,6 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             self.navigationController?.pushViewController(mapView, animated: true)
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        let addCalendarAction = UIAlertAction(title: "Add to Calendar", style: .default, handler: { alert in
-            let discoverEvent = self.createdEvent[senderTag.tag]
-            let formatter = ISO8601DateFormatter()
-               guard let start = discoverEvent.startedAt?.dateValue(),
-            let end = discoverEvent.endDate?.dateValue() else { return }
-                let notes = discoverEvent.eventDescription
-                let title = discoverEvent.displayName.description
-            
-            
-            self.addEventToCalendar(date: start, dateEnd: end, title: title, notes: notes)
-            self.showAlert(title: "PinPoint", message: "Successfully Added to Calendar")
-        })
         let favoriteActionForDiscovery = UIAlertAction(title: "Favorite", style: .default) { alert in
         let thisEvent = self.createdEvent[senderTag.tag]
             let favoriteEvent = FavoritesModel.init(name: (thisEvent.displayName), description: (thisEvent.eventDescription), imageUrl: thisEvent.photoURL, start: thisEvent.startedAt?.dateValue().description ?? "N/A", end: thisEvent.endDate?.dateValue().description ?? "N/A", capacity: "Creator Decides", status: thisEvent.eventType, url: thisEvent.email)
@@ -631,13 +620,28 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         }
         alertController.addAction(mapLoaction)
 
-        alertController.addAction(addCalendarAction)
+        //alertController.addAction(addCalendarAction)
         alertController.addAction(favoriteActionForDiscovery)
         alertController.addAction(cancelAction)
         
         
         present(alertController, animated: true)
         
+    }
+    
+    @objc func calDiscover(senderTag: UIButton) {
+        let addCalendarAction = UIAlertAction(title: "Add to Calendar", style: .default, handler: { alert in
+            let discoverEvent = self.createdEvent[senderTag.tag]
+            let formatter = ISO8601DateFormatter()
+            guard let start = discoverEvent.startedAt?.dateValue(),
+                let end = discoverEvent.endDate?.dateValue() else { return }
+            let notes = discoverEvent.eventDescription
+            let title = discoverEvent.displayName.description
+            
+            
+            self.addEventToCalendar(date: start, dateEnd: end, title: title, notes: notes)
+            self.showAlert(title: "PinPoint", message: "Successfully Added to Calendar")
+        })
     }
     
     @objc private func fetchEvents(){

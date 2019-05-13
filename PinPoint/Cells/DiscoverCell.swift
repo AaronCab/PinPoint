@@ -86,7 +86,7 @@ class DiscoverCell: UICollectionViewCell {
         return ee
     }()
     
-    let moreInfoButton: UIButton = {
+    let mapsButton: UIButton = {
         let button = UIButton()
         button.setImage(#imageLiteral(resourceName: "icons8-target-100"), for: .normal)
         return button
@@ -151,7 +151,7 @@ class DiscoverCell: UICollectionViewCell {
         eventCellContainerView.addSubview(eventLocation)
         eventCellContainerView.addSubview(eventStartTime)
         eventCellContainerView.addSubview(eventEndTime)
-        eventCellContainerView.addSubview(moreInfoButton)
+        eventCellContainerView.addSubview(mapsButton)
         eventCellContainerView.addSubview(calendarButton)
         eventCellContainerView.addSubview(favoriteButton)
         
@@ -188,14 +188,14 @@ class DiscoverCell: UICollectionViewCell {
             make.top.equalTo(eventStartTime.snp_bottom).offset(5)
             make.left.equalTo(20)
         }
-        moreInfoButton.snp.makeConstraints { (make) in
+        mapsButton.snp.makeConstraints { (make) in
             make.top.equalTo(eventEndTime.snp_bottom).offset(20)
             make.height.width.equalTo(45)
             make.left.equalTo(15)
         }
         favoriteButton.snp.makeConstraints { (make) in
             make.top.equalTo(eventEndTime.snp_bottom).offset(20)
-            make.left.equalTo(moreInfoButton.snp_right).offset(20)
+            make.left.equalTo(mapsButton.snp_right).offset(20)
             make.height.width.equalTo(45)
         }
         calendarButton.snp.makeConstraints { (make) in
