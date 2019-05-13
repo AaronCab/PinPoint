@@ -264,7 +264,6 @@ class HomeController: UIViewController{
         contentView.addSubview(eventsView)
         view.addSubview(contentView)
         navigationItem.searchController = nil
-        
     }
     
     func discoverPageOn() {
@@ -360,7 +359,6 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             return catagoriesInAnArray.count
             
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -402,13 +400,13 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             cell.eventEndTime.text = "End Time: \(currentEvent.end?.utc.formatISODateString(dateFormat: "MMM d, h:mm a") ?? "no end time found")"
             cell.eventName.text = currentEvent.name?.text
             cell.eventImageView.kf.indicatorType = .activity
-            cell.moreInfoButton.tag = indexPath.row
+            cell.favoriteEventButton.tag = indexPath.row
             if currentEvent.logo?.original.url == nil{
                 cell.eventImageView.image = UIImage(named: "pinpointred")
             }else{
                 cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.logo?.original.url)!), placeholder: UIImage(named: "pinpointred"))
             }
-            cell.moreInfoButton.addTarget(self, action: #selector(moreInfo), for: .touchUpInside)
+            cell.favoriteEventButton.addTarget(self, action: #selector(moreInfo), for: .touchUpInside)
             return cell
         }
         if collectionView == favoriteView.myCollectionView {
@@ -442,9 +440,9 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             cell.eventDescription.text = currentEvent.eventDescription
             cell.eventName.text = currentEvent.displayName
             cell.eventImageView.kf.indicatorType = .activity
-            cell.moreInfoButton.tag = indexPath.row
+            cell.favoriteEventButton.tag = indexPath.row
             cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.photoURL)), placeholder: UIImage(named: "pinpointred"))
-            cell.moreInfoButton.addTarget(self, action: #selector(moreInfoFav), for: .touchUpInside)
+            cell.favoriteEventButton.addTarget(self, action: #selector(moreInfoFav), for: .touchUpInside)
             
             return cell
         }

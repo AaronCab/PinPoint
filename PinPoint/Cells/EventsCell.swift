@@ -90,9 +90,9 @@ class EventsCell: UICollectionViewCell {
         return ee
     }()
     
-    let moreInfoButton: UIButton = {
+    let favoriteEventButton: UIButton = {
         let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "icons8-star-80"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "icons8-star-100-2"), for: .normal)
         //trying to get the button a shadow
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
@@ -104,6 +104,17 @@ class EventsCell: UICollectionViewCell {
 
         return button
     }()
+    let calendarEventButton: UIButton = {
+        let button = UIButton()
+        button.setImage(#imageLiteral(resourceName: "icons8-planner-100"), for: .normal)
+        return button
+    }()
+    let safariEventButton: UIButton = {
+        let button = UIButton()
+        button.setImage(#imageLiteral(resourceName: "icons8-open-in-browser-100"), for: .normal)
+        return button
+    }()
+    
     private var shadowLayer: CAShapeLayer!
     private var cornerRadius: CGFloat = 25.0
     private var fillColor: UIColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) // the color applied to the shadowLayer, rather than the view's backgroundColor
@@ -152,7 +163,9 @@ make.edges.equalTo(contentView)
         eventCellContainerView.addSubview(eventDescription)
         eventCellContainerView.addSubview(eventStartTime)
         eventCellContainerView.addSubview(eventEndTime)
-        eventCellContainerView.addSubview(moreInfoButton)
+        eventCellContainerView.addSubview(favoriteEventButton)
+        eventCellContainerView.addSubview(calendarEventButton)
+        eventCellContainerView.addSubview(safariEventButton)
         
         eventName.snp.makeConstraints { (make) in
             make.top.equalTo(eventCellContainerView.snp.top)
@@ -181,11 +194,21 @@ make.edges.equalTo(contentView)
             make.top.equalTo(eventStartTime.snp_bottom).offset(5)
             make.left.equalTo(20)
         }
-        moreInfoButton.snp.makeConstraints { (make) in
-            make.top.equalTo(eventEndTime.snp_bottom).offset(10)
-            make.height.equalTo(50)
-            make.left.equalTo(20)
-            make.width.equalTo(50)
+        favoriteEventButton.snp.makeConstraints { (make) in
+            make.top.equalTo(eventEndTime.snp_bottom).offset(15)
+            make.height.width.equalTo(45)
+            make.left.equalTo(15)
+        }
+        calendarEventButton.snp.makeConstraints { (make) in
+            make.top.equalTo(eventEndTime.snp_bottom).offset(15)
+            make.left.equalTo(favoriteEventButton.snp_right).offset(20)
+            make.height.width.equalTo(45)
+        }
+        safariEventButton.snp.makeConstraints { (make) in
+            make.top.equalTo(eventEndTime.snp_bottom).offset(15)
+            make.height.equalTo(35)
+            make.width.equalTo(30)
+            make.left.equalTo(calendarEventButton.snp_right).offset(20)
         }
     }
 }
