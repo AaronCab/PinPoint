@@ -12,7 +12,7 @@ import SnapKit
 class CategoryCell: UICollectionViewCell {
     private var shadowLayer: CAShapeLayer!
     private var cornerRadius: CGFloat = 25.0
-    private var fillColor: UIColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435) // the color applied to the shadowLayer, rather than the view's backgroundColor
+    private var fillColor: UIColor = #colorLiteral(red: 0.1910400689, green: 0.2061233521, blue: 0.2311887741, alpha: 1) // the color applied to the shadowLayer, rather than the view's backgroundColor
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -43,6 +43,7 @@ class CategoryCell: UICollectionViewCell {
     let categoryName: UILabel = {
         let catName = UILabel()
         catName.text = "Event Name"
+        catName.textColor = .white
         catName.textAlignment = .center
         catName.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
         catName.font = UIFont.init(name: "futura", size: 14)
