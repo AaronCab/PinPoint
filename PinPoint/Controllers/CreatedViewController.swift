@@ -60,6 +60,7 @@ class CreatedViewController: UIViewController, LocationResultsControllerDelegate
                                                   style: .plain,
                                                   target: self,
                                                   action: #selector(searchButtonPressed))
+        photoLibraryBarItem.tintColor = #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)
         createdEvent.createdPicture.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
          toolbar.items = [photoLibraryBarItem]
         }

@@ -39,6 +39,7 @@ class CreatedView: UIView {
     lazy var createName: UITextField = {
         let createTF = UITextField()
         createTF.placeholder = "Enter Name of Event"
+        createTF.text = "Demo Day After Party"
         createTF.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         createTF.font = UIFont.init(name: "futura", size: 20)
         createTF.textAlignment = .center
@@ -49,13 +50,15 @@ class CreatedView: UIView {
         let createdButton = UIButton()
         createdButton.layer.cornerRadius = 15
         createdButton.layer.masksToBounds = true
-        createdButton.setImage(#imageLiteral(resourceName: "placeholder-image"), for: .normal)
+        createdButton.backgroundColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
+        createdButton.setImage(#imageLiteral(resourceName: "IMG_0279"), for: .normal)
         return createdButton
     }()
     
     lazy var eventText: UITextField = {
         let eventText = UITextField()
         eventText.placeholder = "Enter Event's Description"
+        eventText.text = "Join us in the gift shop area and enjoy the open bar"
         eventText.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         eventText.font = UIFont.init(name: "futura", size: 18)
         return eventText
