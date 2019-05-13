@@ -70,20 +70,13 @@ class FavoritesCell: UICollectionViewCell {
         return button
     }()
     
-    let bottonView: UIView = {
+    let buttonView: UIView = {
         let view = UIView()
         view.backgroundColor = .blue
         view.layer.cornerRadius = 20
         return view
     }()
-    
-//    let switchView: UISwitch = {
-//        let sv = UISwitch()
-//        sv.thumbTintColor = .black
-//        sv.onTintColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
-//        return sv
-//    }()
-    
+
     private var shadowLayer: CAShapeLayer!
     private var cornerRadius: CGFloat = 25.0
     private var fillColor: UIColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) // the color applied to the shadowLayer, rather than the view's backgroundColor
@@ -128,7 +121,6 @@ class FavoritesCell: UICollectionViewCell {
         eventCellContainerView.addSubview(eventStartTime)
         eventCellContainerView.addSubview(eventEndTime)
         eventCellContainerView.addSubview(moreInfoButton)
-        //eventCellContainerView.addSubview(switchView)
         
         eventName.snp.makeConstraints { (make) in
             make.top.equalTo(eventCellContainerView.snp.top)
@@ -166,12 +158,7 @@ class FavoritesCell: UICollectionViewCell {
             make.left.equalTo(20)
             make.width.equalTo(50)
         }
-        
-//        switchView.snp.makeConstraints { (make) in
-//            make.top.equalTo(eventEndTime.snp_bottom).offset(28)
-//            make.height.equalTo(50)
-//            make.left.equalTo(moreInfoButton.snp.right).offset(50)
-//        }
+
     }
     
 }
