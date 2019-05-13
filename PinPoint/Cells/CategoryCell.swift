@@ -12,7 +12,7 @@ import SnapKit
 class CategoryCell: UICollectionViewCell {
     private var shadowLayer: CAShapeLayer!
     private var cornerRadius: CGFloat = 25.0
-    private var fillColor: UIColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1) // the color applied to the shadowLayer, rather than the view's backgroundColor
+    private var fillColor: UIColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435) // the color applied to the shadowLayer, rather than the view's backgroundColor
     
     override func layoutSubviews() {
         super.layoutSubviews()

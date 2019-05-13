@@ -94,15 +94,13 @@ class FavoritesCell: UICollectionViewCell {
         return button
     }()
     
-    let bottonView: UIView = {
+    let buttonView: UIView = {
         let view = UIView()
         view.backgroundColor = .blue
         view.layer.cornerRadius = 20
         return view
     }()
-    
 
-    
     private var shadowLayer: CAShapeLayer!
     private var cornerRadius: CGFloat = 25.0
     private var fillColor: UIColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) // the color applied to the shadowLayer, rather than the view's backgroundColor
@@ -190,5 +188,6 @@ class FavoritesCell: UICollectionViewCell {
             make.left.equalTo(20)
             make.width.equalTo(50)
         }
+
     }
 }
