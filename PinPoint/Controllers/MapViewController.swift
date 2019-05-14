@@ -44,7 +44,6 @@ class MapViewController: UIViewController {
     private func setupLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        //locationManager.requestWhenInUseAuthorization()
         
     }
     
@@ -132,42 +131,18 @@ extension MapViewController: MKMapViewDelegate {
             }
             self.getDirections(from: userLocation, destination: destination)
         }
-//        let segue = UIAlertAction(title: "Venue Info", style: .default) { (action) in
-//            let detailVC = DiscoverViewController()
-//            detailVC.discoverVie = selectedVenue
-//            self.navigationController?.pushViewController(detailVC, animated: true)
-//        }
+
         let cancel = UIAlertAction(title: "Cancel", style: .cancel)
         actionSheet.addAction(directions)
-//        actionSheet.addAction(segue)
         actionSheet.addAction(cancel)
         present(actionSheet, animated: true, completion: nil)
     }
     
     private func getDirections(from: CLLocationCoordinate2D, destination: CLLocationCoordinate2D) {
         let request = createDirectionsRequest(fromCoordinate: from, toDestination: destination)
-        let directions = MKDirections(request: request)
         let url = "http://maps.apple.com/maps?saddr=\(from.latitude),\(from.longitude)&daddr=\(destination.latitude),\(destination.longitude)"
         UIApplication.shared.openURL(URL(string:url)!)
-       // resetMapView(newDirections: directions)
-        
-        directions.calculate { [unowned self] (response, error) in
-            if let error = error {
-                print("Can't get directions: \(error)")
-                self.showAlert(title: "Can't get Directions", message: "\(error)" )
-            } else if let response = response {
-                for route in response.routes {
-                                        // extra TODO: show directions word
-                    var stepsStr = ""
-                    let steps = route.steps
-                    steps.forEach { stepsStr += "\($0.instructions)\n" }
-                    self.mapView.mapView.addOverlay(route.polyline)
-                    self.mapView.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
-                    self.showAlert(title: "Directions", message: stepsStr)
-                    break
-                }
-            }
-        }
+  
     }
     
     private func createDirectionsRequest(fromCoordinate: CLLocationCoordinate2D, toDestination: CLLocationCoordinate2D) -> MKDirections.Request {
