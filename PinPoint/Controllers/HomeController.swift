@@ -386,8 +386,10 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
                 cell.eventEndTime.text = "End Time: \(dateString)"
             }
             
-            cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.photoURL)), placeholder: UIImage(named: "pinpointred"))
+            cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.photoURL)), placeholder: UIImage(named: "IMG_0279"))
             cell.favoriteButton.tag = indexPath.row
+            cell.calendarButton.tag = indexPath.row
+            cell.mapsButton.tag = indexPath.row
             cell.mapsButton.addTarget(self, action: #selector(mapDiscover), for: .touchUpInside)
             cell.favoriteButton.addTarget(self, action: #selector(favEventUserCreated), for: .touchUpInside)
             cell.calendarButton.addTarget(self, action: #selector(calDiscover), for: .touchUpInside)
@@ -404,11 +406,13 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             cell.eventImageView.kf.indicatorType = .activity
             cell.favoriteEventButton.tag = indexPath.row
             if currentEvent.logo?.original.url == nil{
-                cell.eventImageView.image = UIImage(named: "pinpointred")
+                cell.eventImageView.image = UIImage(named: "IMG_0279")
             }else{
-                cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.logo?.original.url)!), placeholder: UIImage(named: "pinpointred"))
+                cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.logo?.original.url)!), placeholder: UIImage(named: "IMG_0279"))
             }
+            cell.safariEventButton.tag = indexPath.row
             cell.favoriteEventButton.tag = indexPath.row
+            cell.calendarEventButton.tag = indexPath.row
             cell.favoriteEventButton.addTarget(self, action: #selector(favEvent), for: .touchUpInside)
             cell.calendarEventButton.addTarget(self, action: #selector(calDiscover), for: .touchUpInside)
             cell.safariEventButton.addTarget(self, action: #selector(moreInfo), for: .touchUpInside)
@@ -424,9 +428,9 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             cell.eventImageView.kf.indicatorType = .activity
             cell.moreInfoButton.tag = indexPath.row
             if currentEvent.imageUrl == nil{
-                cell.eventImageView.image = UIImage(named: "pinpointred")
+                cell.eventImageView.image = UIImage(named: "IMG_0279")
             }else{
-                cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.imageUrl)!), placeholder: UIImage(named: "pinpointred"))
+                cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.imageUrl)!), placeholder: UIImage(named: "IMG_0279"))
             }
             cell.moreInfoButton.addTarget(self, action: #selector(moreInfoFav), for: .touchUpInside)
             
@@ -447,7 +451,9 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             cell.eventName.text = currentEvent.displayName
             cell.eventImageView.kf.indicatorType = .activity
             cell.favoriteEventButton.tag = indexPath.row
-            cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.photoURL)), placeholder: UIImage(named: "pinpointred"))
+            cell.calendarEventButton.tag = indexPath.row
+            cell.safariEventButton.tag = indexPath.row
+            cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.photoURL)), placeholder: UIImage(named: "IMG_0279"))
             cell.favoriteEventButton.addTarget(self, action: #selector(moreInfoFav), for: .touchUpInside)
             
             return cell
