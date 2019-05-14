@@ -59,6 +59,6 @@ extension EventsView{
     private func preferencesButtonConstraint() {
         addSubview(preferencesButton)
         preferencesButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([preferencesButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10), preferencesButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10),preferencesButton.heightAnchor.constraint(equalToConstant: 40), preferencesButton.widthAnchor.constraint(equalToConstant: 45)])
+        NSLayoutConstraint.activate([preferencesButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10), preferencesButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10),preferencesButton.heightAnchor.constraint(equalToConstant: 35), preferencesButton.widthAnchor.constraint(equalToConstant: 35)])
     }
 }
