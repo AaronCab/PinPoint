@@ -306,7 +306,7 @@ class HomeController: UIViewController{
         contentView.removeFromSuperview()
         contentView = UIView.init(frame: UIScreen.main.bounds)
         loadFavorites()
-        self.navigationItem.title = "F A V O R I T E S"
+        self.navigationItem.title = "S A V E D  E V E N T S"
         favoriteView.myCollectionView.delegate = self
         favoriteView.myCollectionView.dataSource = self
         whatToSeque = .favorite
@@ -572,7 +572,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         }
         let userCreatedEvent = createdEvent[senderTag.tag]
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let favoriteActionForDiscovery = UIAlertAction(title: "Saved", style: .default) { alert in
+        let favoriteActionForDiscovery = UIAlertAction(title: "Save", style: .default) { alert in
             let thisEvent = self.createdEvent[senderTag.tag]
             let favoriteEvent = FavoritesModel.init(name: (thisEvent.displayName), description: (thisEvent.eventDescription), imageUrl: thisEvent.photoURL, start: thisEvent.startedAt?.dateValue().description ?? "N/A", end: thisEvent.endDate?.dateValue().description ?? "N/A", capacity: "Creator Decides", status: thisEvent.eventType, url: thisEvent.email)
             FavoritesDataManager.saveToDocumentsDirectory(favoriteArticle: favoriteEvent)
