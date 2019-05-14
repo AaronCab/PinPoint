@@ -80,9 +80,6 @@ extension MenuController: UITableViewDataSource, UITableViewDelegate {
             delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .favorites)
         }
         if indexPath.row == 3 {
-            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .requests)
-        }
-        if indexPath.row == 4 {
             delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .profile)
         }
       
