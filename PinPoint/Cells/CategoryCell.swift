@@ -45,15 +45,15 @@ class CategoryCell: UICollectionViewCell {
         catName.text = "Event Name"
         catName.textColor = .white
         catName.textAlignment = .center
-        catName.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        catName.font = UIFont.init(name: "futura", size: 14)
+        catName.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        catName.font = UIFont.init(name: "futura", size: 17)
         return catName
     }()
     
     let categoryImage: UIImageView = {
         let catImg = UIImageView()
         catImg.image = UIImage(named: "icons8-health-calendar-100")
-        catImg.contentMode = .scaleAspectFill
+        catImg.contentMode = .scaleAspectFit
         catImg.layer.masksToBounds = true
         return catImg
     }()
@@ -86,12 +86,12 @@ class CategoryCell: UICollectionViewCell {
         }
         
         categoryImage.snp.makeConstraints { (make) in
-            make.top.equalTo(categoryName.snp.bottom).offset(7)
+            make.top.equalTo(categoryName.snp.bottom).offset(2)
             make.left.equalTo(20)
             make.right.equalTo(-20)
-            make.height.equalTo(30)
-            make.width.equalTo(18)
-            make.bottom.equalTo(self.snp.bottom).offset(7)
+            make.height.equalTo(35)
+            make.width.equalTo(35)
+            make.bottom.equalTo(self.snp.bottom)
         }
     }
     
