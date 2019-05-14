@@ -387,9 +387,10 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             }
             
             cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.photoURL)), placeholder: UIImage(named: "pinpointred"))
+            cell.favoriteButton.tag = indexPath.row
             cell.mapsButton.addTarget(self, action: #selector(mapDiscover), for: .touchUpInside)
-            cell.favoriteButton.addTarget(self, action: #selector(calDiscover), for: .touchUpInside)
-            cell.calendarButton.addTarget(self, action: #selector(mapDiscover), for: .touchUpInside)
+            cell.favoriteButton.addTarget(self, action: #selector(favEventUserCreated), for: .touchUpInside)
+            cell.calendarButton.addTarget(self, action: #selector(calDiscover), for: .touchUpInside)
             
             return cell
         }
@@ -407,7 +408,10 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             }else{
                 cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.logo?.original.url)!), placeholder: UIImage(named: "pinpointred"))
             }
-            cell.favoriteEventButton.addTarget(self, action: #selector(moreInfo), for: .touchUpInside)
+            cell.favoriteEventButton.tag = indexPath.row
+            cell.favoriteEventButton.addTarget(self, action: #selector(favEvent), for: .touchUpInside)
+            cell.calendarEventButton.addTarget(self, action: #selector(calDiscover), for: .touchUpInside)
+            cell.safariEventButton.addTarget(self, action: #selector(moreInfo), for: .touchUpInside)
             return cell
         }
         if collectionView == favoriteView.myCollectionView {
@@ -425,6 +429,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
                 cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.imageUrl)!), placeholder: UIImage(named: "pinpointred"))
             }
             cell.moreInfoButton.addTarget(self, action: #selector(moreInfoFav), for: .touchUpInside)
+            
             return cell
         }
         if collectionView == preferencesView.categoryCollectionView {
@@ -517,26 +522,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        let favoriteActione = UIAlertAction(title: "Favorite", style: .default) { alert in
-            let thisEvent = self.event[senderTag.tag]
-            let favoriteEvent = FavoritesModel.init(name: (thisEvent.name?.text)!, description: (thisEvent.description?.text)!, imageUrl: thisEvent.logo?.original.url, start: thisEvent.start!.utc, end: thisEvent.end!.utc, capacity: thisEvent.capacity, status: thisEvent.status, url: thisEvent.url)
-            FavoritesDataManager.saveToDocumentsDirectory(favoriteArticle: favoriteEvent)
-            self.showAlert(title: "PinPoint", message: "Successfully Favorited Event")
-        }
-        let addCalendarAction = UIAlertAction(title: "Add to Calendar", style: .default, handler: { alert in
-            let thisEvent = self.event[senderTag.tag]
-            let formatter = ISO8601DateFormatter()
-            guard let start = thisEvent.start?.utc,
-                let end = thisEvent.end?.utc,
-                let dateStart = formatter.date(from: start),
-                let dateEnd = formatter.date(from: end),
-                let notes = thisEvent.description?.text,
-                let title = thisEvent.name?.text else { return }
-            
-            
-            self.addEventToCalendar(date: dateStart, dateEnd: dateEnd, title: title, notes: notes)
-            self.showAlert(title: "PinPoint", message: "Successfully Added to Calendar")
-        })
+      
         let safariActionForNearbyEvents = UIAlertAction(title: "Safari", style: .default) { alert in
             let nearby = self.event[senderTag.tag]
             guard let nearbyURL = nearby.url,
@@ -549,11 +535,9 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
        
         
         alertController.addAction(cancelAction)
-        alertController.addAction(favoriteActione)
         alertController.addAction(safariActionForNearbyEvents)
-        alertController.addAction(addCalendarAction)
         present(alertController, animated: true)
-        
+    
     }
     func addEventToCalendar(date: Date, dateEnd: Date, title: String, notes: String) {
         let eventStore: EKEventStore = EKEventStore()
@@ -581,26 +565,20 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         }
         print("pressed")
     }
-    @objc func mapDiscover(senderTag: UIButton){
+    @objc func favEventUserCreated(senderTag: UIButton){
         guard let user = authService.getCurrentUser() else {
             showAlert(title: "No logged in user", message: nil)
             return
         }
         let userCreatedEvent = createdEvent[senderTag.tag]
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let mapLoaction = UIAlertAction(title: "Maps", style: .default) { alert in
-            let mapView = MapViewController()
-            mapView.modalTransitionStyle = .flipHorizontal
-            mapView.venues = self.createdEvent
-            self.navigationController?.pushViewController(mapView, animated: true)
+        let favoriteActionForDiscovery = UIAlertAction(title: "Favorite", style: .default) { alert in
+            let thisEvent = self.createdEvent[senderTag.tag]
+            let favoriteEvent = FavoritesModel.init(name: (thisEvent.displayName), description: (thisEvent.eventDescription), imageUrl: thisEvent.photoURL, start: thisEvent.startedAt?.dateValue().description ?? "N/A", end: thisEvent.endDate?.dateValue().description ?? "N/A", capacity: "Creator Decides", status: thisEvent.eventType, url: thisEvent.email)
+            FavoritesDataManager.saveToDocumentsDirectory(favoriteArticle: favoriteEvent)
+            self.showAlert(title: "PinPoint", message: "Successfully Favorites Event")
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        let favoriteActionForDiscovery = UIAlertAction(title: "Favorite", style: .default) { alert in
-        let thisEvent = self.createdEvent[senderTag.tag]
-            let favoriteEvent = FavoritesModel.init(name: (thisEvent.displayName), description: (thisEvent.eventDescription), imageUrl: thisEvent.photoURL, start: thisEvent.startedAt?.dateValue().description ?? "N/A", end: thisEvent.endDate?.dateValue().description ?? "N/A", capacity: "Creator Decides", status: thisEvent.eventType, url: thisEvent.email)
-        FavoritesDataManager.saveToDocumentsDirectory(favoriteArticle: favoriteEvent)
-        self.showAlert(title: "PinPoint", message: "Successfully Favorites Event")
-        }
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [unowned self] (action) in
             self.confirmDeletionActionSheet(handler: { (action) in
                 
@@ -619,10 +597,54 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             alertController.addAction(deleteAction)
             
         }
+        alertController.addAction(cancelAction)
+        alertController.addAction(favoriteActionForDiscovery)
+        present(alertController, animated: true)
+        
+    }
+    @objc func favEvent(senderTag: UIButton){
+       
+//        let userCreatedEvent = createdEvent[senderTag.tag]
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let favoriteActionForDiscovery = UIAlertAction(title: "Favorite", style: .default) { alert in
+            let thisEvent = self.event[senderTag.tag]
+            let favoriteEvent = FavoritesModel.init(name: ((thisEvent.name?.text)!), description: (thisEvent.description?.text)!, imageUrl: thisEvent.logo?.original.url, start: thisEvent.start?.timezone ?? "N/A", end: thisEvent.end?.timezone ?? "N/A", capacity: "Creator Decides", status: thisEvent.status, url: thisEvent.url)
+            FavoritesDataManager.saveToDocumentsDirectory(favoriteArticle: favoriteEvent)
+            self.showAlert(title: "PinPoint", message: "Successfully Favorites Event")
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [unowned self] (action) in
+            self.confirmDeletionActionSheet(handler: { (action) in
+                
+                self.deleteFavorite(senderTag: senderTag)
+                self.favoriteView.myCollectionView.reloadData()
+            })
+        }
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(favoriteActionForDiscovery)
+        present(alertController, animated: true)
+
+    }
+    @objc func mapDiscover(senderTag: UIButton){
+        guard let user = authService.getCurrentUser() else {
+            showAlert(title: "No logged in user", message: nil)
+            return
+        }
+        let userCreatedEvent = createdEvent[senderTag.tag]
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let mapLoaction = UIAlertAction(title: "Maps", style: .default) { alert in
+            let mapView = MapViewController()
+            mapView.modalTransitionStyle = .flipHorizontal
+            mapView.venues = self.createdEvent
+            self.navigationController?.pushViewController(mapView, animated: true)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+      
         alertController.addAction(mapLoaction)
 
         //alertController.addAction(addCalendarAction)
-        alertController.addAction(favoriteActionForDiscovery)
+        
         alertController.addAction(cancelAction)
         
         
@@ -631,6 +653,10 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
     }
     
     @objc func calDiscover(senderTag: UIButton) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+
         let addCalendarAction = UIAlertAction(title: "Add to Calendar", style: .default, handler: { alert in
             let discoverEvent = self.createdEvent[senderTag.tag]
             let formatter = ISO8601DateFormatter()
@@ -643,6 +669,13 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             self.addEventToCalendar(date: start, dateEnd: end, title: title, notes: notes)
             self.showAlert(title: "PinPoint", message: "Successfully Added to Calendar")
         })
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(addCalendarAction)
+
+        
+        present(alertController, animated: true)
+        
     }
     
     @objc private func fetchEvents(){
@@ -678,6 +711,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
+        
         alertController.addAction(safariAction)
         alertController.addAction(deleteAction)
         alertController.addAction(cancelAction)
