@@ -98,7 +98,7 @@ class HomeController: UIViewController{
         }
     }
     var favoriteCell = FavoritesCell()
-    var intestedIn = "101"{
+    var intestedIn = "102"{
         didSet{
             self.getCategory(intrest: intestedIn, location: location)
 
@@ -116,7 +116,7 @@ class HomeController: UIViewController{
     }
     
     private func getCategory(intrest: String?, location: String?){
-        ApiClient.getCategoryEvents(distance: "10km", location: location?.replacingOccurrences(of: " ", with: "-") ?? "Manhattan", categoryID: intrest ?? "101") { (error, data) in
+        ApiClient.getCategoryEvents(distance: "10km", location: location?.replacingOccurrences(of: " ", with: "-") ?? "Queens", categoryID: intrest ?? "103") { (error, data) in
             if let error = error {
                 print(error.errorMessage())
             } else if let data = data {
