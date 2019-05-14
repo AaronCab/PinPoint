@@ -10,34 +10,50 @@ import UIKit
 import Toucan
 import CoreLocation
 
+protocol FinallyATransfer {
+    func location(place: String)
+}
+protocol FinallyACatagory {
+    func intrest(catagroy: String)
+}
+
 class PreferencesViewController: UIViewController {
     var centerController: UIViewController!
     var preferencesView = PreferencesView()
     var locationView = LocationView()
     var locationViewHeight = NSLayoutConstraint()
+    var locationViewContorller = LocationResultController()
     
-    var catagories = [
+    var categories = [
         "Business": "101",
-        "ScienceAndTech": "102",
+        "Science & Tech": "102",
         "Music": "103",
-        "FilmAndMedia": "104",
+        "Film & Media": "104",
         "Arts": "105",
         "Fashion": "106",
         "Health": "107",
-        "SportsAndFitness": "108",
+        "Sports & Fitness": "108",
         "All": ""]
-    var catagoriesInAnArray = ["Business", "ScienceAndTech", "Music","FilmAndMedia","Arts","Fashion", "Health","SportsAndFitness", "All"]
+    var categoriesInAnArray = ["Business", "Science & Tech", "Music","Film & Media","Arts","Fashion", "Health","Sports & Fitness", "All"]
     var currentLocation: CLLocation! {
         didSet{
             preferencesView.locationButton.setTitle(location, for: .normal)
         }
     }
+    var delegate: FinallyATransfer?
+    var delegateForIntrest: FinallyACatagory?
     var locationManager = CLLocationManager()
     var locationService = LocationService()
     var long: Double!
     var lat: Double!
     
-    var location = "Manhattan"
+    var location = "Manhattan"{
+        didSet{
+              locationViewContorller.delegate2 = self
+            self.delegate?.location(place: location)
+
+        }
+    }
     
 
     override func viewDidLoad() {
@@ -59,11 +75,12 @@ class PreferencesViewController: UIViewController {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         }
-        hideKeyboardWhenTappedAround()
+        preferencesView.locationResultsController.delegate2 = self
+        preferencesView.locationResultsController.delegate = self
+        hideKeyboardWhenTappedAround() 
     }
     
     @objc func locationFinder(){
-        
     }
     @objc func dismissView(){
         navigationController?.popViewController(animated: true)
@@ -72,19 +89,33 @@ class PreferencesViewController: UIViewController {
         
     }
 }
-extension PreferencesViewController: UICollectionViewDataSource, UICollectionViewDelegate{
+extension PreferencesViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-      return catagoriesInAnArray.count
+      return categoriesInAnArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
-        let category = catagoriesInAnArray[indexPath.row]
+        let category = categoriesInAnArray[indexPath.row]
         cell.categoryName.text = category
         cell.categoryImage.image = UIImage(named: category)
         
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        cell?.layer.borderWidth = 7.0
+        cell?.layer.borderColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
+        cell?.layer.cornerRadius = 25
+        let category = categoriesInAnArray[indexPath.row]
+        delegateForIntrest?.intrest(catagroy: category)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 150, height: 150)
+    }
+    
     
     
 }
@@ -120,3 +151,23 @@ extension PreferencesViewController: CLLocationManagerDelegate {
         }
     }
 }
+
+extension PreferencesViewController: LocationString{
+    func getString(address: String) {
+        location = address
+    }
+    
+    
+}
+extension PreferencesViewController: LocationResultsControllerDelegate{
+    func didSelectCoordinate(_ locationResultsController: LocationResultController, coordinate: CLLocationCoordinate2D, address: String) {
+        preferencesView.searchController.searchBar.text = address
+    }
+    
+    func didScrollTableView(_ locationResultsController: LocationResultController) {
+        
+    }
+    
+    
+}
+

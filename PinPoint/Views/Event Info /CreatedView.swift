@@ -19,6 +19,7 @@ class CreatedView: UIView {
         super.init(coder: aDecoder)
         commonInit()
     }
+    
     lazy var cancel: UIButton = {
         var button = UIButton()
         button.setTitle("Cancel", for: .normal)
@@ -26,36 +27,43 @@ class CreatedView: UIView {
         button.isEnabled = true
         return button
     }()
+    
     lazy var create: UIButton = {
         var button = UIButton()
-        button.setTitle("Create Event", for: .normal)
+        button.setTitle("Save Event", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.isEnabled = true
         return button
     }()
+    
     lazy var createName: UITextField = {
         let createTF = UITextField()
         createTF.placeholder = "Enter Name of Event"
+        createTF.text = "Demo Day After Party"
         createTF.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         createTF.font = UIFont.init(name: "futura", size: 20)
         createTF.textAlignment = .center
         return createTF
     }()
-    var createdPicture: UIImageView = {
-        let imageView = UIImageView()
-        imageView.layer.cornerRadius = 15
-        imageView.layer.masksToBounds = true
-        imageView.image = UIImage(named: "placeholder-image")
-        return imageView
+    
+    var createdPicture: UIButton = {
+        let createdButton = UIButton()
+        createdButton.layer.cornerRadius = 15
+        createdButton.layer.masksToBounds = true
+        createdButton.backgroundColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
+        createdButton.setImage(#imageLiteral(resourceName: "IMG_0279"), for: .normal)
+        return createdButton
     }()
     
     lazy var eventText: UITextField = {
         let eventText = UITextField()
         eventText.placeholder = "Enter Event's Description"
+        eventText.text = "Join us in the gift shop area and enjoy the open bar"
         eventText.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         eventText.font = UIFont.init(name: "futura", size: 18)
         return eventText
     }()
+    
     lazy var locationText: UITextField = {
         let locationTF = UITextField()
         locationTF.placeholder = "Enter Location of Event"
@@ -63,11 +71,19 @@ class CreatedView: UIView {
         locationTF.font = UIFont.init(name: "futura", size: 18)
         return locationTF
     }()
+    
+    lazy var startTextLabel: UILabel = {
+       let startTL = UILabel()
+        startTL.text = "Enter Start of Event"
+        startTL.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        startTL.font = UIFont.init(name: "futura", size: 18)
+        startTL.textColor = #colorLiteral(red: 0.7884225249, green: 0.7880350351, blue: 0.8096494675, alpha: 1)
+        return startTL
+    }()
+    
     lazy var startText: UIDatePicker = {
         let startTF = UIDatePicker()
         startTF.timeZone = NSTimeZone.local
-//        startTF.addTarget(self, action: "dateSelected", for: UIControl.Event.valueChanged)
-//        startTF.frame =
         return startTF
     }()
     lazy var endText: UIDatePicker = {
@@ -75,12 +91,22 @@ class CreatedView: UIView {
          endTF.timeZone = NSTimeZone.local
         return endTF
     }()
+    lazy var endTextLabel: UILabel = {
+        let endTL = UILabel()
+        endTL.text = "Enter End of Event"
+        endTL.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        endTL.font = UIFont.init(name: "futura", size: 18)
+        endTL.textColor = #colorLiteral(red: 0.7884225249, green: 0.7880350351, blue: 0.8096494675, alpha: 1)
+        return endTL
+    }()
+    
     var addEventButton: UIButton = {
         let button = UIButton()
         button.setImage(#imageLiteral(resourceName: "icons8-create-25"), for: .normal)
         button.backgroundColor = .clear
         return button
     }()
+    
     private func commonInit(){
         addSubview(cancel)
         addSubview(create)
@@ -88,6 +114,8 @@ class CreatedView: UIView {
         addSubview(eventText)
         addSubview(createdPicture)
         addSubview(locationText)
+        addSubview(startTextLabel)
+        addSubview(endTextLabel)
         addSubview(startText)
         addSubview(endText)
         createName.snp.makeConstraints { (make) in
@@ -98,8 +126,8 @@ class CreatedView: UIView {
         }
         createdPicture.snp.makeConstraints { (make) in
             make.top.equalTo(createName.snp.bottom).offset(15)
-            make.width.equalTo(300)
-            make.height.equalTo(300)
+            make.width.equalTo(275)
+            make.height.equalTo(275)
             make.centerX.equalTo(self.snp.centerX)
         }
         eventText.snp.makeConstraints { (make) in
@@ -112,13 +140,25 @@ class CreatedView: UIView {
             make.top.equalTo(eventText.snp.bottom).offset(15)
             make.left.equalTo(35)
         }
-        startText.snp.makeConstraints { (make) in
+        
+        startTextLabel.snp.makeConstraints { (make) in
             make.top.equalTo(locationText.snp.bottom).offset(15)
+            make.left.equalTo(35)
+        }
+        
+        startText.snp.makeConstraints { (make) in
+            make.top.equalTo(startTextLabel.snp.bottom).offset(15)
             make.height.equalTo(110)
             make.left.equalTo(35)
         }
+        
+        endTextLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(startText.snp.bottom).offset(15)
+            make.left.equalTo(35)
+        }
+        
         endText.snp.makeConstraints { (make) in
-            make.top.equalTo(startText.snp.bottom).offset(5)
+            make.top.equalTo(endTextLabel.snp.bottom).offset(5)
              make.height.equalTo(110)
             make.left.equalTo(35)
         }

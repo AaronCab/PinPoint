@@ -90,7 +90,9 @@ final class DBService {
                 EventCollectionKeys.DisplayNameKey : event.displayName,
                 EventCollectionKeys.StartedAt : event.startedAt,
                 EventCollectionKeys.EndDate: event.endDate,
-                EventCollectionKeys.Location: event.location
+                EventCollectionKeys.Location: event.location,
+                EventCollectionKeys.Lat: event.lat,
+                EventCollectionKeys.Long: event.long
                 ])
             { (error) in
                 if let error = error {

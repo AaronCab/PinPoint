@@ -48,6 +48,7 @@ class ContainerController: UIViewController {
             menuController = MenuController()
             menuController.delegate = self
     view.insertSubview(menuController.view, at: 0)
+            view.backgroundColor = #colorLiteral(red: 0.1910400689, green: 0.2061233521, blue: 0.2311887741, alpha: 1)
             addChild(menuController)
             menuController.didMove(toParent: self)
         }
@@ -78,8 +79,8 @@ class ContainerController: UIViewController {
             print("show nearby events")
         case .Favorites:
             print("show favorites")
-        case .Requests:
-            print("show messages")
+//        case .Requests:
+//            print("show messages")
         case .Profile:
             print("show profile")
         }
@@ -109,8 +110,8 @@ extension ContainerController: HomeControllerDelegate {
             homeController.eventsPageOn()
         case .favorites:
             homeController.favoritesPageOn() 
-        case .requests:
-            homeController.friendRequestsPageOn()
+//        case .requests:
+//            homeController.friendRequestsPageOn()
         case .profile:
             homeController.profilePageOn()
         default:

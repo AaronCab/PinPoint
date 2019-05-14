@@ -22,37 +22,41 @@ class EditProfileView: UIView {
     
     var profilePicture: CircularImageView = {
         let imageView = CircularImageView()
+        imageView.backgroundColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
         return imageView
     }()
     var displayName: UITextField = {
         let textField = UITextField()
-        textField.backgroundColor = .white
+        textField.backgroundColor = #colorLiteral(red: 0.9335083961, green: 0.9331413507, blue: 0.9547348619, alpha: 1)
         textField.font = UIFont.init(name: "futura", size: 16)
         textField.placeholder = " U S E R N A M E"
         textField.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        textField.textColor = #colorLiteral(red: 0.1907173097, green: 0.01004208904, blue: 0.0916705057, alpha: 1)
         return textField
     }()
     var firstName: UITextField = {
         let textField = UITextField()
-        textField.backgroundColor = .white
+        textField.backgroundColor = #colorLiteral(red: 0.9335083961, green: 0.9331413507, blue: 0.9547348619, alpha: 1)
         textField.font = UIFont.init(name: "futura", size: 16)
         textField.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         textField.placeholder = " F I R S T  N A M E"
+        textField.textColor = #colorLiteral(red: 0.1907173097, green: 0.01004208904, blue: 0.0916705057, alpha: 1)
         return textField
     }()
     var lastName: UITextField = {
         let textField = UITextField()
-        textField.backgroundColor = .white
+        textField.backgroundColor = #colorLiteral(red: 0.9335083961, green: 0.9331413507, blue: 0.9547348619, alpha: 1)
         textField.font = UIFont.init(name: "futura", size: 16)
         textField.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         textField.placeholder = " L A S T  N A M E"
+        textField.textColor = #colorLiteral(red: 0.1907173097, green: 0.01004208904, blue: 0.0916705057, alpha: 1)
         return textField
     }()
     
     var bio: UIButton = {
         let button = UIButton()
         button.backgroundColor = #colorLiteral(red: 0.9213752151, green: 0.2994325757, blue: 0.291195482, alpha: 1)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.setTitle("E D I T  B I O", for: .normal)
         button.layer.cornerRadius = 10
         return button
@@ -105,10 +109,10 @@ class EditProfileView: UIView {
         didSet{
             bio.setTitle(loggedInUserModel.bio ?? "", for: .normal)
             if let picture = loggedInUserModel.photoURL{
-                profilePicture.kf.setImage(with: URL(string: picture), placeholder: #imageLiteral(resourceName: "placeholder-image.png"))
+                profilePicture.kf.setImage(with: URL(string: picture), placeholder: #imageLiteral(resourceName: "PinPoint_Logo_Clear"))
             }
             else{
-                profilePicture.image = UIImage(named: "placeholder-image")
+                profilePicture.image = UIImage(#imageLiteral(resourceName: "PinPoint_Logo_Clear.png"))
             }
             firstName.text = loggedInUserModel.firstName ?? ""
             lastName.text = loggedInUserModel.lastName ?? ""

@@ -21,7 +21,7 @@ class EditProfileViewController: UIViewController {
         return ip
     }()
     
-    var user: UserLogedInModel!
+    var user: ProfileOfUser!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,10 +32,28 @@ class EditProfileViewController: UIViewController {
 
     
     
+    
     func introViewStuff(){
         editProfile.picButton.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
         editProfile.bio.addTarget(self, action: #selector(bioController), for: .touchUpInside)
         editProfile.editButton.addTarget(self, action: #selector(updateProifle), for: .touchUpInside)
+        if user.photoURL != nil{
+            editProfile.profilePicture.kf.setImage(with: URL(string: (user.photoURL!)), placeholder: UIImage(#imageLiteral(resourceName: "PinPoint_Logo_Clear")))        }
+        else{
+            editProfile.profilePicture.image = UIImage(named: "placeholder-image")
+        }
+        editProfile.displayName.text = user.displayName
+        if user.firstName == nil{
+            
+        }else{
+        editProfile.firstName.text = user.firstName
+        }
+        if user.lastName == nil{
+            
+        }
+        else{
+        editProfile.lastName.text = user.lastName
+        }
     }
     
     

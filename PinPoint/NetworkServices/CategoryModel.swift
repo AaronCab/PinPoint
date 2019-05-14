@@ -8,23 +8,26 @@
 
 import Foundation
 
-public class Catagory{
+public class Category{
     private init (){}
     
-var catagories = [
+var categories = [
 "Business": "101",
-"ScienceAndTech": "102",
+"Science & Tech": "102",
 "Music": "103",
-"FilmAndMedia": "104",
+"Film & Media": "104",
 "Arts": "105",
 "Fashion": "106",
 "Health": "107",
-"SportsAndFitness": "108",
+"Sports & Fitness": "108",
     "All": ""]
-    var catagoriesInAnArray = ["Business", "ScienceAndTech", "Music","FilmAndMedia","Arts","Fashion", "Health","SportsAndFitness", "All"]
+    
+    var categoriesInAnArray = ["Business", "Science & Tech", "Music","Film & Media","Arts","Fashion", "Health","Sports & Fitness", "All"]
 }
 extension Dictionary where Value : Equatable {
     func allKeysForValue(val : Value) -> [Key]? {
         return self.filter { $1 == val }.map { $0.0 }
     }
 }
+
+

@@ -40,7 +40,7 @@ class MenuController: UIViewController {
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 25).isActive = true
     }
 }
 extension MenuController: UITableViewDataSource, UITableViewDelegate {
@@ -66,7 +66,7 @@ extension MenuController: UITableViewDataSource, UITableViewDelegate {
         header.textLabel?.font = UIFont(name: "Futura", size: 36)
         header.textLabel?.backgroundColor = UIColor.clear
         header.textLabel?.textColor = UIColor.white
-        header.contentView.backgroundColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
+        header.contentView.backgroundColor = #colorLiteral(red: 0.1910400689, green: 0.2061233521, blue: 0.2311887741, alpha: 1)
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let menuOption = MenuOption(rawValue: indexPath.row)
@@ -80,9 +80,6 @@ extension MenuController: UITableViewDataSource, UITableViewDelegate {
             delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .favorites)
         }
         if indexPath.row == 3 {
-            delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .requests)
-        }
-        if indexPath.row == 4 {
             delegate?.handleMenuToggle(forMenuOption: menuOption, menuCategories: .profile)
         }
       

@@ -15,7 +15,7 @@ class DiscoverView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 16
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize.init(width: 400, height: 750)
+        layout.itemSize = CGSize.init(width: 388, height: 660)
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
         cv.backgroundColor = .white
@@ -33,12 +33,13 @@ class DiscoverView: UIView {
     }
     var addEventButton: UIButton = {
         let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "icons8-create-25"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "icons8-plus-math-100"), for: .normal)
         button.backgroundColor = .clear
         return button
     }()
     private func commonInit(){
-        backgroundColor = .white
+        backgroundColor = .clear
+
         self.discoverCollectionView.register(DiscoverCell.self, forCellWithReuseIdentifier: "DiscoverCell")
         setup()
         addEventButtonConstraint()
@@ -60,7 +61,7 @@ extension DiscoverView{
     private func addEventButtonConstraint() {
         addSubview(addEventButton)
         addEventButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([addEventButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10), addEventButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10),addEventButton.heightAnchor.constraint(equalToConstant: 40), addEventButton.widthAnchor.constraint(equalToConstant: 45)])
+        NSLayoutConstraint.activate([addEventButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10), addEventButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10),addEventButton.heightAnchor.constraint(equalToConstant: 40), addEventButton.widthAnchor.constraint(equalToConstant: 40)])
     }
 }
 

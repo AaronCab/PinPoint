@@ -15,7 +15,7 @@ class EventsView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 16
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize.init(width: 400, height: 750)
+        layout.itemSize = CGSize.init(width: 388, height: 660)
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
         cv.backgroundColor = .white
@@ -23,7 +23,7 @@ class EventsView: UIView {
     } ()
     var preferencesButton: UIButton = {
         let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "icons8-save_search"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "icons8-slider-100"), for: .normal)
         button.backgroundColor = .clear
         return button
     }()
@@ -59,6 +59,6 @@ extension EventsView{
     private func preferencesButtonConstraint() {
         addSubview(preferencesButton)
         preferencesButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([preferencesButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10), preferencesButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10),preferencesButton.heightAnchor.constraint(equalToConstant: 40), preferencesButton.widthAnchor.constraint(equalToConstant: 45)])
+        NSLayoutConstraint.activate([preferencesButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10), preferencesButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10),preferencesButton.heightAnchor.constraint(equalToConstant: 35), preferencesButton.widthAnchor.constraint(equalToConstant: 35)])
     }
 }

@@ -21,7 +21,7 @@ class PreferencesView: UIView {
     }()
     lazy var create: UIButton = {
         var button = UIButton()
-        button.setTitle("Seve", for: .normal)
+        button.setTitle("Save", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.isEnabled = true
         return button
@@ -36,7 +36,7 @@ class PreferencesView: UIView {
             let layout = UICollectionViewFlowLayout()
             layout.minimumLineSpacing = 16
             layout.scrollDirection = .vertical 
-            layout.itemSize = CGSize.init(width: 115, height: 115)
+            layout.itemSize = CGSize.init(width: 150, height: 150)
             let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
             cv.backgroundColor = .clear
             return cv
@@ -73,7 +73,7 @@ class PreferencesView: UIView {
         let sc = UISearchController(searchResultsController: locationResultsController)
         sc.searchResultsUpdater = locationResultsController
         sc.hidesNavigationBarDuringPresentation = false
-        sc.searchBar.placeholder = "search for your own location"
+        sc.searchBar.placeholder = "Search for your location"
         sc.dimsBackgroundDuringPresentation = false
         sc.obscuresBackgroundDuringPresentation = false
         sc.searchBar.autocapitalizationType = .none
