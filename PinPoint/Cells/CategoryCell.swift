@@ -87,10 +87,10 @@ class CategoryCell: UICollectionViewCell {
         
         categoryImage.snp.makeConstraints { (make) in
             make.top.equalTo(categoryName.snp.bottom).offset(7)
-            make.left.equalTo(15)
-            make.right.equalTo(-15)
-            make.height.equalTo(71)
-            make.width.equalTo(26)
+            make.left.equalTo(20)
+            make.right.equalTo(-20)
+            make.height.equalTo(30)
+            make.width.equalTo(18)
             make.bottom.equalTo(self.snp.bottom).offset(7)
         }
     }
