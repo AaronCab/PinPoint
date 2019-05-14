@@ -48,6 +48,7 @@ class ContainerController: UIViewController {
             menuController = MenuController()
             menuController.delegate = self
     view.insertSubview(menuController.view, at: 0)
+            view.backgroundColor = #colorLiteral(red: 0.1910400689, green: 0.2061233521, blue: 0.2311887741, alpha: 1)
             addChild(menuController)
             menuController.didMove(toParent: self)
         }
