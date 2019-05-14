@@ -77,7 +77,7 @@ class PreferencesViewController: UIViewController {
         }
         preferencesView.locationResultsController.delegate2 = self
         preferencesView.locationResultsController.delegate = self
-        hideKeyboardWhenTappedAround()
+        hideKeyboardWhenTappedAround() 
     }
     
     @objc func locationFinder(){
@@ -113,7 +113,7 @@ extension PreferencesViewController: UICollectionViewDataSource, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 130, height: 130)
+        return CGSize(width: 150, height: 150)
     }
     
     

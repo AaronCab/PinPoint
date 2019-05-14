@@ -61,7 +61,7 @@ extension DiscoverView{
     private func addEventButtonConstraint() {
         addSubview(addEventButton)
         addEventButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([addEventButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10), addEventButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10),addEventButton.heightAnchor.constraint(equalToConstant: 40), addEventButton.widthAnchor.constraint(equalToConstant: 45)])
+        NSLayoutConstraint.activate([addEventButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10), addEventButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10),addEventButton.heightAnchor.constraint(equalToConstant: 40), addEventButton.widthAnchor.constraint(equalToConstant: 40)])
     }
 }
 

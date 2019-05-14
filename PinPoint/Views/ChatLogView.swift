@@ -25,8 +25,7 @@ class ChatLogView: UIView {
     
     public var settingsButton: UIButton = {
         let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "icons8-happy-100").withRenderingMode(.alwaysOriginal), for: .normal)
-        //button.setTitle("Request", for: .normal)
+        button.setImage(#imageLiteral(resourceName: "icons8-customer-240").withRenderingMode(.alwaysOriginal), for: .normal)
         button.backgroundColor = .clear
         return button
     }()
