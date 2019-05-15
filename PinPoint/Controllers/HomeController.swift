@@ -433,7 +433,8 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
                 cell.eventImageView.kf.setImage(with: URL(string: (currentEvent.imageUrl)!), placeholder: UIImage(named: "IMG_0279"))
             }
             cell.moreInfoButton.addTarget(self, action: #selector(moreInfoFav), for: .touchUpInside)
-            
+            self.loadFavorites()
+
             return cell
         }
         if collectionView == preferencesView.categoryCollectionView {
@@ -580,9 +581,15 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let favoriteActionForDiscovery = UIAlertAction(title: "Save", style: .default) { alert in
             let thisEvent = self.createdEvent[senderTag.tag]
-            let favoriteEvent = FavoritesModel.init(name: (thisEvent.displayName), description: (thisEvent.eventDescription), imageUrl: thisEvent.photoURL, start: thisEvent.startedAt?.dateValue().description ?? "N/A", end: thisEvent.endDate?.dateValue().description ?? "N/A", capacity: "Creator Decides", status: thisEvent.eventType, url: thisEvent.email)
+            if let thisDate = thisEvent.startedAt?.dateValue(){
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MMM d, h:mm a"
+                let dateString = dateFormatter.string(from: thisDate)
+                let otherString = dateFormatter.string(from: (thisEvent.endDate?.dateValue())!)
+                let favoriteEvent = FavoritesModel.init(name: (thisEvent.displayName), description: (thisEvent.eventDescription), imageUrl: thisEvent.photoURL, start: dateString, end: otherString, capacity: "Creator Decides", status: thisEvent.eventType, url: thisEvent.email)
             FavoritesDataManager.saveToDocumentsDirectory(favoriteArticle: favoriteEvent)
             self.showAlert(title: "PinPoint", message: "Successfully Saved Event")
+        }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [unowned self] (action) in
@@ -614,7 +621,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let favoriteActionForDiscovery = UIAlertAction(title: "Save", style: .default) { alert in
             let thisEvent = self.event[senderTag.tag]
-            let favoriteEvent = FavoritesModel.init(name: ((thisEvent.name?.text)!), description: (thisEvent.description?.text)!, imageUrl: thisEvent.logo?.original.url, start: thisEvent.start?.timezone ?? "N/A", end: thisEvent.end?.timezone ?? "N/A", capacity: "Creator Decides", status: thisEvent.status, url: thisEvent.url)
+            let favoriteEvent = FavoritesModel.init(name: ((thisEvent.name?.text)!), description: (thisEvent.description?.text)!, imageUrl: thisEvent.logo?.original.url, start: thisEvent.start?.utc ?? "N/A", end: thisEvent.end?.utc ?? "N/A", capacity: "Creator Decides", status: thisEvent.status, url: thisEvent.url)
             FavoritesDataManager.saveToDocumentsDirectory(favoriteArticle: favoriteEvent)
             self.showAlert(title: "PinPoint", message: "Successfully Saved Event")
         }
@@ -623,7 +630,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             self.confirmDeletionActionSheet(handler: { (action) in
                 
                 self.deleteFavorite(senderTag: senderTag)
-                self.favoriteView.myCollectionView.reloadData()
+                
             })
         }
         
