@@ -122,10 +122,10 @@ class PreferencesView: UIView {
         make.height.equalTo(60)
     }
     categoryCollectionView.snp.makeConstraints { (make) in
-        make.top.equalTo(locationButton.snp.bottom).offset(30)
+        make.top.equalTo(searchBar.snp.bottom).offset(125)
         make.left.equalTo(20)
         make.right.equalTo(-20)
-        make.height.equalTo(700)
+        make.height.equalTo(800)
     }
     
     }
