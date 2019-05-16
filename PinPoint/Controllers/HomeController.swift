@@ -29,7 +29,7 @@ class HomeController: UIViewController{
     func loadFavorites() {
         self.favorite = FavoritesDataManager.fetchItemsFromDocumentsDirectory()
     }
-    var whatToSeque = detailViewSeque.event
+    var whatToSeque = detailViewSeque.custom
     let locationResultsController = LocationResultController()
     let homeSplashImage = HomeSplashView()
     let preferencesView = PreferencesView()
@@ -496,9 +496,10 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch whatToSeque {
         case .event:
-            let eventDVC = DetailViewController()
-            eventDVC.event = event[indexPath.row]
-            self.navigationController?.pushViewController(eventDVC, animated: true)
+            print("do nothing")
+//            let eventDVC = DetailViewController()
+//            eventDVC.event = event[indexPath.row]
+//            self.navigationController?.pushViewController(eventDVC, animated: true)
         case .favorite:
             let favoriteDVC = DetailViewController()
             favoriteDVC.favorite = favorite[indexPath.row]
