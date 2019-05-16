@@ -678,7 +678,6 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             let notes = discoverEvent.eventDescription
             let title = discoverEvent.displayName.description
             
-            
             self.addEventToCalendar(date: start, dateEnd: end, title: title, notes: notes)
             self.showAlert(title: "PinPoint", message: "Successfully Added to Calendar")
         })
