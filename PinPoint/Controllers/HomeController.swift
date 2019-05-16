@@ -23,7 +23,7 @@ enum detailViewSeque{
 }
 
 class HomeController: UIViewController{
-   
+    
     
     var contentView = UIView.init(frame: UIScreen.main.bounds)
     func loadFavorites() {
@@ -101,7 +101,7 @@ class HomeController: UIViewController{
     var intestedIn = "102"{
         didSet{
             self.getCategory(intrest: intestedIn, location: location)
-
+            
         }
     }
     
@@ -147,7 +147,7 @@ class HomeController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       viewdidLoadLayout()
+        viewdidLoadLayout()
     }
     
     
@@ -171,10 +171,10 @@ class HomeController: UIViewController{
         locationManager = CLLocationManager()
         loginViewStuff()
         preferencesViewStuff()
-       configureNavigationBar()
+        configureNavigationBar()
         listernerForFriends { (friends, error) in
             if let error = error{
-               self.showAlert(title: "Error", message: error.localizedDescription)
+                self.showAlert(title: "Error", message: error.localizedDescription)
             }
             if let friends = friends{
                 self.friendsFound = friends
@@ -205,7 +205,7 @@ class HomeController: UIViewController{
                     }
                 })
         }
-
+        
     }
     
     func updateFriend(friendID: String, completeion: @escaping (ProfileOfUser?, Error?) -> Void){
@@ -322,7 +322,7 @@ class HomeController: UIViewController{
             contentView.addSubview(loginView)
             view.addSubview(contentView)
             navigationItem.searchController = nil
-        }else{
+        } else {
             contentView.removeFromSuperview()
             contentView = UIView.init(frame: UIScreen.main.bounds)
             profileView.profilePicture.image = UIImage(named: "placeholder-image")
@@ -475,7 +475,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             }
         }
     }
-
+    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if ((scrollView as? UICollectionView) != nil && !decelerate){
             snapToNearestCell(scrollView as! UICollectionView)
@@ -529,7 +529,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-      
+        
         let safariActionForNearbyEvents = UIAlertAction(title: "Safari", style: .default) { alert in
             let nearby = self.event[senderTag.tag]
             guard let nearbyURL = nearby.url,
@@ -539,12 +539,12 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
-       
+        
         
         alertController.addAction(cancelAction)
         alertController.addAction(safariActionForNearbyEvents)
         present(alertController, animated: true)
-    
+        
     }
     func addEventToCalendar(date: Date, dateEnd: Date, title: String, notes: String) {
         let eventStore: EKEventStore = EKEventStore()
@@ -616,8 +616,8 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         
     }
     @objc func favEvent(senderTag: UIButton){
-       
-//        let userCreatedEvent = createdEvent[senderTag.tag]
+        
+        //        let userCreatedEvent = createdEvent[senderTag.tag]
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let favoriteActionForDiscovery = UIAlertAction(title: "Save", style: .default) { alert in
             let thisEvent = self.event[senderTag.tag]
@@ -637,7 +637,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         alertController.addAction(cancelAction)
         alertController.addAction(favoriteActionForDiscovery)
         present(alertController, animated: true)
-
+        
     }
     @objc func mapDiscover(senderTag: UIButton){
         guard let user = authService.getCurrentUser() else {
@@ -653,9 +653,9 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             self.navigationController?.pushViewController(mapView, animated: true)
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-      
+        
         alertController.addAction(mapLoaction)
-
+        
         //alertController.addAction(addCalendarAction)
         
         alertController.addAction(cancelAction)
@@ -667,9 +667,9 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
     
     @objc func calDiscover(senderTag: UIButton) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-
+        
         let addCalendarAction = UIAlertAction(title: "Add to Calendar", style: .default, handler: { alert in
             let discoverEvent = self.createdEvent[senderTag.tag]
             let formatter = ISO8601DateFormatter()
@@ -685,7 +685,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
         
         alertController.addAction(cancelAction)
         alertController.addAction(addCalendarAction)
-
+        
         
         present(alertController, animated: true)
         
@@ -698,11 +698,11 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
                     print("failed to fetch Events with error: \(error.localizedDescription)")
                 }
                 if let snapshot = snapshot {
-                        self?.createdEvent = snapshot.documents.map { EventCreatedByUser(dict: $0.data()) }.filter(){(self!.userProfile.blockedUser?.contains($0.personID) == false)}
+                    self?.createdEvent = snapshot.documents.map { EventCreatedByUser(dict: $0.data()) }.filter(){(self!.userProfile.blockedUser?.contains($0.personID) == false)}
                         .sorted { $0.createdAt.date() > $1.createdAt.date() }
-                    }
                 }
         }
+    }
     
     @objc func moreInfoFav(senderTag: UIButton){
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -905,8 +905,8 @@ extension HomeController{
 extension HomeController: FinallyACatagory{
     func intrest(catagroy: String) {
         if let catagory = categories[catagroy]{
-        intestedIn = catagory
-        }else{
+            intestedIn = catagory
+        } else {
             
         }
     }
