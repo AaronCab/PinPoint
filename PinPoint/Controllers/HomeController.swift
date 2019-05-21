@@ -414,7 +414,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             cell.favoriteEventButton.tag = indexPath.row
             cell.calendarEventButton.tag = indexPath.row
             cell.favoriteEventButton.addTarget(self, action: #selector(favEvent), for: .touchUpInside)
-            cell.calendarEventButton.addTarget(self, action: #selector(calDiscover), for: .touchUpInside)
+            cell.calendarEventButton.addTarget(self, action: #selector(calEvent), for: .touchUpInside)
             cell.safariEventButton.addTarget(self, action: #selector(moreInfo), for: .touchUpInside)
             return cell
         }
@@ -680,6 +680,34 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate{
             let title = discoverEvent.displayName.description
             
             self.addEventToCalendar(date: start, dateEnd: end, title: title, notes: notes)
+            self.showAlert(title: "PinPoint", message: "Successfully Added to Calendar")
+        })
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(addCalendarAction)
+        
+        
+        present(alertController, animated: true)
+        
+    }
+    @objc func calEvent(senderTag: UIButton) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        let addCalendarAction = UIAlertAction(title: "Add to Calendar", style: .default, handler: { alert in
+            let discoverEvent = self.event[senderTag.tag]
+            guard let start = discoverEvent.start?.utc,
+                let end = discoverEvent.end?.utc,
+                let notes = discoverEvent.description?.text,
+                let title = discoverEvent.name?.text else { return }
+            
+            
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+            let startDate = formatter.date(from: start)
+            let endDate = formatter.date(from: end)
+            self.addEventToCalendar(date: startDate!, dateEnd: endDate!, title: title, notes: notes)
             self.showAlert(title: "PinPoint", message: "Successfully Added to Calendar")
         })
         
