@@ -56,11 +56,11 @@ class CreatedViewController: UIViewController, LocationResultsControllerDelegate
     private func configureInputAccessoryView() {
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 44))
         createdEvent.locationText.inputAccessoryView = toolbar
-        let photoLibraryBarItem = UIBarButtonItem(title: "Search",
+        let photoLibraryBarItem = UIBarButtonItem(title: "SEARCH",
                                                   style: .plain,
                                                   target: self,
                                                   action: #selector(searchButtonPressed))
-        photoLibraryBarItem.tintColor = #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)
+        photoLibraryBarItem.tintColor = #colorLiteral(red: 1, green: 0.2061544955, blue: 0.2048995197, alpha: 0.8473619435)
         createdEvent.createdPicture.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
          toolbar.items = [photoLibraryBarItem]
         }
