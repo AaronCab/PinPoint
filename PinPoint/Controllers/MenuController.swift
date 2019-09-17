@@ -40,7 +40,7 @@ class MenuController: UIViewController {
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 25).isActive = true
+        tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
     }
 }
 extension MenuController: UITableViewDataSource, UITableViewDelegate {
@@ -63,6 +63,7 @@ extension MenuController: UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         header.textLabel?.font = UIFont(name: "Futura", size: 36)
         header.textLabel?.backgroundColor = UIColor.clear
         header.textLabel?.textColor = UIColor.white
