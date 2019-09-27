@@ -15,7 +15,6 @@ class MapViewController: UIViewController {
     private var previousLocation: CLLocation?
     var directions = [MKDirections]()
     
-    //private var longPress: UILongPressGestureRecognizer!
     public var venues: [EventCreatedByUser]!
     
     private var annotations = [MKAnnotation]()
@@ -115,14 +114,14 @@ extension MapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         let index = annotations.firstIndex { $0.title == view.annotation!.title }
-        let selectedVenue = venues[index!]
+        let _ = venues[index!]
         
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let directions = UIAlertAction(title: "Get Directions", style: .default) { (action) in
             guard let userLocation = self.locationManager.location?.coordinate,
                 let destination = view.annotation?.coordinate else {
                     guard let venueLat = self.venues.first?.lat,
-                        let venueLong = self.venues?.first?.long else {return}
+                          let venueLong = self.venues?.first?.long else {return}
                     let coordinate = CLLocationCoordinate2DMake(venueLat,venueLong)
                     let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary:nil))
                     mapItem.name = "Target location"
@@ -139,9 +138,9 @@ extension MapViewController: MKMapViewDelegate {
     }
     
     private func getDirections(from: CLLocationCoordinate2D, destination: CLLocationCoordinate2D) {
-        let request = createDirectionsRequest(fromCoordinate: from, toDestination: destination)
+        let _ = createDirectionsRequest(fromCoordinate: from, toDestination: destination)
         let url = "http://maps.apple.com/maps?saddr=\(from.latitude),\(from.longitude)&daddr=\(destination.latitude),\(destination.longitude)"
-        UIApplication.shared.openURL(URL(string:url)!)
+            UIApplication.shared.open(URL(string:url)!)
   
     }
     
