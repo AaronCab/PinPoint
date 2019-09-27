@@ -42,8 +42,7 @@ extension LocationResultController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath)
         let suggestion = completerResults[indexPath.row]
-        // Each suggestion is a MKLocalSearchCompletion with a title, subtitle
-        
+      
         cell.textLabel?.text = suggestion.title
         cell.detailTextLabel?.text = suggestion.subtitle
         cell.backgroundColor = .white
